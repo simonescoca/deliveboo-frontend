@@ -1,6 +1,7 @@
 <template>
     <h3>
         About Us
+        Ciao
     </h3>
 </template>
 
