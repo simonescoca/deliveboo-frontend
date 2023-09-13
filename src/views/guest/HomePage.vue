@@ -58,6 +58,54 @@
             </div>
         </div>
     </div>
+	<!-- ---Join Deliveroo section--- -->
+	<div class="container">
+        <div class="row border-top border-bottom py-3">
+			<div class="col">
+				<h3>Join Deliveboo</h3>
+			</div>
+			<div class="col-1">
+				<!-- Bottone per aprire/chudere la section -->
+				<button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#joinDeliveboo" aria-expanded="true" aria-controls="joinDeliveboo">
+					<i class="fas fa-chevron-down"></i>
+				</button>
+			</div>
+		</div>
+		
+        <!-- Section "Join Deliveboo" con Collapse -->
+        <div class="collapse show" id="joinDeliveboo">
+            <div class="row">
+                <div class="col-12 col-md text-center">
+					<img src="../../images/joinrider.png" alt="rider image" class="w-50">
+				</div>
+				<div class="col-12 col-md-4 my-auto">
+					<h3>As a rider</h3>
+					<p>Earn money by delivering food from local vendors. All you need is a bike and the passion for riding.</p>
+					<a href="" class="btn btn-secondary fw-semibold">Ride with us</a>
+				</div>
+            </div>
+			<div class="row border-top border-bottom">
+                <div class="col-12 col-md text-center">
+					<img src="../../images/joinpartner.png" alt="chef image" class="w-50">
+				</div>
+				<div class="col-12 col-md-4 my-auto">
+					<h3>As a partner</h3>
+					<p>BiteEats helps local vendors grow with online ordering, loyalty programs, and more.</p>
+					<a href="" class="btn btn-secondary fw-semibold">Partner with us</a>
+				</div>
+            </div>
+			<div class="row">
+                <div class="col-12 col-md text-center">
+					<img src="../../images/joincolleague.png" alt="colleagues image" class="w-50">
+				</div>
+				<div class="col-12 col-md-4 my-auto">
+					<h3>As a colleague</h3>
+					<p>Join our team and help build a top-notch food delivery service.</p>
+					<a href="" class="btn btn-secondary fw-semibold">Work with us</a>
+				</div>
+            </div>
+        </div>
+    </div>
 	
 </template>
 
