@@ -1,7 +1,30 @@
 <template>
-    <h3>
-        Home
-    </h3>
+	<!-- ---Jumbotron section--- -->
+    <div class="container">
+		<div class="row text-center my-5">
+			<div class="col-1 left-image">
+				<img src="../../images/jumboleft.png" alt="" class="">
+			</div>
+				<div class="col-9 my-auto">
+					<div class="row">
+						<div class="col-12 d-flex justify-content-center position-relative">
+							<h1>Find the perfect bite in <br> seconds</h1>
+						</div>
+						<div class="col-12 d-flex justify-content-center">
+							<div class="search mb-2 w-50">
+								<input type="text" placeholder="Restaurant name or type">
+								<i class="fa-solid fa-magnifying-glass"></i>
+							</div>
+							<a href="" class="btn btn-red fw-semibold ms-3 mb-3">Search</a>
+						</div>
+					</div>
+				</div>
+			<div class="col-1 right-image">
+				<img src="../../images/jumboright.png" alt="" class="">
+			</div>
+		</div>
+	</div>
+	
 </template>
 
 <script>
@@ -9,6 +32,7 @@
 	// import axios from "axios";
 
 	export default {
+		name: 'Homepage',
 		data() {
 			return {
 				// store
@@ -38,5 +62,33 @@
 </script>
 
 <style lang="scss" scoped>
+@use '../../styles/variables' as *;
 
+	.search {
+		background-color: $grey;
+		padding: 10px 5px;
+		border-radius: 8px;
+		input{
+			background-color: $grey;
+			border: none;
+			width: 90%;
+			&:focus-visible{ 
+				outline: none;
+				box-shadow: none;
+			}
+		}
+	}
+	.left-image{
+		margin-bottom: 10rem;
+	}
+	.right-image{
+		margin-top: 10rem;
+	}
+	.btn-red{
+		background-color: $primary;
+		color: white;
+		&:hover{
+			background-color: $primarysoft;
+		}
+	}
 </style>
