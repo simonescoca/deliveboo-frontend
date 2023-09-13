@@ -7,6 +7,8 @@ import AdvancedSearch from './views/guest/AdvancedSearch.vue'; // index dei rist
 import RestaurantMenu from './views/guest/RestaurantMenu.vue'; // show del ristorante e index dei piatti
 // la show del piatto è un pop-up, non una view
 import ContactUs from './views/guest/ContactUs.vue';
+import SigninLogin from './views/guest/SigninLogin.vue';
+import Success from './views/guest/Success.vue';
 
 // # importo le views (admin)
 import AddEditFood from './views/admin/AddEditFood.vue';
@@ -45,6 +47,16 @@ const router = createRouter({
             path: '/contact-us',
             name : 'contact-us',
             component : ContactUs,
+        },
+        {
+            path: '/profile',
+            name : 'profile',
+            component : SigninLogin,
+        },
+        {
+            path: '/success',
+            name : 'success',
+            component : Success,
         },
         // ? admin
         {
