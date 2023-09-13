@@ -2,6 +2,7 @@
     <div class="my_background">
         <div class="container">
             <main>
+                <!-- ? la nostra storia e i nostri valori  -->
                 <section v-for="section in sections">
                     <div class="row">
                         <div class="col-6">
@@ -27,6 +28,8 @@
                         </div>
                     </div>
                 </section>
+                <!-- ? la nostra storia e i nostri valori  -->
+                <!-- ? il nostro team  -->
                 <section>
                     <h3>
                         i fondatori
@@ -44,6 +47,8 @@
                         </div>
                     </div>
                 </section>
+                <!-- ? il nostro team  -->
+                <!-- ? recensioni  -->
                 <section>
                     <h3>
                         quello che pensano di noi...
@@ -71,6 +76,7 @@
                         </div>
                     </div>
                 </section>
+                <!-- ? recensioni  -->
             </main>
         </div>
     </div>

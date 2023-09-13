@@ -1,9 +1,12 @@
 <template>
 	<nav>
         <div class="container d-flex justify-content-between">
+            <!-- ? logo container -->
             <div class="d-flex align-items-center my_logo-container">
                 <img src="../../src/images/logo.jpeg" alt="logo">
             </div>
+            <!-- ? logo container -->
+            <!-- ? central links -->
             <ul class="d-flex justify-content-center align-items-center list-unstyled m-0">
                 <li v-for="link in links"> <!--class="d-flex align-items-center"-->
                     <router-link :to="{ name: link.routeName }" class="my_link">
@@ -11,6 +14,8 @@
                     </router-link>
                 </li>
             </ul>
+            <!-- ? central links -->
+            <!-- ? login or profile -->
             <div class="d-flex align-items-center my_gap">
                 <div> <!--class="d-flex align-items-center"-->
                     <router-link :to="{ name: 'profile' }" class="my_link">
@@ -26,6 +31,7 @@
                     </div>
                 </div>
             </div>
+            <!-- ? login or profile -->
         </div>
     </nav>
 </template>
