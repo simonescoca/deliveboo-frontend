@@ -106,7 +106,34 @@
             </div>
         </div>
     </div>
-	
+	<!-- ---Download our app section--- -->
+	<div class="container">
+        <div class="row border-top border-bottom py-3">
+			<div class="col">
+				<h3>Download our app</h3>
+			</div>
+			<div class="col-1">
+				<!-- Bottone per aprire/chudere la section -->
+				<button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#downloadApp" aria-expanded="true" aria-controls="downloadApp">
+					<i class="fas fa-chevron-down"></i>
+				</button>
+			</div>
+		</div>
+		
+        <!-- Section "Download our app" con Collapse -->
+        <div class="collapse show" id="downloadApp">
+            <div class="row">
+				<div class="col-12 col-md-4 my-auto">
+					<h3>Order with ease!</h3>
+					<p>Get the most delicious bites delivered to your door with BiteEats. Our fast and reliable delivery service offers a variety of cuisines from local vendors.</p>
+					<a href="" class="btn btn-red fw-semibold">Download</a>
+				</div>
+                <div class="col-12 col-md text-center">
+					<img src="../../images/downloadapp.png" alt="table with food image" class="w-50">
+				</div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
