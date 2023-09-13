@@ -1,5 +1,5 @@
 <template>
-	<AppHeader />
+	<AppNavbar />
     <main>
         <router-view>
         </router-view>
@@ -8,7 +8,7 @@
 </template>
 
 <script>
-  	import AppHeader from './components/AppHeader.vue';
+  	import AppNavbar from './components/AppNavbar.vue';
 
  	import AppFooter from './components/AppFooter.vue';
 	// import {store} from "../store.js";
@@ -22,7 +22,7 @@
 		},
 
 		components: {
-			AppHeader,
+			AppNavbar,
 			AppFooter
 		},
 
