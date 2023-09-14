@@ -59,7 +59,9 @@
                                         {{ rating.name + " " + rating.surname }}
                                     </h5>
                                     <div class="my_stars">
-                                        {{ rating.stars }}
+                                        <span>
+                                            <i v-for="star in rating.stars" :key="star" class="fa-solid fa-star"></i>
+                                        </span>
                                     </div>
                                     <p class="m-0">
                                         {{ rating.text }}
@@ -124,7 +126,7 @@
                         name: 'Maria',
                         surname: 'Hadik',
                         profileImage: '../../../src/images/rec3.png',
-                        stars: 4.5,
+                        stars: 4,
                         text: 'Deliveboo mi ha aiutato a scoprire nuovi sapori e ristoranti. Lo consiglio a tutti gli appassionati di cibo.',
                     },
                     {
@@ -138,7 +140,7 @@
                         name: 'Jean',
                         surname: 'Dupont',
                         profileImage: '../../../src/images/rec4.png',
-                        stars: 4.5,
+                        stars: 4,
                         text: 'Eccellente per chi cerca un\'esperienza culinaria unica. Ho trovato il ristorante perfetto per festeggiare il mio compleanno.',
                     },
                     {
