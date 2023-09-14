@@ -27,6 +27,56 @@
 						</label>
 						<i class="fa-solid fa-id-card align-self-center"></i>
 					</div>
+					<!-- ---Email--- -->
+					<div class="form-control">
+						<input type="text" required="">
+						<label class="fw-semibold">
+							<span style="transition-delay:0ms">E</span>
+							<span style="transition-delay:50ms">m</span>
+							<span style="transition-delay:100ms">a</span>
+							<span style="transition-delay:150ms">i</span>
+							<span style="transition-delay:200ms">l</span>
+						</label>
+						<i class="fa-solid fa-envelope align-self-center"></i>
+					</div>
+					<!-- ---Password--- -->
+					<div class="form-control d-flex">
+						<input type="password" required="">
+						<label class="fw-semibold">
+							<span style="transition-delay:0ms">P</span>
+							<span style="transition-delay:50ms">a</span>
+							<span style="transition-delay:100ms">s</span>
+							<span style="transition-delay:150ms">s</span>
+							<span style="transition-delay:200ms">w</span>
+							<span style="transition-delay:250ms">o</span>
+							<span style="transition-delay:300ms">r</span>
+							<span style="transition-delay:350ms">d</span>
+						</label>
+						<i class="fa-solid fa-key align-self-center"></i>
+					</div>
+					<!-- ---Password confirm--- -->
+					<div class="form-control d-flex">
+						<input type="password" required="">
+						<label class="fw-semibold">
+							<span style="transition-delay:0ms">P</span>
+							<span style="transition-delay:50ms">a</span>
+							<span style="transition-delay:100ms">s</span>
+							<span style="transition-delay:150ms">s</span>
+							<span style="transition-delay:200ms">w</span>
+							<span style="transition-delay:250ms">o</span>
+							<span style="transition-delay:300ms">r</span>
+							<span style="transition-delay:350ms">d</span>
+							<span style="transition-delay:400ms"> </span>
+							<span style="transition-delay:400ms">c</span>
+							<span style="transition-delay:450ms">o</span>
+							<span style="transition-delay:500ms">n</span>
+							<span style="transition-delay:550ms">f</span>
+							<span style="transition-delay:650ms">i</span>
+							<span style="transition-delay:700ms">r</span>
+							<span style="transition-delay:750ms">m</span>
+						</label>
+						<i class="fa-solid fa-lock align-self-center"></i>
+					</div>
 				</form>
 			</div>
 		</div>
