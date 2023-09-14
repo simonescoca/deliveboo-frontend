@@ -1,7 +1,15 @@
 <template>
-    <h3>
-        Check Out
-    </h3>
+    <div class="container">
+		<div class="row my-4">
+            <p class="fw-semibold">Shoping Cart / <span class="fw-bold">Checkout Step</span></p>
+			<div class="col-7 me-5 cart">
+				
+			</div>
+            <div class="col-4 payment">
+				
+			</div>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -39,5 +47,18 @@
 </script>
 
 <style lang="scss" scoped>
+@use '../../styles/variables' as *;
 
+// ---Shopping cart css---
+    .cart{
+        background-color: $greydark;
+        height: 70vh;
+    }
+
+// ---Payment info css---
+
+    .payment{
+        background-color: $primarysoft;
+        height: 70vh;
+    }
 </style>
