@@ -1,8 +1,6 @@
 import {reactive} from 'vue';
 const store = reactive ({
-    // datum1: "",
-    // datum2: "",
-    // datum3: "",
+    access: false,
 });
 
 export {store}
