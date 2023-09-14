@@ -109,6 +109,35 @@
 			<div class="col-7 text-center">
 				<h1>Log in</h1>
 				<h5>Enter your information to access</h5>
+				<form action="" class="mx-5">
+					<!-- ---Email--- -->
+					<div class="form-control">
+						<input type="text" required="">
+						<label class="fw-semibold">
+							<span style="transition-delay:0ms">E</span>
+							<span style="transition-delay:50ms">m</span>
+							<span style="transition-delay:100ms">a</span>
+							<span style="transition-delay:150ms">i</span>
+							<span style="transition-delay:200ms">l</span>
+						</label>
+						<i class="fa-solid fa-envelope align-self-center"></i>
+					</div>
+					<!-- ---Password--- -->
+					<div class="form-control d-flex">
+						<input type="password" required="">
+						<label class="fw-semibold">
+							<span style="transition-delay:0ms">P</span>
+							<span style="transition-delay:50ms">a</span>
+							<span style="transition-delay:100ms">s</span>
+							<span style="transition-delay:150ms">s</span>
+							<span style="transition-delay:200ms">w</span>
+							<span style="transition-delay:250ms">o</span>
+							<span style="transition-delay:300ms">r</span>
+							<span style="transition-delay:350ms">d</span>
+						</label>
+						<i class="fa-solid fa-key align-self-center"></i>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
