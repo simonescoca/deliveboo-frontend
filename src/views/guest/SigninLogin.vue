@@ -98,6 +98,20 @@
 			</div>
 		</div>
 	</div>
+	<!-- ---Login section, active when store access is true--- -->
+	<div class="container login" v-if="store.access === true">
+		<div class="row my-5">
+			<!-- ---Login img--- -->
+			<div class="col-5 d-flex">
+				<img src="../../images/login.png" alt="" class="w-100 m-auto">
+			</div>
+			<!-- ---Form Login--- -->
+			<div class="col-7 text-center">
+				<h1>Log in</h1>
+				<h5>Enter your information to access</h5>
+			</div>
+		</div>
+	</div>
 </template>
 
 <script>
