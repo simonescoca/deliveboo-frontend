@@ -8,6 +8,7 @@ import RestaurantMenu from './views/guest/RestaurantMenu.vue'; // show del risto
 // la show del piatto è un pop-up, non una view
 import ContactUs from './views/guest/ContactUs.vue';
 import SigninLogin from './views/guest/SigninLogin.vue';
+import CheckOut from './views/guest/CheckOut.vue'
 import Success from './views/guest/Success.vue';
 
 // # importo le views (admin)
@@ -52,6 +53,11 @@ const router = createRouter({
             path: '/profile',
             name : 'profile',
             component : SigninLogin,
+        },
+        {
+            path: '/checkout',
+            name : 'checkout',
+            component : CheckOut,
         },
         {
             path: '/success',
