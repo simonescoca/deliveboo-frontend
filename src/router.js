@@ -12,7 +12,8 @@ import CheckOut from './views/guest/CheckOut.vue'
 import Success from './views/guest/Success.vue';
 
 // # importo le views (admin)
-import AddEditFood from './views/admin/AddEditFood.vue';
+import EditDish from './views/admin/EditDish.vue';
+import AddDish from './views/admin/AddDish.vue';
 import Dashboard from './views/admin/Dashboard.vue';
 import Dishes from './views/admin/Dishes.vue';
 import Orders from './views/admin/Orders.vue';
@@ -66,9 +67,14 @@ const router = createRouter({
         },
         // ? admin
         {
-            path: '/logged/crud-food',
-            name : 'crud-food',
-            component : AddEditFood,
+            path: '/logged/:restaurant/:dish/edit',
+            name : 'edit',
+            component : EditFood,
+        },
+        {
+            path: '/logged/:restaurant/add',
+            name : 'add',
+            component : AddDish,
         },
         {
             path: '/logged/dashboard',
