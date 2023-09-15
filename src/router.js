@@ -69,7 +69,7 @@ const router = createRouter({
         {
             path: '/logged/:restaurant/:dish/edit',
             name : 'edit',
-            component : EditFood,
+            component : EditDish,
         },
         {
             path: '/logged/:restaurant/add',
