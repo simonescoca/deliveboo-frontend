@@ -3,8 +3,9 @@
 		<div class="row my-4">
             <p class="fw-semibold ms-3">Shoping Cart / <span class="fw-bold">Checkout Step</span></p>
             <!-- ---Shopping Cart Section--- -->
-			<div class="col-7 mx-auto cart">
+			<div class="col-7 mx-auto cart position-relative">
 				<h2 class="m-3">Shopping Cart</h2>
+                <!-- ---Dishes header--- -->
                 <div class="row">
                     <div class="col-2 col-md-4 col-lg-6">
                         <h5>Product</h5>
@@ -19,6 +20,7 @@
                         
                     </div>
                     <div class="col-12"><!-- ---Make sure that it goes on the next line--- --></div>
+                    <!-- ---Dishes section--- -->
                     <div class="row">
                         <div class="col-2 col-md-4 col-lg-6">
                             <div class="row">
@@ -40,7 +42,30 @@
                         </div>
                         <hr class="mt-3 liner">
                     </div>
-                    
+                    <!-- ---Total and update section--- -->
+                    <div class="row update position-absolute">
+                        <div class="col-12 col-md-4 col-lg-6 cl-xl-7">
+                            <button class="btn">Update</button>
+                        </div>
+                        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                            <div class="row">
+                                <div class="col-8">
+                                    <h5 class="d-inline">Subtotal:</h5>
+                                    <br>
+                                    <h5 class="d-inline">Shipping:</h5>
+                                    <hr>
+                                    <h5 class="d-inline">Total:</h5>
+                                </div>
+                                <div class="col-4 text-end">
+                                    <span>$ 15.50</span>
+                                    <br>
+                                    <span>$ 2.00</span>
+                                    <hr style="color: transparent;">
+                                    <span class="fw-semibold">$ 17.50</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 			</div>
             <!-- ---Payment info section--- -->
@@ -92,7 +117,7 @@
     .cart{
         background-color: $greydark;
         border-radius: 20px;
-        height: 70vh;                              //  TEMPORANEA DA TOGLIERE!!!
+        min-height: 70vh;                              //  TEMPORANEA DA TOGLIERE!!!
         .row{
             overflow-x: hidden;
             margin-right: -2px;
@@ -117,7 +142,13 @@
                 margin-left: 18px;
             }
         }
-        
+        .update {
+            bottom: 15px;
+            right: 10px;
+            .btn{
+                background-color: $secondarysoft;
+            }
+        }
     }
 
 // ---Payment info css---
