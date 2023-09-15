@@ -12,13 +12,13 @@
                     {{ restaurant.name }}
                 </div>
                 <div class="d-flex">
-                    <router-link to="{ name: restaurant.dishes }">
-                        Dishes
-                    </router-link>
-                    <router-link to="{ name: restaurant.orders }">
-                        Orders
-                    </router-link>
                 </div>
+                <router-link to="{ name: dishes }" class="btn btn-warning">
+                    Dishes
+                </router-link>
+                <router-link to="{ name: orders }" class="btn btn-warning">
+                    Orders
+                </router-link>
             </div>
         </div>
     </div>
