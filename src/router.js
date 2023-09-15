@@ -14,8 +14,8 @@ import Success from './views/guest/Success.vue';
 // # importo le views (admin)
 import AddEditFood from './views/admin/AddEditFood.vue';
 import Dashboard from './views/admin/Dashboard.vue';
-import MyFoods from './views/admin/MyFoods.vue';
-import MyOrders from './views/admin/MyOrders.vue';
+import Dishes from './views/admin/Dishes.vue';
+import Orders from './views/admin/Orders.vue';
 // la show dell'ordine è un pop-up, non una view
 import OrderStatistics from './views/admin/OrderStatistics.vue';
 
@@ -40,7 +40,7 @@ const router = createRouter({
             component : AdvancedSearch,
         },
         {
-            path: '/advanced-search/:slug',
+            path: '/advanced-search/:restaurant',
             name : 'restaurant-menu',
             component : RestaurantMenu,
         },
@@ -66,27 +66,27 @@ const router = createRouter({
         },
         // ? admin
         {
-            path: '/crud-food',
+            path: '/logged/crud-food',
             name : 'crud-food',
             component : AddEditFood,
         },
         {
-            path: '/dashboard',
-            name : 'about-us',
+            path: '/logged/dashboard',
+            name : 'dashboard',
             component : Dashboard,
         },
         {
-            path: '/myfoods',
-            name : 'myfoods',
-            component : MyFoods,
+            path: '/logged/:restaurant/dishes',
+            name : 'dishes',
+            component : Dishes,
         },
         {
-            path: '/myorders',
-            name : 'myorders',
-            component : MyOrders,
+            path: '/logged/:restaurant/orders',
+            name : 'orders',
+            component : Orders,
         },
         {
-            path: '/order-statistics',
+            path: '/logged/order-statistics',
             name : 'order-statistics',
             component : OrderStatistics,
         },
