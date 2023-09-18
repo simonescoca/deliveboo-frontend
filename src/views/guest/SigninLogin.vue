@@ -10,10 +10,10 @@
 			<div class="col-7 text-center">
 				<h1>Sign up</h1>
 				<h5>Enter your information to get started</h5>
-				<form action="" class="mx-5">
+				<form action="" class="mx-5" @submit.prevent="registerUser">
 					<!-- ---Name--- -->
 					<div class="form-control d-flex">
-						<input type="text" required="">
+						<input type="text" id="name" v-model="formData.name" required>
 						<label class="fw-semibold">
 							<span style="transition-delay:0ms">F</span>
 							<span style="transition-delay:50ms">u</span>
@@ -29,7 +29,7 @@
 					</div>
 					<!-- ---Email--- -->
 					<div class="form-control">
-						<input type="text" required="">
+						<input type="text" id="email" v-model="formData.email" required>
 						<label class="fw-semibold">
 							<span style="transition-delay:0ms">E</span>
 							<span style="transition-delay:50ms">m</span>
@@ -41,7 +41,7 @@
 					</div>
 					<!-- ---Password--- -->
 					<div class="form-control d-flex">
-						<input type="password" required="">
+						<input type="password" id="password" v-model="formData.password" required>
 						<label class="fw-semibold">
 							<span style="transition-delay:0ms">P</span>
 							<span style="transition-delay:50ms">a</span>
@@ -56,7 +56,7 @@
 					</div>
 					<!-- ---Password confirm--- -->
 					<div class="form-control d-flex">
-						<input type="password" required="">
+						<input type="text" id="vat_num" v-model="formData.vat_num" required>
 						<label class="fw-semibold">
 							<span style="transition-delay:0ms">P</span>
 							<span style="transition-delay:50ms">a</span>
@@ -78,7 +78,7 @@
 						<i class="fa-solid fa-lock align-self-center"></i>
 					</div>
 					<!-- ---Confirm button--- -->
-					<button class="continue-application">
+					<button class="continue-application" type="submit">
 						<div>
 							<div class="pencil"></div>
 							<div class="folder">
@@ -177,6 +177,14 @@
 		data() {
 			return {
 				store,
+				apiUrl: 'http://127.0.0.1:8000/api/',
+				formData: {
+					name: '',
+					email: '',
+					password: '',
+					vat_num: '',
+				},
+				userToken: '',
 			}
 		},
 
@@ -193,11 +201,21 @@
 		},
 
 		created () {
-
 		},
 
 		methods: {
-
+			registerUser() {
+			// Invia i dati al backend tramite Axios
+			axios.post(`${this.apiUrl}register`, this.formData)
+				.then(response => {
+				// Gestisci la risposta del backend (es. reindirizzamento, messaggi di conferma, ecc.)
+				console.log(response);
+				})
+				.catch(error => {
+				// Gestisci gli errori (es. validazione, errore del server, ecc.)
+				console.log(error)
+				});
+			},
 		}
 	}
 </script>
