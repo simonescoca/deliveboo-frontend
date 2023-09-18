@@ -10,10 +10,10 @@
 			<div class="col-7 text-center">
 				<h1>Sign up</h1>
 				<h5>Enter your information to get started</h5>
-				<form action="" class="mx-5">
+				<form action="" class="mx-5" @submit.prevent="registerUser">
 					<!-- ---Name--- -->
 					<div class="form-control d-flex">
-						<input type="text" required="">
+						<input type="text" id="name" v-model="registerData.name" required>
 						<label class="fw-semibold">
 							<span style="transition-delay:0ms">F</span>
 							<span style="transition-delay:50ms">u</span>
@@ -29,7 +29,7 @@
 					</div>
 					<!-- ---Email--- -->
 					<div class="form-control">
-						<input type="text" required="">
+						<input type="email" id="email" v-model="registerData.email" required>
 						<label class="fw-semibold">
 							<span style="transition-delay:0ms">E</span>
 							<span style="transition-delay:50ms">m</span>
@@ -39,9 +39,26 @@
 						</label>
 						<i class="fa-solid fa-envelope align-self-center"></i>
 					</div>
+					<!-- ---VAT number--- -->
+					<div class="form-control d-flex">
+						<input type="text" id="vat_num" v-model="registerData.vat_num" required>
+						<label class="fw-semibold">
+							<span style="transition-delay:0ms">V</span>
+							<span style="transition-delay:50ms">A</span>
+							<span style="transition-delay:100ms">T</span>
+							<span style="transition-delay:150ms"> </span>
+							<span style="transition-delay:200ms">N</span>
+							<span style="transition-delay:250ms">u</span>
+							<span style="transition-delay:300ms">m</span>
+							<span style="transition-delay:350ms">b</span>
+							<span style="transition-delay:400ms">e</span>
+							<span style="transition-delay:400ms">r</span>
+						</label>
+						<i class="fa-solid fa-lock align-self-center"></i>
+					</div>
 					<!-- ---Password--- -->
 					<div class="form-control d-flex">
-						<input type="password" required="">
+						<input type="password" id="password" v-model="registerData.password" required>
 						<label class="fw-semibold">
 							<span style="transition-delay:0ms">P</span>
 							<span style="transition-delay:50ms">a</span>
@@ -56,7 +73,7 @@
 					</div>
 					<!-- ---Password confirm--- -->
 					<div class="form-control d-flex">
-						<input type="password" required="">
+						<input type="password" id="password_confirm" v-model="registerData.password_confirm" required>
 						<label class="fw-semibold">
 							<span style="transition-delay:0ms">P</span>
 							<span style="transition-delay:50ms">a</span>
@@ -78,7 +95,7 @@
 						<i class="fa-solid fa-lock align-self-center"></i>
 					</div>
 					<!-- ---Confirm button--- -->
-					<button class="continue-application">
+					<button class="continue-application" type="submit">
 						<div>
 							<div class="pencil"></div>
 							<div class="folder">
@@ -109,10 +126,10 @@
 			<div class="col-7 text-center">
 				<h1>Log in</h1>
 				<h5>Enter your information to access</h5>
-				<form action="" class="mx-5">
+				<form action="" class="mx-5" @submit.prevent="loginUser">
 					<!-- ---Email--- -->
 					<div class="form-control">
-						<input type="text" required="">
+						<input id="email" type="email" v-model="loginData.email" required>
 						<label class="fw-semibold">
 							<span style="transition-delay:0ms">E</span>
 							<span style="transition-delay:50ms">m</span>
@@ -124,7 +141,7 @@
 					</div>
 					<!-- ---Password--- -->
 					<div class="form-control d-flex">
-						<input type="password" required="">
+						<input id="password" type="password" v-model="loginData.password" required>
 						<label class="fw-semibold">
 							<span style="transition-delay:0ms">P</span>
 							<span style="transition-delay:50ms">a</span>
@@ -138,7 +155,7 @@
 						<i class="fa-solid fa-key align-self-center"></i>
 					</div>
 					<!-- ---Login button--- -->
-					<button class="loginbtn fw-semibold">Login</button>
+					<button class="loginbtn fw-semibold" type="submit">Login</button>
 					<!-- ---Need to register--- -->
 					<p class="alreadyLogin">New to Deliveboo? <a href="#" class="fw-semibold" @click="store.access = false">Create an account</a></p>
 				</form>
@@ -154,7 +171,7 @@
 						</svg>
 						<span>Connect with Facebook</span>
 					</button>
-					<button class="googlebtn px-4 mt-3">
+					<button class="googlebtn px-4 mt-3" @click="test()">
 						<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" viewBox="0 0 256 262">
 							<path fill="#4285F4" d="M255.878 133.451c0-10.734-.871-18.567-2.756-26.69H130.55v48.448h71.947c-1.45 12.04-9.283 30.172-26.69 42.356l-.244 1.622 38.755 30.023 2.685.268c24.659-22.774 38.875-56.282 38.875-96.027"></path>
 							<path fill="#34A853" d="M130.55 261.1c35.248 0 64.839-11.605 86.453-31.622l-41.196-31.913c-11.024 7.688-25.82 13.055-45.257 13.055-34.523 0-63.824-22.773-74.269-54.25l-1.531.13-40.298 31.187-.527 1.465C35.393 231.798 79.49 261.1 130.55 261.1"></path>
@@ -177,6 +194,21 @@
 		data() {
 			return {
 				store,
+				apiUrl: 'http://127.0.0.1:8000/api/',
+				userToken: localStorage.getItem('userToken'),
+				userId: localStorage.getItem('userId'),
+				userName: localStorage.getItem('userName'),
+				registerData: {
+					name: '',
+					email: '',
+					vat_num: '',
+					password: '',
+					password_confirm: '',
+				},
+				loginData: {
+					email: '',
+					password: '',
+				},
 			}
 		},
 
@@ -197,7 +229,38 @@
 		},
 
 		methods: {
+			handleApiResponse(response) {
+				// console.log(response);
+				// console.log(response.data.token);
+				// console.log(response.data.user.id);
+				// console.log(response.data.user.name);
+				this.userToken = response.data.token;
+				this.userId = response.data.user.id;
+				this.userName = response.data.user.name;
+				localStorage.setItem('userToken', this.userToken);
+				localStorage.setItem('userId', this.userId);
+				localStorage.setItem('userName', this.userName);
+			},
 
+			registerUser() {
+				axios.post(`${this.apiUrl}register`, this.registerData)
+					.then(response => {
+						this.handleApiResponse(response)
+					})
+					.catch(error => {
+						console.log(error)
+					});
+			},
+			
+			loginUser() {
+				axios.post(`${this.apiUrl}login`, this.loginData)
+					.then(response => {
+						this.handleApiResponse(response)
+					})
+					.catch(error => {
+						console.log(error)
+					});
+			},
 		}
 	}
 </script>
