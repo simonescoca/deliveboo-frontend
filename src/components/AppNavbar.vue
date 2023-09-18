@@ -27,7 +27,7 @@
                         <img src="../../src/images/user.png" alt="user profile img" class="my_user-img">
                     </div>
                     <div class="d-flex align-items-center my_username">
-                        @gino
+                        {{ userName }}
                     </div>
                 </div>
             </div>
@@ -58,6 +58,7 @@
                         text: "contacts",
                     },
                 ],
+				userName: localStorage.getItem('userName'),
 			}
 		},
 
