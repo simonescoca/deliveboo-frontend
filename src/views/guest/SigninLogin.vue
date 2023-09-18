@@ -197,6 +197,7 @@
 				apiUrl: 'http://127.0.0.1:8000/api/',
 				userToken: '',
 				userId: '',
+				userName: '',
 				registerData: {
 					name: '',
 					email: '',
@@ -226,8 +227,10 @@
 		created () {
 			this.userToken = localStorage.getItem('userToken');
 			this.userId = localStorage.getItem('userId');
+			this.userName = localStorage.getItem('userName');
 			// console.log(this.userToken);
 			// console.log(this.userId);
+			// console.log(this.userName);
 		},
 
 		methods: {
@@ -237,10 +240,13 @@
 						// console.log(response);
 						// console.log(response.data.token);
 						// console.log(response.data.user.id);
+						// console.log(response.data.user.name);
 						this.userToken = response.data.token;
 						this.userId = response.data.user.id;
+						this.userName = response.data.user.name;
 						localStorage.setItem('userToken', this.userToken);
 						localStorage.setItem('userId', this.userId);
+						localStorage.setItem('userName', this.userName);
 					})
 					.catch(error => {
 						console.log(error)
@@ -252,10 +258,13 @@
 						// console.log(response);
 						// console.log(response.data.token);
 						// console.log(response.data.user.id);
+						// console.log(response.data.user.name);
 						this.userToken = response.data.token;
 						this.userId = response.data.user.id;
+						this.userName = response.data.user.name;
 						localStorage.setItem('userToken', this.userToken);
 						localStorage.setItem('userId', this.userId);
+						localStorage.setItem('userName', this.userName);
 					})
 					.catch(error => {
 						console.log(error)
