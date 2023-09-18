@@ -29,7 +29,7 @@
 					</div>
 					<!-- ---Email--- -->
 					<div class="form-control">
-						<input type="text" id="email" v-model="formData.email" required>
+						<input type="email" id="email" v-model="formData.email" required>
 						<label class="fw-semibold">
 							<span style="transition-delay:0ms">E</span>
 							<span style="transition-delay:50ms">m</span>
@@ -38,6 +38,23 @@
 							<span style="transition-delay:200ms">l</span>
 						</label>
 						<i class="fa-solid fa-envelope align-self-center"></i>
+					</div>
+					<!-- ---VAT number--- -->
+					<div class="form-control d-flex">
+						<input type="text" id="vat_num" v-model="formData.vat_num" required>
+						<label class="fw-semibold">
+							<span style="transition-delay:0ms">V</span>
+							<span style="transition-delay:50ms">A</span>
+							<span style="transition-delay:100ms">T</span>
+							<span style="transition-delay:150ms"> </span>
+							<span style="transition-delay:200ms">N</span>
+							<span style="transition-delay:250ms">u</span>
+							<span style="transition-delay:300ms">m</span>
+							<span style="transition-delay:350ms">b</span>
+							<span style="transition-delay:400ms">e</span>
+							<span style="transition-delay:400ms">r</span>
+						</label>
+						<i class="fa-solid fa-lock align-self-center"></i>
 					</div>
 					<!-- ---Password--- -->
 					<div class="form-control d-flex">
@@ -56,7 +73,7 @@
 					</div>
 					<!-- ---Password confirm--- -->
 					<div class="form-control d-flex">
-						<input type="text" id="vat_num" v-model="formData.vat_num" required>
+						<input type="password" id="password_confirm" v-model="formData.password_confirm" required>
 						<label class="fw-semibold">
 							<span style="transition-delay:0ms">P</span>
 							<span style="transition-delay:50ms">a</span>
@@ -181,8 +198,9 @@
 				formData: {
 					name: '',
 					email: '',
-					password: '',
 					vat_num: '',
+					password: '',
+					password_confirm: '',
 				},
 				userToken: '',
 			}
