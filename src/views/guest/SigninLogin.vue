@@ -195,9 +195,9 @@
 			return {
 				store,
 				apiUrl: 'http://127.0.0.1:8000/api/',
-				userToken: '',
-				userId: '',
-				userName: '',
+				userToken: localStorage.getItem('userToken'),
+				userId: localStorage.getItem('userId'),
+				userName: localStorage.getItem('userName'),
 				registerData: {
 					name: '',
 					email: '',
@@ -225,12 +225,7 @@
 		},
 
 		created () {
-			this.userToken = localStorage.getItem('userToken');
-			this.userId = localStorage.getItem('userId');
-			this.userName = localStorage.getItem('userName');
-			// console.log(this.userToken);
-			// console.log(this.userId);
-			// console.log(this.userName);
+			
 		},
 
 		methods: {
