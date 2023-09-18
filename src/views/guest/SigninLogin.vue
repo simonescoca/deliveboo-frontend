@@ -13,7 +13,7 @@
 				<form action="" class="mx-5" @submit.prevent="registerUser">
 					<!-- ---Name--- -->
 					<div class="form-control d-flex">
-						<input type="text" id="name" v-model="formData.name" required>
+						<input type="text" id="name" v-model="registerData.name" required>
 						<label class="fw-semibold">
 							<span style="transition-delay:0ms">F</span>
 							<span style="transition-delay:50ms">u</span>
@@ -29,7 +29,7 @@
 					</div>
 					<!-- ---Email--- -->
 					<div class="form-control">
-						<input type="email" id="email" v-model="formData.email" required>
+						<input type="email" id="email" v-model="registerData.email" required>
 						<label class="fw-semibold">
 							<span style="transition-delay:0ms">E</span>
 							<span style="transition-delay:50ms">m</span>
@@ -41,7 +41,7 @@
 					</div>
 					<!-- ---VAT number--- -->
 					<div class="form-control d-flex">
-						<input type="text" id="vat_num" v-model="formData.vat_num" required>
+						<input type="text" id="vat_num" v-model="registerData.vat_num" required>
 						<label class="fw-semibold">
 							<span style="transition-delay:0ms">V</span>
 							<span style="transition-delay:50ms">A</span>
@@ -58,7 +58,7 @@
 					</div>
 					<!-- ---Password--- -->
 					<div class="form-control d-flex">
-						<input type="password" id="password" v-model="formData.password" required>
+						<input type="password" id="password" v-model="registerData.password" required>
 						<label class="fw-semibold">
 							<span style="transition-delay:0ms">P</span>
 							<span style="transition-delay:50ms">a</span>
@@ -73,7 +73,7 @@
 					</div>
 					<!-- ---Password confirm--- -->
 					<div class="form-control d-flex">
-						<input type="password" id="password_confirm" v-model="formData.password_confirm" required>
+						<input type="password" id="password_confirm" v-model="registerData.password_confirm" required>
 						<label class="fw-semibold">
 							<span style="transition-delay:0ms">P</span>
 							<span style="transition-delay:50ms">a</span>
@@ -126,10 +126,10 @@
 			<div class="col-7 text-center">
 				<h1>Log in</h1>
 				<h5>Enter your information to access</h5>
-				<form action="" class="mx-5">
+				<form action="" class="mx-5" @submit.prevent="loginUser">
 					<!-- ---Email--- -->
 					<div class="form-control">
-						<input type="text" required="">
+						<input id="email" type="email" v-model="loginData.email" required>
 						<label class="fw-semibold">
 							<span style="transition-delay:0ms">E</span>
 							<span style="transition-delay:50ms">m</span>
@@ -141,7 +141,7 @@
 					</div>
 					<!-- ---Password--- -->
 					<div class="form-control d-flex">
-						<input type="password" required="">
+						<input id="password" type="password" v-model="loginData.password" required>
 						<label class="fw-semibold">
 							<span style="transition-delay:0ms">P</span>
 							<span style="transition-delay:50ms">a</span>
@@ -155,7 +155,7 @@
 						<i class="fa-solid fa-key align-self-center"></i>
 					</div>
 					<!-- ---Login button--- -->
-					<button class="loginbtn fw-semibold">Login</button>
+					<button class="loginbtn fw-semibold" type="submit">Login</button>
 					<!-- ---Need to register--- -->
 					<p class="alreadyLogin">New to Deliveboo? <a href="#" class="fw-semibold" @click="store.access = false">Create an account</a></p>
 				</form>
@@ -171,7 +171,7 @@
 						</svg>
 						<span>Connect with Facebook</span>
 					</button>
-					<button class="googlebtn px-4 mt-3">
+					<button class="googlebtn px-4 mt-3" @click="test()">
 						<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" viewBox="0 0 256 262">
 							<path fill="#4285F4" d="M255.878 133.451c0-10.734-.871-18.567-2.756-26.69H130.55v48.448h71.947c-1.45 12.04-9.283 30.172-26.69 42.356l-.244 1.622 38.755 30.023 2.685.268c24.659-22.774 38.875-56.282 38.875-96.027"></path>
 							<path fill="#34A853" d="M130.55 261.1c35.248 0 64.839-11.605 86.453-31.622l-41.196-31.913c-11.024 7.688-25.82 13.055-45.257 13.055-34.523 0-63.824-22.773-74.269-54.25l-1.531.13-40.298 31.187-.527 1.465C35.393 231.798 79.49 261.1 130.55 261.1"></path>
@@ -195,14 +195,19 @@
 			return {
 				store,
 				apiUrl: 'http://127.0.0.1:8000/api/',
-				formData: {
+				userToken: '',
+				userId: '',
+				registerData: {
 					name: '',
 					email: '',
 					vat_num: '',
 					password: '',
 					password_confirm: '',
 				},
-				userToken: '',
+				loginData: {
+					email: '',
+					password: '',
+				},
 			}
 		},
 
@@ -219,29 +224,43 @@
 		},
 
 		created () {
-			const userToken = localStorage.getItem('userToken');
-			console.log(userToken)
+			this.userToken = localStorage.getItem('userToken');
+			this.userId = localStorage.getItem('userId');
+			// console.log(this.userToken);
+			// console.log(this.userId);
 		},
 
 		methods: {
 			registerUser() {
-			// Invia i dati al backend tramite Axios
-			axios.post(`${this.apiUrl}register`, this.formData)
-				.then(response => {
-				// Gestisci la risposta del backend (es. reindirizzamento, messaggi di conferma, ecc.)
-				console.log(response);
-				console.log(response.data.access_token);
-				this.userToken = response.data.access_token;
-				localStorage.setItem('userToken', this.userToken);
-				})
-				.catch(error => {
-				// Gestisci gli errori (es. validazione, errore del server, ecc.)
-				console.log(error)
-				});
+				axios.post(`${this.apiUrl}register`, this.registerData)
+					.then(response => {
+						// console.log(response);
+						// console.log(response.data.token);
+						// console.log(response.data.user.id);
+						this.userToken = response.data.token;
+						this.userId = response.data.user.id;
+						localStorage.setItem('userToken', this.userToken);
+						localStorage.setItem('userId', this.userId);
+					})
+					.catch(error => {
+						console.log(error)
+					});
 			},
-			// logout(){
-			// 	localStorage.removeItem('userToken')
-			// }
+			loginUser() {
+				axios.post(`${this.apiUrl}login`, this.loginData)
+					.then(response => {
+						// console.log(response);
+						// console.log(response.data.token);
+						// console.log(response.data.user.id);
+						this.userToken = response.data.token;
+						this.userId = response.data.user.id;
+						localStorage.setItem('userToken', this.userToken);
+						localStorage.setItem('userId', this.userId);
+					})
+					.catch(error => {
+						console.log(error)
+					});
+			},
 		}
 	}
 </script>
