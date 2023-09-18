@@ -201,6 +201,8 @@
 		},
 
 		created () {
+			const userToken = localStorage.getItem('userToken');
+			console.log(userToken)
 		},
 
 		methods: {
@@ -210,12 +212,18 @@
 				.then(response => {
 				// Gestisci la risposta del backend (es. reindirizzamento, messaggi di conferma, ecc.)
 				console.log(response);
+				console.log(response.data.access_token);
+				this.userToken = response.data.access_token;
+				localStorage.setItem('userToken', this.userToken);
 				})
 				.catch(error => {
 				// Gestisci gli errori (es. validazione, errore del server, ecc.)
 				console.log(error)
 				});
 			},
+			// logout(){
+			// 	localStorage.removeItem('userToken')
+			// }
 		}
 	}
 </script>
