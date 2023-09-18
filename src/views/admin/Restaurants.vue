@@ -30,13 +30,17 @@
 </template>
 
 <script>
-	// import {store} from "../store.js";
-	// import axios from "axios";
+	import {store} from "../../store.js";
+	import axios from "axios";
 
 	export default {
 		data() {
 			return {
-				// store
+				store,
+				apiUrl: 'http://127.0.0.1:8000/api/',
+				userToken: '',
+				userId: '',
+				userName: '',
                 links: [
                     {
                         routeName: 'dishes',
@@ -54,36 +58,7 @@
                         text: 'Edit',
                     },
                 ],
-                restaurants: [
-                    {
-                        name: 'Casette di Campagna',
-                        image: '../../../src/images/r1.jpeg',
-                    },
-                    {
-                        name: 'Il Cinghiale',
-                        image: '../../../src/images/r2.jpeg',
-                    },
-                    {
-                        name: 'Ristorante Buona Tavola',
-                        image: '../../../src/images/r3.jpeg',
-                    },
-                    {
-                        name: 'Vongola al Porto',
-                        image: '../../../src/images/r4.jpeg',
-                    },
-                    {
-                        name: 'Il Gusto Divino',
-                        image: '../../../src/images/r5.jpeg',
-                    },
-                    {
-                        name: 'La Cucina Felice',
-                        image: '../../../src/images/r6.jpg',
-                    },
-                    {
-                        name: 'Ristorante Al Dente',
-                        image: '../../../src/images/r7.jpeg',
-                    },
-                ],
+                restaurants: [],
 			}
 		},
 
@@ -96,11 +71,13 @@
 		},
 
 		mounted () {
-
+            this.test()
 		},
 
 		created () {
-
+            this.userToken = localStorage.getItem('userToken')
+			this.userId = localStorage.getItem('userId')
+			this.userName = localStorage.getItem('userName')
 		},
 
 		methods: {
@@ -113,7 +90,20 @@
                 .catch(error => {
                     // Gestisci eventuali errori
                 });
-            }
+            },
+            test(){
+                axios.get(`${this.apiUrl}${this.userId}/restaurants`,{
+                headers: {
+                'Authorization': `Bearer ${this.userToken}`
+                }
+                })
+                .then(response => {
+                    this.restaurants = response.data.results.restaurants
+                })
+                .catch(error => {
+                    console.log(error)
+                });
+            },
 		}
 	}
 </script>
