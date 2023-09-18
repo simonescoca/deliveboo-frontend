@@ -17,20 +17,20 @@
             <!-- ? central links -->
             <!-- ? login or profile -->
             <div class="d-flex align-items-center my_gap2">
-                <div v-if="userName === null" @click="store.access = true"> <!--class="d-flex align-items-center"-->
-                    <router-link :to="{ name: 'profile' }" class="my_link">
-                        Login
-                    </router-link>
-                </div>
                 <div v-if="userName === null" @click="store.access = false"> <!--class="d-flex align-items-center"-->
                     <router-link :to="{ name: 'profile' }" class="my_link">
                         Register
                     </router-link>
                 </div>
+                <div v-if="userName === null" @click="store.access = true"> <!--class="d-flex align-items-center"-->
+                    <router-link :to="{ name: 'profile' }" class="my_link">
+                        Login
+                    </router-link>
+                </div>
                 <div v-if="userName !== null"> <!--class="d-flex align-items-center"-->
-                    <button class="my_link btn" @click="logout()">
+                    <a href="/" class="my_link btn" @click="logout()">
                         Logout 
-                    </button>
+                    </a>
                 </div>
                 <div class="d-flex my_gap2" v-if="userName !== null">
                     <div class="my_user-img-cont">
@@ -81,7 +81,7 @@
 		},
 
 		created () {
-            
+
 		},
 
 		methods: {
