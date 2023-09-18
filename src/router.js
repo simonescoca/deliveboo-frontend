@@ -14,6 +14,8 @@ import Success from './views/guest/Success.vue';
 // # importo le views (admin)
 import EditDish from './views/admin/EditDish.vue';
 import AddDish from './views/admin/AddDish.vue';
+import AddRestaurant from './views/admin/AddRestaurant.vue';
+import EditRestaurant from './views/admin/EditRestaurant.vue';
 import Dashboard from './views/admin/Dashboard.vue';
 import Dishes from './views/admin/Dishes.vue';
 import Orders from './views/admin/Orders.vue';
@@ -27,74 +29,84 @@ const router = createRouter({
         // ? guest
         {
             path: '/',
-            name : 'homepage',
-            component : HomePage,
+            name: 'homepage',
+            component: HomePage,
         },
         {
             path: '/about',
-            name : 'about',
-            component : AboutUs,
+            name: 'about',
+            component: AboutUs,
         },
         {
             path: '/advanced-search',
-            name : 'advanced-search',
-            component : AdvancedSearch,
+            name: 'advanced-search',
+            component: AdvancedSearch,
         },
         {
             path: '/advanced-search/:restaurant',
-            name : 'restaurant-menu',
-            component : RestaurantMenu,
+            name: 'restaurant-menu',
+            component: RestaurantMenu,
         },
         {
             path: '/contact-us',
-            name : 'contact-us',
-            component : ContactUs,
+            name: 'contact-us',
+            component: ContactUs,
         },
         {
             path: '/profile',
-            name : 'profile',
-            component : SigninLogin,
+            name: 'profile',
+            component: SigninLogin,
         },
         {
             path: '/checkout',
-            name : 'checkout',
-            component : CheckOut,
+            name: 'checkout',
+            component: CheckOut,
         },
         {
             path: '/success',
-            name : 'success',
-            component : Success,
+            name: 'success',
+            component: Success,
         },
         // ? admin
         {
-            path: '/logged/:restaurant/:dish/edit',
-            name : 'edit',
-            component : EditDish,
+            path: '/logged/restaurant/dish/edit',
+            name: 'editDish',
+            component: EditDish,
         },
         {
-            path: '/logged/:restaurant/add',
-            name : 'add',
-            component : AddDish,
+            path: '/logged/add-restaurant',
+            name: 'addRestaurant',
+            component: AddRestaurant,
+        },
+        {
+            path: '/logged/restaurant/edit',
+            name: 'editRestaurant',
+            component: EditRestaurant,
+        },
+        {
+            path: '/logged/restaurant/add-dish',
+            name: 'addDish',
+            component: AddDish,
         },
         {
             path: '/logged/dashboard',
-            name : 'dashboard',
-            component : Dashboard,
+            name: 'dashboard',
+            component: Dashboard,
         },
         {
-            path: '/logged/:restaurant/dishes',
-            name : 'dishes',
-            component : Dishes,
+            path: '/logged/restaurant/dishes',
+            name: 'dishes',
+            component: Dishes,
         },
         {
-            path: '/logged/:restaurant/orders',
-            name : 'orders',
-            component : Orders,
+            path: '/logged/restaurant/orders',
+            name: 'orders',
+            component: Orders,
         },
         {
             path: '/logged/order-statistics',
-            name : 'order-statistics',
-            component : OrderStatistics,
+            name: 'order-statistics',
+            component: OrderStatistics,
         },
     ]
 })

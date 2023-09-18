@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <h3>
-            Admin - Edit Dish
+            Admin - Add a Restaurant
         </h3>
         <form>
             <div v-for="formSection in formSections" class="mb-3">
@@ -19,7 +19,7 @@
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">
-                Update
+                Create
             </button>
         </form>
     </div>
@@ -32,7 +32,35 @@
 	export default {
 		data() {
 			return {
-				// store
+                formSections: [
+                    {
+                        labelFor: 'name',
+                        labelContent: 'Restaurant\'s name',
+                        inputID: 'name',
+                    },
+                    {
+                        labelFor: 'address',
+                        labelContent: 'Restaurant\'s address',
+                        inputID: 'address',
+                    },
+                    {
+                        labelFor: 'city',
+                        labelContent: 'Restaurant\'s city',
+                        inputID: 'city',
+                    },
+                ],
+
+                formChecks: [
+                    'Italiana',
+                    'Francese',
+                    'Giapponese',
+                    'Messicana',
+                    'Cinese',
+                    'Americana',
+                    'Mediterranea',
+                    'Mediorientale',
+                    'Vietnamita',
+                ],
 			}
 		},
 
