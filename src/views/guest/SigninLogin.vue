@@ -225,41 +225,37 @@
 		},
 
 		created () {
-			
+
 		},
 
 		methods: {
+			handleApiResponse(response) {
+				// console.log(response);
+				// console.log(response.data.token);
+				// console.log(response.data.user.id);
+				// console.log(response.data.user.name);
+				this.userToken = response.data.token;
+				this.userId = response.data.user.id;
+				this.userName = response.data.user.name;
+				localStorage.setItem('userToken', this.userToken);
+				localStorage.setItem('userId', this.userId);
+				localStorage.setItem('userName', this.userName);
+			},
+
 			registerUser() {
 				axios.post(`${this.apiUrl}register`, this.registerData)
 					.then(response => {
-						// console.log(response);
-						// console.log(response.data.token);
-						// console.log(response.data.user.id);
-						// console.log(response.data.user.name);
-						this.userToken = response.data.token;
-						this.userId = response.data.user.id;
-						this.userName = response.data.user.name;
-						localStorage.setItem('userToken', this.userToken);
-						localStorage.setItem('userId', this.userId);
-						localStorage.setItem('userName', this.userName);
+						this.handleApiResponse(response)
 					})
 					.catch(error => {
 						console.log(error)
 					});
 			},
+			
 			loginUser() {
 				axios.post(`${this.apiUrl}login`, this.loginData)
 					.then(response => {
-						// console.log(response);
-						// console.log(response.data.token);
-						// console.log(response.data.user.id);
-						// console.log(response.data.user.name);
-						this.userToken = response.data.token;
-						this.userId = response.data.user.id;
-						this.userName = response.data.user.name;
-						localStorage.setItem('userToken', this.userToken);
-						localStorage.setItem('userId', this.userId);
-						localStorage.setItem('userName', this.userName);
+						this.handleApiResponse(response)
 					})
 					.catch(error => {
 						console.log(error)
