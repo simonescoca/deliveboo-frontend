@@ -16,18 +16,28 @@
             </ul>
             <!-- ? central links -->
             <!-- ? login or profile -->
-            <div class="d-flex align-items-center my_gap">
-                <div> <!--class="d-flex align-items-center"-->
+            <div class="d-flex align-items-center my_gap2">
+                <div v-if="userName === null" @click="store.access = false"> <!--class="d-flex align-items-center"-->
                     <router-link :to="{ name: 'profile' }" class="my_link">
-                        login / register
+                        Register
                     </router-link>
                 </div>
-                <div class="d-flex my_gap2">
+                <div v-if="userName === null" @click="store.access = true"> <!--class="d-flex align-items-center"-->
+                    <router-link :to="{ name: 'profile' }" class="my_link">
+                        Login
+                    </router-link>
+                </div>
+                <div v-if="userName !== null"> <!--class="d-flex align-items-center"-->
+                    <a href="/" class="my_link btn" @click="logout()">
+                        Logout 
+                    </a>
+                </div>
+                <div class="d-flex my_gap2" v-if="userName !== null">
                     <div class="my_user-img-cont">
                         <img src="../../src/images/user.png" alt="user profile img" class="my_user-img">
                     </div>
                     <div class="d-flex align-items-center my_username">
-                        @gino
+                        {{ this.userName }}
                     </div>
                 </div>
             </div>
@@ -37,13 +47,13 @@
 </template>
 
 <script>
-	// import {store} from "../store.js";
+	import {store} from "../store.js";
 	// import axios from "axios";
 
 	export default {
 		data() {
 			return {
-				// store
+				store,
                 links: [
                     {
                         routeName: "homepage",
@@ -58,6 +68,7 @@
                         text: "contacts",
                     },
                 ],
+                userName: localStorage.getItem('userName'),
 			}
 		},
 
@@ -69,16 +80,17 @@
 
 		},
 
-		mounted () {
-
-		},
-
 		created () {
 
 		},
 
 		methods: {
-
+            logout(){
+                localStorage.removeItem('userToken');
+                localStorage.removeItem('userId');
+                localStorage.removeItem('userName');
+				this.userName = localStorage.getItem('userName');
+            }
 		}
 	}
 </script>
