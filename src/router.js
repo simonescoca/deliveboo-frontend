@@ -16,7 +16,7 @@ import EditDish from './views/admin/EditDish.vue';
 import AddDish from './views/admin/AddDish.vue';
 import AddRestaurant from './views/admin/AddRestaurant.vue';
 import EditRestaurant from './views/admin/EditRestaurant.vue';
-import Dashboard from './views/admin/Dashboard.vue';
+import Restaurants from './views/admin/Restaurants.vue';
 import Dishes from './views/admin/Dishes.vue';
 import Orders from './views/admin/Orders.vue';
 // la show dell'ordine è un pop-up, non una view
@@ -69,42 +69,42 @@ const router = createRouter({
         },
         // ? admin
         {
-            path: '/logged/restaurant/dish/edit',
+            path: '/user/restaurant/dish/edit',
             name: 'editDish',
             component: EditDish,
         },
         {
-            path: '/logged/add-restaurant',
+            path: '/user/add-restaurant',
             name: 'addRestaurant',
             component: AddRestaurant,
         },
         {
-            path: '/logged/restaurant/edit',
+            path: '/user/restaurant/edit',
             name: 'editRestaurant',
             component: EditRestaurant,
         },
         {
-            path: '/logged/restaurant/add-dish',
+            path: '/user/restaurant/add-dish',
             name: 'addDish',
             component: AddDish,
         },
         {
-            path: '/logged/dashboard',
-            name: 'dashboard',
-            component: Dashboard,
+            path: '/user/restaurants',
+            name: 'restaurants',
+            component: Restaurants,
         },
         {
-            path: '/logged/restaurant/dishes',
+            path: '/user/restaurant/dishes',
             name: 'dishes',
             component: Dishes,
         },
         {
-            path: '/logged/restaurant/orders',
+            path: '/user/restaurant/orders',
             name: 'orders',
             component: Orders,
         },
         {
-            path: '/logged/order-statistics',
+            path: '/user/order-statistics',
             name: 'order-statistics',
             component: OrderStatistics,
         },
