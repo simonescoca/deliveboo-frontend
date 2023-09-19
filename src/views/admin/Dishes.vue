@@ -69,14 +69,14 @@
 
 		methods: {
             getDishes(){
-                axios.get(`${this.apiUrl}${this.userId}/restaurants/${store.selectedRes}`,{
+                axios.get(`${this.apiUrl}${this.userId}/restaurants/${store.selectedRes}/dishes`,{
                 headers: {
                 'Authorization': `Bearer ${this.userToken}`
                 }
                 })
                 .then(response => {
-                    console.log(response.data.results.dishes)
-                    this.dishes = response.data.results.dishes
+                    console.log(response.data.results)
+                    this.dishes = response.data.results
                 })
                 .catch(error => {
                     console.log(error)
