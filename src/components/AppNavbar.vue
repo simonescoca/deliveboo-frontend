@@ -97,6 +97,11 @@
 
 <style lang="scss" scoped>
 	@use "../styles/variables" as *;
+    @use "../styles/general.scss" as *;
+
+    *:not(i) {
+        font-family: 'Borel', cursive;
+    }
 
     nav {
         background-color: $primarysoft;
