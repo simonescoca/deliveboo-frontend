@@ -71,7 +71,7 @@
 		},
 
 		mounted () {
-            this.test()
+            this.getRestaurants()
 		},
 
 		created () {
@@ -91,7 +91,7 @@
                     // Gestisci eventuali errori
                 });
             },
-            test(){
+            getRestaurants(){
                 axios.get(`${this.apiUrl}${this.userId}/restaurants`,{
                 headers: {
                 'Authorization': `Bearer ${this.userToken}`
