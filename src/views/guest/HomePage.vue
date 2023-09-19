@@ -10,12 +10,14 @@
 						<div class="col-12 d-flex justify-content-center position-relative">
 							<h1>Find the perfect bite in <br> seconds</h1>
 						</div>
-						<div class="col-12 d-flex justify-content-center">
-							<div class="search mb-2 w-50">
-								<input type="text" placeholder="Restaurant name or type">
+						<div class="col-12 d-flex justify-content-center align-items-center">
+							<div class="search w-50">
+								<input type="text" placeholder="Restaurant name or type" @keyup.enter="advancedSearch">
 								<i class="fa-solid fa-magnifying-glass"></i>
 							</div>
-							<a href="" class="btn btn-red fw-semibold ms-3 mb-3">Search</a>
+                            <router-link :to="{name: 'advanced-search'}" class="btn btn-red fw-semibold ms-3">
+                                Search
+                            </router-link>
 						</div>
 					</div>
 				</div>
@@ -139,6 +141,7 @@
 <script>
 	// import {store} from "../store.js";
 	// import axios from "axios";
+    import { router } from '../../router';
 
 	export default {
 		name: 'Homepage',
@@ -165,7 +168,9 @@
 		},
 
 		methods: {
-
+            advancedSearch () {
+                router.push({ name: 'advanced-search' });
+            }
 		}
 	}
 </script>
