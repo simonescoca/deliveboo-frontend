@@ -4,7 +4,7 @@
             <main>
                 <!-- ? la nostra storia e i nostri valori  -->
                 <section>
-                    <div class="row">
+                    <div class="row text-center">
                         <div class="col-5">
                             <h4>
                                 {{ sections[0].name }}
@@ -83,11 +83,11 @@
 			return {
                 sections: [
                     {
-                        name: 'La nostra storia',
+                        name: 'la nostra storia',
                         text: 'Quattro amici di diverse città d\'Italia, uniti dalla passione per il cibo, nel 2023 creano Deliveboo, un sito web che permette alle persone di tutto il mondo di scoprire i ristoranti migliori della cucina locale e straniera. Il sito ha da subito un grande successo e diventa un punto di riferimento per gli appassionati di cibo di tutto il mondo.',
                     },
                     {
-                        name: 'I nostri valori',
+                        name: 'i nostri valori',
                         text: 'Crediamo che il cibo sia un modo per connettere le persone e creare esperienze memorabili. I nostri valori guidano il nostro lavoro e ci aiutano a realizzare la nostra missione di aiutare le persone a scoprire la cucina migliore dei loro paesi e di tutto il mondo.',
                     },
                 ],
@@ -178,6 +178,11 @@
 
 <style lang="scss" scoped>
     @use '../../styles/variables' as *;
+    @use '../../styles/general.scss' as *;
+
+    *:not(i) {
+        font-family: 'Borel', cursive;
+    }
 
     .my_background {
         background-color: $secondarysoft;
@@ -196,6 +201,10 @@
 
     .my_members {
         gap: 1.5rem;
+    }
+
+    .card {
+        border-radius: 3rem;
     }
 
     .card > img {
