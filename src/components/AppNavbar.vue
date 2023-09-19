@@ -10,7 +10,13 @@
             <ul class="d-flex justify-content-center align-items-center list-unstyled m-0">
                 <li v-for="link in links"> <!--class="d-flex align-items-center"-->
                     <router-link :to="{ name: link.routeName }" class="my_link">
-                        {{ link.text }}
+                        <span>
+                            <i :class="link.icon">
+                            </i>
+                        </span>
+                        <span>
+                            {{ link.text }}
+                        </span>
                     </router-link>
                 </li>
             </ul>
@@ -19,17 +25,32 @@
             <div class="d-flex align-items-center my_gap2">
                 <div v-if="userName === null" @click="store.access = false"> <!--class="d-flex align-items-center"-->
                     <router-link :to="{ name: 'profile' }" class="my_link">
-                        Register
+                        <span>
+                            <i class="fa-solid fa-user-pen"></i>
+                        </span>
+                        <span>
+                            Register
+                        </span>
                     </router-link>
                 </div>
                 <div v-if="userName === null" @click="store.access = true"> <!--class="d-flex align-items-center"-->
                     <router-link :to="{ name: 'profile' }" class="my_link">
-                        Login
+                        <span>
+                            <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                        </span>
+                        <span>
+                            Login
+                        </span>
                     </router-link>
                 </div>
                 <div v-if="userName !== null"> <!--class="d-flex align-items-center"-->
                     <a href="/" class="my_link btn" @click="logout()">
-                        Logout 
+                        <span>
+                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        </span>
+                        <span>
+                            Logout
+                        </span>
                     </a>
                 </div>
                 <div class="d-flex my_gap2" v-if="userName !== null">
@@ -58,14 +79,17 @@
                     {
                         routeName: "homepage",
                         text: "home",
+                        icon: 'fa-solid fa-house',
                     },
                     {
                         routeName: "about",
                         text: "about us",
+                        icon: 'fa-solid fa-burger',
                     },
                     {
                         routeName: "contact-us",
                         text: "contacts",
+                        icon: 'fa-solid fa-paper-plane',
                     },
                 ],
                 userName: localStorage.getItem('userName'),
@@ -97,11 +121,6 @@
 
 <style lang="scss" scoped>
 	@use "../styles/variables" as *;
-    @use "../styles/general.scss" as *;
-
-    *:not(i) {
-        font-family: 'Borel', cursive;
-    }
 
     nav {
         background-color: $primarysoft;
