@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container position-relative">
         <header class="d-flex justify-content-end">
             <router-link :to="{ name: 'addDish' }" class="btn btn-primary">
                 New Dish
@@ -17,7 +17,7 @@
                     {{ dish.name }}
                 </div>
                 <div class="position-absolute bottom-0 satr-0 end-0">
-                    <button class="btn btn-primary">
+                    <button class="btn btn-primary" @click="dishInfo(dish.id)">
                         Show
                     </button>
                     <router-link :to="{ name: 'editDish' }" class="btn btn-warning" @click="store.selectedDish = dish.id">
@@ -26,6 +26,19 @@
                     <button @click="softDeleteItem" class="btn btn-danger">
                         Delete
                     </button>
+                </div>
+            </div>
+        </div>
+        <div class="position-absolute dishinfo" :class="this.infotoggle === false ? 'invisible' : ''">
+            <div class="card d-inline-block m-5 text-center position-relative">
+                <i class="fa-solid fa-xmark position-absolute" style="color: #ff0000;" @click="this.infotoggle = false"></i>
+                <div class="card-body">
+                    <h5 class="card-title">{{infodish.name}}</h5>
+                    <h6 class="card-subtitle mb-2 text-bg-success w-25 py-2 mx-auto">Price: {{infodish.price}}</h6>
+                    <p class="card-text">Dish course: {{ infodish.course }}</p>
+                    <p class="card-text">{{ infodish.description }}</p>
+                    <p class="card-text">Pic: {{ infodish.photo }}</p>
+                    <p class="card-text">Ingredients: <span v-for="ingredient in infodish.ingredients">{{ ingredient.name }}, </span></p>
                 </div>
             </div>
         </div>
@@ -45,6 +58,8 @@
 				userId: '',
 				userName: '',
                 dishes: [],
+                infotoggle: false,
+                infodish: [],
 			}
 		},
 
@@ -82,11 +97,45 @@
                     console.log(error)
                 });
             },
+            dishInfo(dishId){
+                axios.get(`${this.apiUrl}${this.userId}/restaurants/${store.selectedRes}/dishes/${dishId}`,{
+                headers: {
+                'Authorization': `Bearer ${this.userToken}`
+                }
+                })
+                .then(response => {
+                    console.log(response.data.results.dish)
+                    this.infodish = response.data.results.dish
+                })
+                .catch(error => {
+                    console.log(error)
+                });
+                this.infotoggle = !this.infotoggle
+            },
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
+    .dishinfo{
+        top: 150px;
+        left: 25%;
+        width: 50%;
+        .fa-xmark{
+            right: 10px;
+            top: 5px;
+            font-size: 30px;
+            cursor: pointer;
+        }
+        .card-body{
+            background-color: rgb(228, 228, 228);
+            border: 1px solid black;
+            border-radius: 5px;
+        }
+    }
+    .invisible{
+        display: none;
+    }
     .my_dishes {
         gap: 3rem;
     }
