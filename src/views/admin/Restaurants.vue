@@ -17,7 +17,7 @@
                     {{ restaurant.name }}
                 </div>
                 <div class="position-absolute bottom-0 satr-0 end-0">
-                    <router-link v-for="link in links" :to="{ name: link.routeName }" class="btn" :class="link.class" @click="store.selectedRes = restaurant.name">
+                    <router-link v-for="link in links" :to="{ name: link.routeName }" class="btn" :class="link.class" @click="store.selectedRes = restaurant.id">
                         {{ link.text }}
                     </router-link>
                     <button @click="softDeleteItem" class="btn btn-danger">
@@ -98,6 +98,7 @@
                 }
                 })
                 .then(response => {
+                    console.log(response)
                     this.restaurants = response.data.results.restaurants
                 })
                 .catch(error => {
