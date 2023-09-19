@@ -20,7 +20,7 @@
                     <button class="btn btn-primary">
                         Show
                     </button>
-                    <router-link :to="{ name: 'editDish' }" class="btn btn-warning">
+                    <router-link :to="{ name: 'editDish' }" class="btn btn-warning" @click="store.selectedDish = dish.id">
                         Edit
                     </router-link>
                     <button @click="softDeleteItem" class="btn btn-danger">
