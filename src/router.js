@@ -1,25 +1,26 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
 // # importo le views (guest)
-import HomePage from './views/guest/HomePage.vue';
+import HomePage from './views/guest/HomePage.vue'; // redirect all'advanced search
+import AdvancedSearch from './views/guest/AdvancedSearch.vue'; // (index) dei ristoranti con filter
+import RestaurantMenu from './views/guest/RestaurantMenu.vue'; // (show) del ristorante selezionato e (index) dei piatti associati a quel ristorante
 import AboutUs from './views/guest/AboutUs.vue';
-import AdvancedSearch from './views/guest/AdvancedSearch.vue'; // index dei ristoranti
-import RestaurantMenu from './views/guest/RestaurantMenu.vue'; // show del ristorante e index dei piatti
-// la show del piatto è un pop-up, non una view
-import ContactUs from './views/guest/ContactUs.vue';
-import SigninLogin from './views/guest/SigninLogin.vue';
+// la show del piatto è un pop-up, non una view // ? off-canvas
+import ContactUs from './views/guest/ContactUs.vue'; // il form manda un'email al guest che vuole essere contattato
+import SigninLogin from './views/guest/SigninLogin.vue'; // l'utente si logga -> access token -> auth
 import CheckOut from './views/guest/CheckOut.vue'
 import Success from './views/guest/Success.vue';
 
 // # importo le views (admin)
-import EditDish from './views/admin/EditDish.vue';
-import AddDish from './views/admin/AddDish.vue';
-import AddRestaurant from './views/admin/AddRestaurant.vue';
-import EditRestaurant from './views/admin/EditRestaurant.vue';
-import Restaurants from './views/admin/Restaurants.vue';
-import Dishes from './views/admin/Dishes.vue';
-import Orders from './views/admin/Orders.vue';
-// la show dell'ordine è un pop-up, non una view
+import Restaurants from './views/admin/Restaurants.vue'; // (index) dei ristoranti associati all'utente loggato
+import AddRestaurant from './views/admin/AddRestaurant.vue'; // (create) nuovo ristorante per l'utente loggato
+import EditRestaurant from './views/admin/EditRestaurant.vue'; // (edit) modifica ristorante esistente dell'utente loggato
+import Dishes from './views/admin/Dishes.vue'; // (show) del ristorante e (index) dei patti associati a quel ristorante
+// la show del piatto è un pop-up, non una view // ? off-canvas
+import AddDish from './views/admin/AddDish.vue'; // (create) nuovo piatto associato al ristorante selezionato
+import EditDish from './views/admin/EditDish.vue'; // (edit) piatto esistente del ristorante selezionato
+import Orders from './views/admin/Orders.vue'; // (index) ordini associati al ristorante selezionato
+// la show dell'ordine è un pop-up, non una view // ? off-canvas
 import OrderStatistics from './views/admin/OrderStatistics.vue';
 
 
@@ -33,19 +34,19 @@ const router = createRouter({
             component: HomePage,
         },
         {
-            path: '/about',
-            name: 'about',
-            component: AboutUs,
-        },
-        {
             path: '/advanced-search',
             name: 'advanced-search',
             component: AdvancedSearch,
         },
         {
-            path: '/advanced-search/:restaurant',
+            path: '/advanced-search/restaurant',
             name: 'restaurant-menu',
             component: RestaurantMenu,
+        },
+        {
+            path: '/about',
+            name: 'about',
+            component: AboutUs,
         },
         {
             path: '/contact-us',
