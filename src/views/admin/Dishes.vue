@@ -33,43 +33,18 @@
 </template>
 
 <script>
-	// import {store} from "../store.js";
-	// import axios from "axios";
+	import {store} from "../../store.js";
+	import axios from "axios";
 
 	export default {
 		data() {
 			return {
-				// store
-                dishes: [
-                    {
-                        name: 'Carbonara',
-                        image: '../../../src/images/d1.jpeg',
-                    },
-                    {
-                        name: 'Rombo al Forno',
-                        image: '../../../src/images/d2.jpeg',
-                    },
-                    {
-                        name: 'Linguine all\'Astice',
-                        image: '../../../src/images/d3.jpeg',
-                    },
-                    {
-                        name: 'Panino con la Porchetta',
-                        image: '../../../src/images/d4.jpeg',
-                    },
-                    {
-                        name: 'Insalata di Mare',
-                        image: '../../../src/images/d5.jpeg',
-                    },
-                    {
-                        name: 'Pizza Margherita',
-                        image: '../../../src/images/d6.jpeg',
-                    },
-                    {
-                        name: 'Bruschette al Pomodoro',
-                        image: '../../../src/images/d7.jpeg',
-                    },
-                ],
+				store,
+				apiUrl: 'http://127.0.0.1:8000/api/',
+				userToken: '',
+				userId: '',
+				userName: '',
+                dishes: [],
 			}
 		},
 
@@ -82,15 +57,31 @@
 		},
 
 		mounted () {
-
+            this.getDishes()
 		},
 
 		created () {
-
+            this.userToken = localStorage.getItem('userToken')
+			this.userId = localStorage.getItem('userId')
+			this.userName = localStorage.getItem('userName')
+            console.log(store.selectedRes)
 		},
 
 		methods: {
-
+            getDishes(){
+                axios.get(`${this.apiUrl}${this.userId}/restaurants/${store.selectedRes}`,{
+                headers: {
+                'Authorization': `Bearer ${this.userToken}`
+                }
+                })
+                .then(response => {
+                    console.log(response.data.results.dishes)
+                    this.dishes = response.data.results.dishes
+                })
+                .catch(error => {
+                    console.log(error)
+                });
+            },
 		}
 	}
 </script>
