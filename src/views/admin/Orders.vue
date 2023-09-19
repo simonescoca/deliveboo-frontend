@@ -4,13 +4,18 @@
 			<h5 class="card-title">Order n: {{order.id}}</h5>
 			<h6 class="card-subtitle mb-2 text-muted">Total price: {{order.total_price}}</h6>
 			<p class="card-text">Customer name: {{ order.customer_name }}</p>
-			<p class="card-text">Customer name: {{ order.customer_address }}</p>
-			<p class="card-text">Customer name: {{ order.phone_number }}</p>
-			<p class="card-text">Customer name: {{ order.status===0 ? 'In process' : 'Completed' }}</p>
-			<a href="#" class="card-link">Card link</a>
-			<a href="#" class="card-link">Another link</a>
+			<p class="card-text">Customer address: {{ order.customer_address }}</p>
+			<p class="card-text">Customer phone number: {{ order.phone_number }}</p>
+			<p class="card-text">Status: {{ order.status===0 ? 'In process' : 'Completed' }}</p>
+			<a href="#" class="card-link btn btn-primary" @click="getOrderInfo(order.id)">Order Info</a>
 		</div>
 	</div>
+	<div>
+		<router-link :to="{ name: 'order-statistics' }" class="btn btn-secondary">
+			Order statistics
+		</router-link>
+	</div>
+	
 </template>
 
 <script>
@@ -62,6 +67,19 @@ import axios from "axios";
                     console.log(error)
                 });
             },
+			getOrderInfo(orderId){
+				axios.get(`${this.apiUrl}${this.userId}/restaurants/${store.selectedRes}/orders/${orderId}`,{
+                headers: {
+                'Authorization': `Bearer ${this.userToken}`
+                }
+                })
+                .then(response => {
+                    console.log(response)
+                })
+                .catch(error => {
+                    console.log(error)
+                });
+			}
 		}
 	}
 </script>
