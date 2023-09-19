@@ -9,12 +9,12 @@
             <!-- ? central links -->
             <ul class="d-flex justify-content-center align-items-center list-unstyled m-0">
                 <li v-for="link in links"> <!--class="d-flex align-items-center"-->
-                    <router-link :to="{ name: link.routeName }" class="my_link">
+                    <router-link :to="{ name: link.routeName }" class="d-flex align-items-center my_link">
                         <span>
                             <i :class="link.icon">
                             </i>
                         </span>
-                        <span>
+                        <span class="ms-2">
                             {{ link.text }}
                         </span>
                     </router-link>
@@ -24,31 +24,31 @@
             <!-- ? login or profile -->
             <div class="d-flex align-items-center my_gap2">
                 <div v-if="userName === null" @click="store.access = false"> <!--class="d-flex align-items-center"-->
-                    <router-link :to="{ name: 'profile' }" class="my_link">
+                    <router-link :to="{ name: 'profile' }" class="d-flex align-items-center my_link">
                         <span>
                             <i class="fa-solid fa-user-pen"></i>
                         </span>
-                        <span>
+                        <span class="ms-2">
                             Register
                         </span>
                     </router-link>
                 </div>
                 <div v-if="userName === null" @click="store.access = true"> <!--class="d-flex align-items-center"-->
-                    <router-link :to="{ name: 'profile' }" class="my_link">
+                    <router-link :to="{ name: 'profile' }" class="d-flex align-items-center my_link">
                         <span>
                             <i class="fa-solid fa-arrow-right-to-bracket"></i>
                         </span>
-                        <span>
+                        <span class="ms-2">
                             Login
                         </span>
                     </router-link>
                 </div>
                 <div v-if="userName !== null"> <!--class="d-flex align-items-center"-->
-                    <a href="/" class="my_link btn" @click="logout()">
+                    <a href="/" class="d-flex align-items-center my_link btn" @click="logout()">
                         <span>
                             <i class="fa-solid fa-arrow-right-from-bracket"></i>
                         </span>
-                        <span>
+                        <span class="ms-2">
                             Logout
                         </span>
                     </a>
