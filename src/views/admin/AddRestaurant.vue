@@ -3,6 +3,12 @@
         <h3>
             Admin - Add a Restaurant
         </h3>
+        <div v-if="isUpdateSuccess" class="alert alert-success">
+           La creazione del tuo ristorante è andata a buon fine!
+        </div>
+        <div v-if="isUpdateFailure" class="alert alert-danger">
+           La creazione del tuo ristorante non è andata a buon fine. Si è verificato un errore.
+        </div>
         <form @submit.prevent="createNewRestaurant">
             <div v-for="formSection in formSections" class="mb-3">
                 <label :for="formSection" class="form-label">
@@ -54,6 +60,8 @@
                     'Mediorientale',
                     'Vietnamita',
                 ],
+                isUpdateSuccess: false, 
+                isUpdateFailure: false,
 
                 newRestaurant: {
                     name: '',
@@ -97,13 +105,20 @@
                     }
                 })
                 .then(response => {
+                    if (response.status === 200 || response.status === 204) {
+          
+                     this.isUpdateSuccess = true;
+                     this.isUpdateFailure = false; 
+                    } 
                     
                     console.log(response)
                     // this.restaurants = response.data.results.restaurants
 
                 })
                 .catch(error => {
-                    console.log(error)
+                    console.error(error);
+                    this.isUpdateSuccess = false; 
+                    this.isUpdateFailure = true;
                 });
             }
 		}
