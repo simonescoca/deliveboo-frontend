@@ -98,14 +98,14 @@
                 });
             },
             dishInfo(dishId){
-                axios.get(`${this.apiUrl}${this.userId}/restaurants/${store.selectedRes}`,{
+                axios.get(`${this.apiUrl}${this.userId}/restaurants/${store.selectedRes}/dishes/${dishId}`,{
                 headers: {
                 'Authorization': `Bearer ${this.userToken}`
                 }
                 })
                 .then(response => {
-                    console.log(response.data.results.restaurant.dishes[dishId])
-                    this.infodish = response.data.results.restaurant.dishes[dishId]
+                    console.log(response)
+                    this.infodish = response.data.results.dish
                 })
                 .catch(error => {
                     console.log(error)
