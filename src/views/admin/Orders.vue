@@ -14,6 +14,12 @@
 		<div class="card d-inline-block m-5 text-center position-relative">
 			<i class="fa-solid fa-xmark position-absolute" style="color: #ff0000;" @click="this.infotoggle = false"></i>
 			<h2>Order Details</h2>
+				<div class="card-body" v-for="dish in infodish">
+					<h5 class="card-title">{{ dish.name }}</h5>
+					<h6 class="card-subtitle mb-2 text-bg-success py-2 mx-auto">Price: {{ dish.price }}</h6>
+					<!-- <p class="card-text">Dish course: {{ dish.course }}</p>
+					<p class="card-text">Pic: {{ infodish.photo }}</p> -->
+				</div>
 		</div>
 	</div>
 	<div>
