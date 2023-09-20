@@ -17,117 +17,133 @@
                     {{ restaurant.name }}
                 </div>
                 <div class="position-absolute bottom-0 satr-0 end-0">
-                    <router-link v-for="link in links" :to="{ name: link.routeName }" class="btn" :class="link.class" @click="store.selectedRes = restaurant.id">
+                    <router-link v-for="link in links" :to="{ name: link.routeName }" class="btn" :class="link.class"
+                        @click="store.selectedRes = restaurant.id">
                         {{ link.text }}
                     </router-link>
-                    <button @click="softDeleteItem" class="btn btn-danger">
+                    <button @click="softDeleteItem(restaurant.id)" class="btn btn-danger">
                         Delete
                     </button>
                 </div>
             </div>
         </div>
+        <div v-if="isDeleteSuccess" class="alert alert-success">
+            La modifica è andata a buon fine!
+        </div>
     </div>
 </template>
 
 <script>
-	import {store} from "../../store.js";
-	import axios from "axios";
+import { store } from "../../store.js";
+import axios from "axios";
 
-	export default {
-		data() {
-			return {
-				store,
-				apiUrl: 'http://127.0.0.1:8000/api/',
-				userToken: '',
-				userId: '',
-				userName: '',
-                links: [
-                    {
-                        routeName: 'dishes',
-                        class: 'btn-success',
-                        text: 'Dishes',
-                    },
-                    {
-                        routeName: 'orders',
-                        class: 'btn-success',
-                        text: 'Orders',
-                    },
-                    {
-                        routeName: 'editRestaurant',
-                        class: 'btn-warning',
-                        text: 'Edit',
-                    },
-                ],
-                restaurants: [],
-			}
-		},
+export default {
+    data() {
+        return {
+            store,
+            isDeleteSuccess: false,
+            apiUrl: 'http://127.0.0.1:8000/api/',
+            userToken: '',
+            userId: '',
+            userName: '',
+            links: [
+                {
+                    routeName: 'dishes',
+                    class: 'btn-success',
+                    text: 'Dishes',
+                },
+                {
+                    routeName: 'orders',
+                    class: 'btn-success',
+                    text: 'Orders',
+                },
+                {
+                    routeName: 'editRestaurant',
+                    class: 'btn-warning',
+                    text: 'Edit',
+                },
+            ],
+            restaurants: [],
+        }
+    },
 
-		components: {
+    components: {
 
-		},
+    },
 
-		props: {
+    props: {
 
-		},
+    },
 
-		mounted () {
-            this.getRestaurants()
-		},
+    mounted() {
+        this.getRestaurants()
+        console.log(`${this.apiUrl}${this.userId}/restaurants/${store.selectedRes}`);
+    },
 
-		created () {
-            this.userToken = localStorage.getItem('userToken')
-			this.userId = localStorage.getItem('userId')
-			this.userName = localStorage.getItem('userName')
-		},
+    created() {
+        this.userToken = localStorage.getItem('userToken')
+        this.userId = localStorage.getItem('userId')
+        this.userName = localStorage.getItem('userName')
+    },
 
-		methods: {
-            softDeleteItem() {
-                const itemId = 1; // L'id dell'elemento da eliminare
-                axios.delete(`/api/items/${itemId}`)
+    methods: {
+        softDeleteItem(restaurantId) {
+            //const itemId = 1;  L'id dell'elemento da eliminare
+            axios.delete(`${this.apiUrl}${this.userId}/restaurants/${restaurantId}`)
                 .then(response => {
                     // Gestisci la risposta dal backend (ad esempio, aggiorna lo stato della vista)
+                    if (response.status === 200 || response.status === 204) {
+                        this.isDeleteSuccess = true;
+                        console.log(this.isDeleteSuccess)
+                        setTimeout(() => {
+                            this.isDeleteSuccess = false;
+                            console.log(this.isDeleteSuccess)
+                        }, 5000)
+                    }
+                    this.getRestaurants();
                 })
                 .catch(error => {
                     // Gestisci eventuali errori
                 });
-            },
-            getRestaurants(){
-                axios.get(`${this.apiUrl}${this.userId}/restaurants`,{
+
+        },
+        getRestaurants() {
+            axios.get(`${this.apiUrl}${this.userId}/restaurants`, {
                 headers: {
-                'Authorization': `Bearer ${this.userToken}`
+                    'Authorization': `Bearer ${this.userToken}`
                 }
-                })
+            })
                 .then(response => {
-                    console.log(response)
+                    // console.log(response)
                     this.restaurants = response.data
                 })
                 .catch(error => {
                     console.log(error)
                 });
-            },
-		}
-	}
+        },
+    }
+}
 </script>
 
 <style lang="scss" scoped>
-    .my_restaurants {
-        gap: 3rem;
-    }
+.my_restaurants {
+    gap: 3rem;
+}
 
-    .my_restaurant {
-        border: 1px solid black;
+.my_restaurant {
+    border: 1px solid black;
+    border-radius: 7px;
+}
+
+.my_r-img {
+    height: 17.8rem;
+    width: 17.8rem;
+    object-fit: contain;
+
+    img {
+        height: 100%;
+        width: 100%;
         border-radius: 7px;
     }
-
-    .my_r-img {
-        height: 17.8rem;
-        width: 17.8rem;
-        object-fit: contain;
-
-        img {
-            height: 100%;
-            width: 100%;
-            border-radius: 7px;
-        }
-    }
+}
 </style>
