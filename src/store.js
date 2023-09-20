@@ -1,15 +1,16 @@
-import {reactive} from 'vue';
-const store = reactive ({
+import { reactive } from "vue";
+const store = reactive({
     access: false,
-    selectedRes: '',
-    selectedDish: '',
+    selectedRes: "",
+    selectedDish: "",
+    deletedItemId: "",
 });
 
-export {store}
+export { store };
 
 /**
  * import {store} from "./path"
- * 
+ *
  * data () {
  *     return {
  *         store
