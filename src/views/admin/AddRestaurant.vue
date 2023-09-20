@@ -12,7 +12,7 @@
             </div>
             <div class="d-flex">
                 <div v-for="formCheck in formChecks" class="mb-3 ms-4 form-check">
-                    <input type="checkbox" class="form-check-input" :id="formCheck" :value="formCheck" v-model="newRestaurant.types">
+                    <input type="checkbox" class="form-check-input" :id="formCheck" :value="formCheck" v-model="newRestaurant.types" @click="console.log(newRestaurant)">
                     <label class="form-check-label" :for="formCheck">
                         {{'Cucina ' + formCheck }}
                     </label>
