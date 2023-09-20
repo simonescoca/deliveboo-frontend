@@ -84,28 +84,28 @@
 
 		methods: {
             getDishes(){
-                axios.get(`${this.apiUrl}${this.userId}/restaurants/${store.selectedRes}/dishes`,{
+                axios.get(`${this.apiUrl}${this.userId}/restaurants/${store.selectedRes}`,{
                 headers: {
                 'Authorization': `Bearer ${this.userToken}`
                 }
                 })
                 .then(response => {
-                    console.log(response.data.results)
-                    this.dishes = response.data.results
+                    console.log(response)
+                    this.dishes = response.data.results.restaurant.dishes
                 })
                 .catch(error => {
                     console.log(error)
                 });
             },
             dishInfo(dishId){
-                axios.get(`${this.apiUrl}${this.userId}/restaurants/${store.selectedRes}/dishes/${dishId}`,{
+                axios.get(`${this.apiUrl}${this.userId}/restaurants/${store.selectedRes}`,{
                 headers: {
                 'Authorization': `Bearer ${this.userToken}`
                 }
                 })
                 .then(response => {
-                    console.log(response.data.results.dish)
-                    this.infodish = response.data.results.dish
+                    console.log(response.data.results.restaurant.dishes[dishId])
+                    this.infodish = response.data.results.restaurant.dishes[dishId]
                 })
                 .catch(error => {
                     console.log(error)
