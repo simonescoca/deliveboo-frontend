@@ -3,13 +3,13 @@
         <h3>
             Admin - Edit Dish
         </h3>
-        <form @submit.prevent="editDish">
+        <form @submit.prevent="updateDish">
             <div v-for="formSection in formSections" class="mb-3">
                 <div v-if="formSection.labelFor != 'description'">
                     <label :for="formSection.labelFor" class="form-label">
                         {{ formSection.labelContent }}
                     </label>
-                    <input :type="formSection.inputType" :class="formSection.inputClass" :id="formSection.inputID" :aria-describedby="formSection.labelFor" v-model="editData.name">
+                    <input :type="formSection.inputType" :class="formSection.inputClass" :id="formSection.inputID" :aria-describedby="formSection.labelFor" v-model="editData[formSection.inputID]">
                 </div>
                 <div v-else class="form-floating">
                     <textarea class="form-control" :placeholder="formSection.textareaPlaceholder" :id="formSection.textareaID" v-model="editData.description">
@@ -26,12 +26,12 @@
                     is it available?
                 </label>
             </div>
-            <!-- <div class="mb-3">
+            <div class="mb-3">
                 <label for="formFile" class="form-label">
                     Add image
                 </label>
-                <input class="form-control" type="file" id="image">
-            </div> -->
+                <input class="form-control" type="url" id="image" v-model="editData.photo">
+            </div>
             <select class="form-select" aria-label="select-course" v-model="editData.course">
                 <option selected>
                     Select course
@@ -40,15 +40,14 @@
                     {{ course }}
                 </option>
             </select>
-
-            <label for="ingredients" class="form-label mt-4">
-                Type dish ingredients
-            </label>
-            <input type="text" class="form-control mb-3" id="ingredient" v-model="editData.ingredient_names">
-            <div class="btn btn-success" @click="addIngredient">
-                Add Ingredient
+            <div class="d-flex">
+                <div v-for="ingredient in ingredients" class="mb-3 ms-4 form-check">
+                    <input type="checkbox" class="form-check-input" :id="ingredient" :value="ingredient" v-model="editData.ingredient_names">
+                    <label class="form-check-label" :for="ingredient">
+                        {{ ingredient }}
+                    </label>
+                </div>
             </div>
-
 
             <button type="submit" class="btn btn-primary">
                 Update
@@ -108,7 +107,9 @@
 					ingredient_names: [],
 				},
                 ingredient: '',
-                ingredients: [],
+                actualIngredients: [],
+                isUpdateSuccess: false, 
+                isUpdateFailure: false,
 			}
 		},
 
@@ -131,35 +132,14 @@
 		},
 
 		methods: {
-            addIngredient () {
-                this.ingredients.push(this.ingredient)
-                console.log(this.ingredients)
-                this.ingredient = ''
-            },
             getDish(){
-                axios.get(`${this.apiUrl}${this.userId}/restaurants/${store.selectedRes}/${store.selectedDish}`,{
+                axios.get(`${this.apiUrl}${this.userId}/restaurants/${store.selectedRes}/dishes/${store.selectedDish}`,{
                 headers: {
                 'Authorization': `Bearer ${this.userToken}`
                 }
                 })
                 .then(response => {
                     console.log(response)
-                })
-                .catch(error => {
-                    console.log(error)
-                });
-            },
-            editDish(){
-                axios.get(`${this.apiUrl}${this.userId}/restaurants/${store.selectedRes}/${store.selectedDish}/edit`,{
-                    headers: {
-                    'Authorization': `Bearer ${this.userToken}`
-                    },
-                    params: {
-                        editData: this.editData
-                    }
-                })
-                .then(response => {
-                    console.log('Edit mandata')
                 })
                 .catch(error => {
                     console.log(error)
