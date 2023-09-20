@@ -32,6 +32,9 @@
                 </div>
             </div>
         </div>
+        <router-link :to="{ name: 'deleted-dishes' }" class="btn btn-danger">
+            Deleted Dishes
+        </router-link>
         <div class="position-absolute dishinfo" :class="this.infotoggle === false ? 'invisible' : ''">
             <div class="card d-inline-block m-5 text-center position-relative">
                 <i class="fa-solid fa-xmark position-absolute" style="color: #ff0000;" @click="this.infotoggle = false"></i>
