@@ -12,8 +12,8 @@
             </div>
             <div class="d-flex">
                 <div v-for="formCheck in formChecks" class="mb-3 ms-4 form-check">
-                    <input type="checkbox" class="form-check-input" :id="formCheck" :value="formCheck" v-model="newRestaurant['categories']" @click="console.log(newRestaurant)">
-                    <label class="form-check-label" for="cuisine-type">
+                    <input type="checkbox" class="form-check-input" :id="formCheck" :value="formCheck" v-model="newRestaurant['types']" @click="console.log(newRestaurant)">
+                    <label class="form-check-label" :for="formCheck">
                         {{'Cucina ' + formCheck }}
                     </label>
                 </div>
@@ -59,7 +59,7 @@
                     name: '',
                     address: '',
                     city: '',
-                    categories: [],
+                    types: [],
                 }
 			}
 		},
@@ -85,6 +85,11 @@
 		methods: {
             createNewRestaurant () {
                 axios.post(`${this.apiUrl}/${this.userId}/restaurants`,{
+                    name: this.newRestaurant.name,
+                    address: this.newRestaurant.address,
+                    city: this.newRestaurant.city,
+                    types: this.newRestaurant.types
+                },{
                     headers: {
                         'Authorization': `Bearer ${this.userToken}`
                     }
@@ -92,6 +97,7 @@
                 .then(response => {
                     console.log(response)
                     // this.restaurants = response.data.results.restaurants
+
                 })
                 .catch(error => {
                     console.log(error)
