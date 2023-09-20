@@ -8,6 +8,9 @@
         <h3>
             I tuoi piatti:
         </h3>
+        <div v-if="isDeleteSuccess" class="my-3 alert alert-success">
+            La modifica è andata a buon fine!
+        </div>
         <div class="d-flex flex-wrap my_dishes">
             <div v-for="dish in dishes" class="position-relative my_dish">
                 <div class="my_r-img">
@@ -23,86 +26,91 @@
                     <router-link :to="{ name: 'editDish' }" class="btn btn-warning" @click="store.selectedDish = dish.id">
                         Edit
                     </router-link>
-                    <button @click="softDeleteItem" class="btn btn-danger">
+                    <button @click="softDeleteItem(dish.id)" class="btn btn-danger">
                         Delete
                     </button>
                 </div>
             </div>
         </div>
+        <router-link :to="{ name: 'deleted-dishes' }" class="btn btn-danger">
+            Deleted Dishes
+        </router-link>
         <div class="position-absolute dishinfo" :class="this.infotoggle === false ? 'invisible' : ''">
             <div class="card d-inline-block m-5 text-center position-relative">
                 <i class="fa-solid fa-xmark position-absolute" style="color: #ff0000;" @click="this.infotoggle = false"></i>
                 <div class="card-body">
-                    <h5 class="card-title">{{infodish.name}}</h5>
-                    <h6 class="card-subtitle mb-2 text-bg-success w-25 py-2 mx-auto">Price: {{infodish.price}}</h6>
+                    <h5 class="card-title">{{ infodish.name }}</h5>
+                    <h6 class="card-subtitle mb-2 text-bg-success w-25 py-2 mx-auto">Price: {{ infodish.price }}</h6>
                     <p class="card-text">Dish course: {{ infodish.course }}</p>
                     <p class="card-text">{{ infodish.description }}</p>
                     <p class="card-text">Pic: {{ infodish.photo }}</p>
-                    <p class="card-text">Ingredients: <span v-for="ingredient in infodish.ingredients">{{ ingredient.name }}, </span></p>
+                    <p class="card-text">Ingredients: <span v-for="ingredient in infodish.ingredients">{{ ingredient.name
+                    }}, </span></p>
                 </div>
             </div>
         </div>
+
     </div>
 </template>
 
 <script>
-	import {store} from "../../store.js";
-	import axios from "axios";
+import { store } from "../../store.js";
+import axios from "axios";
 
-	export default {
-		data() {
-			return {
-				store,
-				apiUrl: 'http://127.0.0.1:8000/api/',
-				userToken: '',
-				userId: '',
-				userName: '',
-                dishes: [],
-                infotoggle: false,
-                infodish: [],
-			}
-		},
+export default {
+    data() {
+        return {
+            store,
+            isDeleteSuccess: false,
+            apiUrl: 'http://127.0.0.1:8000/api/',
+            userToken: '',
+            userId: '',
+            userName: '',
+            dishes: [],
+            infotoggle: false,
+            infodish: [],
+        }
+    },
 
-		components: {
+    components: {
 
-		},
+    },
 
-		props: {
+    props: {
 
-		},
+    },
 
-		mounted () {
-            this.getDishes()
-		},
+    mounted() {
+        this.getDishes()
+    },
 
-		created () {
-            this.userToken = localStorage.getItem('userToken')
-			this.userId = localStorage.getItem('userId')
-			this.userName = localStorage.getItem('userName')
-            console.log(store.selectedRes)
-		},
+    created() {
+        this.userToken = localStorage.getItem('userToken')
+        this.userId = localStorage.getItem('userId')
+        this.userName = localStorage.getItem('userName')
+        console.log(store.selectedRes)
+    },
 
-		methods: {
-            getDishes(){
-                axios.get(`${this.apiUrl}${this.userId}/restaurants/${store.selectedRes}`,{
+    methods: {
+        getDishes() {
+            axios.get(`${this.apiUrl}${this.userId}/restaurants/${store.selectedRes}`, {
                 headers: {
-                'Authorization': `Bearer ${this.userToken}`
+                    'Authorization': `Bearer ${this.userToken}`
                 }
-                })
+            })
                 .then(response => {
-                    console.log(response)
                     this.dishes = response.data.results.restaurant.dishes
                 })
                 .catch(error => {
                     console.log(error)
                 });
-            },
-            dishInfo(dishId){
-                axios.get(`${this.apiUrl}${this.userId}/restaurants/${store.selectedRes}/dishes/${dishId}`,{
+        },
+        dishInfo(dishId) {
+            axios.get(`${this.apiUrl}${this.userId}/restaurants/${store.selectedRes}/dishes/${dishId}`, {
                 headers: {
-                'Authorization': `Bearer ${this.userToken}`
+                    'Authorization': `Bearer ${this.userToken}`
                 }
-                })
+            })
                 .then(response => {
                     console.log(response)
                     this.infodish = response.data.results.dish
@@ -110,50 +118,75 @@
                 .catch(error => {
                     console.log(error)
                 });
-                this.infotoggle = !this.infotoggle
-            },
-		}
-	}
+            this.infotoggle = !this.infotoggle
+        },
+        softDeleteItem(dishId) {
+            //const itemId = 1;  L'id dell'elemento da eliminare
+            axios.delete(`${this.apiUrl}${this.userId}/restaurants/${store.selectedRes}/dishes/${dishId}`)
+                .then(response => {
+                    // Gestisci la risposta dal backend (ad esempio, aggiorna lo stato della vista)
+                    if (response.status === 200 || response.status === 204) {
+                        this.isDeleteSuccess = true;
+                        console.log(this.isDeleteSuccess)
+                        setTimeout(() => {
+                            this.isDeleteSuccess = false;
+                            console.log(this.isDeleteSuccess)
+                        }, 5000)
+                        console.log(response.data)
+                    }
+                    this.getDishes();
+                })
+                .catch(error => {
+                    // Gestisci eventuali errori
+                });
+
+        },
+    }
+}
 </script>
 
 <style lang="scss" scoped>
-    .dishinfo{
-        top: 150px;
-        left: 25%;
-        width: 50%;
-        .fa-xmark{
-            right: 10px;
-            top: 5px;
-            font-size: 30px;
-            cursor: pointer;
-        }
-        .card-body{
-            background-color: rgb(228, 228, 228);
-            border: 1px solid black;
-            border-radius: 5px;
-        }
-    }
-    .invisible{
-        display: none;
-    }
-    .my_dishes {
-        gap: 3rem;
+.dishinfo {
+    top: 150px;
+    left: 25%;
+    width: 50%;
+
+    .fa-xmark {
+        right: 10px;
+        top: 5px;
+        font-size: 30px;
+        cursor: pointer;
     }
 
-    .my_dish {
+    .card-body {
+        background-color: rgb(228, 228, 228);
         border: 1px solid black;
+        border-radius: 5px;
+    }
+}
+
+.invisible {
+    display: none;
+}
+
+.my_dishes {
+    gap: 3rem;
+}
+
+.my_dish {
+    border: 1px solid black;
+    border-radius: 7px;
+}
+
+.my_r-img {
+    height: 17.8rem;
+    width: 17.8rem;
+    object-fit: contain;
+
+    img {
+        height: 100%;
+        width: 100%;
         border-radius: 7px;
     }
-
-    .my_r-img {
-        height: 17.8rem;
-        width: 17.8rem;
-        object-fit: contain;
-
-        img {
-            height: 100%;
-            width: 100%;
-            border-radius: 7px;
-        }
-    }
+}
 </style>

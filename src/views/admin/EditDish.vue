@@ -3,13 +3,19 @@
         <h3>
             Admin - Edit Dish
         </h3>
-        <form @submit.prevent="editDish">
+        <div v-if="isUpdateSuccess" class="alert alert-success">
+            La modifica del piatto è andata a buon fine!
+        </div>
+        <div v-if="isUpdateFailure" class="alert alert-danger">
+            La modifica del piatto non è andata a buon fine. Si è verificato un errore.
+        </div>
+        <form @submit.prevent="updateDish">
             <div v-for="formSection in formSections" class="mb-3">
                 <div v-if="formSection.labelFor != 'description'">
                     <label :for="formSection.labelFor" class="form-label">
                         {{ formSection.labelContent }}
                     </label>
-                    <input :type="formSection.inputType" :class="formSection.inputClass" :id="formSection.inputID" :aria-describedby="formSection.labelFor" v-model="editData.name">
+                    <input :type="formSection.inputType" :class="formSection.inputClass" :id="formSection.inputID" :aria-describedby="formSection.labelFor" v-model="editData[formSection.inputID]">
                 </div>
                 <div v-else class="form-floating">
                     <textarea class="form-control" :placeholder="formSection.textareaPlaceholder" :id="formSection.textareaID" v-model="editData.description">
@@ -26,12 +32,12 @@
                     is it available?
                 </label>
             </div>
-            <!-- <div class="mb-3">
+            <div class="mb-3">
                 <label for="formFile" class="form-label">
                     Add image
                 </label>
-                <input class="form-control" type="file" id="image">
-            </div> -->
+                <input class="form-control" type="url" id="image" v-model="editData.photo">
+            </div>
             <select class="form-select" aria-label="select-course" v-model="editData.course">
                 <option selected>
                     Select course
@@ -40,15 +46,14 @@
                     {{ course }}
                 </option>
             </select>
-
-            <label for="ingredients" class="form-label mt-4">
-                Type dish ingredients
-            </label>
-            <input type="text" class="form-control mb-3" id="ingredient" v-model="editData.ingredient_names">
-            <div class="btn btn-success" @click="addIngredient">
-                Add Ingredient
+            <div class="d-flex">
+                <div v-for="ingredient in ingredients" class="mb-3 ms-4 form-check">
+                    <input type="checkbox" class="form-check-input" :id="ingredient" :value="ingredient" v-model="editData.ingredient_names">
+                    <label class="form-check-label" :for="ingredient">
+                        {{ ingredient }}
+                    </label>
+                </div>
             </div>
-
 
             <button type="submit" class="btn btn-primary">
                 Update
@@ -98,6 +103,13 @@
                     'Contorno',
                     'Dolce',
                 ],
+                ingredients: [
+                    "Spaghetti", 
+                    "Uova", 
+                    "Guanciale", 
+                    "Pecorino romano", 
+                    "Pepe nero",
+                ],
 				editData: {
 					name: '',
 					description: '',
@@ -108,7 +120,9 @@
 					ingredient_names: [],
 				},
                 ingredient: '',
-                ingredients: [],
+                actualIngredients: [],
+                isUpdateSuccess: false, 
+                isUpdateFailure: false,
 			}
 		},
 
@@ -131,39 +145,52 @@
 		},
 
 		methods: {
-            addIngredient () {
-                this.ingredients.push(this.ingredient)
-                console.log(this.ingredients)
-                this.ingredient = ''
-            },
             getDish(){
-                axios.get(`${this.apiUrl}${this.userId}/restaurants/${store.selectedRes}/${store.selectedDish}`,{
+                axios.get(`${this.apiUrl}${this.userId}/restaurants/${store.selectedRes}/dishes/${store.selectedDish}`,{
                 headers: {
                 'Authorization': `Bearer ${this.userToken}`
                 }
                 })
                 .then(response => {
                     console.log(response)
+                    this.editData.name = response.data.results.dish.name
+                    this.editData.description = response.data.results.dish.description
+                    this.editData.price = response.data.results.dish.price
+                    this.editData.course = response.data.results.dish.course
+                    this.editData.photo = response.data.results.dish.photo
+                    this.editData.available = response.data.results.dish.available
                 })
                 .catch(error => {
                     console.log(error)
                 });
             },
-            editDish(){
-                axios.get(`${this.apiUrl}${this.userId}/restaurants/${store.selectedRes}/${store.selectedDish}/edit`,{
-                    headers: {
+            updateDish() {
+            axios.put(`${this.apiUrl}${this.userId}/restaurants/${store.selectedRes}/dishes/${store.selectedDish}`, {
+                name: this.editData.name,
+                description: this.editData.description,
+                price: this.editData.price,
+                course: this.editData.course,
+                photo: this.editData.photo,
+                available: this.editData.available,
+                ingredient_names: this.editData.ingredient_names,
+            }, {
+                headers: {
                     'Authorization': `Bearer ${this.userToken}`
-                    },
-                    params: {
-                        editData: this.editData
-                    }
-                })
-                .then(response => {
-                    console.log('Edit mandata')
-                })
-                .catch(error => {
-                    console.log(error)
-                });
+                }
+            })
+            .then(response => {
+                if (response.status === 200 || response.status === 204) {
+            
+                this.isUpdateSuccess = true;
+                this.isUpdateFailure = false; 
+            } 
+                console.log(response);
+            })
+            .catch(error => {
+                console.error(error);
+                this.isUpdateSuccess = false; 
+                this.isUpdateFailure = true;
+            });
             },
 		}
 	}
