@@ -3,6 +3,12 @@
         <h3>
             Admin - Edit Dish
         </h3>
+        <div v-if="isUpdateSuccess" class="alert alert-success">
+            La modifica del piatto è andata a buon fine!
+        </div>
+        <div v-if="isUpdateFailure" class="alert alert-danger">
+            La modifica del piatto non è andata a buon fine. Si è verificato un errore.
+        </div>
         <form @submit.prevent="updateDish">
             <div v-for="formSection in formSections" class="mb-3">
                 <div v-if="formSection.labelFor != 'description'">
