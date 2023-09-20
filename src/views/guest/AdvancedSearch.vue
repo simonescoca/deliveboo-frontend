@@ -9,7 +9,7 @@
                 <i class="fa-solid fa-magnifying-glass"></i>
             </div>
         </div>
-        <div class="d-flex justify-content-center align-items-center container">
+        <!-- <div class="d-flex justify-content-center align-items-center container">
             <div class="customCheckBoxHolder">
                 <input type="checkbox" id="cCB1" class="customCheckBoxInput" @change="toggleType('Italiana'), getRestaurants()">
                 <label for="cCB1" class="customCheckBoxWrapper me-2">
@@ -82,6 +82,14 @@
                     </div>
                 </label>
             </div>
+        </div> -->
+        <div class="test">
+            <form @submit.prevent="getRestaurants()">
+                <input type="checkbox" name="type[]" value="Italiana">
+                <input type="checkbox" name="type[]" value="Francese">
+                <input type="checkbox" name="type[]" value="Giapponese">
+                <button type="submit">Test</button>
+            </form>
         </div>
     </header>
     <main class="d-flex flex-wrap justify-content-around align-items-center container">
@@ -115,7 +123,8 @@
 		data() {
 			return {
 				// store
-                selectedOptions: [],
+                selectedOptions: '',
+                checkSelect: [],
                 restCategOrName: '',
                 apiUrl: 'http://127.0.0.1:8000/api',
                 initialRestaurants: [],
@@ -152,14 +161,15 @@
 
 		methods: {
             getRestaurants(){
+                const selectedTypes = Array.from(document.querySelectorAll('input[name="type[]"]:checked')).map(input => input.value);
                 axios.get(`${this.apiUrl}/restaurants`,{
                     params: {
                         name: this.restCategOrName,
-                        type: this.selectedOptions
+                        type: selectedTypes
                     }
                 })
                 .then(response => {
-                    this.initialRestaurants = response.data.results.data
+                    this.initialRestaurants = response.data.results
                     console.log(response)
                 })
                 .catch(error => {
@@ -167,11 +177,15 @@
                 });
             },
             toggleType(type) {
-                const index = this.selectedOptions.indexOf(type)
+                const index = this.checkSelect.indexOf(type)
                 if (index !== -1) {
-                    this.selectedOptions = this.selectedOptions.filter(item => item !== type);
+                    this.checkSelect = this.checkSelect.filter(item => item !== type);
+                    let selection = type + ", "
+                    this.selectedOptions = this.selectedOptions.replace(selection, "")
+                    
                 } else {
-                    this.selectedOptions.push(type);
+                    this.checkSelect.push(type)
+                    this.selectedOptions = this.selectedOptions + type + ", ";
                 }
                 console.log(this.selectedOptions)
             }
