@@ -147,6 +147,12 @@
                 })
                 .then(response => {
                     console.log(response)
+                    this.editData.name = response.data.results.dish.name
+                    this.editData.description = response.data.results.dish.description
+                    this.editData.price = response.data.results.dish.price
+                    this.editData.course = response.data.results.dish.course
+                    this.editData.photo = response.data.results.dish.photo
+                    this.editData.available = response.data.results.dish.available
                 })
                 .catch(error => {
                     console.log(error)
