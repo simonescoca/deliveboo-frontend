@@ -5,13 +5,14 @@
                 Find your favorite
             </div>
             <div class="my_searchbar w-50">
-                <input type="text" v-model="restCategOrName" placeholder="Restaurant name or type" @keyup="getRestaurants()">
+                <input type="text" v-model="restCategOrName" placeholder="Restaurant name or type">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </div>
         </div>
-        <!-- <div class="d-flex justify-content-center align-items-center container">
+        <form @submit.prevent="getRestaurants()">
+            <div class="d-flex justify-content-center align-items-center container">
             <div class="customCheckBoxHolder">
-                <input type="checkbox" id="cCB1" class="customCheckBoxInput" @change="toggleType('Italiana'), getRestaurants()">
+                <input type="checkbox" id="cCB1" class="customCheckBoxInput" name="type[]" value="Italiana">
                 <label for="cCB1" class="customCheckBoxWrapper me-2">
                     <div class="customCheckBox">
                         <div class="inner">Italiana</div>
@@ -19,7 +20,7 @@
                 </label>
             </div>
             <div class="customCheckBoxHolder">
-                <input type="checkbox" id="cCB2" class="customCheckBoxInput" @change="toggleType('Francese'), getRestaurants()">
+                <input type="checkbox" id="cCB2" class="customCheckBoxInput" name="type[]" value="Francese">
                 <label for="cCB2" class="customCheckBoxWrapper">
                     <div class="customCheckBox">
                         <div class="inner">Francese</div>
@@ -27,7 +28,7 @@
                 </label>
             </div>
             <div class="customCheckBoxHolder">
-                <input type="checkbox" id="cCB3" class="customCheckBoxInput" @change="toggleType('Giapponese'), getRestaurants()">
+                <input type="checkbox" id="cCB3" class="customCheckBoxInput" name="type[]" value="Giapponese">
                 <label for="cCB3" class="customCheckBoxWrapper">
                     <div class="customCheckBox">
                         <div class="inner">Giapponese</div>
@@ -35,7 +36,7 @@
                 </label>
             </div>
             <div class="customCheckBoxHolder">
-                <input type="checkbox" id="cCB4" class="customCheckBoxInput" @change="toggleType('Cinese'), getRestaurants()">
+                <input type="checkbox" id="cCB4" class="customCheckBoxInput" name="type[]" value="Cinese">
                 <label for="cCB4" class="customCheckBoxWrapper">
                     <div class="customCheckBox">
                         <div class="inner">Cinese</div>
@@ -43,7 +44,7 @@
                 </label>
             </div>
             <div class="customCheckBoxHolder">
-                <input type="checkbox" id="cCB5" class="customCheckBoxInput" @change="toggleType('Americana'), getRestaurants()">
+                <input type="checkbox" id="cCB5" class="customCheckBoxInput" name="type[]" value="Americana">
                 <label for="cCB5" class="customCheckBoxWrapper">
                     <div class="customCheckBox">
                         <div class="inner">Americana</div>
@@ -51,7 +52,7 @@
                 </label>
             </div>
             <div class="customCheckBoxHolder">
-                <input type="checkbox" id="cCB6" class="customCheckBoxInput" @change="toggleType('Indiano'), getRestaurants()">
+                <input type="checkbox" id="cCB6" class="customCheckBoxInput" name="type[]" value="Indiano">
                 <label for="cCB6" class="customCheckBoxWrapper">
                     <div class="customCheckBox">
                         <div class="inner">Indiano</div>
@@ -59,7 +60,7 @@
                 </label>
             </div>
             <div class="customCheckBoxHolder">
-                <input type="checkbox" id="cCB7" class="customCheckBoxInput" @change="toggleType('Mediterranea'), getRestaurants()">
+                <input type="checkbox" id="cCB7" class="customCheckBoxInput" name="type[]" value="Mediterranea">
                 <label for="cCB7" class="customCheckBoxWrapper">
                     <div class="customCheckBox">
                         <div class="inner">Mediterranea</div>
@@ -67,7 +68,7 @@
                 </label>
             </div>
             <div class="customCheckBoxHolder">
-                <input type="checkbox" id="cCB8" class="customCheckBoxInput" @change="toggleType('Mediorientale'), getRestaurants()">
+                <input type="checkbox" id="cCB8" class="customCheckBoxInput" name="type[]" value="Mediorientale">
                 <label for="cCB8" class="customCheckBoxWrapper">
                     <div class="customCheckBox">
                         <div class="inner">Mediorientale</div>
@@ -75,22 +76,18 @@
                 </label>
             </div>
             <div class="customCheckBoxHolder">
-                <input type="checkbox" id="cCB9" class="customCheckBoxInput" @change="toggleType('Vietnamita'), getRestaurants()">
+                <input type="checkbox" id="cCB9" class="customCheckBoxInput" name="type[]" value="Vietnamita">
                 <label for="cCB9" class="customCheckBoxWrapper">
                     <div class="customCheckBox">
                         <div class="inner">Vietnamita</div>
                     </div>
                 </label>
             </div>
-        </div> -->
-        <div class="test">
-            <form @submit.prevent="getRestaurants()">
-                <input type="checkbox" name="type[]" value="Italiana">
-                <input type="checkbox" name="type[]" value="Francese">
-                <input type="checkbox" name="type[]" value="Giapponese">
-                <button type="submit">Test</button>
-            </form>
-        </div>
+            </div>
+            <div class="d-flex">
+                <button type="submit" class="btn btn-success mx-auto">Search it!</button>
+            </div>
+        </form>
     </header>
     <main class="d-flex flex-wrap justify-content-around align-items-center container">
         <div v-for="initialRestaurant in initialRestaurants" class="mb-4">
@@ -162,6 +159,7 @@
 		methods: {
             getRestaurants(){
                 const selectedTypes = Array.from(document.querySelectorAll('input[name="type[]"]:checked')).map(input => input.value);
+                console.log(selectedTypes)
                 axios.get(`${this.apiUrl}/restaurants`,{
                     params: {
                         name: this.restCategOrName,
@@ -169,8 +167,13 @@
                     }
                 })
                 .then(response => {
-                    this.initialRestaurants = response.data.results
                     console.log(response)
+                    console.log(selectedTypes[0])
+                    if(selectedTypes[0] === undefined){
+                        this.initialRestaurants = response.data.results.data
+                    }else{
+                        this.initialRestaurants = response.data.results
+                    }
                 })
                 .catch(error => {
                     console.log(error)
