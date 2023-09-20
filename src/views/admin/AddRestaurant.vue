@@ -3,7 +3,7 @@
         <h3>
             Admin - Add a Restaurant
         </h3>
-        <form>
+        <form @submit.prevent="createNewRestaurant">
             <div v-for="formSection in formSections" class="mb-3">
                 <label :for="formSection" class="form-label">
                     {{ 'Restaurant\'s ' + formSection }}
@@ -12,13 +12,13 @@
             </div>
             <div class="d-flex">
                 <div v-for="formCheck in formChecks" class="mb-3 ms-4 form-check">
-                    <input type="checkbox" class="form-check-input" :id="formCheck" :value="formCheck" v-model="newRestaurant['types']" @click="console.log(newRestaurant)">
+                    <input type="checkbox" class="form-check-input" :id="formCheck" :value="formCheck" v-model="newRestaurant.types">
                     <label class="form-check-label" :for="formCheck">
                         {{'Cucina ' + formCheck }}
                     </label>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary" @click="createNewRestaurant">
+            <button type="submit" class="btn btn-primary">
                 Create
             </button>
         </form>
@@ -84,17 +84,20 @@
 
 		methods: {
             createNewRestaurant () {
+                
                 axios.post(`${this.apiUrl}/${this.userId}/restaurants`,{
                     name: this.newRestaurant.name,
                     address: this.newRestaurant.address,
                     city: this.newRestaurant.city,
                     types: this.newRestaurant.types
+                    
                 },{
                     headers: {
                         'Authorization': `Bearer ${this.userToken}`
                     }
                 })
                 .then(response => {
+                    
                     console.log(response)
                     // this.restaurants = response.data.results.restaurants
 
