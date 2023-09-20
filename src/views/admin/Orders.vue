@@ -10,6 +10,12 @@
 			<a href="#" class="card-link btn btn-primary" @click="getOrderInfo(order.id)">Order Info</a>
 		</div>
 	</div>
+	<div class="position-absolute dishinfo" :class="this.infotoggle === false ? 'invisible' : ''">
+		<div class="card d-inline-block m-5 text-center position-relative">
+			<i class="fa-solid fa-xmark position-absolute" style="color: #ff0000;" @click="this.infotoggle = false"></i>
+			<h2>Order Details</h2>
+		</div>
+	</div>
 	<div>
 		<router-link :to="{ name: 'order-statistics' }" class="btn btn-secondary">
 			Order statistics
@@ -89,5 +95,7 @@ import axios from "axios";
 </script>
 
 <style lang="scss" scoped>
-
+.invisible {
+    display: none;
+}
 </style>
