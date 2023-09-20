@@ -79,29 +79,12 @@
             getRestaurants(search){
                 axios.get(`${this.apiUrl}/restaurants`,{
                     params: {
-                        restCategOrName: this.restCategOrName,
+                        name: search,
                     }
                 })
                 .then(response => {
-                    if (search === '') {
-                        this.initialRestaurants = response.data.results.data
-                    } else {
-                        this.initialRestaurants = []
-                        
-                        response.data.results.data.forEach( (restaurant) => {
-                            if (restaurant.name.includes(search)) {
-                                this.initialRestaurants.push(restaurant)
-                            }
-                        })
-
-                        response.data.results.data.forEach( (restaurant) => {
-                            restaurant.types.forEach ( (category) => {
-                                if (category.name.includes(search)) {
-                                    this.initialRestaurants.push(restaurant)
-                                }
-                            })
-                        })
-                    }
+                    this.initialRestaurants = response.data.results
+                    
                 })
                 .catch(error => {
                     console.log(error)
