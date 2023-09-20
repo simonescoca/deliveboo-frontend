@@ -5,7 +5,7 @@
                 Find your favorite
             </div>
             <div class="my_searchbar w-50">
-                <input type="text" v-model="restCategOrName" placeholder="Restaurant name or type" @input="getRestaurants(restCategOrName)">
+                <input type="text" v-model="restCategOrName" placeholder="Restaurant name or type" @keyup="getRestaurants(restCategOrName)">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </div>
         </div>
@@ -83,7 +83,7 @@
                     }
                 })
                 .then(response => {
-                    this.initialRestaurants = response.data.results
+                    this.initialRestaurants = response.data.results.data
                     
                 })
                 .catch(error => {
