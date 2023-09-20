@@ -31,6 +31,8 @@ import axios from "axios";
 				userId: '',
 				userName: '',
 				orders:[],
+				infodish: [],
+				infotoggle: false,
 			}
 		},
 
@@ -75,10 +77,12 @@ import axios from "axios";
                 })
                 .then(response => {
                     console.log(response)
+					this.infodish = response.data.results
                 })
                 .catch(error => {
                     console.log(error)
                 });
+            this.infotoggle = !this.infotoggle
 			}
 		}
 	}
