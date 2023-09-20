@@ -158,6 +158,34 @@
                     console.log(error)
                 });
             },
+            updateDish() {
+            axios.put(`${this.apiUrl}${this.userId}/restaurants/${store.selectedRes}/dishes/${store.selectedDish}`, {
+                name: this.editData.name,
+                description: this.editData.description,
+                price: this.editData.price,
+                course: this.editData.course,
+                photo: this.editData.photo,
+                available: this.editData.available,
+                ingredient_names: this.editData.ingredient_names,
+            }, {
+                headers: {
+                    'Authorization': `Bearer ${this.userToken}`
+                }
+            })
+            .then(response => {
+                if (response.status === 200 || response.status === 204) {
+            
+                this.isUpdateSuccess = true;
+                this.isUpdateFailure = false; 
+            } 
+                console.log(response);
+            })
+            .catch(error => {
+                console.error(error);
+                this.isUpdateSuccess = false; 
+                this.isUpdateFailure = true;
+            });
+            },
 		}
 	}
 </script>
