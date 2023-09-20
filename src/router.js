@@ -22,6 +22,8 @@ import EditDish from './views/admin/EditDish.vue'; // (edit) piatto esistente de
 import Orders from './views/admin/Orders.vue'; // (index) ordini associati al ristorante selezionato
 // la show dell'ordine è un pop-up, non una view // ? off-canvas
 import OrderStatistics from './views/admin/OrderStatistics.vue';
+import DeletedRestaurants from './views/admin/DeletedRestaurants.vue';
+import DeletedDishes from './views/admin/DeletedDishes.vue';
 
 
 const router = createRouter({
@@ -108,6 +110,16 @@ const router = createRouter({
             path: '/user/order-statistics',
             name: 'order-statistics',
             component: OrderStatistics,
+        },
+        {
+            path: '/user/restaurants/deleted',
+            name: 'deleted-restaurants',
+            component: DeletedRestaurants,
+        },
+        {
+            path: '/user/restaurant/dishes/deleted',
+            name: 'deleted-dishes',
+            component: DeletedDishes,
         },
     ]
 })
