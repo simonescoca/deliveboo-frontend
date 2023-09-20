@@ -1,6 +1,9 @@
 <template>
     <div class="container">
-        <header class="d-flex justify-content-end">
+        <header class="d-flex justify-content-between">
+            <router-link :to="{ name: 'deleted-restaurants' }" class="btn btn-danger">
+                Deleted Restaurants
+            </router-link>
             <router-link :to="{ name: 'addRestaurant' }" class="btn btn-primary">
                 New Restaurant
             </router-link>

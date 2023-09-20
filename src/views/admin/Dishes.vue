@@ -29,6 +29,9 @@
                 </div>
             </div>
         </div>
+        <router-link :to="{ name: 'deleted-dishes' }" class="btn btn-danger">
+            Deleted Dishes
+        </router-link>
     </div>
 </template>
 
