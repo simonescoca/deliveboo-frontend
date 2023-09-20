@@ -97,6 +97,13 @@
                     'Contorno',
                     'Dolce',
                 ],
+                ingredients: [
+                    "Spaghetti", 
+                    "Uova", 
+                    "Guanciale", 
+                    "Pecorino romano", 
+                    "Pepe nero",
+                ],
 				editData: {
 					name: '',
 					description: '',
