@@ -99,7 +99,7 @@
                 })
                 .then(response => {
                     console.log(response)
-                    this.restaurants = response.data.results.restaurants
+                    this.restaurants = response.data
                 })
                 .catch(error => {
                     console.log(error)
