@@ -26,18 +26,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="dish in dishes">
+                        <tr v-for="deletedDish in deletedDishes">
                             <th>
-                                {{ dish.name }}
+                                {{ deletedDish.name }}
                             </th>
                             <td>
-                                {{ dish.description }}
+                                {{ deletedDish.description }}
                             </td>
                             <td>
-                                {{ dish.price }}
+                                {{ deletedDish.price }}
                             </td>
                             <td>
-                                {{ dish.course }}
+                                {{ deletedDish.course }}
                             </td>
                             <td>
                                 <button type="submit" class="btn btn-sm btn-warning">
@@ -67,14 +67,7 @@
 				userToken: '',
 				userId: '',
 				userName: '',
-                dishes: [
-                    {
-                        name: 'nome piatto',
-                        description: 'descrizione piatto',
-                        price: 'prezzo piatto',
-                        course: 'portata'
-                    }
-                ]
+                deletedDishes: []
 			}
 		},
 
@@ -105,8 +98,8 @@
                     }
                 })
                 .then(response => {
-                    console.log(response)
-                    // this.restaurants = response.data
+                    console.log(response.data.results)
+                    this.deletedDishes = response.data.results
                 })
                 .catch(error => {
                     console.log(error)

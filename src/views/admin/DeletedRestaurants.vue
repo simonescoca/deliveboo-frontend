@@ -26,18 +26,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="restaurant in restaurants">
+                        <tr v-for="deletedRestaurant in deletedRestaurants">
                             <th>
-                                {{ restaurant.name }}
+                                {{ deletedRestaurant.name }}
                             </th>
                             <td>
-                                {{ restaurant.address }}
+                                {{ deletedRestaurant.address }}
                             </td>
                             <td>
-                                {{ restaurant.city }}
+                                {{ deletedRestaurant.city }}
                             </td>
                             <td>
-                                {{ restaurant.types }}
+                                {{ deletedRestaurant.types }}
                             </td>
                             <td>
                                 <button type="submit" class="btn btn-sm btn-warning">
@@ -67,18 +67,7 @@
 				userToken: '',
 				userId: '',
 				userName: '',
-                restaurants: [
-                    {
-                        name: 'nome risto',
-                        address: 'indirizzo risto',
-                        city: 'città risto',
-                        types: [
-                            'cinese',
-                            'giapponese',
-                            'orientale',
-                        ],
-                    }
-                ]
+                deletedRestaurants: [],
 			}
 		},
 
@@ -109,8 +98,8 @@
                     }
                 })
                 .then(response => {
-                    console.log(response)
-                    // this.restaurants = response.data
+                    console.log(response.data.results)
+                    this.deletedRestaurants = response.data.results
                 })
                 .catch(error => {
                     console.log(error)
