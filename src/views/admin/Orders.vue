@@ -103,6 +103,30 @@ import axios from "axios";
 </script>
 
 <style lang="scss" scoped>
+.dishinfo {
+    top: 150px;
+    left: 25%;
+    width: 50%;
+	
+	.card{
+		background-color: rgb(228, 228, 228);
+	}
+
+    .fa-xmark {
+        right: 10px;
+        top: 5px;
+        font-size: 30px;
+        cursor: pointer;
+    }
+
+    .card-body {
+        background-color: rgba(0, 0, 0, 0.185);
+        border: 1px solid black;
+        border-radius: 5px;
+		width: calc(100%/5);
+    }
+}
+
 .invisible {
     display: none;
 }
