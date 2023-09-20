@@ -166,6 +166,15 @@
                     console.log(error)
                 });
             },
+            toggleType(type) {
+                const index = this.selectedOptions.indexOf(type)
+                if (index !== -1) {
+                    this.selectedOptions = this.selectedOptions.filter(item => item !== type);
+                } else {
+                    this.selectedOptions.push(type);
+                }
+                console.log(this.selectedOptions)
+            }
 		}
 	}
 </script>
