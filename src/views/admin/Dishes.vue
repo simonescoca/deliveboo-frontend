@@ -121,7 +121,7 @@ export default {
             this.infotoggle = !this.infotoggle
         },
         softDeleteItem(dishId) {
-            //const itemId = 1;  L'id dell'elemento da eliminare
+            store.deletedItemId = dishId;
             axios.delete(`${this.apiUrl}${this.userId}/restaurants/${store.selectedRes}/dishes/${dishId}`)
                 .then(response => {
                     // Gestisci la risposta dal backend (ad esempio, aggiorna lo stato della vista)
