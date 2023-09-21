@@ -37,7 +37,7 @@
                         </div>
                         <div class="col my-auto">
                             <h6 class="d-inline">$ {{ calculateTotalPrice(dish) }}</h6>
-                            <i class="fa-solid fa-xmark ms-5"></i>
+                            <i class="fa-solid fa-xmark ms-5" @click="removeDish(dish)"></i>
                         </div>
                         <hr class="mt-3 liner">
                     
@@ -223,6 +223,19 @@
 
                 // Salva l'array cart aggiornato nel localStorage
                 localStorage.setItem('cart', JSON.stringify(this.cart));
+                }
+            },
+            // Rimuovi il piatto dall'array cart
+            removeDish(dish) {
+                // Trova l'indice dell'elemento dish all'interno dell'array cart
+                const index = this.cart.findIndex(item => item.id === dish.id);
+
+                // Se l'elemento è stato trovato, rimuovilo dall'array cart
+                if (index !== -1) {
+                    this.cart.splice(index, 1);
+
+                    // Salva l'array cart aggiornato nel localStorage
+                    localStorage.setItem('cart', JSON.stringify(this.cart));
                 }
             },
             calculateTotalPrice(dish){
