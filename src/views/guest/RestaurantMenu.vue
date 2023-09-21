@@ -8,11 +8,11 @@
 
 	<!-- ---Sezione selezione sottocategorie--- -->
 	<div class="d-flex justify-content-center align-items-center container">
-		<div class="customCheckBoxHolder">
+		<div class="customCheckBoxHolder" v-for="category in resCategories">
 			<input type="checkbox" id="cCB1" class="customCheckBoxInput" name="type[]" value="Italiana">
 			<label for="cCB1" class="customCheckBoxWrapper me-2">
-				<div class="customCheckBox">
-					<div class="inner">Test</div>
+				<div class="customCheckBox" :class="category.name">
+					<div class="inner">{{category.name}}</div>
 				</div>
 			</label>
 		</div>
@@ -103,7 +103,7 @@
   padding: 2px 8px;
   background-color: rgba(0, 0, 0, 0.16);
   border-radius: 0px;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(0, 0, 0, 0.7);
   transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
   transition-duration: 300ms;
   transition-property: color, background-color, box-shadow;
