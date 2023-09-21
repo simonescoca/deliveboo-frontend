@@ -10,6 +10,7 @@ import ContactUs from './views/guest/ContactUs.vue'; // il form manda un'email a
 import SigninLogin from './views/guest/SigninLogin.vue'; // l'utente si logga -> access token -> auth
 import CheckOut from './views/guest/CheckOut.vue'
 import Success from './views/guest/Success.vue';
+import NotFound from './views/guest/NotFound.vue';
 
 // # importo le views (admin)
 import Restaurants from './views/admin/Restaurants.vue'; // (index) dei ristoranti associati all'utente loggato
@@ -69,6 +70,11 @@ const router = createRouter({
             path: '/success',
             name: 'success',
             component: Success,
+        },
+        {
+            path: '/not-found',
+            name: 'not-found',
+            component: NotFound,
         },
         // ? admin
         {
