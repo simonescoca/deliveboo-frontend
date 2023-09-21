@@ -199,4 +199,64 @@
 	}
 
 
+// ---Dishes cards styles---
+.myCard {
+	height: 400px;
+	overflow: visible;
+	cursor: pointer;
+	position: relative;
+	&::before, .content {
+	border-radius: 5px;
+	box-shadow: 0px 0px 5px 1px #00000022;
+	transition: transform 300ms, box-shadow 200ms;
+	}
+	&::before {
+		position: absolute;
+		content: ' ';
+		display: block;
+		width: 100%;
+		height: 100%;
+		background-color: #ee9933;
+		transform: rotateZ(5deg);
+	}
+	.content {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: white;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	transform: rotateZ(-5deg);
+		img {
+		width: 150px;
+		height: fit-content;
+		}
+	}
+	&:hover::before, &:hover .content {
+		transform: rotateZ(0deg);
+	}
+	&:active::before, &:active .content {
+		box-shadow: none;
+	}
+}
+.description {
+	width: 100%;
+	text-align: center;
+	margin-top: 20px;
+}
+.info {
+	color: #00000066;
+}
+.price::before {
+	content: '$';
+}
+.price {
+	font-weight: bold;
+	color: #ee9933;
+}
+.description p {
+	margin-bottom: 10px;
+}
 </style>
