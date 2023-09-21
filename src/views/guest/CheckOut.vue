@@ -134,6 +134,12 @@
 			</div>
         </div>
     </div>
+    <!-- ---Parte di testing per la store del carrello--- -->
+    <div class="testing mx-5">
+        <p class="btn btn-success">Aggiungi Carbonara</p>
+        <p class="btn btn-success mx-3">Aggiungi Parmigiana</p>
+        <p class="btn btn-success">Aggiungi Parmigiana</p>
+    </div>
 </template>
 
 <script>
@@ -177,7 +183,7 @@
     .cart{
         background-color: $greydark;
         border-radius: 20px;
-        min-height: 70vh;                              //  TEMPORANEA DA TOGLIERE!!!
+        min-height: 70vh;
         .row{
             overflow-x: hidden;
             margin-right: -2px;
