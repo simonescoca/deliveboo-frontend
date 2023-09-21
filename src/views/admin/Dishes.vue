@@ -1,6 +1,9 @@
 <template>
     <div class="container position-relative">
-        <header class="d-flex justify-content-end">
+        <header class="d-flex justify-content-between">
+            <router-link :to="{ name: 'deleted-dishes' }" class="btn btn-danger">
+                Deleted Dishes
+            </router-link>
             <router-link :to="{ name: 'addDish' }" class="btn btn-primary">
                 New Dish
             </router-link>
@@ -32,9 +35,6 @@
                 </div>
             </div>
         </div>
-        <router-link :to="{ name: 'deleted-dishes' }" class="btn btn-danger">
-            Deleted Dishes
-        </router-link>
         <div class="position-absolute dishinfo" :class="this.infotoggle === false ? 'invisible' : ''">
             <div class="card d-inline-block m-5 text-center position-relative">
                 <i class="fa-solid fa-xmark position-absolute" style="color: #ff0000;" @click="this.infotoggle = false"></i>
