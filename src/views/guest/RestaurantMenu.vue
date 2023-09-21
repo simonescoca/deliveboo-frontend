@@ -33,6 +33,7 @@
 				resData: [],
 				resTypes: [],
 				resDishes: [],
+				resCategories: [],
 			}
 		},
 
@@ -60,9 +61,22 @@
 					this.resData = response.data.results.restaurant
 					this.resTypes = response.data.results.restaurant.types
 					this.resDishes = response.data.results.restaurant.dishes
-                    console.log(this.resData)
-                    console.log(this.resTypes)
-                    console.log(this.resDishes)
+
+					// ---Creazione array con le category prese dai piatti presenti---
+					const mergedCategories = [];
+					this.resDishes.forEach((dish) => {
+						dish.categories.forEach((category) => {
+						// Verifica se la categoria è già presente nell'array mergedCategories
+						const existingCategory = mergedCategories.find((mergedCategory) => mergedCategory.id === category.id);
+						if (!existingCategory) {
+							// Se la categoria non è presente, la aggiungiamo all'array mergedCategories
+							mergedCategories.push(category);
+							}
+						});
+					});
+					// Assegno l'array di categorie alla resCategories
+					this.resCategories = mergedCategories;
+					console.log(this.resCategories)
                 })
                 .catch(error => {
                     console.log(error)
