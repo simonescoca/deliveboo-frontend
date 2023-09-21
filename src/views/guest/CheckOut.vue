@@ -37,7 +37,7 @@
                         </div>
                         <div class="col my-auto">
                             <h6 class="d-inline">$ {{ calculateTotalPrice(dish) }}</h6>
-                            <i class="fa-solid fa-xmark ms-5" @click="removeDish(dish)"></i>
+                            <i class="fa-solid fa-xmark ms-5" style="color: #ff0000;" @click="removeDish(dish)"></i>
                         </div>
                         <hr class="mt-3 liner">
                     
