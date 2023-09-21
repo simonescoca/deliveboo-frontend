@@ -36,7 +36,7 @@
                             <input type="number" :value="dish.quantity">
                         </div>
                         <div class="col my-auto">
-                            <h6 class="d-inline">$ {{ dish.price }}</h6>
+                            <h6 class="d-inline">$ {{ calculateTotalPrice(dish) }}</h6>
                             <i class="fa-solid fa-xmark ms-5"></i>
                         </div>
                         <hr class="mt-3 liner">
@@ -58,11 +58,11 @@
                                     <h5 class="d-inline">Total:</h5>
                                 </div>
                                 <div class="col-4 text-end">
-                                    <span>$ 15.50</span>
+                                    <span>$ {{ calculateGrandTotal(cart) }}</span>
                                     <br>
                                     <span>$ 2.00</span>
                                     <hr style="color: transparent;">
-                                    <span class="fw-semibold">$ 17.50</span>
+                                    <span class="fw-semibold">$ {{ finalPrice() }}</span>
                                 </div>
                             </div>
                         </div>
@@ -150,6 +150,8 @@
 				apiUrl: 'http://127.0.0.1:8000/api/',
 				resDishes: [],
                 cart: [],
+                shippingCost: 2,
+                grandTotal: 0,
 			}
 		},
 
@@ -202,7 +204,21 @@
                 console.log(this.cart)
                 alert('Elemento aggiunto al carrello!');
             },
-
+            calculateTotalPrice(dish){
+                return (dish.price * dish.quantity).toFixed(2)
+            },
+            calculateGrandTotal() {
+                    this.grandTotal = 0;
+                // Calcola il totale sommando i prezzi totali di tutti i piatti
+                for (const dish of this.cart) {
+                    this.grandTotal += dish.price * dish.quantity;
+                }
+                return this.grandTotal.toFixed(2); // Usiamo toFixed per avere due decimali
+            },
+            finalPrice() {
+                // Calcola il totale finale sommando il GrandTotal e il costo di spedizione
+                return (parseFloat(this.grandTotal) + this.shippingCost).toFixed(2);
+            },
             // --Funzione x prendere i dati dal ristorante---
 			getRestaurantInfo() {
             axios.get(`${this.apiUrl}restaurants/1`)
