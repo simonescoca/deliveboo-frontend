@@ -21,24 +21,23 @@
                     </div>
                     <div class="col-12"><!-- ---Make sure that it goes on the next line--- --></div>
                     <!-- ---Dishes section--- -->
-                    <div class="row">
+                    <div class="row" v-for="dish in cart">
                         <div class="col-2 col-md-4 col-lg-6">
                             <div class="row">
                                 <div class="col-12 col-sm-4">
                                     <img src="../../images/biglogo.png" alt="" class="w-100">
                                 </div>
                                 <div class="col-12 col-sm my-auto">
-                                    <h6 class="my-2">Deluxe Hamburger</h6>
-                                    <p class="my-2">Carne, Insalata, Salsa</p>
+                                    <h6 class="my-2">{{ dish.name }}</h6>
                                 </div>
                             </div>
                         </div>
                         <div class="col my-auto">
-                            <input type="number" value="1">
+                            <input type="number"  v-model="dish.quantity" @input="updateTotalPrice(dish)">
                         </div>
                         <div class="col my-auto">
-                            <h6 class="d-inline">$ 15.50</h6>
-                            <i class="fa-solid fa-xmark ms-5"></i>
+                            <h6 class="d-inline">$ {{ calculateTotalPrice(dish) }}</h6>
+                            <i class="fa-solid fa-xmark ms-5" style="color: #ff0000;" @click="removeDish(dish)"></i>
                         </div>
                         <hr class="mt-3 liner">
                     
@@ -59,11 +58,11 @@
                                     <h5 class="d-inline">Total:</h5>
                                 </div>
                                 <div class="col-4 text-end">
-                                    <span>$ 15.50</span>
+                                    <span>$ {{ calculateGrandTotal(cart) }}</span>
                                     <br>
-                                    <span>$ 2.00</span>
+                                    <span>$ {{ shippingCost.toFixed(2) }}</span>
                                     <hr style="color: transparent;">
-                                    <span class="fw-semibold">$ 17.50</span>
+                                    <span class="fw-semibold">$ {{ finalPrice() }}</span>
                                 </div>
                             </div>
                         </div>
@@ -134,17 +133,25 @@
 			</div>
         </div>
     </div>
+    <!-- ---Parte di testing per la store del carrello--- -->
+    <div class="testing mx-5">
+        <p class="btn btn-success mx-1" @click="addToCart(dish)" v-for="dish in resDishes">Aggiungi {{ dish.name }}</p>
+    </div>
 </template>
 
 <script>
 	// import {store} from "../store.js";
-	// import axios from "axios";
+	import axios from "axios";
 
 	export default {
 		name: 'CheckOut',
 		data() {
 			return {
-				// store
+				apiUrl: 'http://127.0.0.1:8000/api/',
+				resDishes: [],
+                cart: [],
+                shippingCost: 2,
+                grandTotal: 0,
 			}
 		},
 
@@ -157,7 +164,9 @@
 		},
 
 		mounted () {
-
+            localStorage.removeItem('cart')
+            this.getRestaurantInfo()
+            console.log(this.cart)
 		},
 
 		created () {
@@ -165,7 +174,96 @@
 		},
 
 		methods: {
+            addToCart(dish) {
+                // Ottenere il carrello dal localStorage come stringa JSON o inizializzarlo come array vuoto se non esiste
+                const cartString = localStorage.getItem('cart');
+                const cart = cartString ? JSON.parse(cartString) : [];
 
+                // Verifica se l'elemento è già nel carrello
+                const existingDish = cart.find(cartDish => cartDish.id === dish.id);
+
+                // Verifica se l'elemento appartiene allo stesso negozio degli altri elementi nel carrello
+                if (existingDish && existingDish.restaurant_id !== dish.restaurant_id) {
+                    alert('Non puoi aggiungere elementi da ristoranti diversi nello stesso carrello.');
+                    return;
+                }
+
+                if (existingDish) {
+                    // Se l'elemento esiste già nel carrello, aumenta la quantità
+                    existingDish.quantity += 1;
+                } else {
+                    // Se l'elemento non esiste nel carrello, aggiungilo come oggetto
+                    cart.push({ id: dish.id, name: dish.name, quantity: 1, price: dish.price, restaurant_id: dish.restaurant_id });
+                }
+
+                // Salva il carrello aggiornato nel localStorage come stringa JSON
+                localStorage.setItem('cart', JSON.stringify(cart));
+
+                // Assegna il carrello come array a this.cart
+                this.cart = cart;
+                console.log(this.cart)
+                alert('Elemento aggiunto al carrello!');
+            },
+            // Aggiorna il prezzo totale quando viene cambiato il valore dell'input
+            updateTotalPrice(dish) {
+                // Assicurati che dish.quantity sia un numero valido
+                dish.quantity = parseFloat(dish.quantity);
+
+                // Assicurati che dish.quantity sia maggiore o uguale a 0
+                if (isNaN(dish.quantity) || dish.quantity < 1) {
+                    dish.quantity = 1;
+                }
+
+                // Trova l'indice dell'elemento dish all'interno dell'array cart
+                const index = this.cart.findIndex(item => item.id === dish.id);
+
+                // Se l'elemento è stato trovato, aggiorna dish.quantity in cart
+                if (index !== -1) {
+                    this.cart[index].quantity = dish.quantity;
+
+                // Salva l'array cart aggiornato nel localStorage
+                localStorage.setItem('cart', JSON.stringify(this.cart));
+                }
+            },
+            // Rimuovi il piatto dall'array cart
+            removeDish(dish) {
+                // Trova l'indice dell'elemento dish all'interno dell'array cart
+                const index = this.cart.findIndex(item => item.id === dish.id);
+
+                // Se l'elemento è stato trovato, rimuovilo dall'array cart
+                if (index !== -1) {
+                    this.cart.splice(index, 1);
+
+                    // Salva l'array cart aggiornato nel localStorage
+                    localStorage.setItem('cart', JSON.stringify(this.cart));
+                }
+            },
+            calculateTotalPrice(dish){
+                return (dish.price * dish.quantity).toFixed(2)
+            },
+            calculateGrandTotal() {
+                    this.grandTotal = 0;
+                // Calcola il totale sommando i prezzi totali di tutti i piatti
+                for (const dish of this.cart) {
+                    this.grandTotal += dish.price * dish.quantity;
+                }
+                return this.grandTotal.toFixed(2); // Usiamo toFixed per avere due decimali
+            },
+            finalPrice() {
+                // Calcola il totale finale sommando il GrandTotal e il costo di spedizione
+                return (parseFloat(this.grandTotal) + this.shippingCost).toFixed(2);
+            },
+            // --Funzione x prendere i dati dal ristorante---
+			getRestaurantInfo() {
+            axios.get(`${this.apiUrl}restaurants/1`)
+                .then(response => {
+					console.log(response)
+					this.resDishes = response.data.results.restaurant.dishes
+                })
+                .catch(error => {
+                    console.log(error)
+                });
+			},
 		}
 	}
 </script>
@@ -177,7 +275,7 @@
     .cart{
         background-color: $greydark;
         border-radius: 20px;
-        min-height: 70vh;                              //  TEMPORANEA DA TOGLIERE!!!
+        min-height: 70vh;
         .row{
             overflow-x: hidden;
             margin-right: -2px;
