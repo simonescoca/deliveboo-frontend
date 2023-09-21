@@ -189,6 +189,7 @@
 <script>
 	import {store} from "../../store";
 	import axios from "axios";
+    import { router } from '../../router';
 
 	export default {
 		data() {
@@ -251,15 +252,20 @@
 						console.log(error)
 					});
 			},
+
+            dashboardRedirect () {
+                router.push({ name: 'restaurants' });
+            },
 			
 			loginUser() {
 				axios.post(`${this.apiUrl}login`, this.loginData)
-					.then(response => {
-						this.handleApiResponse(response)
-					})
-					.catch(error => {
-						console.log(error)
-					});
+                .then(response => {
+                    this.handleApiResponse(response)
+                })
+                .catch(error => {
+                    console.log(error)
+                });
+                setTimeout(this.dashboardRedirect, 1500)
 			},
 		}
 	}
