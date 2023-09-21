@@ -17,6 +17,9 @@
 			return {
 				store,
 				apiUrl: 'http://127.0.0.1:8000/api/',
+				resData: [],
+				resTypes: [],
+				resDishes: [],
 			}
 		},
 
@@ -40,7 +43,13 @@
 			getRestaurantInfo() {
             axios.get(`${this.apiUrl}restaurants/1`)
                 .then(response => {
-                    console.log(response)
+					console.log(response)
+					this.resData = response.data.results.restaurant
+					this.resTypes = response.data.results.restaurant.types
+					this.resDishes = response.data.results.restaurant.dishes
+                    console.log(this.resData)
+                    console.log(this.resTypes)
+                    console.log(this.resDishes)
                 })
                 .catch(error => {
                     console.log(error)
