@@ -1,7 +1,10 @@
 <template>
 
     <!-- ---Sezione dati ristorante--- -->
-
+	<p>{{ resData.name }}</p>
+	<p>{{ resData.address }}</p>
+	<p>{{ resData.city }}</p>
+	<span v-for="resType in resTypes"> {{ resType.name }} </span>
 	<!-- ---Sezione selezione sottocategorie--- -->
 
 	<!-- ---Sezione piatti, divisa in Primi, Secondi, Dolci--- -->
