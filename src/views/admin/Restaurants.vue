@@ -39,6 +39,7 @@
 <script>
 import { store } from "../../store.js";
 import axios from "axios";
+import { router } from '../../router';
 
 export default {
     data() {
@@ -79,17 +80,29 @@ export default {
     },
 
     mounted() {
-        this.getRestaurants()
-        console.log(`${this.apiUrl}${this.userId}/restaurants/${store.selectedRes}`);
+
     },
 
     created() {
         this.userToken = localStorage.getItem('userToken')
         this.userId = localStorage.getItem('userId')
         this.userName = localStorage.getItem('userName')
+        if (this.userToken === null) {
+            this.doLogin ()
+        } else {
+            this.getRestaurants()
+        }
     },
 
     methods: {
+        notFound () {
+            router.push({ name: 'not-found' });
+        },
+
+        doLogin () {
+            router.push({ name: 'profile'})
+        },
+
         softDeleteItem(restaurantId) {
             //const itemId = 1;  L'id dell'elemento da eliminare
             axios.delete(`${this.apiUrl}${this.userId}/restaurants/${restaurantId}`)
@@ -110,19 +123,20 @@ export default {
                 });
 
         },
+
         getRestaurants() {
             axios.get(`${this.apiUrl}${this.userId}/restaurants`, {
                 headers: {
                     'Authorization': `Bearer ${this.userToken}`
                 }
             })
-                .then(response => {
-                    // console.log(response)
-                    this.restaurants = response.data
-                })
-                .catch(error => {
-                    console.log(error)
-                });
+            .then(response => {
+                // console.log(response)
+                this.restaurants = response.data
+            })
+            .catch(error => {
+                console.log(error)
+            });
         },
     }
 }
