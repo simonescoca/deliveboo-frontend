@@ -1,7 +1,11 @@
 <template>
-    <h3>
-        Restaurant / Menu
-    </h3>
+
+    <!-- ---Sezione dati ristorante--- -->
+
+	<!-- ---Sezione selezione sottocategorie--- -->
+
+	<!-- ---Sezione piatti, divisa in Primi, Secondi, Dolci--- -->
+	
 </template>
 
 <script>
