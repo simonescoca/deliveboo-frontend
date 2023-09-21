@@ -21,23 +21,22 @@
                     </div>
                     <div class="col-12"><!-- ---Make sure that it goes on the next line--- --></div>
                     <!-- ---Dishes section--- -->
-                    <div class="row">
+                    <div class="row" v-for="dish in cart">
                         <div class="col-2 col-md-4 col-lg-6">
                             <div class="row">
                                 <div class="col-12 col-sm-4">
                                     <img src="../../images/biglogo.png" alt="" class="w-100">
                                 </div>
                                 <div class="col-12 col-sm my-auto">
-                                    <h6 class="my-2">Deluxe Hamburger</h6>
-                                    <p class="my-2">Carne, Insalata, Salsa</p>
+                                    <h6 class="my-2">{{ dish.name }}</h6>
                                 </div>
                             </div>
                         </div>
                         <div class="col my-auto">
-                            <input type="number" value="1">
+                            <input type="number" :value="dish.quantity">
                         </div>
                         <div class="col my-auto">
-                            <h6 class="d-inline">$ 15.50</h6>
+                            <h6 class="d-inline">$ {{ dish.price }}</h6>
                             <i class="fa-solid fa-xmark ms-5"></i>
                         </div>
                         <hr class="mt-3 liner">
@@ -200,7 +199,7 @@
 
                 // Assegna il carrello come array a this.cart
                 this.cart = cart;
-
+                console.log(this.cart)
                 alert('Elemento aggiunto al carrello!');
             },
 
