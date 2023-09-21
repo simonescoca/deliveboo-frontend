@@ -53,14 +53,16 @@
                         </span>
                     </a>
                 </div>
-                <div class="d-flex my_gap2" v-if="userName !== null">
-                    <div class="my_user-img-cont">
-                        <img src="../../src/images/user.png" alt="user profile img" class="my_user-img">
+                <router-link :to="{name: 'restaurants'}" v-if="userName !== null">
+                    <div class="d-flex my_gap2">
+                        <div class="my_user-img-cont">
+                            <img src="../../src/images/user.png" alt="user profile img" class="my_user-img">
+                        </div>
+                        <div class="d-flex align-items-center my_username">
+                            {{ this.userName }}
+                        </div>
                     </div>
-                    <div class="d-flex align-items-center my_username">
-                        {{ this.userName }}
-                    </div>
-                </div>
+                </router-link>
             </div>
             <!-- ? login or profile -->
         </div>
