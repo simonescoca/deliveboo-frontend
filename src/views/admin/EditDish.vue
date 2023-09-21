@@ -41,10 +41,10 @@
                 <input class="form-control" type="url" id="image" v-model="editData.photo">
             </div>
             <select class="form-select" aria-label="select-course" v-model="editData.course">
-                <option>
-                    Select course
+                <option selected>
+                    {{ editData.course }}
                 </option>
-                <option v-for="course in courses" :value="course" :selected="editData.course == course">
+                <option v-for="course in courses" :value="course" >
                     {{ course }}
                 </option>
             </select>
@@ -100,11 +100,11 @@ export default {
                 },
             ],
             courses: [
-                'Antipasto',
-                'Primo',
-                'Secondo',
-                'Contorno',
-                'Dolce',
+                'Antipasti',
+                'Primi',
+                'Secondi',
+                'Contorni',
+                'Dolci',
             ],
             ingredients: [
                 "Spaghetti",
@@ -156,6 +156,7 @@ export default {
             })
                 .then(response => {
                     console.log(response)
+                    
                     this.editData.name = response.data.results.dish.name
                     this.editData.description = response.data.results.dish.description
                     this.editData.price = response.data.results.dish.price
