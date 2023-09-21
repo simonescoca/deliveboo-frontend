@@ -8,16 +8,18 @@
 
 	<!-- ---Sezione selezione sottocategorie--- -->
 	<div class="d-flex justify-content-center align-items-center container">
-		<div class="customCheckBoxHolder" v-for="category in resCategories">
-			<input type="checkbox" id="cCB1" class="customCheckBoxInput" name="type[]" value="Italiana">
-			<label for="cCB1" class="customCheckBoxWrapper me-2">
+		<div class="customCheckBoxHolder" v-for="category,index in resCategories">
+			<input type="checkbox" :id="'cCB'+index" class="customCheckBoxInput" @change="toggleCategory(category.name)">
+			<label :for="'cCB'+index" class="customCheckBoxWrapper me-2">
 				<div class="customCheckBox" :class="category.name">
 					<div class="inner">{{category.name}}</div>
 				</div>
 			</label>
 		</div>
 	</div>
+
 	<!-- ---Sezione piatti, divisa in Primi, Secondi, Dolci--- -->
+
 
 </template>
 
@@ -34,6 +36,7 @@
 				resTypes: [],
 				resDishes: [],
 				resCategories: [],
+				activeCategory: [],
 			}
 		},
 
@@ -54,6 +57,7 @@
 		},
 
 		methods: {
+			// --Funzione x prendere i dati dal ristorante---
 			getRestaurantInfo() {
             axios.get(`${this.apiUrl}restaurants/1`)
                 .then(response => {
@@ -81,6 +85,18 @@
                 .catch(error => {
                     console.log(error)
                 });
+			},
+			// --Funzione per attivare e disattivare le categorie---
+			toggleCategory(selectedCategory){
+				const index = this.activeCategory.indexOf(selectedCategory);
+				if (index !== -1) {
+					// Il tipo è presente nell'array, quindi rimuovilo
+					this.activeCategory.splice(index, 1);
+				} else {
+					// Il tipo non è presente nell'array, quindi aggiungilo
+					this.activeCategory.push(selectedCategory);
+				}
+				console.log(this.activeCategory)
 			},
 		}
 	}
