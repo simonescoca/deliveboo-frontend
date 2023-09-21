@@ -33,7 +33,7 @@
                             </div>
                         </div>
                         <div class="col my-auto">
-                            <input type="number" :value="dish.quantity">
+                            <input type="number"  v-model="dish.quantity" @input="updateTotalPrice(dish)">
                         </div>
                         <div class="col my-auto">
                             <h6 class="d-inline">$ {{ calculateTotalPrice(dish) }}</h6>
@@ -60,7 +60,7 @@
                                 <div class="col-4 text-end">
                                     <span>$ {{ calculateGrandTotal(cart) }}</span>
                                     <br>
-                                    <span>$ 2.00</span>
+                                    <span>$ {{ shippingCost.toFixed(2) }}</span>
                                     <hr style="color: transparent;">
                                     <span class="fw-semibold">$ {{ finalPrice() }}</span>
                                 </div>
@@ -203,6 +203,27 @@
                 this.cart = cart;
                 console.log(this.cart)
                 alert('Elemento aggiunto al carrello!');
+            },
+            // Aggiorna il prezzo totale quando viene cambiato il valore dell'input
+            updateTotalPrice(dish) {
+                // Assicurati che dish.quantity sia un numero valido
+                dish.quantity = parseFloat(dish.quantity);
+
+                // Assicurati che dish.quantity sia maggiore o uguale a 0
+                if (isNaN(dish.quantity) || dish.quantity < 1) {
+                    dish.quantity = 1;
+                }
+
+                // Trova l'indice dell'elemento dish all'interno dell'array cart
+                const index = this.cart.findIndex(item => item.id === dish.id);
+
+                // Se l'elemento è stato trovato, aggiorna dish.quantity in cart
+                if (index !== -1) {
+                    this.cart[index].quantity = dish.quantity;
+
+                // Salva l'array cart aggiornato nel localStorage
+                localStorage.setItem('cart', JSON.stringify(this.cart));
+                }
             },
             calculateTotalPrice(dish){
                 return (dish.price * dish.quantity).toFixed(2)
