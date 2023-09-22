@@ -76,6 +76,7 @@
 			return {
 				store,
 				apiUrl: 'http://127.0.0.1:8000/api/',
+                cart: [],
 				resData: [],
 				resTypes: [],
 				resDishes: [],
@@ -170,8 +171,8 @@
 
                 // Assegna il carrello come array a this.cart
                 this.cart = cart;
-                console.log(this.cart)
-                alert('Elemento aggiunto al carrello!');
+				store.cart = cart;
+                console.log(store.cart)
             },
 		}
 	}
