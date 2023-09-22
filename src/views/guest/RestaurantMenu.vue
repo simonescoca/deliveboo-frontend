@@ -36,40 +36,34 @@
 	<!-- ---Sezione piatti, divisa in Primi, Secondi, Dolci--- -->
 	<div class="container">
 		<div class="row myGap">
-			<div class="myCard col-3 mx-auto mb-5" v-for="dish in resDishes">
-				<div class="content">
+			<div class="myCard col-3-custom mx-auto mb-5" v-for="dish in resDishes">
+				<div class="content-info">
+					<p class="title fw-bold">
+							{{ dish.name }}
+						<i class="fa-solid fa-xmark ms-2" style="color: #ff0000;" @click="seeDescription(dish)"></i>
+					</p>
+					<p class="text-center">
+						{{ dish.description }}
+					</p>
+					<div class="ingredients text-center mb-3">
+						<p class="fw-semibold mt-1">Ingredienti:</p>
+						<span class="fst-italic" v-for="(ingredient, index) in dish.ingredients" :key="index">
+							{{ ingredient.name + (index !== (dish.ingredients.length - 1) ? ", " : "")}}
+						</span>
+					</div>
+					<p class="btn btn-success" @click="addToCart(dish)">Add to cart</p>
+				</div>
+				<div class="content" :class="showDescription[dish.id] ? 'description-hidden': ''">
 					<img src="https://www.cypressgreen.in/blog/wp-content/uploads/2021/03/food.jpg" alt="food image">
 					<div class="description">
-						<p class="title">
-							<strong>
+						<p class="title fw-bold">
                                 {{ dish.name }}
-                            </strong>
-                            <i class="fa-solid fa-circle-info ms-2" @click="seeDescription"></i>
-						</p>
-						<p class="info">
-							{{ dish.description }}
-						</p>
-						<p class="info d-inline fst-italic fw-lighter" v-for="(ingredient, index) in dish.ingredients" :key="index">
-							{{ ingredient.name }}
-                            <span v-if="index !== dish.ingredients.length - 1">
-                                ,
-                            </span> 
+                            <i class="fa-solid fa-circle-info ms-2" @click="seeDescription(dish)"></i>
 						</p>
 						<p class="price">
 							{{ dish.price.toFixed(2) }}
 						</p>
-                        <div class="d-flex align-items-center w-fit-content">
-                            <div @click="counter = counter - 1">
-                                -
-                            </div>
-                            <div>
-                                {{ counter }}
-                            </div>
-                            <div @click="counter = counter + 1">
-                                +
-                            </div>
-                        </div>
-
+						<p class="btn btn-success" @click="addToCart(dish)">Add to cart</p>
 					</div>
 				</div>
 			</div>
@@ -87,11 +81,13 @@
 			return {
 				store,
 				apiUrl: 'http://127.0.0.1:8000/api/',
+                cart: [],
 				resData: [],
 				resTypes: [],
 				resDishes: [],
 				resCategories: [],
 				activeCategory: [],
+				showDescription: {},
 			}
 		},
 
@@ -120,7 +116,9 @@
 					this.resData = response.data.results.restaurant
 					this.resTypes = response.data.results.restaurant.types
 					this.resDishes = response.data.results.restaurant.dishes
-
+					this.resDishes.forEach(dish => {
+						this.showDescription[dish.id] = false;
+					});
 					// ---Creazione array con le category prese dai piatti presenti---
 					const mergedCategories = [];
 					this.resDishes.forEach((dish) => {
@@ -152,6 +150,42 @@
 					this.activeCategory.push(selectedCategory);
 				}
 				console.log(this.activeCategory)
+			},
+			// --Funzione per aggiungere un piatto al carrello--
+            addToCart(dish) {
+                // Ottenere il carrello dal localStorage come stringa JSON o inizializzarlo come array vuoto se non esiste
+                const cartString = localStorage.getItem('cart');
+                const cart = cartString ? JSON.parse(cartString) : [];
+
+                // Verifica se l'elemento è già nel carrello
+                const existingDish = cart.find(cartDish => cartDish.id === dish.id);
+
+                // Verifica se l'elemento appartiene allo stesso negozio degli altri elementi nel carrello
+                if (existingDish && existingDish.restaurant_id !== dish.restaurant_id) {
+                    alert('Non puoi aggiungere elementi da ristoranti diversi nello stesso carrello.');
+                    return;
+                }
+
+                if (existingDish) {
+                    // Se l'elemento esiste già nel carrello, aumenta la quantità
+                    existingDish.quantity += 1;
+                } else {
+                    // Se l'elemento non esiste nel carrello, aggiungilo come oggetto
+                    cart.push({ id: dish.id, name: dish.name, quantity: 1, price: dish.price, restaurant_id: dish.restaurant_id });
+                }
+
+                // Salva il carrello aggiornato nel localStorage come stringa JSON
+                localStorage.setItem('cart', JSON.stringify(cart));
+
+                // Assegna il carrello come array a this.cart
+                this.cart = cart;
+				store.cart = cart;
+                console.log(store.cart)
+            },
+			// --Funzione per mostrare le info di un piatto--
+			seeDescription(dish) {
+				this.showDescription[dish.id] = !this.showDescription[dish.id];
+				console.log(this.showDescription[dish.id]);
 			},
 		}
 	}
@@ -236,46 +270,65 @@
 .myGap {
     gap: 1rem;
 }
+.col-3-custom{
+	flex: 0 0 auto;
+	width: 30%;
+}
 .myCard {
-	height: 400px;
-	overflow: visible;
+	height: 418px;
+	overflow: hidden;
 	cursor: pointer;
 	position: relative;
-	&::before, .content {
+	&::before, .content, .content-info{
         border-radius: 5px;
         box-shadow: 0px 0px 5px 1px #00000022;
         transition: transform 300ms, box-shadow 200ms;
 	}
-	&::before {
+	.content-info{
 		position: absolute;
-		content: ' ';
-		display: block;
-		width: 100%;
-		height: 100%;
-		background-color: #ee9933;
-		transform: rotateZ(5deg);
+		top: 5%;
+		right: 5%;
+        width: 90%;
+        height: 90%;
+        background-color: #ee9933;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transform: rotateZ(5deg);
+
+        img {
+            width: 100%;
+            border-radius: 5px;
+        }
 	}
 	.content {
         position: absolute;
-        width: 100%;
-        height: 100%;
+		top: 5%;
+		right: 5%;
+        width: 90%;
+        height: 90%;
         background-color: white;
         padding: 20px;
         display: flex;
         flex-direction: column;
         align-items: center;
         transform: rotateZ(-5deg);
-
+        transition: all 0.5s; 
         img {
-            width: 150px;
-            height: fit-content;
+            width: 100%;
             border-radius: 5px;
         }
 	}
-	&:hover::before, &:hover .content {
+	& .description-hidden {
+		opacity: 0;
+		margin-top: 350px;
+        transition: all 0.5s;
+    }
+	&:hover::before, &:hover .content, &:hover .content-info {
 		transform: rotateZ(0deg);
 	}
-	&:active::before, &:active .content {
+	&:active::before, &:active .content, &:active .content-info{
 		box-shadow: none;
 	}
 }

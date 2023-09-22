@@ -4,6 +4,7 @@ const store = reactive({
     selectedRes: "",
     selectedDish: "",
     deletedItemId: "",
+    cart: [],
 });
 
 export { store };
