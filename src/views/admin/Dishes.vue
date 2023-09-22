@@ -1,5 +1,5 @@
 <template>
-    <div class="container position-relative py-3">
+    <div class="container py-3">
         <header class="d-flex justify-content-between mb-3">
             <router-link :to="{ name: 'deleted-dishes' }" class="btn btn-danger">
                 <i class="fa-regular fa-trash-can"></i> See trashed
@@ -40,18 +40,23 @@
 
             </div>
         </div>
-        <div class="position-absolute dishShow" :class="this.infotoggle === false ? 'invisible' : ''">
+        <div class="position-absolute dishShow" :class="infotoggle === false ? 'invisible' : ''">
             <div class="card d-inline-block m-5 text-center position-relative">
-                <i class="fa-solid fa-xmark show position-absolute" style="color: #ff0000;"
-                    @click="this.infotoggle = false"></i>
-                <div class="card-body">
-                    <h5 class="card-title">{{ infodish.name }}</h5>
-                    <h6 class="card-subtitle mb-2 text-bg-success w-25 py-2 mx-auto">Price: {{ infodish.price }}</h6>
-                    <p class="card-text">Dish course: {{ infodish.course }}</p>
+                <i class="fa-solid fa-xmark fa-sm show position-absolute" @click="infotoggle = false"></i>
+                <div class="card-body py-3">
+                    <h5 class="card-title fst-italic fw-bold">{{ infodish.name }}</h5>
+                    <h6 class="card-subtitle mb-2 py-2 mx-auto"><span class="fw-bold">Price</span> ~ {{
+                        infodish.price ? infodish.price.toFixed(2) +
+                    '&euro;' : ''
+                    }}
+                    </h6>
+                    <p class="card-text"><span class="fw-bold">Portata</span> ~ {{ capitalizeFirstLetter(infodish.course,
+                        infotoggle) }}
+                    </p>
                     <p class="card-text">{{ infodish.description }}</p>
-                    <p class="card-text">Pic: {{ infodish.photo }}</p>
-                    <p class="card-text">Ingredients: <span v-for="ingredient in infodish.ingredients">{{ ingredient.name
-                    }}, </span></p>
+                    <p class="card-text"><span class="fw-bold">Ingredienti</span> ~ <span
+                            v-for="ingredient in infodish.ingredients">{{ ingredient.name
+                            }}, </span></p>
                 </div>
             </div>
         </div>
@@ -64,6 +69,7 @@ import { store } from "../../store.js";
 import axios from "axios";
 
 export default {
+
     data() {
         return {
             store,
@@ -76,6 +82,8 @@ export default {
             dishes: [],
             infotoggle: false,
             infodish: [],
+            selectedRes: null,
+
         }
     },
 
@@ -88,34 +96,44 @@ export default {
     },
 
     mounted() {
-        this.getDishes()
+        this.selectedRes = localStorage.getItem('currentRestaurant');
+        this.getDishes();
     },
 
     created() {
         this.userToken = localStorage.getItem('userToken')
         this.userId = localStorage.getItem('userId')
         this.userName = localStorage.getItem('userName')
-        console.log(store.selectedRes)
+        if (store.selectedRes) {
+            localStorage.setItem('currentRestaurant', store.selectedRes);
+        }
+
+
+
+
     },
 
     methods: {
+
         getDishes() {
-            axios.get(`${this.apiUrl}${this.userId}/restaurants/${store.selectedRes}`, {
+            axios.get(`${this.apiUrl}${this.userId}/restaurants/${this.selectedRes}`, {
                 headers: {
                     'Authorization': `Bearer ${this.userToken}`
-                }
+                },
+
             })
                 .then(response => {
                     this.dishes = response.data.results.restaurant.dishes;
                     console.log(response.data.results.restaurant.dishes)
                     this.restaurant = response.data.results.restaurant;
+                    localStorage.setItem('selectedRes', store.selectedRes);
                 })
                 .catch(error => {
                     console.log(error)
                 });
         },
         dishInfo(dishId) {
-            axios.get(`${this.apiUrl}${this.userId}/restaurants/${store.selectedRes}/dishes/${dishId}`, {
+            axios.get(`${this.apiUrl}${this.userId}/restaurants/${this.selectedRes}/dishes/${dishId}`, {
                 headers: {
                     'Authorization': `Bearer ${this.userToken}`
                 }
@@ -131,7 +149,7 @@ export default {
         },
         softDeleteItem(dishId) {
             store.deletedItemId = dishId;
-            axios.delete(`${this.apiUrl}${this.userId}/restaurants/${store.selectedRes}/dishes/${dishId}`)
+            axios.delete(`${this.apiUrl}${this.userId}/restaurants/${this.selectedRes}/dishes/${dishId}`)
                 .then(response => {
                     // Gestisci la risposta dal backend (ad esempio, aggiorna lo stato della vista)
                     if (response.status === 200 || response.status === 204) {
@@ -150,6 +168,11 @@ export default {
                 });
 
         },
+        capitalizeFirstLetter(string, check) {
+            if (check) {
+                return string.charAt(0).toUpperCase() + string.slice(1);
+            }
+        }
     }
 }
 </script>
@@ -173,26 +196,32 @@ h3 {
 }
 
 .dishShow {
-    top: 150px;
-    left: 25%;
-    width: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    transition: all 500ms;
+    background: none;
 
     .fa-xmark.show {
         right: 10px;
         top: 5px;
         font-size: 30px;
         cursor: pointer;
+        color: #f07f5c;
     }
 
     .card-body {
-        background-color: rgb(228, 228, 228);
-        border: 1px solid black;
+        background-color: rgba(220, 176, 163, 0.742);
+        color: rgb(238, 112, 45);
+
         border-radius: 5px;
     }
 }
 
 .invisible {
-    display: none;
+    opacity: 0;
+    scale: 0.2;
 }
 
 .my_dishes {
