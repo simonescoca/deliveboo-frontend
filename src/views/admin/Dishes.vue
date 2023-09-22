@@ -133,7 +133,7 @@ export default {
                 });
         },
         dishInfo(dishId) {
-            axios.get(`${this.apiUrl}${this.userId}/restaurants/${store.selectedRes}/dishes/${dishId}`, {
+            axios.get(`${this.apiUrl}${this.userId}/restaurants/${this.selectedRes}/dishes/${dishId}`, {
                 headers: {
                     'Authorization': `Bearer ${this.userToken}`
                 }
@@ -149,7 +149,7 @@ export default {
         },
         softDeleteItem(dishId) {
             store.deletedItemId = dishId;
-            axios.delete(`${this.apiUrl}${this.userId}/restaurants/${store.selectedRes}/dishes/${dishId}`)
+            axios.delete(`${this.apiUrl}${this.userId}/restaurants/${this.selectedRes}/dishes/${dishId}`)
                 .then(response => {
                     // Gestisci la risposta dal backend (ad esempio, aggiorna lo stato della vista)
                     if (response.status === 200 || response.status === 204) {

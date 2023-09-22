@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h3>
+        <h3 class="text-center my-3">
             Deleted Dishes
         </h3>
         <div class="row justify-content-center">
@@ -8,22 +8,20 @@
                 Il piatto è stato ripristinato correttamente!
             </div>
             <div class="col-12">
-                <table class="table table-dark table-striped table-hover">
-                    <thead>
+                <table class="table table-striped table-hover">
+                    <thead class="header-table">
                         <tr>
                             <th scope="col">
                                 Name
                             </th>
-                            <th scope="col">
-                                Description
-                            </th>
+
                             <th scope="col">
                                 Price
                             </th>
                             <th scope="col">
                                 Course
                             </th>
-                            <th scope="col">
+                            <th scope="col" class="text-center">
                                 Actions
                             </th>
                         </tr>
@@ -33,20 +31,21 @@
                             <th>
                                 {{ deletedDish.name }}
                             </th>
+
                             <td>
-                                {{ deletedDish.description }}
-                            </td>
-                            <td>
-                                {{ deletedDish.price }}
+                                {{
+                                    deletedDish.price ? deletedDish.price.toFixed(2) +
+                                '&euro;' : ''
+                                }}
                             </td>
                             <td>
                                 {{ deletedDish.course }}
                             </td>
-                            <td>
+                            <td class="d-flex justify-content-around">
                                 <button type="submit" class="btn btn-sm btn-warning" @click="restoreItem(deletedDish.id)">
                                     Restore
                                 </button>
-                                <button button type=" submit" class="ms-2 btn btn-sm btn-danger">
+                                <button button type=" submit" class=" btn btn-sm btn-danger">
                                     Obliterate
                                 </button>
                             </td>
@@ -71,7 +70,8 @@ export default {
             userId: '',
             userName: '',
             deletedDishes: [],
-            isRestoreSuccess: false
+            isRestoreSuccess: false,
+            selectedRes: null
         }
     },
 
@@ -84,19 +84,24 @@ export default {
     },
 
     mounted() {
-
+        this.selectedRes = localStorage.getItem('currentRestaurant');
+        this.getDeletedDishes()
     },
 
     created() {
         this.userToken = localStorage.getItem('userToken')
         this.userId = localStorage.getItem('userId')
         this.userName = localStorage.getItem('userName')
-        this.getDeletedDishes()
+        if (store.selectedRes) {
+            localStorage.setItem('currentRestaurant', store.selectedRes);
+        }
+
+
     },
 
     methods: {
         getDeletedDishes() {
-            axios.get(`${this.apiUrl}/${this.userId}/restaurants/${store.selectedRes}/deleted-dishes`, {
+            axios.get(`${this.apiUrl}/${this.userId}/restaurants/${this.selectedRes}/deleted-dishes`, {
                 headers: {
                     'Authorization': `Bearer ${this.userToken}`
                 }
@@ -111,8 +116,8 @@ export default {
         },
         restoreItem(dishId) {
 
-            console.log(`${this.apiUrl}/${this.userId}/restaurants/${store.selectedRes}/deleted-dishes/${dishId}`);
-            axios.delete(`${this.apiUrl}/${this.userId}/restaurants/${store.selectedRes}/deleted-dishes/${dishId}`, {
+
+            axios.delete(`${this.apiUrl}/${this.userId}/restaurants/${this.selectedRes}/deleted-dishes/${dishId}`, {
                 headers: {
                     'Authorization': `Bearer ${this.userToken}`
                 }
@@ -139,4 +144,17 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+table.table {
+
+    --bs-table-bg: #ffaa91;
+    --bs-table-border-color: rgb(252, 186, 186);
+    --bs-table-accent-bg: transparent;
+    --bs-table-striped-color: ;
+    --bs-table-striped-bg: #ff9474;
+    --bs-table-active-color: ;
+    --bs-table-hover-color: var(--bs-body-color);
+    --bs-table-hover-bg: #fc8c69;
+
+}
+</style>
