@@ -37,24 +37,28 @@
 	<div class="container">
 		<div class="row myGap">
 			<div class="myCard col-3 mx-auto mb-5" v-for="dish in resDishes">
+				<div class="content-info">
+					<p class="title fw-bold">
+							{{ dish.name }}
+						<i class="fa-solid fa-xmark ms-2" style="color: #ff0000;" @click="closeDescription"></i>
+					</p>
+					<p class="text-center">
+						{{ dish.description }}
+					</p>
+					<div class="ingredients text-center">
+						<p class="fw-semibold mt-3">Ingredienti:</p>
+						<span class="fst-italic" v-for="(ingredient, index) in dish.ingredients" :key="index">
+							{{ ingredient.name + (index !== (dish.ingredients.length - 1) ? ", " : "")}}
+						</span>
+					</div>
+				</div>
 				<div class="content">
 					<img src="https://www.cypressgreen.in/blog/wp-content/uploads/2021/03/food.jpg" alt="food image">
 					<div class="description">
-						<p class="title">
-							<strong>
+						<p class="title fw-bold">
                                 {{ dish.name }}
-                            </strong>
                             <i class="fa-solid fa-circle-info ms-2" @click="seeDescription"></i>
 						</p>
-						<!-- <p class="info">
-							{{ dish.description }}
-						</p> -->
-						<!-- <p class="info d-inline fst-italic fw-lighter" v-for="(ingredient, index) in dish.ingredients" :key="index">
-							{{ ingredient.name }}
-                            <span v-if="index !== dish.ingredients.length - 1">
-                                ,
-                            </span> 
-						</p> -->
 						<p class="price">
 							{{ dish.price.toFixed(2) }}
 						</p>
@@ -258,11 +262,11 @@
     gap: 1rem;
 }
 .myCard {
-	height: 400px;
+	height: 360px;
 	overflow: visible;
 	cursor: pointer;
 	position: relative;
-	&::before, .content {
+	&::before, .content, .content-info{
         border-radius: 5px;
         box-shadow: 0px 0px 5px 1px #00000022;
         transition: transform 300ms, box-shadow 200ms;
@@ -276,6 +280,22 @@
 		background-color: #ee9933;
 		transform: rotateZ(5deg);
 	}
+	.content-info{
+		position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: #ee9933;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transform: rotateZ(-5deg);
+
+        img {
+            width: 100%;
+            border-radius: 5px;
+        }
+	}
 	.content {
         position: absolute;
         width: 100%;
@@ -288,14 +308,14 @@
         transform: rotateZ(-5deg);
 
         img {
-            width: 290px;
+            width: 100%;
             border-radius: 5px;
         }
 	}
-	&:hover::before, &:hover .content {
+	&:hover::before, &:hover .content, &:hover .content-info {
 		transform: rotateZ(0deg);
 	}
-	&:active::before, &:active .content {
+	&:active::before, &:active .content, &:active .content-info{
 		box-shadow: none;
 	}
 }
