@@ -24,11 +24,17 @@ import Orders from './views/admin/Orders.vue'; // (index) ordini associati al ri
 import OrderStatistics from './views/admin/OrderStatistics.vue';
 import DeletedRestaurants from './views/admin/DeletedRestaurants.vue';
 import DeletedDishes from './views/admin/DeletedDishes.vue';
+import PaymentForm from './views/PaymentForm.vue'
 
 
 const router = createRouter({
     history: createWebHistory(),
     routes : [
+        {
+            path: '/payment-form',
+            name: 'payment-form',
+            component: PaymentForm, // Assicurati di importare correttamente il componente PaymentForm
+        },
         // ? guest
         {
             path: '/',
