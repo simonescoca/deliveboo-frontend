@@ -192,6 +192,9 @@ export default {
                     if (response.status === 200 || response.status === 204) {
 
                         this.isUpdateSuccess = true;
+                        setTimeout(() => {
+                            this.isUpdateSuccess = false;
+                        }, 3000);
                         this.isUpdateFailure = false;
                     }
 
