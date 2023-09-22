@@ -1,18 +1,33 @@
 <template>
-
     <!-- ---Sezione dati ristorante--- -->
-	<p>{{ resData.name }}</p>
-	<p>{{ resData.address }}</p>
-	<p>{{ resData.city }}</p>
-	<span v-for="resType in resTypes"> {{ resType.name }} </span>
+    <header class="my-5">
+        <div class="d-flex container justify-content-around align-items-center">
+            <h1 class="m-0">
+                {{ resData.name }}
+            </h1>
+            <div class="d-flex justify-content-center align-items-center">
+                <h4 v-for="(resType, index) in resTypes" :key="index" class="m-0" :class="index !== 0 ? 'ms-2' : ''">
+                    {{ resType.name }}
+                    <span v-if="index !== resTypes.length - 1">
+                        ,
+                    </span>
+                </h4>
+            </div>
+            <h4 class="m-0">
+                {{ resData.city + ", " + resData.address }}
+            </h4>
+        </div>
+    </header>
 
 	<!-- ---Sezione selezione sottocategorie--- -->
-	<div class="d-flex justify-content-center align-items-center container">
-		<div class="customCheckBoxHolder" v-for="category,index in resCategories">
-			<input type="checkbox" :id="'cCB'+index" class="customCheckBoxInput" @change="toggleCategory(category.name)">
-			<label :for="'cCB'+index" class="customCheckBoxWrapper me-2">
+	<div class="d-flex justify-content-center align-items-center container mb-5">
+		<div class="customCheckBoxHolder" v-for="(category, index) in resCategories" :key="index">
+			<input type="checkbox" :id="'cCB' + index" class="customCheckBoxInput" @change="toggleCategory(category.name)">
+			<label :for="'cCB' + index" class="customCheckBoxWrapper me-2">
 				<div class="customCheckBox" :class="category.name">
-					<div class="inner">{{category.name}}</div>
+					<div class="inner">
+                        {{ category.name }}
+                    </div>
 				</div>
 			</label>
 		</div>
@@ -20,23 +35,41 @@
 
 	<!-- ---Sezione piatti, divisa in Primi, Secondi, Dolci--- -->
 	<div class="container">
-		<div class="row">
-			<div class="myCard col-4 mx-auto" v-for="dish in resDishes">
+		<div class="row myGap">
+			<div class="myCard col-3 mx-auto mb-5" v-for="dish in resDishes">
 				<div class="content">
 					<img src="https://www.cypressgreen.in/blog/wp-content/uploads/2021/03/food.jpg" alt="food image">
 					<div class="description">
 						<p class="title">
-							<strong>{{ dish.name }}</strong>
+							<strong>
+                                {{ dish.name }}
+                            </strong>
+                            <i class="fa-solid fa-circle-info ms-2" @click="seeDescription"></i>
 						</p>
 						<p class="info">
 							{{ dish.description }}
 						</p>
-						<p class="info d-inline" v-for="ingredients in dish.ingredients">
-							{{ ingredients.name }} - 
+						<p class="info d-inline fst-italic fw-lighter" v-for="(ingredient, index) in dish.ingredients" :key="index">
+							{{ ingredient.name }}
+                            <span v-if="index !== dish.ingredients.length - 1">
+                                ,
+                            </span> 
 						</p>
 						<p class="price">
-							{{ dish.price }}
+							{{ dish.price.toFixed(2) }}
 						</p>
+                        <div class="d-flex align-items-center w-fit-content">
+                            <div @click="counter = counter - 1">
+                                -
+                            </div>
+                            <div>
+                                {{ counter }}
+                            </div>
+                            <div @click="counter = counter + 1">
+                                +
+                            </div>
+                        </div>
+
 					</div>
 				</div>
 			</div>
@@ -71,11 +104,11 @@
 		},
 
 		mounted () {
-			this.getRestaurantInfo()
+
 		},
 
 		created () {
-
+			this.getRestaurantInfo()
 		},
 
 		methods: {
@@ -180,7 +213,7 @@
 		border-left: 0px;
 	}
 	.customCheckBoxInput {
-		splay: none;
+		display: none;
 	}
 	.customCheckBoxInput:checked + .customCheckBoxWrapper .customCheckBox {
 		background-color: #2d6737;
@@ -200,15 +233,18 @@
 
 
 // ---Dishes cards styles---
+.myGap {
+    gap: 1rem;
+}
 .myCard {
 	height: 400px;
 	overflow: visible;
 	cursor: pointer;
 	position: relative;
 	&::before, .content {
-	border-radius: 5px;
-	box-shadow: 0px 0px 5px 1px #00000022;
-	transition: transform 300ms, box-shadow 200ms;
+        border-radius: 5px;
+        box-shadow: 0px 0px 5px 1px #00000022;
+        transition: transform 300ms, box-shadow 200ms;
 	}
 	&::before {
 		position: absolute;
@@ -220,19 +256,21 @@
 		transform: rotateZ(5deg);
 	}
 	.content {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	background-color: white;
-	padding: 20px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	transform: rotateZ(-5deg);
-		img {
-		width: 150px;
-		height: fit-content;
-		}
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: white;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transform: rotateZ(-5deg);
+
+        img {
+            width: 150px;
+            height: fit-content;
+            border-radius: 5px;
+        }
 	}
 	&:hover::before, &:hover .content {
 		transform: rotateZ(0deg);
@@ -258,5 +296,8 @@
 }
 .description p {
 	margin-bottom: 10px;
+}
+.w-fit-content {
+    width: fit-content;
 }
 </style>
