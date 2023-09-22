@@ -277,12 +277,14 @@
 .myCard {
 	height: 418px;
 	overflow: hidden;
-	cursor: pointer;
 	position: relative;
 	&::before, .content, .content-info{
         border-radius: 5px;
         box-shadow: 0px 0px 5px 1px #00000022;
         transition: transform 300ms, box-shadow 200ms;
+	}
+	i{
+	cursor: pointer;
 	}
 	.content-info{
 		position: absolute;
