@@ -36,28 +36,29 @@
 	<!-- ---Sezione piatti, divisa in Primi, Secondi, Dolci--- -->
 	<div class="container">
 		<div class="row myGap">
-			<div class="myCard col-3 mx-auto mb-5" v-for="dish in resDishes">
+			<div class="myCard col-3-custom mx-auto mb-5" v-for="dish in resDishes">
 				<div class="content-info">
 					<p class="title fw-bold">
 							{{ dish.name }}
-						<i class="fa-solid fa-xmark ms-2" style="color: #ff0000;" @click="closeDescription"></i>
+						<i class="fa-solid fa-xmark ms-2" style="color: #ff0000;" @click="seeDescription(dish)"></i>
 					</p>
 					<p class="text-center">
 						{{ dish.description }}
 					</p>
-					<div class="ingredients text-center">
-						<p class="fw-semibold mt-3">Ingredienti:</p>
+					<div class="ingredients text-center mb-3">
+						<p class="fw-semibold mt-1">Ingredienti:</p>
 						<span class="fst-italic" v-for="(ingredient, index) in dish.ingredients" :key="index">
 							{{ ingredient.name + (index !== (dish.ingredients.length - 1) ? ", " : "")}}
 						</span>
 					</div>
+					<p class="btn btn-success" @click="addToCart(dish)">Add to cart</p>
 				</div>
-				<div class="content">
+				<div class="content" :class="showDescription[dish.id] ? 'description-hidden': ''">
 					<img src="https://www.cypressgreen.in/blog/wp-content/uploads/2021/03/food.jpg" alt="food image">
 					<div class="description">
 						<p class="title fw-bold">
                                 {{ dish.name }}
-                            <i class="fa-solid fa-circle-info ms-2" @click="seeDescription"></i>
+                            <i class="fa-solid fa-circle-info ms-2" @click="seeDescription(dish)"></i>
 						</p>
 						<p class="price">
 							{{ dish.price.toFixed(2) }}
@@ -86,6 +87,7 @@
 				resDishes: [],
 				resCategories: [],
 				activeCategory: [],
+				showDescription: {},
 			}
 		},
 
@@ -114,7 +116,9 @@
 					this.resData = response.data.results.restaurant
 					this.resTypes = response.data.results.restaurant.types
 					this.resDishes = response.data.results.restaurant.dishes
-
+					this.resDishes.forEach(dish => {
+						this.showDescription[dish.id] = false;
+					});
 					// ---Creazione array con le category prese dai piatti presenti---
 					const mergedCategories = [];
 					this.resDishes.forEach((dish) => {
@@ -178,6 +182,11 @@
 				store.cart = cart;
                 console.log(store.cart)
             },
+			// --Funzione per mostrare le info di un piatto--
+			seeDescription(dish) {
+				this.showDescription[dish.id] = !this.showDescription[dish.id];
+				console.log(this.showDescription[dish.id]);
+			},
 		}
 	}
 </script>
@@ -261,9 +270,13 @@
 .myGap {
     gap: 1rem;
 }
+.col-3-custom{
+	flex: 0 0 auto;
+	width: 30%;
+}
 .myCard {
-	height: 360px;
-	overflow: visible;
+	height: 418px;
+	overflow: hidden;
 	cursor: pointer;
 	position: relative;
 	&::before, .content, .content-info{
@@ -271,25 +284,18 @@
         box-shadow: 0px 0px 5px 1px #00000022;
         transition: transform 300ms, box-shadow 200ms;
 	}
-	&::before {
-		position: absolute;
-		content: ' ';
-		display: block;
-		width: 100%;
-		height: 100%;
-		background-color: #ee9933;
-		transform: rotateZ(5deg);
-	}
 	.content-info{
 		position: absolute;
-        width: 100%;
-        height: 100%;
+		top: 5%;
+		right: 5%;
+        width: 90%;
+        height: 90%;
         background-color: #ee9933;
         padding: 20px;
         display: flex;
         flex-direction: column;
         align-items: center;
-        transform: rotateZ(-5deg);
+        transform: rotateZ(5deg);
 
         img {
             width: 100%;
@@ -298,20 +304,27 @@
 	}
 	.content {
         position: absolute;
-        width: 100%;
-        height: 100%;
+		top: 5%;
+		right: 5%;
+        width: 90%;
+        height: 90%;
         background-color: white;
         padding: 20px;
         display: flex;
         flex-direction: column;
         align-items: center;
         transform: rotateZ(-5deg);
-
+        transition: all 0.5s; 
         img {
             width: 100%;
             border-radius: 5px;
         }
 	}
+	& .description-hidden {
+		opacity: 0;
+		margin-top: 350px;
+        transition: all 0.5s;
+    }
 	&:hover::before, &:hover .content, &:hover .content-info {
 		transform: rotateZ(0deg);
 	}
