@@ -107,10 +107,6 @@ export default {
         if (store.selectedRes) {
             localStorage.setItem('currentRestaurant', store.selectedRes);
         }
-
-
-
-
     },
 
     methods: {
