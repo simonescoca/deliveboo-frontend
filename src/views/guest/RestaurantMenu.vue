@@ -46,30 +46,19 @@
                             </strong>
                             <i class="fa-solid fa-circle-info ms-2" @click="seeDescription"></i>
 						</p>
-						<p class="info">
+						<!-- <p class="info">
 							{{ dish.description }}
-						</p>
-						<p class="info d-inline fst-italic fw-lighter" v-for="(ingredient, index) in dish.ingredients" :key="index">
+						</p> -->
+						<!-- <p class="info d-inline fst-italic fw-lighter" v-for="(ingredient, index) in dish.ingredients" :key="index">
 							{{ ingredient.name }}
                             <span v-if="index !== dish.ingredients.length - 1">
                                 ,
                             </span> 
-						</p>
+						</p> -->
 						<p class="price">
 							{{ dish.price.toFixed(2) }}
 						</p>
-                        <div class="d-flex align-items-center w-fit-content">
-                            <div @click="counter = counter - 1">
-                                -
-                            </div>
-                            <div>
-                                {{ counter }}
-                            </div>
-                            <div @click="counter = counter + 1">
-                                +
-                            </div>
-                        </div>
-
+						<p class="btn btn-success" @click="addToCart(dish)">Add to cart</p>
 					</div>
 				</div>
 			</div>
@@ -153,6 +142,37 @@
 				}
 				console.log(this.activeCategory)
 			},
+			// --Funzione per aggiungere un piatto al carrello--
+            addToCart(dish) {
+                // Ottenere il carrello dal localStorage come stringa JSON o inizializzarlo come array vuoto se non esiste
+                const cartString = localStorage.getItem('cart');
+                const cart = cartString ? JSON.parse(cartString) : [];
+
+                // Verifica se l'elemento è già nel carrello
+                const existingDish = cart.find(cartDish => cartDish.id === dish.id);
+
+                // Verifica se l'elemento appartiene allo stesso negozio degli altri elementi nel carrello
+                if (existingDish && existingDish.restaurant_id !== dish.restaurant_id) {
+                    alert('Non puoi aggiungere elementi da ristoranti diversi nello stesso carrello.');
+                    return;
+                }
+
+                if (existingDish) {
+                    // Se l'elemento esiste già nel carrello, aumenta la quantità
+                    existingDish.quantity += 1;
+                } else {
+                    // Se l'elemento non esiste nel carrello, aggiungilo come oggetto
+                    cart.push({ id: dish.id, name: dish.name, quantity: 1, price: dish.price, restaurant_id: dish.restaurant_id });
+                }
+
+                // Salva il carrello aggiornato nel localStorage come stringa JSON
+                localStorage.setItem('cart', JSON.stringify(cart));
+
+                // Assegna il carrello come array a this.cart
+                this.cart = cart;
+                console.log(this.cart)
+                alert('Elemento aggiunto al carrello!');
+            },
 		}
 	}
 </script>
@@ -267,8 +287,7 @@
         transform: rotateZ(-5deg);
 
         img {
-            width: 150px;
-            height: fit-content;
+            width: 290px;
             border-radius: 5px;
         }
 	}
