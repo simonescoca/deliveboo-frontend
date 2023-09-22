@@ -2,10 +2,10 @@
     <div class="container py-3">
         <header class="d-flex justify-content-between mb-3">
             <router-link :to="{ name: 'deleted-dishes' }" class="btn btn-danger">
-                <i class="fa-regular fa-trash-can"></i> See trashed
+                <i class="fa-regular fa-trash-can"></i> Cestino
             </router-link>
             <router-link :to="{ name: 'addDish' }" class="btn btn-primary">
-                <i class="fa-solid fa-plus"></i> Add new dish
+                <i class="fa-solid fa-plus"></i> Aggiungi piatto
             </router-link>
         </header>
         <h3 class="restaurant-menu">
@@ -16,23 +16,26 @@
         </div>
         <div class=" my_dishes">
             <div v-for="dish in dishes" class="d-flex my_dish my-3">
-                <div class="my_r-img ps-2">
+                <div class="my_r-img ps-2 w-25">
                     <img :src="dish.photo" :alt="dish.name">
                 </div>
-                <div class="dishinfo d-flex flex-column align-items-center justify-content-between mb-3">
+                <div class="dishinfo w-75 d-flex flex-column align-items-center justify-content-between mb-3">
                     <div class="my_r-name">
                         {{ dish.name }}
                     </div>
-                    <div>
-                        <button class="btn btn-outline-danger" @click="dishInfo(dish.id)">
+                    <div class="w-50 text-left">
+                        {{ dish.description }}
+                    </div>
+                    <div class="btn-group">
+                        <button class="btn" @click="dishInfo(dish.id)">
                             <i class="fa-solid fa-circle-info"></i>
                         </button>
                         <router-link :to="{ name: 'editDish' }" @click="store.selectedDish = dish.id">
-                            <button class="btn btn-outline-danger mx-3">
+                            <button class="btn mx-3">
                                 <i class="fa-solid fa-pen"></i>
                             </button>
                         </router-link>
-                        <button @click="softDeleteItem(dish.id)" class="btn btn-outline-danger">
+                        <button @click="softDeleteItem(dish.id)" class="btn">
                             <i class="fa-solid fa-xmark"></i>
                         </button>
                     </div>
@@ -40,9 +43,9 @@
 
             </div>
         </div>
-        <div class="position-absolute dishShow" :class="infotoggle === false ? 'invisible' : ''">
+        <div class="position-fixed dishShow" :class="infotoggle === false ? 'invisible' : ''">
             <div class="card d-inline-block m-5 text-center position-relative">
-                <i class="fa-solid fa-xmark fa-sm show position-absolute" @click="infotoggle = false"></i>
+                <i class="fa-solid fa-xmark fa-xl show position-absolute" @click="infotoggle = false"></i>
                 <div class="card-body py-3">
                     <h5 class="card-title fst-italic fw-bold">{{ infodish.name }}</h5>
                     <h6 class="card-subtitle mb-2 py-2 mx-auto"><span class="fw-bold">Price</span> ~ {{
@@ -180,6 +183,18 @@ h3 {
     font-style: italic;
 }
 
+.btn-group {
+    button {
+        color: #de4a3a;
+        outline: 1px solid #de4a3a;
+
+        &:hover {
+            color: white;
+            background-color: #de4a3a;
+        }
+    }
+}
+
 .dishinfo {
     flex-grow: 1;
 
@@ -198,11 +213,12 @@ h3 {
     width: 60%;
     transition: all 500ms;
     background: none;
+    z-index: 1;
 
     .fa-xmark.show {
-        right: 10px;
-        top: 5px;
-        font-size: 30px;
+        right: 2%;
+        top: 8%;
+
         cursor: pointer;
         color: #f07f5c;
     }
@@ -210,14 +226,14 @@ h3 {
     .card-body {
         background-color: rgba(220, 176, 163, 0.742);
         color: rgb(238, 112, 45);
-
         border-radius: 5px;
     }
 }
 
 .invisible {
     opacity: 0;
-    scale: 0.2;
+    scale: 0.1;
+    transform: translate(-100%, -80%);
 }
 
 .my_dishes {
@@ -228,12 +244,9 @@ h3 {
 
     border-radius: 7px;
     overflow: hidden;
-
     border-top: 3px solid #f07f5c;
     border-bottom: 3px solid #f07f5c;
     padding: 1rem 0;
-
-
 }
 
 .my_r-img {
@@ -245,6 +258,7 @@ h3 {
     img {
         height: 100%;
         width: 100%;
+        object-fit: cover;
         border-radius: 5px;
     }
 }
