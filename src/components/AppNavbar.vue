@@ -1,11 +1,11 @@
 <template>
-	<nav>
-        <div class="container d-flex justify-content-between">
+	<nav class="position-relative">
+        <div class="container d-flex justify-content-between align-items-center">
             <!-- ? logo container -->
             <div class="d-flex align-items-center my_logo-container">
                 <img src="../../src/images/logo.jpeg" alt="logo">
             </div>
-            <!-- ? logo container -->
+
             <!-- ? central links -->
             <ul class="d-flex justify-content-center align-items-center list-unstyled m-0">
                 <li v-for="link in links"> <!--class="d-flex align-items-center"-->
@@ -20,7 +20,7 @@
                     </router-link>
                 </li>
             </ul>
-            <!-- ? central links -->
+
             <!-- ? login or profile -->
             <div class="d-flex align-items-center my_gap2">
                 <div v-if="userName === null" @click="store.access = false"> <!--class="d-flex align-items-center"-->
@@ -63,8 +63,68 @@
                         </div>
                     </div>
                 </router-link>
+
+                <!-- ? kart-button -->
+                <div class="d-flex justify-content-center align-items-center bg-danger py-1 px-2 rounded" @click="isKartVisible = true">
+                    <span>
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </span>
+                </div>
             </div>
-            <!-- ? login or profile -->
+        </div>
+
+        <!-- ? kart -->
+        <div class="position-fixed top-0 end-0 bg-danger myKart" :class="isKartVisible === false ? 'w-0' : 'w-30rem'">
+            <div class="position-absolute top-0 start-0 px-2 py-1 rounded bg-warning closeKart" @click="isKartVisible = false">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+
+            <!-- ? kart - restaurant -->
+            <header class="mt-5">
+                <h2>
+                    nome ristorante selezionato
+                </h2>
+            </header>
+
+            <!-- ? kart - dishes -->
+            <main class="overflow">
+                <div v-for="piattoFittizio in piattiFittizi" class="d-flex bg-primary mt-3 kartSection">
+                    <div class="m-auto d-flex bg-secondary myAdded">
+                        <div class="imgCont">
+                            <img :src="piattoFittizio.immagine" :alt="piattoFittizio.nome">
+                        </div>
+                        <div class="infoCont">
+                            <p class="m-0">
+                                {{ piattoFittizio.nome }}
+                            </p>
+                            <p class="m-0">
+                                {{"$" + piattoFittizio.prezzo.toFixed(2) }}
+                            </p>
+                        </div>
+                        <div class="myCounter">
+                            <!-- <div class="d-flex">
+                                <div class="py-1 px-2 bg-warning" @click="piattoFittizio.quantita--">
+                                    -
+                                </div>
+                                <div class="py-1 px-2 bg-primary">
+                                    {{ piattoFittizio.quantita }}
+                                </div>
+                                <div class="py-1 px-2 bg-warning" @click="piattoFittizio.quantita++">
+                                    +
+                                </div>
+                            </div> -->
+                            <input type="number" name="quantity" id="quantity" v-model="piattoFittizio.quantita" @change="updateTotale">
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- ? kart - bill -->
+            <footer>
+                <h4 class="m-0">
+                    {{ "Totale: " + totale }}
+                </h4>
+            </footer>
         </div>
     </nav>
 </template>
@@ -95,6 +155,76 @@
                     },
                 ],
                 userName: localStorage.getItem('userName'),
+                isKartVisible: false,
+                piattiFittizi: [
+                    {
+                        nome: 'Porco dio al pesto',
+                        immagine: 'https://blog.giallozafferano.it/dulcisinforno/wp-content/uploads/2021/03/Carbonara-ricetta-5328.jpg',
+                        prezzo: 10,
+                        quantita: 1,
+                    },
+                    {
+                        nome: 'Madonna alla puttanesca',
+                        immagine: 'https://blog.giallozafferano.it/dulcisinforno/wp-content/uploads/2021/03/Carbonara-ricetta-5328.jpg',
+                        prezzo: 3,
+                        quantita: 1,
+                    },
+                    {
+                        nome: 'Cristo arrosto',
+                        immagine: 'https://blog.giallozafferano.it/dulcisinforno/wp-content/uploads/2021/03/Carbonara-ricetta-5328.jpg',
+                        prezzo: 18,
+                        quantita: 1,
+                    },
+                    {
+                        nome: 'Mozzarelle della Madonna',
+                        immagine: 'https://blog.giallozafferano.it/dulcisinforno/wp-content/uploads/2021/03/Carbonara-ricetta-5328.jpg',
+                        prezzo: 8,
+                        quantita: 1,
+                    },
+                    {
+                        nome: 'Porco dio al pesto',
+                        immagine: 'https://blog.giallozafferano.it/dulcisinforno/wp-content/uploads/2021/03/Carbonara-ricetta-5328.jpg',
+                        prezzo: 10,
+                        quantita: 1,
+                    },
+                    {
+                        nome: 'Madonna alla puttanesca',
+                        immagine: 'https://blog.giallozafferano.it/dulcisinforno/wp-content/uploads/2021/03/Carbonara-ricetta-5328.jpg',
+                        prezzo: 3,
+                        quantita: 1,
+                    },
+                    {
+                        nome: 'Cristo arrosto',
+                        immagine: 'https://blog.giallozafferano.it/dulcisinforno/wp-content/uploads/2021/03/Carbonara-ricetta-5328.jpg',
+                        prezzo: 18,
+                        quantita: 1,
+                    },
+                    {
+                        nome: 'Mozzarelle della Madonna',
+                        immagine: 'https://blog.giallozafferano.it/dulcisinforno/wp-content/uploads/2021/03/Carbonara-ricetta-5328.jpg',
+                        prezzo: 8,
+                        quantita: 1,
+                    },
+                    {
+                        nome: 'Madonna alla puttanesca',
+                        immagine: 'https://blog.giallozafferano.it/dulcisinforno/wp-content/uploads/2021/03/Carbonara-ricetta-5328.jpg',
+                        prezzo: 3,
+                        quantita: 1,
+                    },
+                    {
+                        nome: 'Cristo arrosto',
+                        immagine: 'https://blog.giallozafferano.it/dulcisinforno/wp-content/uploads/2021/03/Carbonara-ricetta-5328.jpg',
+                        prezzo: 18,
+                        quantita: 1,
+                    },
+                    {
+                        nome: 'Mozzarelle della Madonna',
+                        immagine: 'https://blog.giallozafferano.it/dulcisinforno/wp-content/uploads/2021/03/Carbonara-ricetta-5328.jpg',
+                        prezzo: 8,
+                        quantita: 1,
+                    },
+                ],
+                totale: 0,
 			}
 		},
 
@@ -111,11 +241,18 @@
 		},
 
 		methods: {
-            logout(){
+            logout () {
                 localStorage.removeItem('userToken');
                 localStorage.removeItem('userId');
                 localStorage.removeItem('userName');
 				this.userName = localStorage.getItem('userName');
+            },
+
+            updateTotale () {
+                this.piattiFittizi.forEach ( (piattoFittizio, costoSezione) => {
+                    costoSezione = (piattoFittizio.prezzo * piattoFittizio.quantita)
+                    this.totale += costoSezione
+                })
             }
 		}
 	}
@@ -173,6 +310,54 @@
 
         .my_gap2 {
             gap: .4rem;
+        }
+
+        .myKart {
+            height: 100vh;
+            transition: all .3s ease-in-out;
+        }
+
+        .w-0 {
+            width: 0;
+        }
+
+        .w-30rem {
+            width: 30rem;
+        }
+
+        .overflow {
+            overflow-y: scroll;
+            height: 80%;
+
+            &::-webkit-scrollbar-track {
+                background-color: transparent;
+            }
+        }
+
+        .myAdded {
+            width: 80%;
+            height: 90%;
+        }
+
+        .kartSection {
+            height: 6rem;
+        }
+
+        .imgCont {
+            object-fit: contain;
+            width: 7rem;
+
+            img {
+                height: 100%;
+                width: 100%;
+            }
+        }
+
+        .myCounter {
+
+            input {
+                width: 5rem;
+            }
         }
     }
 </style>
