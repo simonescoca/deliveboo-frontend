@@ -1,11 +1,11 @@
 <template>
     <div class="container">
         <header class="d-flex justify-content-between">
-            <router-link :to="{ name: 'deleted-restaurants' }" class="btn btn-danger">
-                Deleted Restaurants
+            <router-link :to="{ name: 'deleted-restaurants' }" class="btn my_btn deleted">
+                <i class="fa-regular fa-trash-can"></i>
             </router-link>
-            <router-link :to="{ name: 'addRestaurant' }" class="btn btn-primary">
-                New Restaurant
+            <router-link :to="{ name: 'addRestaurant' }" class="btn my_btn add">
+                <i class="fa-solid fa-plus"></i>
             </router-link>
         </header>
         <h3>
@@ -88,19 +88,19 @@ export default {
         this.userId = localStorage.getItem('userId')
         this.userName = localStorage.getItem('userName')
         if (this.userToken === null) {
-            this.doLogin ()
+            this.doLogin()
         } else {
             this.getRestaurants()
         }
     },
 
     methods: {
-        notFound () {
+        notFound() {
             router.push({ name: 'not-found' });
         },
 
-        doLogin () {
-            router.push({ name: 'profile'})
+        doLogin() {
+            router.push({ name: 'profile' })
         },
 
         softDeleteItem(restaurantId) {
@@ -130,19 +130,54 @@ export default {
                     'Authorization': `Bearer ${this.userToken}`
                 }
             })
-            .then(response => {
-                // console.log(response)
-                this.restaurants = response.data
-            })
-            .catch(error => {
-                console.log(error)
-            });
+                .then(response => {
+                    // console.log(response)
+                    this.restaurants = response.data
+                })
+                .catch(error => {
+                    console.log(error)
+                });
         },
     }
 }
 </script>
 
 <style lang="scss" scoped>
+header {
+    .my_btn {
+        border: 1px solid rgba(0, 0, 0, 0.223);
+        width: 100px;
+        position: fixed;
+        top: 14%;
+        left: -4.5%;
+        transition: all 500ms;
+
+
+        &:hover {
+            left: -3.5%;
+        }
+
+        i {
+            margin-left: 60px;
+            color: #000000a2;
+        }
+    }
+
+    .my_btn.add {
+        top: 20%;
+
+        &:hover {
+            background-color: rgba(110, 174, 206, 0.447);
+        }
+    }
+
+    .my_btn.deleted {
+        &:hover {
+            background-color: rgba(240, 133, 133, 0.481);
+        }
+    }
+}
+
 .my_restaurants {
     gap: 3rem;
 }

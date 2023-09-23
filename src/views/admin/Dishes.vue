@@ -1,22 +1,22 @@
 <template>
     <div class="container py-3">
         <header class="d-flex justify-content-between mb-3">
-            <router-link :to="{ name: 'deleted-dishes' }" class="btn btn-danger">
-                <i class="fa-regular fa-trash-can"></i> Cestino
+            <router-link :to="{ name: 'deleted-dishes' }" class="btn my_btn deleted">
+                <i class="fa-regular fa-trash-can"></i>
             </router-link>
-            <router-link :to="{ name: 'addDish' }" class="btn btn-primary">
-                <i class="fa-solid fa-plus"></i> Aggiungi piatto
+            <router-link :to="{ name: 'addDish' }" class="btn my_btn add">
+                <i class="fa-solid fa-plus"></i>
             </router-link>
         </header>
         <h3 class="restaurant-menu">
             {{ restaurant.name }} ~ Menù
         </h3>
-        <div v-if="isDeleteSuccess" class="my-3 alert alert-success">
+        <div v-if="isDeleteSucess" class="position-fixed my-3 alert alert-success my_msg">
             La modifica è andata a buon fine!
         </div>
         <div class=" my_dishes">
             <div v-for="dish in dishes" class="d-flex my_dish my-3">
-                <div class="my_r-img ps-2 w-25">
+                <div class="my_r-img w-25">
                     <img :src="dish.photo" :alt="dish.name">
                 </div>
                 <div class="dishinfo w-75 d-flex flex-column align-items-center justify-content-between mb-3">
@@ -183,6 +183,40 @@ h3 {
     font-style: italic;
 }
 
+header {
+    .my_btn {
+        border: 1px solid rgba(0, 0, 0, 0.223);
+        width: 100px;
+        position: fixed;
+        left: -4.5%;
+        transition: all 500ms;
+
+
+        &:hover {
+            left: -3.5%;
+        }
+
+        i {
+            margin-left: 60px;
+            color: #000000a2;
+        }
+    }
+
+    .my_btn.add {
+        top: 20%;
+
+        &:hover {
+            background-color: rgba(110, 174, 206, 0.447);
+        }
+    }
+
+    .my_btn.deleted {
+        &:hover {
+            background-color: rgba(240, 133, 133, 0.481);
+        }
+    }
+}
+
 .btn-group {
     button {
         color: #de4a3a;
@@ -204,6 +238,13 @@ h3 {
         font-weight: bold;
 
     }
+}
+
+.my_msg {
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
 }
 
 .dishShow {
@@ -244,9 +285,14 @@ h3 {
 
     border-radius: 7px;
     overflow: hidden;
-    border-top: 3px solid #f07f5c;
-    border-bottom: 3px solid #f07f5c;
-    padding: 1rem 0;
+    border: 1px solid #f07e5c76;
+    padding: 1rem;
+    transition: scale 1s;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+
+    &:hover {
+        scale: 1.05;
+    }
 }
 
 .my_r-img {
@@ -260,6 +306,7 @@ h3 {
         width: 100%;
         object-fit: cover;
         border-radius: 5px;
+
     }
 }
 </style>
