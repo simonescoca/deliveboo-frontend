@@ -36,7 +36,7 @@
 	<!-- ---Sezione piatti, divisa in Primi, Secondi, Dolci--- -->
 	<div class="container">
 		<div class="row myGap">
-			<div class="myCard col-3-custom mx-auto mb-5" v-for="dish in resDishes">
+			<div class="myCard col-3-custom mx-auto mb-5" v-for="dish in resDishes" :class="!showSelectedDish(dish.categories) ? 'notSelected' : ''">
 				<div class="content-info">
 					<p class="title fw-bold">
 							{{ dish.name }}
@@ -150,6 +150,20 @@
 					this.activeCategory.push(selectedCategory);
 				}
 				console.log(this.activeCategory)
+			},
+			// --Funzione per mostrare un piatto solo se non ci sono selezioni oppure la selezione della categoria è presente in quel piatto--
+			showSelectedDish(categories){
+				let active = false;
+				if (this.activeCategory.length === 0) {
+					return true;
+				} else {
+					categories.forEach(category => {
+					if (this.activeCategory.includes(category.name)) {
+						active = true;
+					}
+					});
+				}
+				return active;
 			},
 			// --Funzione per aggiungere un piatto al carrello--
             addToCart(dish) {
@@ -298,7 +312,7 @@
         flex-direction: column;
         align-items: center;
         transform: rotateZ(5deg);
-
+		overflow-y: hidden;
         img {
             width: 100%;
             border-radius: 5px;
@@ -333,6 +347,9 @@
 	&:active::before, &:active .content, &:active .content-info{
 		box-shadow: none;
 	}
+}
+.notSelected{
+	display: none;
 }
 .description {
 	width: 100%;
