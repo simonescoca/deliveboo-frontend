@@ -360,4 +360,16 @@
             }
         }
     }
+        @media (max-width: 768px) {
+  .my_link span:nth-child(2) {
+    display: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .my_logo-container img {
+    display: none;
+  }
+}
+
 </style>
