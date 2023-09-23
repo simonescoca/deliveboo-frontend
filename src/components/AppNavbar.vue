@@ -367,9 +367,31 @@
 }
 
 @media (max-width: 420px) {
-  .my_logo-container img {
-    display: none;
-  }
+    .my_logo-container,
+    .my_logo-container img {
+      display: none !important; /* Hide the logo container and its image */
+    }
+
+    ul.list-unstyled:first-of-type {
+      margin-left: 10px; 
+      gap: 10px; 
+    }
+
+    ul.list-unstyled:first-of-type li {
+      margin-right: 5px; 
+    }
+
+    
+    .d-flex.align-items-center.my_gap2 {
+      display: none;
+    }
+
+    
+    nav > div > div:first-child {
+      display: flex;
+      justify-content: space-between;
+      align-items: center; 
+    }
 }
 
 </style>
