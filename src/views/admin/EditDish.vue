@@ -66,8 +66,8 @@
             </div>
 
             <div class="my-3">
-                <button type="submit" class="btn btn-primary">
-                    Update
+                <button type="submit" class="btn btn-primary d-flex mx-auto">
+                    Aggiorna
                 </button>
             </div>
         </form>

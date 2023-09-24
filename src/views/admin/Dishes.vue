@@ -53,13 +53,13 @@
                     '&euro;' : ''
                     }}
                     </h6>
-                    <p class="card-text"><span class="fw-bold">Portata</span> ~ {{ capitalizeFirstLetter(infodish.course,
-                        infotoggle) }}
+                    <p class="card-text"><span class="fw-bold">Portata</span> ~ {{ infodish.course
+                    }}
                     </p>
                     <p class="card-text">{{ infodish.description }}</p>
                     <p class="card-text"><span class="fw-bold">Ingredienti</span> ~ <span
-                            v-for="ingredient in infodish.ingredients">{{ ingredient.name
-                            }}, </span></p>
+                            v-for="ingredient, index in infodish.ingredients">{{ ingredient.name
+                            }}{{ infodish.ingredients.length == index + 1 ? '' : ', ' }} </span></p>
                 </div>
             </div>
         </div>
@@ -167,11 +167,6 @@ export default {
                 });
 
         },
-        capitalizeFirstLetter(string, check) {
-            if (check) {
-                return string.charAt(0).toUpperCase() + string.slice(1);
-            }
-        }
     }
 }
 </script>
@@ -251,22 +246,23 @@ header {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 60%;
+    width: 30%;
+
     transition: all 500ms;
-    background: none;
+
     z-index: 1;
 
     .fa-xmark.show {
-        right: 2%;
-        top: 8%;
+        right: 2.5%;
+        top: 5%;
 
         cursor: pointer;
-        color: #f07f5c;
+        color: rgb(188, 188, 188);
     }
 
     .card-body {
-        background-color: rgba(220, 176, 163, 0.742);
-        color: rgb(238, 112, 45);
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+        color: rgb(241, 100, 24);
         border-radius: 5px;
     }
 }

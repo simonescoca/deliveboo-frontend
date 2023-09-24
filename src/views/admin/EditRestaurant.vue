@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <h3>
-            Admin - Edit Restaurant
+            Admin - Modifica ristorante
         </h3>
         <div v-if="isUpdateSuccess" class="alert alert-success">
             La modifica è andata a buon fine!
@@ -27,8 +27,8 @@
                     </label>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">
-                Update
+            <button type="submit" class="d-flex btn btn-primary mx-auto mt-3">
+                Aggiorna
             </button>
         </form>
     </div>
@@ -49,17 +49,17 @@ export default {
             formSections: [
                 {
                     labelFor: 'name',
-                    labelContent: 'Restaurant\'s name',
+                    labelContent: 'Nome',
                     inputID: 'name',
                 },
                 {
                     labelFor: 'address',
-                    labelContent: 'Restaurant\'s address',
+                    labelContent: 'Indirizzo',
                     inputID: 'address',
                 },
                 {
                     labelFor: 'city',
-                    labelContent: 'Restaurant\'s city',
+                    labelContent: 'Locazione',
                     inputID: 'city',
                 },
             ],
