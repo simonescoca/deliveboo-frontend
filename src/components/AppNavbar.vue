@@ -64,8 +64,8 @@
                     </div>
                 </router-link>
 
-                <!-- ? kart-button -->
-                <div class="d-flex justify-content-center align-items-center bg-danger py-1 px-2 rounded" @click="isKartVisible = true">
+                <!-- ? cart-button -->
+                <div class="d-flex justify-content-center align-items-center bg-danger py-1 px-2 rounded" @click="isCartVisible = true">
                     <span>
                         <i class="fa-solid fa-cart-shopping"></i>
                     </span>
@@ -73,32 +73,32 @@
             </div>
         </div>
 
-        <!-- ? kart -->
-        <div class="position-fixed top-0 end-0 bg-danger myKart" :class="isKartVisible === false ? 'w-0' : 'w-30rem'">
-            <div class="position-absolute top-0 start-0 px-2 py-1 rounded bg-warning closeKart" @click="isKartVisible = false">
+        <!-- ? cart -->
+        <div class="position-fixed top-0 end-0 bg-danger myCart" :class="isCartVisible === false ? 'w-0' : 'w-30rem'">
+            <div class="position-absolute top-0 start-0 px-2 py-1 rounded bg-warning closeKart" @click="isCartVisible = false">
                 <i class="fa-solid fa-xmark"></i>
             </div>
 
-            <!-- ? kart - restaurant -->
+            <!-- ? cart - restaurant -->
             <header class="mt-5">
                 <h2>
                     nome ristorante selezionato
                 </h2>
             </header>
 
-            <!-- ? kart - dishes -->
+            <!-- ? cart - dishes -->
             <main class="overflow">
-                <div v-for="piattoFittizio in piattiFittizi" class="d-flex bg-primary mt-3 kartSection">
+                <div v-for="dish in store.cart" class="d-flex bg-primary mt-3 cartSection">
                     <div class="m-auto d-flex bg-secondary myAdded">
                         <div class="imgCont">
-                            <img :src="piattoFittizio.immagine" :alt="piattoFittizio.nome">
+                            <!-- <img :src="piattoFittizio.immagine" :alt="piattoFittizio.nome"> -->
                         </div>
                         <div class="infoCont">
                             <p class="m-0">
-                                {{ piattoFittizio.nome }}
+                                {{ dish.name }}
                             </p>
                             <p class="m-0">
-                                {{"$" + piattoFittizio.prezzo.toFixed(2) }}
+                                {{"$" + dish.price }}
                             </p>
                         </div>
                         <div class="myCounter">
@@ -113,13 +113,13 @@
                                     +
                                 </div>
                             </div> -->
-                            <input type="number" name="quantity" id="quantity" v-model="piattoFittizio.quantita" @change="updateTotale">
+                            <input type="number" name="quantity" id="quantity" v-model="dish.quantity" @change="updateTotale">
                         </div>
                     </div>
                 </div>
             </main>
 
-            <!-- ? kart - bill -->
+            <!-- ? cart - bill -->
             <footer>
                 <h4 class="m-0">
                     {{ "Totale: " + totale }}
@@ -155,75 +155,7 @@
                     },
                 ],
                 userName: localStorage.getItem('userName'),
-                isKartVisible: false,
-                piattiFittizi: [
-                    {
-                        nome: 'Porco dio al pesto',
-                        immagine: 'https://blog.giallozafferano.it/dulcisinforno/wp-content/uploads/2021/03/Carbonara-ricetta-5328.jpg',
-                        prezzo: 10,
-                        quantita: 1,
-                    },
-                    {
-                        nome: 'Madonna alla puttanesca',
-                        immagine: 'https://blog.giallozafferano.it/dulcisinforno/wp-content/uploads/2021/03/Carbonara-ricetta-5328.jpg',
-                        prezzo: 3,
-                        quantita: 1,
-                    },
-                    {
-                        nome: 'Cristo arrosto',
-                        immagine: 'https://blog.giallozafferano.it/dulcisinforno/wp-content/uploads/2021/03/Carbonara-ricetta-5328.jpg',
-                        prezzo: 18,
-                        quantita: 1,
-                    },
-                    {
-                        nome: 'Mozzarelle della Madonna',
-                        immagine: 'https://blog.giallozafferano.it/dulcisinforno/wp-content/uploads/2021/03/Carbonara-ricetta-5328.jpg',
-                        prezzo: 8,
-                        quantita: 1,
-                    },
-                    {
-                        nome: 'Porco dio al pesto',
-                        immagine: 'https://blog.giallozafferano.it/dulcisinforno/wp-content/uploads/2021/03/Carbonara-ricetta-5328.jpg',
-                        prezzo: 10,
-                        quantita: 1,
-                    },
-                    {
-                        nome: 'Madonna alla puttanesca',
-                        immagine: 'https://blog.giallozafferano.it/dulcisinforno/wp-content/uploads/2021/03/Carbonara-ricetta-5328.jpg',
-                        prezzo: 3,
-                        quantita: 1,
-                    },
-                    {
-                        nome: 'Cristo arrosto',
-                        immagine: 'https://blog.giallozafferano.it/dulcisinforno/wp-content/uploads/2021/03/Carbonara-ricetta-5328.jpg',
-                        prezzo: 18,
-                        quantita: 1,
-                    },
-                    {
-                        nome: 'Mozzarelle della Madonna',
-                        immagine: 'https://blog.giallozafferano.it/dulcisinforno/wp-content/uploads/2021/03/Carbonara-ricetta-5328.jpg',
-                        prezzo: 8,
-                        quantita: 1,
-                    },
-                    {
-                        nome: 'Madonna alla puttanesca',
-                        immagine: 'https://blog.giallozafferano.it/dulcisinforno/wp-content/uploads/2021/03/Carbonara-ricetta-5328.jpg',
-                        prezzo: 3,
-                        quantita: 1,
-                    },
-                    {
-                        nome: 'Cristo arrosto',
-                        immagine: 'https://blog.giallozafferano.it/dulcisinforno/wp-content/uploads/2021/03/Carbonara-ricetta-5328.jpg',
-                        prezzo: 18,
-                        quantita: 1,
-                    },
-                    {
-                        nome: 'Mozzarelle della Madonna',
-                        immagine: 'https://blog.giallozafferano.it/dulcisinforno/wp-content/uploads/2021/03/Carbonara-ricetta-5328.jpg',
-                        prezzo: 8,
-                        quantita: 1,
-                    },
-                ],
+                isCartVisible: false,
                 totale: 0,
 			}
 		},
@@ -236,8 +168,13 @@
 
 		},
 
-		created () {
+        mounted(){
 
+        },
+
+		created () {
+            const cartString = localStorage.getItem('cart')
+            store.cart = cartString ? JSON.parse(cartString) : []
 		},
 
 		methods: {
@@ -312,9 +249,10 @@
             gap: .4rem;
         }
 
-        .myKart {
+        .myCart {
             height: 100vh;
             transition: all .3s ease-in-out;
+            z-index: 2;
         }
 
         .w-0 {
@@ -339,7 +277,7 @@
             height: 90%;
         }
 
-        .kartSection {
+        .cartSection {
             height: 6rem;
         }
 
