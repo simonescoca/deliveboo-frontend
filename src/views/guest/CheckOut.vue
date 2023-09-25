@@ -147,7 +147,7 @@
 </template>
 
 <script>
-	// import {store} from "../store.js";
+	import {store} from "../../store.js";
 	import axios from "axios";
     import { initializeDropin } from '../../dropin.js';
 	export default {
@@ -156,6 +156,7 @@
         
 		data() {
 			return {
+                store,
 				resDishes: [],
                 cart: [],
                 shippingCost: 2,
@@ -166,7 +167,7 @@
                 expirationDate: "",
                 cvv: "",
                 clientToken:"",
-                amount:""
+                amount:"",
 			}
 		},
 
@@ -176,9 +177,12 @@
 		},
 
 		mounted () {
-            localStorage.removeItem('cart')
+            // --Prendo i dati del ristorante dal backend--
             this.getRestaurantInfo()
-            console.log(this.cart)
+            // --Prendo i dati del cart dallo storage--
+            let cartString = localStorage.getItem('cart')
+            this.cart = cartString ? JSON.parse(cartString) : []
+            store.cart = cartString ? JSON.parse(cartString) : []
 
             axios.get('http://127.0.0.1:8000/api/getClientToken')
             .then(response => {
