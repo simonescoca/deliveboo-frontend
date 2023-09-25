@@ -88,7 +88,7 @@
 
             <!-- ? cart - dishes -->
             <main class="overflow">
-                <div v-for="dish in cart" class="d-flex bg-primary mt-3 cartSection">
+                <div v-for="dish in store.cart" class="d-flex bg-primary mt-3 cartSection">
                     <div class="m-auto d-flex bg-secondary myAdded">
                         <div class="imgCont">
                             <img :src="dish.photo" :alt="dish.name">
@@ -113,17 +113,20 @@
                                     +
                                 </div>
                             </div> -->
-                            <input type="number" v-model="dish.quantity" @input="updateTotalPrice(dish), calculateGrandTotal()">
+                            <input type="number" v-model="dish.quantity" @input="updateTotalPrice(dish), calculateGrandTotal()" @change="calculateGrandTotal()">
                         </div>
                     </div>
                 </div>
             </main>
 
             <!-- ? cart - bill -->
-            <footer>
+            <footer class="d-flex justify-content-around align-items-center">
                 <h4 class="m-0">
                     {{ "Totale: " + totale }}
                 </h4>
+                <router-link :to="{ name: 'checkout' }" class="btn btn-warning">
+                    Check Out
+                </router-link>
             </footer>
         </div>
     </nav>
@@ -220,9 +223,12 @@
             calculateGrandTotal() {
                     this.totale = 0;
                 // Calcola il totale sommando i prezzi totali di tutti i piatti
-                for (const dish of this.cart) {
+                // for (const dish of store.cart) {
+                //     this.totale += dish.price * dish.quantity;
+                // }
+                store.cart.forEach((dish)=>{
                     this.totale += dish.price * dish.quantity;
-                }
+                })
                 return this.totale.toFixed(2); // Usiamo toFixed per avere due decimali
             },
 		}
