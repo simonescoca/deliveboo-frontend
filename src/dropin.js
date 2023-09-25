@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 
-export function initializeDropin(clientToken,) {
+export function initializeDropin(clientToken,vueInstance) {
     
     
    
@@ -45,7 +45,7 @@ export function initializeDropin(clientToken,) {
             })
             .then(response => {
               // Gestisci la risposta dal server backend (es. conferma di pagamento)
-              handlePaymentSuccess(response);
+              vueInstance.handlePaymentSuccess(response);
               console.log('Risposta dal server:', response.data);
             })
             .catch(error => {
