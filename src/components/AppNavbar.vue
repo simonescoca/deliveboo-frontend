@@ -74,24 +74,24 @@
         </div>
 
         <!-- ? cart -->
-        <div class="position-fixed top-0 end-0 bg-danger myCart" :class="isCartVisible === false ? 'w-0' : 'w-30rem'">
-            <div class="position-absolute top-0 start-0 px-2 py-1 rounded bg-warning closeKart" @click="isCartVisible = false">
+        <div class="position-fixed top-0 end-0 bg-secondary bg-opacity-75 myCart" :class="isCartVisible === false ? 'w-0' : 'w-30rem'">
+            <div class="position-absolute top-0 start-0 text-white fw-bold fs-1" @click="isCartVisible = false">
                 <i class="fa-solid fa-xmark"></i>
             </div>
 
             <!-- ? cart - restaurant -->
-            <header class="mt-5">
-                <h2>
-                    nome ristorante selezionato
+            <header class="mt-5 d-flex">
+                <h2 class="m-0 m-auto">
+                    Ristorante selezionato
                 </h2>
             </header>
 
             <!-- ? cart - dishes -->
             <main class="overflow">
-                <div v-for="dish in store.cart" class="d-flex bg-primary mt-3 cartSection">
-                    <div class="m-auto d-flex bg-secondary myAdded">
+                <div v-for="dish in store.cart" class="d-flex mt-3 cartSection">
+                    <div class="m-auto d-flex justify-content-between bg-secondary rounded py-2 px-3 position-relative myAdded">
                         <div class="imgCont">
-                            <img :src="dish.photo" :alt="dish.name">
+                            <img :src="dish.photo" :alt="dish.name" class="rounded">
                         </div>
                         <div class="infoCont">
                             <p class="m-0">
@@ -101,18 +101,7 @@
                                 {{"$" + dish.price }}
                             </p>
                         </div>
-                        <div class="myCounter">
-                            <!-- <div class="d-flex">
-                                <div class="py-1 px-2 bg-warning" @click="piattoFittizio.quantita--">
-                                    -
-                                </div>
-                                <div class="py-1 px-2 bg-primary">
-                                    {{ piattoFittizio.quantita }}
-                                </div>
-                                <div class="py-1 px-2 bg-warning" @click="piattoFittizio.quantita++">
-                                    +
-                                </div>
-                            </div> -->
+                        <div class="position-absolute bottom-0 end-0 myCounter">
                             <input type="number" v-model="dish.quantity" @input="updateTotalPrice(dish), calculateGrandTotal()" @change="calculateGrandTotal()">
                         </div>
                     </div>
@@ -124,7 +113,7 @@
                 <h4 class="m-0">
                     {{ "Totale: " + totale }}
                 </h4>
-                <router-link :to="{ name: 'checkout' }" class="btn btn-warning">
+                <router-link :to="{ name: 'checkout' }" class="btn btn-warning" @click="isCartVisible = false">
                     Check Out
                 </router-link>
             </footer>
@@ -314,11 +303,11 @@
 
         .myAdded {
             width: 80%;
-            height: 90%;
+            height: 95%;
         }
 
         .cartSection {
-            height: 6rem;
+            height: 7rem;
         }
 
         .imgCont {
