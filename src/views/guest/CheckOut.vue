@@ -125,9 +125,16 @@
                                 <input id="phone" class="input_field" type="text" name="phone" title="phone" placeholder="Enter your phone number">
                             </div>
                         </div>
+                        
+                    </form>
+
+                    <div id="dropin-container"></div>
+                    <button id="submit-button" class="purchase--btn"  >Checkout</button>
                         <!-- ---Checkout button--- -->
-                            <button class="purchase--btn">Checkout</button>
-                        </form>
+                            
+                            
+                            
+                        
                     </div>
                 </div>
 			</div>
@@ -142,22 +149,27 @@
 <script>
 	// import {store} from "../store.js";
 	import axios from "axios";
-
+    import { initializeDropin } from '../../dropin.js';
 	export default {
 		name: 'CheckOut',
+        
+        
 		data() {
 			return {
-				apiUrl: 'http://127.0.0.1:8000/api/',
 				resDishes: [],
                 cart: [],
                 shippingCost: 2,
                 grandTotal: 0,
+                apiUrl: "http://127.0.0.1:8000/api/",
+                amount: "",
+                cardNumber: "",
+                expirationDate: "",
+                cvv: "",
+                clientToken:"",
+                amount:""
 			}
 		},
 
-		components: {
-
-		},
 
 		props: {
 
@@ -167,6 +179,15 @@
             localStorage.removeItem('cart')
             this.getRestaurantInfo()
             console.log(this.cart)
+
+            axios.get('http://127.0.0.1:8000/api/getClientToken')
+            .then(response => {
+            this.clientToken = response.data.clientToken;
+            console.log(this.clientToken);
+            const dropinInstance = initializeDropin(this.clientToken);
+            
+    });
+
 		},
 
 		created () {
@@ -251,7 +272,8 @@
             },
             finalPrice() {
                 // Calcola il totale finale sommando il GrandTotal e il costo di spedizione
-                return (parseFloat(this.grandTotal) + this.shippingCost).toFixed(2);
+                this.amount = (parseFloat(this.grandTotal) + this.shippingCost).toFixed(2);
+                return this.amount;
             },
             // --Funzione x prendere i dati dal ristorante---
 			getRestaurantInfo() {
