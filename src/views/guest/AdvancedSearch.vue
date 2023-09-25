@@ -91,18 +91,18 @@
         </form>
     </header>
     <main class="d-flex flex-wrap justify-content-around align-items-center container">
-        <div v-for="initialRestaurant in initialRestaurants" class="mb-4">
+        <div v-for="restaurant in restaurants" class="mb-4">
             <div class="card" style="width: 24rem;">
-                <img src="" class="card-img-top" :alt="initialRestaurant.name">
+                <img :src="restaurant.image" class="card-img-top" :alt="restaurant.name">
                 <div class="card-body">
                 <h5 class="card-title">
-                    {{ initialRestaurant.name }}
+                    {{ restaurant.name }}
                 </h5>
                 <p class="card-text">
-                    {{ initialRestaurant.city + ", " + initialRestaurant.address }}
+                    {{ restaurant.city + ", " + restaurant.address }}
                 </p>
                 <div class="d-flex align-items-center my_categories">
-                    <p v-for="category in initialRestaurant.types" class="m-0 ms-2 mb-2 card-text">
+                    <p v-for="category in restaurant.types" class="m-0 ms-2 mb-2 card-text">
                         {{ category.name }}
                     </p>
                 </div>
@@ -125,7 +125,7 @@
                 checkSelect: [],
                 restCategOrName: '',
                 apiUrl: 'http://127.0.0.1:8000/api',
-                initialRestaurants: [],
+                restaurants: [],
                 categories: [
                     'Italiana',
                     'Francese',
@@ -160,7 +160,7 @@
 		methods: {
             getRestaurants(){
                 const selectedTypes = Array.from(document.querySelectorAll('input[name="type[]"]:checked')).map(input => input.value);
-                console.log(selectedTypes)
+                // console.log(selectedTypes)
                 axios.get(`${this.apiUrl}/restaurants`,{
                     params: {
                         name: this.restCategOrName,
@@ -168,12 +168,12 @@
                     }
                 })
                 .then(response => {
-                    console.log(response)
+                    console.log(response.data.results.data)
                     console.log(selectedTypes[0])
                     if(selectedTypes[0] === undefined){
-                        this.initialRestaurants = response.data.results.data
+                        this.restaurants = response.data.results.data
                     }else{
-                        this.initialRestaurants = response.data.results
+                        this.restaurants = response.data.results
                     }
                 })
                 .catch(error => {
@@ -307,5 +307,11 @@
   border-color: #000;
   outline: 0;
   box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.25);
+}
+
+.card img {
+    object-fit: cover;
+    object-position: center;
+    height: 20rem;
 }
 </style>
