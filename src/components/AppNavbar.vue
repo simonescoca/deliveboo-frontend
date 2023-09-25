@@ -91,7 +91,7 @@
                 <div v-for="dish in cart" class="d-flex bg-primary mt-3 cartSection">
                     <div class="m-auto d-flex bg-secondary myAdded">
                         <div class="imgCont">
-                            <!-- <img :src="piattoFittizio.immagine" :alt="piattoFittizio.nome"> -->
+                            <img :src="dish.photo" :alt="dish.name">
                         </div>
                         <div class="infoCont">
                             <p class="m-0">
