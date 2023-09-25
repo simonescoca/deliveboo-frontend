@@ -1,12 +1,12 @@
 <template>
 	<div class="card w-25 d-inline-block m-5 text-center " v-for="order in orders">
 		<div class="card-body">
-			<h5 class="card-title">Order n: {{order.id}}</h5>
-			<h6 class="card-subtitle mb-2 text-muted">Total price: {{order.total_price}}</h6>
+			<h5 class="card-title">Order n: {{ order.id }}</h5>
+			<h6 class="card-subtitle mb-2 text-muted">Total price: {{ order.total_price }}</h6>
 			<p class="card-text">Customer name: {{ order.customer_name }}</p>
 			<p class="card-text">Customer address: {{ order.customer_address }}</p>
 			<p class="card-text">Customer phone number: {{ order.phone_number }}</p>
-			<p class="card-text">Status: {{ order.status===0 ? 'In process' : 'Completed' }}</p>
+			<p class="card-text">Status: {{ order.status === 0 ? 'In process' : 'Completed' }}</p>
 			<a href="#" class="card-link btn btn-primary" @click="getOrderInfo(order.id)">Order Info</a>
 		</div>
 	</div>
@@ -29,105 +29,109 @@
 			Order statistics
 		</router-link>
 	</div>
-	
 </template>
 
 <script>
-import {store} from "../../store.js";
+import { store } from "../../store.js";
 import axios from "axios";
 
-	export default {
-		data() {
-			return {
-				store,
-				apiUrl: 'http://127.0.0.1:8000/api/',
-				userToken: '',
-				userId: '',
-				userName: '',
-				orders:[],
-				infodish: [],
-				infotoggle: false,
-			}
-		},
+export default {
+	data() {
+		return {
+			store,
+			apiUrl: 'http://127.0.0.1:8000/api/',
+			userToken: '',
+			userId: '',
+			userName: '',
+			orders: [],
+			infodish: [],
+			infotoggle: false,
+			selectedRes: null,
+		}
+	},
 
-		components: {
+	components: {
 
-		},
+	},
 
-		props: {
+	props: {
 
-		},
+	},
 
-		mounted () {
-            this.getOrders()
-		},
+	mounted() {
+		this.selectedRes = localStorage.getItem('currentRestaurant');
+		this.getOrders()
+	},
 
-		created () {
-            this.userToken = localStorage.getItem('userToken')
-			this.userId = localStorage.getItem('userId')
-			this.userName = localStorage.getItem('userName')
-		},
+	created() {
+		this.userToken = localStorage.getItem('userToken')
+		this.userId = localStorage.getItem('userId')
+		this.userName = localStorage.getItem('userName')
+		if (store.selectedRes) {
+			localStorage.setItem('currentRestaurant', store.selectedRes);
+		}
+	},
 
-		methods: {
-			getOrders(){
-                axios.get(`${this.apiUrl}${this.userId}/restaurants/${store.selectedRes}/orders`,{
-                headers: {
-                'Authorization': `Bearer ${this.userToken}`
-                }
-                })
-                .then(response => {
-                    console.log(response.data.results)
+	methods: {
+		getOrders() {
+			axios.get(`${this.apiUrl}${this.userId}/restaurants/${this.selectedRes}/orders`, {
+				headers: {
+					'Authorization': `Bearer ${this.userToken}`
+				}
+			})
+				.then(response => {
+					console.log(response.data.results)
 					this.orders = response.data.results
-                })
-                .catch(error => {
-                    console.log(error)
-                });
-            },
-			getOrderInfo(orderId){
-				axios.get(`${this.apiUrl}${this.userId}/restaurants/${store.selectedRes}/orders/${orderId}`,{
-                headers: {
-                'Authorization': `Bearer ${this.userToken}`
-                }
-                })
-                .then(response => {
-                    console.log(response)
+				})
+				.catch(error => {
+					console.log(error)
+				});
+		},
+		getOrderInfo(orderId) {
+			axios.get(`${this.apiUrl}${this.userId}/restaurants/${store.selectedRes}/orders/${orderId}`, {
+				headers: {
+					'Authorization': `Bearer ${this.userToken}`
+				}
+			})
+				.then(response => {
+					console.log(response)
 					this.infodish = response.data.results
-                })
-                .catch(error => {
-                    console.log(error)
-                });
-            this.infotoggle = !this.infotoggle
-			}
+				})
+				.catch(error => {
+					console.log(error)
+				});
+			this.infotoggle = !this.infotoggle
 		}
 	}
+}
 </script>
 
 <style lang="scss" scoped>
 .dishinfo {
-    top: 150px;
-    left: 25%;
-    width: 50%;
-	
-	.card{
+	top: 150px;
+	left: 25%;
+	width: 50%;
+
+	.card {
 		background-color: rgb(228, 228, 228);
 	}
 
-    .fa-xmark {
-        right: 10px;
-        top: 5px;
-        font-size: 30px;
-        cursor: pointer;
-    }
+	.fa-xmark {
+		right: 10px;
+		top: 5px;
+		font-size: 30px;
+		cursor: pointer;
+	}
 
-    .card-body {
-        background-color: rgba(0, 0, 0, 0.185);
-        border: 1px solid black;
-        border-radius: 5px;
+	.card-body {
+		background-color: rgba(0, 0, 0, 0.185);
+		border: 1px solid black;
+		border-radius: 5px;
 		width: calc(100%/5);
-    }
+	}
 }
 
 .invisible {
-    display: none;
+	display: none;
 }
 </style>
