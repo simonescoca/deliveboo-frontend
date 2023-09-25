@@ -149,6 +149,7 @@
                 clientToken:"",
                 amount:"",
                 paymentSuccessful: false,
+                restaurant_id:""
 			}
 		},
 
@@ -168,7 +169,9 @@
             this.clientToken = response.data.clientToken;
             console.log(this.clientToken);
             const dropinInstance = initializeDropin(this.clientToken,this);
-            
+            console.log(this.cart);
+            this.restaurant_id = this.cart[0].restaurant_id;
+            console.log(this.restaurant_id);
     });
 
 		},
@@ -180,8 +183,26 @@
 		methods: {
             handlePaymentSuccess(response) {
                 if(response.data.success === true){
-                    console.log("daje ora mando l'ordine");
+                    
                     this.paymentSuccessful = true;
+                    
+                    axios.post('http://127.0.0.1:8000/api/orders', {
+                        total_price:this.amount,
+                        customer_name:'giacobbo',
+                        customer_address:'via de tu madre',
+                        phone_number:'334352635267',
+                        restaurant_id: this.restaurant_id,
+                        status:this.paymentSuccessful,
+                        dishes:this.cart.map(item => item.id)
+                    }).then(response => {
+
+                        if (response.status === 200 || response.status === 204) {
+                           console.log("ordine riuscito") 
+                     }   
+                    
+                    console.log(response)
+                  })
+                          
                 }
                 
              },
