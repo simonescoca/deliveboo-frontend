@@ -106,7 +106,7 @@
                         {{ category.name }}
                     </p>
                 </div>
-            <router-link :to="{ name: '/advanced-search/restaurant' }" class="btn btn-primary">
+            <router-link :to="{ name: '/advanced-search/restaurant' }" class="btn btn-primary" @click="saveSelectedRestaurant(restaurant.id)">
                         Restaurant Menu
             </router-link>
             </div>
@@ -194,6 +194,9 @@
                     this.selectedOptions = this.selectedOptions + type + ", ";
                 }
                 console.log(this.selectedOptions)
+            },
+            saveSelectedRestaurant(selectedRestaurant) {
+                localStorage.setItem('selectedRestaurant', selectedRestaurant);
             }
 		}
 	}
