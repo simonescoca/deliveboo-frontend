@@ -166,7 +166,7 @@
                 expirationDate: "",
                 cvv: "",
                 clientToken:"",
-                
+                paymentSuccessful: false,
 			}
 		},
 
@@ -197,6 +197,13 @@
 		},
 
 		methods: {
+            handlePaymentSuccess(response) {
+                if(response === true){
+                    "daje ora mando l'ordine"
+                    this.paymentSuccessful = true;
+                }
+                
+             },
             addToCart(dish) {
                 // Ottenere il carrello dal localStorage come stringa JSON o inizializzarlo come array vuoto se non esiste
                 const cartString = localStorage.getItem('cart');
