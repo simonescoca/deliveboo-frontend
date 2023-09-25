@@ -143,12 +143,12 @@
                 shippingCost: 2,
                 grandTotal: 0,
                 apiUrl: "http://127.0.0.1:8000/api/",
-                amount: "",
                 cardNumber: "",
                 expirationDate: "",
                 cvv: "",
                 clientToken:"",
-                amount:"",paymentSuccessful: false,
+                amount:"",
+                paymentSuccessful: false,
 			}
 		},
 
@@ -167,7 +167,7 @@
             .then(response => {
             this.clientToken = response.data.clientToken;
             console.log(this.clientToken);
-            const dropinInstance = initializeDropin(this.clientToken);
+            const dropinInstance = initializeDropin(this.clientToken,this);
             
     });
 
@@ -179,8 +179,8 @@
 
 		methods: {
             handlePaymentSuccess(response) {
-                if(response === true){
-                    "daje ora mando l'ordine"
+                if(response.data.success === true){
+                    console.log("daje ora mando l'ordine");
                     this.paymentSuccessful = true;
                 }
                 
