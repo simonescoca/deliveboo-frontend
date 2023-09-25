@@ -88,7 +88,7 @@
 
             <!-- ? cart - dishes -->
             <main class="overflow">
-                <div v-for="dish in store.cart" class="d-flex bg-primary mt-3 cartSection">
+                <div v-for="dish in cart" class="d-flex bg-primary mt-3 cartSection">
                     <div class="m-auto d-flex bg-secondary myAdded">
                         <div class="imgCont">
                             <!-- <img :src="piattoFittizio.immagine" :alt="piattoFittizio.nome"> -->
@@ -113,7 +113,7 @@
                                     +
                                 </div>
                             </div> -->
-                            <input type="number" name="quantity" id="quantity" v-model="dish.quantity" @change="updateTotale">
+                            <input type="number" v-model="dish.quantity" @input="updateTotalPrice(dish)">
                         </div>
                     </div>
                 </div>
@@ -157,6 +157,7 @@
                 userName: localStorage.getItem('userName'),
                 isCartVisible: false,
                 totale: 0,
+                cart: [],
 			}
 		},
 
@@ -173,8 +174,9 @@
         },
 
 		created () {
-            const cartString = localStorage.getItem('cart')
-            store.cart = cartString ? JSON.parse(cartString) : []
+            this.cartString = localStorage.getItem('cart')
+            this.cart = this.cartString ? JSON.parse(this.cartString) : []
+            store.cart = this.cartString ? JSON.parse(this.cartString) : []
 		},
 
 		methods: {
@@ -184,13 +186,31 @@
                 localStorage.removeItem('userName');
 				this.userName = localStorage.getItem('userName');
             },
+            // Aggiorna il prezzo totale quando viene cambiato il valore dell'input
+            updateTotalPrice(dish) {
+                // Assicurati che dish.quantity sia un numero valido
+                dish.quantity = parseFloat(dish.quantity);
 
-            updateTotale () {
-                this.piattiFittizi.forEach ( (piattoFittizio, costoSezione) => {
-                    costoSezione = (piattoFittizio.prezzo * piattoFittizio.quantita)
-                    this.totale += costoSezione
-                })
-            }
+                // Assicurati che dish.quantity sia maggiore o uguale a 0
+                if (isNaN(dish.quantity) || dish.quantity < 1) {
+                    dish.quantity = 1;
+                }
+
+                // Trova l'indice dell'elemento dish all'interno dell'array cart
+                const index = this.cart.findIndex(item => item.id === dish.id);
+
+                // Se l'elemento è stato trovato, aggiorna dish.quantity in cart
+                if (index !== -1) {
+                    this.cart[index].quantity = dish.quantity;
+
+                // Salva l'array cart aggiornato nel localStorage
+                localStorage.setItem('cart', JSON.stringify(this.cart));
+                const cartString = localStorage.getItem('cart')
+                store.cart = cartString ? JSON.parse(cartString) : []
+                this.cart = cartString ? JSON.parse(cartString) : []
+                console.log(store.cart)
+                }
+            },
 		}
 	}
 </script>
