@@ -102,21 +102,6 @@
                         <!-- ---User credit card info--- -->
                         <div class="credit-card-info--form">
                             <div class="input_container">
-                                <label for="fullname" class="input_label">Card holder full name</label>
-                                <input id="fullname" class="input_field" type="text" name="fullname" title="fullname" placeholder="Enter your full name">
-                            </div>
-                            <div class="input_container">
-                                <label for="cardnumber" class="input_label">Card Number</label>
-                                <input id="cardnumber" class="input_field" type="number" name="cardnumber" title="cardnumber" placeholder="0000 0000 0000 0000">
-                            </div>
-                            <div class="input_container">
-                                <label for="password_field" class="input_label">Expiry Date / CVV</label>
-                                <div class="split">
-                                    <input id="cvv" class="input_field" type="text" name="input-name" title="Expiry Date" placeholder="01/23">
-                                    <input id="cvv" class="input_field" type="number" name="cvv" title="CVV" placeholder="CVV">
-                                </div>
-                            </div>
-                            <div class="input_container">
                                 <label for="address" class="input_label">Home Address</label>
                                 <input id="address" class="input_field" type="text" name="address" title="address" placeholder="Enter your home address">
                             </div>
