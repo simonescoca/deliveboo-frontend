@@ -45,6 +45,7 @@ export function initializeDropin(clientToken,) {
             })
             .then(response => {
               // Gestisci la risposta dal server backend (es. conferma di pagamento)
+              handlePaymentSuccess(response);
               console.log('Risposta dal server:', response.data);
             })
             .catch(error => {
