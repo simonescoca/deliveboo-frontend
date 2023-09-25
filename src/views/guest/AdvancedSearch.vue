@@ -106,7 +106,9 @@
                         {{ category.name }}
                     </p>
                 </div>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+            <router-link :to="{ name: '/advanced-search/restaurant' }" class="btn btn-primary">
+                        Restaurant Menu
+            </router-link>
             </div>
             </div>
         </div>
