@@ -174,9 +174,9 @@
         },
 
 		created () {
-            this.cartString = localStorage.getItem('cart')
-            this.cart = this.cartString ? JSON.parse(this.cartString) : []
-            store.cart = this.cartString ? JSON.parse(this.cartString) : []
+            let cartString = localStorage.getItem('cart')
+            this.cart = cartString ? JSON.parse(cartString) : []
+            store.cart = cartString ? JSON.parse(cartString) : []
 		},
 
 		methods: {
@@ -188,9 +188,9 @@
             },
             // Aggiorna il contenuto del cart
             getCart(){
-                this.cartString = localStorage.getItem('cart')
-                this.cart = this.cartString ? JSON.parse(this.cartString) : []
-                store.cart = this.cartString ? JSON.parse(this.cartString) : []
+                let cartString = localStorage.getItem('cart')
+                this.cart = cartString ? JSON.parse(cartString) : []
+                store.cart = cartString ? JSON.parse(cartString) : []
             },
             // Aggiorna il prezzo totale quando viene cambiato il valore dell'input
             updateTotalPrice(dish) {
@@ -211,7 +211,7 @@
 
                 // Salva l'array cart aggiornato nel localStorage
                 localStorage.setItem('cart', JSON.stringify(this.cart));
-                const cartString = localStorage.getItem('cart')
+                let cartString = localStorage.getItem('cart')
                 store.cart = cartString ? JSON.parse(cartString) : []
                 this.cart = cartString ? JSON.parse(cartString) : []
                 console.log(store.cart)
