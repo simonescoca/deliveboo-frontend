@@ -2,106 +2,107 @@
     <header class="mt-4 mb-3 bg-primary py-4">
         <div class="d-flex justify-content-around align-items-center container">
             <div>
-                Find your favorite
-            </div>
-            <div class="my_searchbar w-50">
-                <input type="text" v-model="restCategOrName" placeholder="Restaurant name or type">
-                <i class="fa-solid fa-magnifying-glass"></i>
+                <h2 class="findYourFavorite">
+                    Find your favorite
+                </h2>
             </div>
         </div>
         <form @submit.prevent="getRestaurants()">
+            <div class="input-group mb-3 w-50 mx-auto">
+                <input type="text" v-model="restCategOrName" class="form-control" placeholder="Restaurant name or type..." @keyup.enter="getRestaurants()">
+                <button class="btn btn-outline-dark" type="submit">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
             <div class="d-flex justify-content-center align-items-center container">
-            <div class="customCheckBoxHolder">
-                <input type="checkbox" id="cCB1" class="customCheckBoxInput" name="type[]" value="Italiana">
-                <label for="cCB1" class="customCheckBoxWrapper me-2">
-                    <div class="customCheckBox">
-                        <div class="inner">Italiana</div>
-                    </div>
-                </label>
-            </div>
-            <div class="customCheckBoxHolder">
-                <input type="checkbox" id="cCB2" class="customCheckBoxInput" name="type[]" value="Francese">
-                <label for="cCB2" class="customCheckBoxWrapper">
-                    <div class="customCheckBox">
-                        <div class="inner">Francese</div>
-                    </div>
-                </label>
-            </div>
-            <div class="customCheckBoxHolder">
-                <input type="checkbox" id="cCB3" class="customCheckBoxInput" name="type[]" value="Giapponese">
-                <label for="cCB3" class="customCheckBoxWrapper">
-                    <div class="customCheckBox">
-                        <div class="inner">Giapponese</div>
-                    </div>
-                </label>
-            </div>
-            <div class="customCheckBoxHolder">
-                <input type="checkbox" id="cCB4" class="customCheckBoxInput" name="type[]" value="Cinese">
-                <label for="cCB4" class="customCheckBoxWrapper">
-                    <div class="customCheckBox">
-                        <div class="inner">Cinese</div>
-                    </div>
-                </label>
-            </div>
-            <div class="customCheckBoxHolder">
-                <input type="checkbox" id="cCB5" class="customCheckBoxInput" name="type[]" value="Americana">
-                <label for="cCB5" class="customCheckBoxWrapper">
-                    <div class="customCheckBox">
-                        <div class="inner">Americana</div>
-                    </div>
-                </label>
-            </div>
-            <div class="customCheckBoxHolder">
-                <input type="checkbox" id="cCB6" class="customCheckBoxInput" name="type[]" value="Indiano">
-                <label for="cCB6" class="customCheckBoxWrapper">
-                    <div class="customCheckBox">
-                        <div class="inner">Indiano</div>
-                    </div>
-                </label>
-            </div>
-            <div class="customCheckBoxHolder">
-                <input type="checkbox" id="cCB7" class="customCheckBoxInput" name="type[]" value="Mediterranea">
-                <label for="cCB7" class="customCheckBoxWrapper">
-                    <div class="customCheckBox">
-                        <div class="inner">Mediterranea</div>
-                    </div>
-                </label>
-            </div>
-            <div class="customCheckBoxHolder">
-                <input type="checkbox" id="cCB8" class="customCheckBoxInput" name="type[]" value="Mediorientale">
-                <label for="cCB8" class="customCheckBoxWrapper">
-                    <div class="customCheckBox">
-                        <div class="inner">Mediorientale</div>
-                    </div>
-                </label>
-            </div>
-            <div class="customCheckBoxHolder">
-                <input type="checkbox" id="cCB9" class="customCheckBoxInput" name="type[]" value="Vietnamita">
-                <label for="cCB9" class="customCheckBoxWrapper">
-                    <div class="customCheckBox">
-                        <div class="inner">Vietnamita</div>
-                    </div>
-                </label>
-            </div>
-            </div>
-            <div class="d-flex">
-                <button type="submit" class="btn btn-success mx-auto">Search it!</button>
+                <div class="customCheckBoxHolder">
+                    <input type="checkbox" id="cCB1" class="customCheckBoxInput" name="type[]" value="Italiana">
+                    <label for="cCB1" class="customCheckBoxWrapper me-2">
+                        <div class="customCheckBox">
+                            <div class="inner">Italiana</div>
+                        </div>
+                    </label>
+                </div>
+                <div class="customCheckBoxHolder">
+                    <input type="checkbox" id="cCB2" class="customCheckBoxInput" name="type[]" value="Francese">
+                    <label for="cCB2" class="customCheckBoxWrapper">
+                        <div class="customCheckBox">
+                            <div class="inner">Francese</div>
+                        </div>
+                    </label>
+                </div>
+                <div class="customCheckBoxHolder">
+                    <input type="checkbox" id="cCB3" class="customCheckBoxInput" name="type[]" value="Giapponese">
+                    <label for="cCB3" class="customCheckBoxWrapper">
+                        <div class="customCheckBox">
+                            <div class="inner">Giapponese</div>
+                        </div>
+                    </label>
+                </div>
+                <div class="customCheckBoxHolder">
+                    <input type="checkbox" id="cCB4" class="customCheckBoxInput" name="type[]" value="Cinese">
+                    <label for="cCB4" class="customCheckBoxWrapper">
+                        <div class="customCheckBox">
+                            <div class="inner">Cinese</div>
+                        </div>
+                    </label>
+                </div>
+                <div class="customCheckBoxHolder">
+                    <input type="checkbox" id="cCB5" class="customCheckBoxInput" name="type[]" value="Americana">
+                    <label for="cCB5" class="customCheckBoxWrapper">
+                        <div class="customCheckBox">
+                            <div class="inner">Americana</div>
+                        </div>
+                    </label>
+                </div>
+                <div class="customCheckBoxHolder">
+                    <input type="checkbox" id="cCB6" class="customCheckBoxInput" name="type[]" value="Indiano">
+                    <label for="cCB6" class="customCheckBoxWrapper">
+                        <div class="customCheckBox">
+                            <div class="inner">Indiano</div>
+                        </div>
+                    </label>
+                </div>
+                <div class="customCheckBoxHolder">
+                    <input type="checkbox" id="cCB7" class="customCheckBoxInput" name="type[]" value="Mediterranea">
+                    <label for="cCB7" class="customCheckBoxWrapper">
+                        <div class="customCheckBox">
+                            <div class="inner">Mediterranea</div>
+                        </div>
+                    </label>
+                </div>
+                <div class="customCheckBoxHolder">
+                    <input type="checkbox" id="cCB8" class="customCheckBoxInput" name="type[]" value="Mediorientale">
+                    <label for="cCB8" class="customCheckBoxWrapper">
+                        <div class="customCheckBox">
+                            <div class="inner">Mediorientale</div>
+                        </div>
+                    </label>
+                </div>
+                <div class="customCheckBoxHolder">
+                    <input type="checkbox" id="cCB9" class="customCheckBoxInput" name="type[]" value="Vietnamita">
+                    <label for="cCB9" class="customCheckBoxWrapper">
+                        <div class="customCheckBox">
+                            <div class="inner">Vietnamita</div>
+                        </div>
+                    </label>
+                </div>
             </div>
         </form>
     </header>
     <main class="d-flex flex-wrap justify-content-around align-items-center container">
-        <div v-for="initialRestaurant in initialRestaurants" class="mb-4">
+        <div v-for="restaurant in restaurants" class="mb-4">
             <div class="card" style="width: 24rem;">
-                <img src="" class="card-img-top" :alt="initialRestaurant.name">
+                <img :src="restaurant.image" class="card-img-top" :alt="restaurant.name">
                 <div class="card-body">
                 <h5 class="card-title">
-                    {{ initialRestaurant.name }}
+                    {{ restaurant.name }}
                 </h5>
                 <p class="card-text">
-                    {{ initialRestaurant.city + ", " + initialRestaurant.address }}
+                    {{ restaurant.city + ", " + restaurant.address }}
                 </p>
                 <div class="d-flex align-items-center my_categories">
-                    <p v-for="category in initialRestaurant.types" class="m-0 ms-2 mb-2 card-text">
+                    <p v-for="category in restaurant.types" class="m-0 ms-2 mb-2 card-text">
                         {{ category.name }}
                     </p>
                 </div>
@@ -124,7 +125,7 @@
                 checkSelect: [],
                 restCategOrName: '',
                 apiUrl: 'http://127.0.0.1:8000/api',
-                initialRestaurants: [],
+                restaurants: [],
                 categories: [
                     'Italiana',
                     'Francese',
@@ -159,7 +160,7 @@
 		methods: {
             getRestaurants(){
                 const selectedTypes = Array.from(document.querySelectorAll('input[name="type[]"]:checked')).map(input => input.value);
-                console.log(selectedTypes)
+                // console.log(selectedTypes)
                 axios.get(`${this.apiUrl}/restaurants`,{
                     params: {
                         name: this.restCategOrName,
@@ -167,12 +168,12 @@
                     }
                 })
                 .then(response => {
-                    console.log(response)
+                    console.log(response.data.results.data)
                     console.log(selectedTypes[0])
                     if(selectedTypes[0] === undefined){
-                        this.initialRestaurants = response.data.results.data
+                        this.restaurants = response.data.results.data
                     }else{
-                        this.initialRestaurants = response.data.results
+                        this.restaurants = response.data.results
                     }
                 })
                 .catch(error => {
@@ -199,6 +200,13 @@
 <style lang="scss" scoped>
 
     @use '../../styles/variables' as *;
+    @use '../../styles/general.scss' as *;
+
+    .findYourFavorite {
+        font-family: 'Borel', cursive;
+        color: white;
+    }
+
     .my_searchbar {
         background-color: $grey;
         padding: 10px 5px;
@@ -293,4 +301,17 @@
   transform: translateY(-2px);
 }
 
+.form-control:focus {
+  color: var(--bs-body-color);
+  background-color: var(--bs-body-bg);
+  border-color: #000;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.25);
+}
+
+.card img {
+    object-fit: cover;
+    object-position: center;
+    height: 20rem;
+}
 </style>
