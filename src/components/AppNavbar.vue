@@ -65,7 +65,7 @@
                 </router-link>
 
                 <!-- ? cart-button -->
-                <div class="d-flex justify-content-center align-items-center bg-danger py-1 px-2 rounded" @click="getCart(), isCartVisible = true">
+                <div class="d-flex justify-content-center align-items-center bg-danger py-1 px-2 rounded" @click="getCart(), calculateGrandTotal(), isCartVisible = true">
                     <span>
                         <i class="fa-solid fa-cart-shopping"></i>
                     </span>
@@ -113,7 +113,7 @@
                                     +
                                 </div>
                             </div> -->
-                            <input type="number" v-model="dish.quantity" @input="updateTotalPrice(dish)">
+                            <input type="number" v-model="dish.quantity" @input="updateTotalPrice(dish), calculateGrandTotal()">
                         </div>
                     </div>
                 </div>
@@ -216,6 +216,14 @@
                 this.cart = cartString ? JSON.parse(cartString) : []
                 console.log(store.cart)
                 }
+            },
+            calculateGrandTotal() {
+                    this.totale = 0;
+                // Calcola il totale sommando i prezzi totali di tutti i piatti
+                for (const dish of this.cart) {
+                    this.totale += dish.price * dish.quantity;
+                }
+                return this.totale.toFixed(2); // Usiamo toFixed per avere due decimali
             },
 		}
 	}
