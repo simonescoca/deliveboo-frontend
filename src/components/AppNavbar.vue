@@ -278,7 +278,7 @@
         .myCart {
             height: 100vh;
             transition: all .3s ease-in-out;
-            z-index: 2;
+            z-index: 3;
         }
 
         .w-0 {
