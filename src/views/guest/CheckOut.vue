@@ -127,7 +127,7 @@
                         </div>
                         
                     </form>
-
+                    <input type="hidden" id="amountInput" :value=amount>
                     <div id="dropin-container"></div>
                     <button id="submit-button" class="purchase--btn"  >Checkout</button>
                         <!-- ---Checkout button--- -->
@@ -189,7 +189,7 @@
 		},
 
 		created () {
-
+            
 		},
 
 		methods: {
