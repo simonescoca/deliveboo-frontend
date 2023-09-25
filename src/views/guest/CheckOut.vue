@@ -189,7 +189,7 @@
                     axios.post('http://127.0.0.1:8000/api/orders', {
                         total_price:this.amount,
                         customer_name:'giacobbo',
-                        customer_address:'via de tu madre',
+                        customer_address:'via alessandri',
                         phone_number:'334352635267',
                         restaurant_id: this.restaurant_id,
                         status:this.paymentSuccessful,
