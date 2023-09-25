@@ -88,6 +88,7 @@
 				resCategories: [],
 				activeCategory: [],
 				showDescription: {},
+				selectedRestaurant: [],
 			}
 		},
 
@@ -104,13 +105,15 @@
 		},
 
 		created () {
+			this.selectedRestaurant = localStorage.getItem('selectedRestaurant')
+			console.log(this.selectedRestaurant)
 			this.getRestaurantInfo()
 		},
 
 		methods: {
 			// --Funzione x prendere i dati dal ristorante---
 			getRestaurantInfo() {
-            axios.get(`${this.apiUrl}restaurants/1`)
+            axios.get(`${this.apiUrl}restaurants/${this.selectedRestaurant}`)
                 .then(response => {
 					console.log(response)
 					this.resData = response.data.results.restaurant
