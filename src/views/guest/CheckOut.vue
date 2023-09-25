@@ -125,12 +125,16 @@
                                 <input id="phone" class="input_field" type="text" name="phone" title="phone" placeholder="Enter your phone number">
                             </div>
                         </div>
+                        
+                    </form>
+
+                    <div id="dropin-container"></div>
+                    <button id="submit-button" class="purchase--btn"  >Checkout</button>
                         <!-- ---Checkout button--- -->
-                            <div id="dropin-container"></div>
-                            <button class="purchase--btn" id="submit-button" >Checkout</button>
                             
                             
-                        </form>
+                            
+                        
                     </div>
                 </div>
 			</div>
@@ -152,7 +156,6 @@
         
 		data() {
 			return {
-				apiUrl: 'http://127.0.0.1:8000/api/',
 				resDishes: [],
                 cart: [],
                 shippingCost: 2,
@@ -182,7 +185,7 @@
             this.clientToken = response.data.clientToken;
             console.log(this.clientToken);
             const dropinInstance = initializeDropin(this.clientToken);
-            const SendNonceToServer = SendNonceToServer(paymentMethodNonce,this.amount);
+            
     });
 
 		},
