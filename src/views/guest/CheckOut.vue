@@ -197,7 +197,7 @@
                     }).then(response => {
 
                         if (response.status === 200 || response.status === 204) {
-                           console.log("a zi ma jacopo è troppo forte. L'ORDINE E' RIUSCITO ZIOOOOOOOOOO") 
+                           console.log("ordine riuscito") 
                      }   
                     
                     console.log(response)
