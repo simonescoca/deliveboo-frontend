@@ -30,11 +30,12 @@ export function initializeDropin(clientToken) {
           
           const paymentMethodNonce = payload.nonce;
 
-          function SendNonceToServer(paymentMethodNonce) {
+          function SendNonceToServer(paymentMethodNonce,amount) {
             // Esegui una richiesta HTTP al tuo server backend per inviare il nonce
             // e completare la transazione
             axios.post('http://127.0.0.1:8000/api/sendNonce', {
-              nonce: paymentMethodNonce
+              nonce: paymentMethodNonce,
+              amount: amount
               // Altri dati necessari per il pagamento, se del caso
             })
             .then(response => {
