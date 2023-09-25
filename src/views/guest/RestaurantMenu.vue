@@ -167,6 +167,7 @@
 			},
 			// --Funzione per aggiungere un piatto al carrello--
             addToCart(dish) {
+				console.log(dish)
                 // Ottenere il carrello dal localStorage come stringa JSON o inizializzarlo come array vuoto se non esiste
                 const cartString = localStorage.getItem('cart');
                 const cart = cartString ? JSON.parse(cartString) : [];
@@ -185,7 +186,7 @@
                     existingDish.quantity += 1;
                 } else {
                     // Se l'elemento non esiste nel carrello, aggiungilo come oggetto
-                    cart.push({ id: dish.id, name: dish.name, quantity: 1, price: dish.price, restaurant_id: dish.restaurant_id });
+                    cart.push({ id: dish.id, name: dish.name, quantity: 1, price: dish.price, restaurant_id: dish.restaurant_id, photo: dish.photo });
                 }
 
                 // Salva il carrello aggiornato nel localStorage come stringa JSON
