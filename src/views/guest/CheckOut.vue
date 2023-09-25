@@ -102,21 +102,6 @@
                         <!-- ---User credit card info--- -->
                         <div class="credit-card-info--form">
                             <div class="input_container">
-                                <label for="fullname" class="input_label">Card holder full name</label>
-                                <input id="fullname" class="input_field" type="text" name="fullname" title="fullname" placeholder="Enter your full name">
-                            </div>
-                            <div class="input_container">
-                                <label for="cardnumber" class="input_label">Card Number</label>
-                                <input id="cardnumber" class="input_field" type="number" name="cardnumber" title="cardnumber" placeholder="0000 0000 0000 0000">
-                            </div>
-                            <div class="input_container">
-                                <label for="password_field" class="input_label">Expiry Date / CVV</label>
-                                <div class="split">
-                                    <input id="cvv" class="input_field" type="text" name="input-name" title="Expiry Date" placeholder="01/23">
-                                    <input id="cvv" class="input_field" type="number" name="cvv" title="CVV" placeholder="CVV">
-                                </div>
-                            </div>
-                            <div class="input_container">
                                 <label for="address" class="input_label">Home Address</label>
                                 <input id="address" class="input_field" type="text" name="address" title="address" placeholder="Enter your home address">
                             </div>
@@ -140,14 +125,10 @@
 			</div>
         </div>
     </div>
-    <!-- ---Parte di testing per la store del carrello--- -->
-    <div class="testing mx-5">
-        <p class="btn btn-success mx-1" @click="addToCart(dish)" v-for="dish in resDishes">Aggiungi {{ dish.name }}</p>
-    </div>
 </template>
 
 <script>
-	// import {store} from "../store.js";
+	import {store} from "../../store.js";
 	import axios from "axios";
     import { initializeDropin } from '../../dropin.js';
 	export default {
@@ -156,6 +137,7 @@
         
 		data() {
 			return {
+                store,
 				resDishes: [],
                 cart: [],
                 shippingCost: 2,
@@ -166,7 +148,7 @@
                 expirationDate: "",
                 cvv: "",
                 clientToken:"",
-                paymentSuccessful: false,
+                amount:"",paymentSuccessful: false,
 			}
 		},
 
@@ -176,11 +158,10 @@
 		},
 
 		mounted () {
-            this.finalPrice();
-
-            localStorage.removeItem('cart')
-            this.getRestaurantInfo()
-            console.log(this.cart)
+            // --Prendo i dati del cart dallo storage--
+            let cartString = localStorage.getItem('cart')
+            this.cart = cartString ? JSON.parse(cartString) : []
+            store.cart = cartString ? JSON.parse(cartString) : []
 
             axios.get('http://127.0.0.1:8000/api/getClientToken')
             .then(response => {
@@ -284,17 +265,6 @@
                 this.amount = (parseFloat(this.grandTotal) + this.shippingCost).toFixed(2);
                 return this.amount;
             },
-            // --Funzione x prendere i dati dal ristorante---
-			getRestaurantInfo() {
-            axios.get(`${this.apiUrl}restaurants/1`)
-                .then(response => {
-					console.log(response)
-					this.resDishes = response.data.results.restaurant.dishes
-                })
-                .catch(error => {
-                    console.log(error)
-                });
-			},
 		}
 	}
 </script>
