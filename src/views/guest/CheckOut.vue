@@ -126,9 +126,10 @@
                             </div>
                         </div>
                         <!-- ---Checkout button--- -->
-                            <button class="purchase--btn">Checkout</button>
                             <div id="dropin-container"></div>
-                            <button id="submit-button">Request payment method</button>
+                            <button class="purchase--btn" id="submit-button" >Checkout</button>
+                            
+                            
                         </form>
                     </div>
                 </div>
@@ -162,12 +163,10 @@
                 expirationDate: "",
                 cvv: "",
                 clientToken:"",
+                amount:""
 			}
 		},
 
-		components: {
-    PaymentForm
-},
 
 		props: {
 
@@ -183,6 +182,7 @@
             this.clientToken = response.data.clientToken;
             console.log(this.clientToken);
             const dropinInstance = initializeDropin(this.clientToken);
+            const SendNonceToServer = SendNonceToServer(paymentMethodNonce,this.amount);
     });
 
 		},
@@ -269,7 +269,8 @@
             },
             finalPrice() {
                 // Calcola il totale finale sommando il GrandTotal e il costo di spedizione
-                return (parseFloat(this.grandTotal) + this.shippingCost).toFixed(2);
+                this.amount = (parseFloat(this.grandTotal) + this.shippingCost).toFixed(2);
+                return this.amount;
             },
             // --Funzione x prendere i dati dal ristorante---
 			getRestaurantInfo() {
