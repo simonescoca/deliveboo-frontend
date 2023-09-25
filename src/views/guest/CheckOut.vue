@@ -127,6 +127,8 @@
                         </div>
                         <!-- ---Checkout button--- -->
                             <button class="purchase--btn">Checkout</button>
+                            <div id="dropin-container"></div>
+                            <button id="submit-button">Request payment method</button>
                         </form>
                     </div>
                 </div>
@@ -142,9 +144,14 @@
 <script>
 	// import {store} from "../store.js";
 	import axios from "axios";
-
+    import PaymentForm from "../PaymentForm.vue";
+    import { initializeDropin } from '../../dropin.js';
 	export default {
 		name: 'CheckOut',
+        
+        components:{
+           PaymentForm
+        },
 		data() {
 			return {
 				apiUrl: 'http://127.0.0.1:8000/api/',
@@ -152,12 +159,18 @@
                 cart: [],
                 shippingCost: 2,
                 grandTotal: 0,
+                apiUrl: "http://127.0.0.1:8000/api/",
+                amount: "",
+                cardNumber: "",
+                expirationDate: "",
+                cvv: "",
+                clientToken:"",
 			}
 		},
 
 		components: {
-
-		},
+    PaymentForm
+},
 
 		props: {
 
@@ -167,6 +180,14 @@
             localStorage.removeItem('cart')
             this.getRestaurantInfo()
             console.log(this.cart)
+
+            axios.get('http://127.0.0.1:8000/api/getClientToken')
+            .then(response => {
+            this.clientToken = response.data.clientToken;
+            console.log(this.clientToken);
+            const dropinInstance = initializeDropin(this.clientToken);
+    });
+
 		},
 
 		created () {
