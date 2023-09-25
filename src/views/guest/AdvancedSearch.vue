@@ -106,7 +106,7 @@
                         {{ category.name }}
                     </p>
                 </div>
-            <router-link :to="{ name: '/advanced-search/restaurant' }" class="btn btn-primary" @click="saveSelectedRestaurant(restaurant.id)">
+            <router-link :to="{ name: 'restaurant-menu' }" class="btn btn-primary">
                         Restaurant Menu
             </router-link>
             </div>
