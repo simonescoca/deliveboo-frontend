@@ -127,7 +127,7 @@
                         </div>
                         
                     </form>
-
+                    <input type="hidden" id="amountInput" :value=amount>
                     <div id="dropin-container"></div>
                     <button id="submit-button" class="purchase--btn"  >Checkout</button>
                         <!-- ---Checkout button--- -->
@@ -166,7 +166,7 @@
                 expirationDate: "",
                 cvv: "",
                 clientToken:"",
-                amount:""
+                
 			}
 		},
 
@@ -176,6 +176,8 @@
 		},
 
 		mounted () {
+            this.finalPrice();
+
             localStorage.removeItem('cart')
             this.getRestaurantInfo()
             console.log(this.cart)
@@ -191,7 +193,7 @@
 		},
 
 		created () {
-
+            
 		},
 
 		methods: {
