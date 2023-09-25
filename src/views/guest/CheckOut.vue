@@ -140,10 +140,6 @@
 			</div>
         </div>
     </div>
-    <!-- ---Parte di testing per la store del carrello--- -->
-    <div class="testing mx-5">
-        <p class="btn btn-success mx-1" @click="addToCart(dish)" v-for="dish in resDishes">Aggiungi {{ dish.name }}</p>
-    </div>
 </template>
 
 <script>
@@ -177,8 +173,6 @@
 		},
 
 		mounted () {
-            // --Prendo i dati del ristorante dal backend--
-            this.getRestaurantInfo()
             // --Prendo i dati del cart dallo storage--
             let cartString = localStorage.getItem('cart')
             this.cart = cartString ? JSON.parse(cartString) : []
@@ -199,36 +193,6 @@
 		},
 
 		methods: {
-            addToCart(dish) {
-                // Ottenere il carrello dal localStorage come stringa JSON o inizializzarlo come array vuoto se non esiste
-                const cartString = localStorage.getItem('cart');
-                const cart = cartString ? JSON.parse(cartString) : [];
-
-                // Verifica se l'elemento è già nel carrello
-                const existingDish = cart.find(cartDish => cartDish.id === dish.id);
-
-                // Verifica se l'elemento appartiene allo stesso negozio degli altri elementi nel carrello
-                if (existingDish && existingDish.restaurant_id !== dish.restaurant_id) {
-                    alert('Non puoi aggiungere elementi da ristoranti diversi nello stesso carrello.');
-                    return;
-                }
-
-                if (existingDish) {
-                    // Se l'elemento esiste già nel carrello, aumenta la quantità
-                    existingDish.quantity += 1;
-                } else {
-                    // Se l'elemento non esiste nel carrello, aggiungilo come oggetto
-                    cart.push({ id: dish.id, name: dish.name, quantity: 1, price: dish.price, restaurant_id: dish.restaurant_id });
-                }
-
-                // Salva il carrello aggiornato nel localStorage come stringa JSON
-                localStorage.setItem('cart', JSON.stringify(cart));
-
-                // Assegna il carrello come array a this.cart
-                this.cart = cart;
-                console.log(this.cart)
-                alert('Elemento aggiunto al carrello!');
-            },
             // Aggiorna il prezzo totale quando viene cambiato il valore dell'input
             updateTotalPrice(dish) {
                 // Assicurati che dish.quantity sia un numero valido
@@ -279,17 +243,6 @@
                 this.amount = (parseFloat(this.grandTotal) + this.shippingCost).toFixed(2);
                 return this.amount;
             },
-            // --Funzione x prendere i dati dal ristorante---
-			getRestaurantInfo() {
-            axios.get(`${this.apiUrl}restaurants/1`)
-                .then(response => {
-					console.log(response)
-					this.resDishes = response.data.results.restaurant.dishes
-                })
-                .catch(error => {
-                    console.log(error)
-                });
-			},
 		}
 	}
 </script>
