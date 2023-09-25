@@ -144,7 +144,6 @@
 <script>
 	// import {store} from "../store.js";
 	import axios from "axios";
-    import PaymentForm from "../PaymentForm.vue";
     import { initializeDropin } from '../../dropin.js';
 	export default {
 		name: 'CheckOut',
