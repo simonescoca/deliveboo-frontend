@@ -65,7 +65,7 @@
                 </router-link>
 
                 <!-- ? cart-button -->
-                <div class="d-flex justify-content-center align-items-center bg-danger py-1 px-2 rounded" @click="isCartVisible = true">
+                <div class="d-flex justify-content-center align-items-center bg-danger py-1 px-2 rounded" @click="getCart(), isCartVisible = true">
                     <span>
                         <i class="fa-solid fa-cart-shopping"></i>
                     </span>
@@ -185,6 +185,12 @@
                 localStorage.removeItem('userId');
                 localStorage.removeItem('userName');
 				this.userName = localStorage.getItem('userName');
+            },
+            // Aggiorna il contenuto del cart
+            getCart(){
+                this.cartString = localStorage.getItem('cart')
+                this.cart = this.cartString ? JSON.parse(this.cartString) : []
+                store.cart = this.cartString ? JSON.parse(this.cartString) : []
             },
             // Aggiorna il prezzo totale quando viene cambiato il valore dell'input
             updateTotalPrice(dish) {
