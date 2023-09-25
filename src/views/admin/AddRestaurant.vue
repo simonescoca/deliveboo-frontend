@@ -1,8 +1,8 @@
 <template>
     <div class="container">
-        <h3>
+        <h1 class="my-3">
             Admin - Aggiungi un ristorante
-        </h3>
+        </h1>
         <div v-if="isUpdateSuccess" class="alert alert-success">
             La creazione del tuo ristorante è andata a buon fine!
         </div>
@@ -133,4 +133,12 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.container {
+    color: rgba(0, 0, 0, 0.732);
+}
+
+.card {
+    color: rgba(0, 0, 0, 0.732)
+}
+</style>

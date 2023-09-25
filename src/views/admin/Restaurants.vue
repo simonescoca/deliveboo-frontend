@@ -8,12 +8,15 @@
                 <i class="fa-solid fa-plus"></i>
             </router-link>
         </header>
-        <h3>
-            I tuoi ristoranti:
-        </h3>
+        <h1 class="text-center my-3 fw-bold">
+            I tuoi ristoranti
+        </h1>
+        <div v-if="isDeleteSuccess" class="alert alert-success">
+            Il ristorante è stato eliminato.
+        </div>
         <div class="my_restaurants container">
             <div class="row">
-                <div v-for="restaurant, index in restaurants" :key="restaurant.inHover = false"
+                <div v-for="restaurant in restaurants" :key="restaurant.inHover = false"
                     @mouseenter="restaurant.inHover = true" @mouseleave="restaurant.inHover = false"
                     class="d-flex position-relative my_restaurant col-12 my-3">
                     <div class="my_r-img">
@@ -28,23 +31,32 @@
                         </ul>
                     </div>
 
-                    <button @click="softDeleteItem(restaurant.id)"
+                    <button @click="itemToSoftDelete(restaurant.id)" :disabled="showDeleteConfirmationModal"
                         class="my_del-btn btn d-flex justify-content-center align-items-center">
                         <i class="fa-solid fa-xmark fa-xs"></i>
                     </button>
-                    <div class="position-relative d-flex flex-column ms-auto justify-content-evenly">
+
+                    <div class="position-relative d-flex flex-column ms-auto justify-content-evenly"
+                        v-if="!showDeleteConfirmationModal">
                         <router-link v-for="link in links" :to="{ name: link.routeName }" :class="link.class"
                             @click="store.selectedRes = restaurant.id">
                             <i class="position-absolute fa-solid my-btn"
                                 :class="link.icon, restaurant.inHover ? 'active' : 'invisible'"></i>
                         </router-link>
                     </div>
+
                 </div>
             </div>
         </div>
-        <div v-if="isDeleteSuccess" class="alert alert-success">
-            La modifica è andata a buon fine!
+
+        <div class="delete-modal position-fixed card p-3 bg-dark" v-if="showDeleteConfirmationModal">
+            <p>Spostare nel cestino?</p>
+            <div class="btn-group d-flex justify-content-evenly">
+                <button type="delete" @click="softDeleteItem" class="btn btn-modal">Sì</button>
+                <button @click="showDeleteConfirmationModal = false" class="btn btn-modal">Annulla</button>
+            </div>
         </div>
+
     </div>
 </template>
 
@@ -58,6 +70,8 @@ export default {
         return {
             store,
             isDeleteSuccess: false,
+            showDeleteConfirmationModal: false,
+            restaurantToDelete: null,
             apiUrl: 'http://127.0.0.1:8000/api/',
             userToken: '',
             userId: '',
@@ -115,9 +129,10 @@ export default {
             router.push({ name: 'profile' })
         },
 
-        softDeleteItem(restaurantId) {
-            //const itemId = 1;  L'id dell'elemento da eliminare
-            axios.delete(`${this.apiUrl}${this.userId}/restaurants/${restaurantId}`)
+        softDeleteItem() {
+
+            this.showDeleteConfirmationModal = false;
+            axios.delete(`${this.apiUrl}${this.userId}/restaurants/${this.restaurantToDelete}`)
                 .then(response => {
                     // Gestisci la risposta dal backend (ad esempio, aggiorna lo stato della vista)
                     if (response.status === 200 || response.status === 204) {
@@ -131,9 +146,16 @@ export default {
                     this.getRestaurants();
                 })
                 .catch(error => {
-                    // Gestisci eventuali errori
+                    console.log(error)
                 });
 
+
+
+        },
+
+        itemToSoftDelete(restaurantId) {
+            this.showDeleteConfirmationModal = true;
+            this.restaurantToDelete = restaurantId;
         },
 
         getRestaurants() {
@@ -152,6 +174,7 @@ export default {
                     console.log(error)
                 });
         },
+
     }
 }
 </script>
@@ -162,7 +185,7 @@ header {
         border: 1px solid rgba(0, 0, 0, 0.223);
         width: 100px;
         position: fixed;
-        top: 14%;
+        top: 16%;
         left: -4.5%;
         transition: all 500ms;
 
@@ -177,7 +200,7 @@ header {
     }
 
     .my_btn.add {
-        top: 20%;
+        top: 23%;
 
         &:hover {
             background-color: rgba(110, 174, 206, 0.447);
@@ -191,6 +214,9 @@ header {
     }
 }
 
+h1 {
+    color: rgba(0, 0, 0, 0.732);
+}
 
 .my_restaurants {
     gap: 3rem;
@@ -257,5 +283,23 @@ header {
             transition: all 1s ease-out;
         }
     }
+}
+
+.delete-modal {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 33%;
+    color: white;
+
+    .btn-modal {
+        border: 1px solid #de4a3a;
+        color: white;
+
+        &:hover {
+            background-color: #de4a3a;
+        }
+    }
+
 }
 </style>

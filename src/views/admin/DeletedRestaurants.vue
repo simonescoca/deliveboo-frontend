@@ -1,30 +1,31 @@
 <template>
-    <h3>
-        Deleted Restaurants
-    </h3>
+    <h1 class="text-center my-3 fw-bold">
+        Ristoranti eliminati
+    </h1>
+    <p v-if="deletedRestaurants.length === 0" class="text-center fs-4">Non ci sono ristoranti nel cestino.</p>
     <div class="container">
         <div class="row justify-content-center">
             <div v-if="isRestoreSuccess" class="alert alert-success">
                 Il ristorante è stato ripristinato correttamente!
             </div>
-            <div class="col-12">
-                <table class="table table-dark table-striped table-hover">
+            <div class="col-12" v-if="deletedRestaurants.lenght > 0">
+                <table class="table table-striped table-hover">
                     <thead>
                         <tr>
                             <th scope="col">
-                                Name
+                                Nome
                             </th>
                             <th scope="col">
-                                Address
+                                Indirizzo
                             </th>
                             <th scope="col">
-                                City
+                                Città
                             </th>
                             <th scope="col">
-                                Types
+                                Tipologia
                             </th>
                             <th scope="col">
-                                Actions
+
                             </th>
                         </tr>
                     </thead>
@@ -46,10 +47,10 @@
                             <td>
                                 <button type="submit" class="btn btn-sm btn-warning"
                                     @click="restoreItem(deletedRestaurant.id)">
-                                    Restore
+                                    Ripristina
                                 </button>
                                 <button type="submit" class="ms-2 btn btn-sm btn-danger">
-                                    Obliterate
+                                    Elimina
                                 </button>
                             </td>
                         </tr>
@@ -138,4 +139,17 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+table.table {
+
+    --bs-table-bg: #ffaa91;
+    --bs-table-border-color: rgb(252, 186, 186);
+    --bs-table-accent-bg: transparent;
+    --bs-table-striped-color: ;
+    --bs-table-striped-bg: #ff9474;
+    --bs-table-active-color: ;
+    --bs-table-hover-color: var(--bs-body-color);
+    --bs-table-hover-bg: #fc8c69;
+
+}
+</style>

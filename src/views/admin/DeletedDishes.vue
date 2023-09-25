@@ -1,28 +1,28 @@
 <template>
     <div class="container">
-        <h3 class="text-center my-3">
-            Deleted Dishes
-        </h3>
+        <h1 class="text-center my-3 fw-bold">
+            Piatti eliminati
+        </h1>
+        <p v-if="deletedDishes.length === 0" class="text-center fs-4">Non ci sono piatti nel cestino.</p>
         <div class="row justify-content-center">
             <div v-if="isRestoreSuccess" class="alert alert-success">
                 Il piatto è stato ripristinato correttamente!
             </div>
-            <div class="col-12">
+            <div class="col-12" v-if="deletedDishes.length > 0">
                 <table class="table table-striped table-hover">
                     <thead class="header-table">
                         <tr>
                             <th scope="col">
-                                Name
-                            </th>
-
-                            <th scope="col">
-                                Price
+                                Nome
                             </th>
                             <th scope="col">
-                                Course
+                                Prezzo
+                            </th>
+                            <th scope="col">
+                                Portata
                             </th>
                             <th scope="col" class="text-center">
-                                Actions
+
                             </th>
                         </tr>
                     </thead>
@@ -43,10 +43,10 @@
                             </td>
                             <td class="d-flex justify-content-around">
                                 <button type="submit" class="btn btn-sm btn-warning" @click="restoreItem(deletedDish.id)">
-                                    Restore
+                                    Ripristina
                                 </button>
                                 <button button type=" submit" class=" btn btn-sm btn-danger">
-                                    Obliterate
+                                    Elimina
                                 </button>
                             </td>
                         </tr>

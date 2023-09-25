@@ -27,15 +27,16 @@
                         {{ dish.description }}
                     </div>
                     <div class="btn-group">
-                        <button class="btn" @click="dishInfo(dish.id)">
+                        <button class="btn" @click="dishInfo(dish.id)" :disabled="showDeleteConfirmationModal">
                             <i class="fa-solid fa-circle-info"></i>
                         </button>
-                        <router-link :to="{ name: 'editDish' }" @click="store.selectedDish = dish.id">
+                        <router-link v-if="!showDeleteConfirmationModal" :to="{ name: 'editDish' }"
+                            @click="store.selectedDish = dish.id">
                             <button class="btn mx-3">
                                 <i class="fa-solid fa-pen"></i>
                             </button>
                         </router-link>
-                        <button @click="softDeleteItem(dish.id)" class="btn">
+                        <button @click="itemToSoftDelete(dish.id)" class="btn" :disabled="showDeleteConfirmationModal">
                             <i class="fa-solid fa-xmark"></i>
                         </button>
                     </div>
@@ -63,6 +64,13 @@
                 </div>
             </div>
         </div>
+        <div class="delete-modal bg-dark position-fixed card p-3" v-if="showDeleteConfirmationModal">
+            <p class="text-white">Spostare nel cestino?</p>
+            <div class="btn-group d-flex justify-content-evenly">
+                <button type="delete" @click="softDeleteItem" class="btn btn-modal">Sì</button>
+                <button @click="showDeleteConfirmationModal = false" class="btn">Annulla</button>
+            </div>
+        </div>
 
     </div>
 </template>
@@ -86,6 +94,8 @@ export default {
             infotoggle: false,
             infodish: [],
             selectedRes: null,
+            showDeleteConfirmationModal: false,
+            dishToDelete: null,
 
         }
     },
@@ -115,6 +125,7 @@ export default {
     methods: {
 
         getDishes() {
+            this.showDeleteConfirmationModal = false;
             axios.get(`${this.apiUrl}${this.userId}/restaurants/${this.selectedRes}`, {
                 headers: {
                     'Authorization': `Bearer ${this.userToken}`
@@ -146,9 +157,11 @@ export default {
                 });
             this.infotoggle = !this.infotoggle
         },
-        softDeleteItem(dishId) {
-            store.deletedItemId = dishId;
-            axios.delete(`${this.apiUrl}${this.userId}/restaurants/${this.selectedRes}/dishes/${dishId}`)
+        softDeleteItem() {
+
+            this.showDeleteConfirmationModal = false;
+
+            axios.delete(`${this.apiUrl}${this.userId}/restaurants/${this.selectedRes}/dishes/${this.dishToDelete}`)
                 .then(response => {
                     // Gestisci la risposta dal backend (ad esempio, aggiorna lo stato della vista)
                     if (response.status === 200 || response.status === 204) {
@@ -167,6 +180,10 @@ export default {
                 });
 
         },
+        itemToSoftDelete(dishId) {
+            this.showDeleteConfirmationModal = true;
+            this.dishToDelete = dishId;
+        },
     }
 }
 </script>
@@ -183,6 +200,7 @@ header {
         border: 1px solid rgba(0, 0, 0, 0.223);
         width: 100px;
         position: fixed;
+        top: 16%;
         left: -4.5%;
         transition: all 500ms;
 
@@ -198,7 +216,7 @@ header {
     }
 
     .my_btn.add {
-        top: 20%;
+        top: 23%;
 
         &:hover {
             background-color: rgba(110, 174, 206, 0.447);
@@ -286,9 +304,7 @@ header {
     transition: scale 1s;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 
-    &:hover {
-        scale: 1.05;
-    }
+
 }
 
 .my_r-img {
@@ -304,5 +320,14 @@ header {
         border-radius: 5px;
 
     }
+}
+
+.delete-modal {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 33%;
+
+
 }
 </style>
