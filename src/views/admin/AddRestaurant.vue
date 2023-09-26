@@ -9,13 +9,34 @@
         <div v-if="isUpdateFailure" class="alert alert-danger">
             La creazione del tuo ristorante non è andata a buon fine. Si è verificato un errore.
         </div>
-        <form @submit.prevent="createNewRestaurant">
-            <div v-for="formSection in formSections" class="mb-3">
-                <label :for="formSection" class="form-label">
-                    {{ formSection }}
+        <form @submit.prevent="createNewRestaurant" enctype="multipart/form-data">
+            <!-- <div v-for="formSection in formSections" class="mb-3">
+                <label :for="formSection.name" class="form-label">
+                    {{ formSection.name }}
                 </label>
-                <input type="text" class="form-control" :id="formSection" v-model="newRestaurant[formSection]"
-                    :aria-describedby="formSection">
+                <input :type="formSection.input" class="form-control" :id="formSection.name"
+                    v-model="newRestaurant[formSection.name]" :aria-describedby="formSection.name">
+            </div> -->
+            <div class="mb-3">
+                <label for="name">
+                    Nome
+                </label>
+                <input type="text" name="name" id="name" class="form-control mb-3" v-model="newRestaurant.name">
+
+                <label for="address">
+                    Indirizzo
+                </label>
+                <input type="text" name="address" id="address" class="form-control mb-3" v-model="newRestaurant.address">
+
+                <label for="city">
+                    Locazione (Città)
+                </label>
+                <input type="text" name="city" id="city" class="form-control mb-3" v-model="newRestaurant.city">
+
+                <label for="image">
+                    Carica un'immagine
+                </label>
+                <input type="file" name="image" id="image" class="form-control mb-3" @change="handleImage">
             </div>
 
 
@@ -32,7 +53,7 @@
                 </div>
             </div>
 
-            <button type="submit" class="my-3 btn btn-primary">
+            <button type="submit" class="my-3 btn d-flex mx-auto px-3">
                 Crea
             </button>
         </form>
@@ -51,11 +72,25 @@ export default {
             userToken: '',
             userId: '',
             userName: '',
-            formSections: [
-                'Nome',
-                'Indirizzo',
-                'Locazione (città)',
-            ],
+            // formSections: [
+            //     {
+            //         name: 'Nome',
+            //         input: 'text'
+            //     },
+            //     {
+            //         name: 'Indirizzo',
+            //         input: 'text'
+            //     },
+            //     {
+            //         name: 'Locazione (città)',
+            //         input: 'text'
+            //     },
+            //     {
+            //         name: 'Carica un\'immagine',
+            //         input: 'file'
+            //     }
+
+            // ],
 
             formChecks: [
                 'Italiana',
@@ -75,6 +110,7 @@ export default {
                 name: '',
                 address: '',
                 city: '',
+                image: null,
                 types: [],
             }
         }
@@ -105,16 +141,18 @@ export default {
                 name: this.newRestaurant.name,
                 address: this.newRestaurant.address,
                 city: this.newRestaurant.city,
+                image: this.newRestaurant.image,
                 types: this.newRestaurant.types
 
             }, {
                 headers: {
+                    'Content-Type': 'multipart/form-data',
                     'Authorization': `Bearer ${this.userToken}`
                 }
             })
                 .then(response => {
                     if (response.status === 200 || response.status === 204) {
-
+                        console.log(this.newRestaurant);
                         this.isUpdateSuccess = true;
                         this.isUpdateFailure = false;
                     }
@@ -128,6 +166,11 @@ export default {
                     this.isUpdateSuccess = false;
                     this.isUpdateFailure = true;
                 });
+        },
+        handleImage(event) {
+            // Ottieni il file selezionato dall'utente
+            const file = event.target.files[0];
+            this.newRestaurant.image = file;
         }
     }
 }
@@ -140,5 +183,10 @@ export default {
 
 .card {
     color: rgba(0, 0, 0, 0.732)
+}
+
+.btn {
+    background-color: #ff9474;
+    color: white;
 }
 </style>
