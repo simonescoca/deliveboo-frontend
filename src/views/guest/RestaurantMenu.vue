@@ -1,21 +1,28 @@
 <template>
     <!-- ---Sezione dati ristorante--- -->
     <header class="my-5">
-        <div class="d-flex container justify-content-around align-items-center">
-            <h1 class="m-0">
-                {{ resData.name }}
-            </h1>
-            <div class="d-flex justify-content-center align-items-center">
-                <h4 v-for="(resType, index) in resTypes" :key="index" class="m-0" :class="index !== 0 ? 'ms-2' : ''">
-                    {{ resType.name }}
-                    <span v-if="index !== resTypes.length - 1">
-                        ,
-                    </span>
+        <div class="container">
+            <div class="d-flex">
+                <h1 class="m-0 mx-auto myFont">
+                    {{ resData.name }}
+                </h1>
+            </div>
+            <div class="d-flex justify-content-around align-items-center myFont">
+                <div>
+                    <h4 v-for="(resType, index) in resTypes" :key="index" class="m-0">
+                        <span v-if="index === 0">
+                            Cucina
+                        </span>
+                        {{ resType.name }}
+                        <span v-if="index !== resTypes.length - 1">
+                            ,
+                        </span>
+                    </h4>
+                </div>
+                <h4 class="m-0 myFont">
+                    {{ resData.city + ", " + resData.address }}
                 </h4>
             </div>
-            <h4 class="m-0">
-                {{ resData.city + ", " + resData.address }}
-            </h4>
         </div>
     </header>
 
@@ -217,6 +224,11 @@
 
 <style lang="scss" scoped>
 
+    @use '../../styles/general.scss' as *;
+
+    .myFont {
+        font-family: 'Borel', cursive;
+    }
 // ---Checkboxes styles---
 	.customCheckBoxHolder {
 		margin: 5px;
