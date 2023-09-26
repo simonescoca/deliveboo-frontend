@@ -12,10 +12,10 @@
 						</div>
 						<div class="col-12 d-flex justify-content-center align-items-center">
 							<div class="search w-50">
-								<input type="text" placeholder="Restaurant name or type" @keyup.enter="advancedSearch">
+								<input type="text" placeholder="Restaurant name or type" v-model="search" @keyup.enter="saveSearch(search), advancedSearch">
 								<i class="fa-solid fa-magnifying-glass"></i>
 							</div>
-                            <router-link :to="{name: 'advanced-search'}" class="btn btn-red fw-semibold ms-3">
+                            <router-link :to="{name: 'advanced-search'}" class="btn btn-red fw-semibold ms-3" @click="saveSearch(search)">
                                 Search
                             </router-link>
 						</div>
@@ -139,7 +139,7 @@
 </template>
 
 <script>
-	// import {store} from "../store.js";
+	import {store} from "../../store.js";
 	// import axios from "axios";
     import { router } from '../../router';
 
@@ -147,7 +147,8 @@
 		name: 'Homepage',
 		data() {
 			return {
-				// store
+				store,
+				search: '',
 			}
 		},
 
@@ -164,13 +165,17 @@
 		},
 
 		created () {
-
+			store.search = this.search
 		},
 
 		methods: {
             advancedSearch () {
                 router.push({ name: 'advanced-search' });
-            }
+            },
+			saveSearch(search){
+				store.search = search
+				console.log(store.search)
+			}
 		}
 	}
 </script>
