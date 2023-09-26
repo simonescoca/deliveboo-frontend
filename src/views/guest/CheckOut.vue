@@ -99,12 +99,16 @@
                         <!-- ---User credit card info--- -->
                         <div class="credit-card-info--form">
                             <div class="input_container">
+                                <label for="customer_name" class="input_label">Customer Name</label>
+                                <input id="customer_name" class="input_field" type="text" name="address" title="customer_name" placeholder="Enter your name and surname" v-model="customer_name">
+                            </div>
+                            <div class="input_container">
                                 <label for="address" class="input_label">Home Address</label>
-                                <input id="address" class="input_field" type="text" name="address" title="address" placeholder="Enter your home address">
+                                <input id="address" class="input_field" type="text" name="address" title="address" placeholder="Enter your home address" v-model="customer_address">
                             </div>
                             <div class="input_container">
                                 <label for="phone" class="input_label">Phone Number</label>
-                                <input id="phone" class="input_field" type="text" name="phone" title="phone" placeholder="Enter your phone number">
+                                <input id="phone" class="input_field" type="text" name="phone" title="phone" placeholder="Enter your phone number" v-model="phone_number">
                             </div>
                         </div>
                         
@@ -146,7 +150,10 @@
                 clientToken:"",
                 amount:"",
                 paymentSuccessful: false,
-                restaurant_id:""
+                restaurant_id:"",
+                customer_name:"",
+                customer_address:"",
+                phone_number:""
 			}
 		},
 
@@ -185,13 +192,14 @@
                     
                     axios.post('http://127.0.0.1:8000/api/orders', {
                         total_price:this.amount,
-                        customer_name:'giacobbo',
-                        customer_address:'via alessandri',
-                        phone_number:'334352635267',
+                        customer_name:this.customer_name,
+                        customer_address:this.customer_address,
+                        phone_number:this.phone_number,
                         restaurant_id: this.restaurant_id,
                         status:this.paymentSuccessful,
                         dishes:this.cart.map(item => item.id),
                         quantities:this.cart.map(item => item.quantity)
+
                     }).then(response => {
                         if (response.status === 200 || response.status === 204) {
                             console.log("ordine riuscito") 

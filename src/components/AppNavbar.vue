@@ -227,7 +227,9 @@
                 store.cart.forEach((dish)=>{
                     this.totale += dish.price * dish.quantity;
                 })
-                return this.totale.toFixed(2); // Usiamo toFixed per avere due decimali
+                this.totale = parseFloat(this.totale.toFixed(2))
+                return this.totale; // Usiamo toFixed per avere due decimali
+                
             },
             getTotalQuantity(cart){
                 let total = 0
