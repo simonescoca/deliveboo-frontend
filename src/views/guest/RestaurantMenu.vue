@@ -1,13 +1,14 @@
 <template>
     <!-- ---Sezione dati ristorante--- -->
     <header class="my-5">
-        <div class="container">
-            <div class="d-flex">
-                <h1 class="m-0 mx-auto myFont">
+        <div class="d-flex justify-content-center align-items-center container">
+            <div class="resImgCont myCircle bg-dark d-flex">
+                <img :src="resData.image" :alt="resData.name" class="myCircle m-auto">
+            </div>
+            <div class="ms-5 myFont">
+                <h1 class="m-0 mx-auto">
                     {{ resData.name }}
                 </h1>
-            </div>
-            <div class="d-flex justify-content-around align-items-center myFont">
                 <div>
                     <h4 v-for="(resType, index) in resTypes" :key="index" class="m-0">
                         <span v-if="index === 0">
@@ -70,7 +71,16 @@
 						<p class="price">
 							{{ dish.price.toFixed(2) }}
 						</p>
-						<p class="btn btn-success" @click="addToCart(dish)">Add to cart</p>
+                        <button class="myCart-button" @click="dish.cartClicked = true, addToCart(dish)" :class="dish.cartClicked === true ? 'myClicked' : ''">
+                            <span class="myAdd-to-cart">
+                                Add to cart
+                            </span>
+                            <span class="myAdded">
+                                Added
+                            </span>
+                            <i class="fas fa-shopping-cart"></i>
+                            <i class="fas fa-box"></i>
+                        </button>
 					</div>
 				</div>
 			</div>
@@ -96,6 +106,7 @@
 				activeCategory: [],
 				showDescription: {},
 				selectedRestaurant: [],
+                cartClicked: false,
 			}
 		},
 
@@ -126,6 +137,9 @@
 					this.resData = response.data.results.restaurant
 					this.resTypes = response.data.results.restaurant.types
 					this.resDishes = response.data.results.restaurant.dishes
+                    this.resDishes.forEach((dish)=>{
+                        dish['cartClicked'] = false;
+                    })
 					this.resDishes.forEach(dish => {
 						this.showDescription[dish.id] = false;
 					});
@@ -228,6 +242,22 @@
 
     .myFont {
         font-family: 'Borel', cursive;
+    }
+
+    .myCircle {
+        border-radius: 50%;
+    }
+
+    .resImgCont {
+        height: 20rem;
+        width: 20rem;
+
+        img {
+            height: 96%;
+            width: 96%;
+            object-fit: cover;
+            object-position: center;
+        }
     }
 // ---Checkboxes styles---
 	.customCheckBoxHolder {
@@ -393,5 +423,117 @@
 }
 .w-fit-content {
     width: fit-content;
+}
+
+// ? BOTTONE ADD TO CART
+
+.myCart-button {
+	position: relative;
+	padding: 10px;
+	width: 200px;
+	height: 60px;
+	border: 0;
+	border-radius: 10px;
+	background-color: #4834d4;
+	outline: none;
+	cursor: pointer;
+	color: #fff;
+	transition: .3s ease-in-out;
+	overflow: hidden;
+
+    &:hover {
+        background-color: #35269b;
+    }
+
+    &:active {
+        transform: scale(.9);
+    }
+
+    .fa-shopping-cart {
+        position: absolute;
+        z-index: 2;
+        top: 50%;
+        left: -10%;
+        font-size: 2em;
+        transform: translate(-50%,-50%);
+    }
+    .fa-box {
+        position: absolute;
+        z-index: 3;
+        top: -20%;
+        left: 52%;
+        font-size: 1.2em;
+        transform: translate(-50%,-50%);
+    }
+    span {
+        position: absolute;
+        z-index: 3;
+        left: 50%;
+        top: 50%;
+        font-size: 1.2em;
+        color: #fff;
+        transform: translate(-50%,-50%);
+    }
+    span.myAdd-to-cart {
+        opacity: 1;
+    }
+    span.myAdded {
+        opacity: 0;
+    }
+}
+
+.myCart-button.myClicked {
+    .fa-shopping-cart {
+        animation: cart 1.5s ease-in-out forwards;
+    }
+    .fa-box {
+        animation: box 1.5s ease-in-out forwards;
+    }
+    span.myAdd-to-cart {
+        animation: txt1 1.5s ease-in-out forwards;
+    }
+    span.myAdded {
+        animation: txt2 1.5s ease-in-out forwards;
+    }
+}
+@keyframes cart {
+	0% {
+		left: -10%;
+	}
+	40%, 60% {
+		left: 50%;
+	}
+	100% {
+		left: 110%;
+	}
+}
+@keyframes box {
+	0%, 40% {
+		top: -20%;
+	}
+	60% {
+		top: 40%;
+		left: 52%;
+	}
+	100% {
+		top: 40%;
+		left: 112%;
+	}
+}
+@keyframes txt1 {
+	0% {
+		opacity: 1;
+	}
+	20%, 100% {
+		opacity: 0;
+	}
+}
+@keyframes txt2 {
+	0%, 80% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
 }
 </style>
