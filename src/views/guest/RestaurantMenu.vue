@@ -44,7 +44,8 @@
 	<!-- ---Sezione piatti, divisa in Primi, Secondi, Dolci--- -->
 	<div class="container">
 		<div class="row myGap">
-			<div class="myCard col-3-custom mx-auto mb-5" v-for="dish in resDishes" :class="!showSelectedDish(dish.categories) ? 'notSelected' : ''">
+			<h4 class="text-center">Primi piatti</h4>
+			<div class="myCard col-3-custom mx-auto mb-5" v-for="dish in this.firstCourse" :class="!showSelectedDish(dish.categories) ? 'notSelected' : ''">
 				<div class="content-info">
 					<p class="title fw-bold">
 							{{ dish.name }}
@@ -62,7 +63,95 @@
 					<p class="btn btn-success" @click="addToCart(dish)">Add to cart</p>
 				</div>
 				<div class="content" :class="showDescription[dish.id] ? 'description-hidden': ''">
-					<img src="https://www.cypressgreen.in/blog/wp-content/uploads/2021/03/food.jpg" alt="food image">
+					<div class="boxImg">
+						<img :src="dish.photo" :alt="dish.name">
+					</div>
+					<div class="description">
+						<p class="title fw-bold">
+                                {{ dish.name }}
+                            <i class="fa-solid fa-circle-info ms-2" @click="seeDescription(dish)"></i>
+						</p>
+						<p class="price">
+							{{ dish.price.toFixed(2) }}
+						</p>
+                        <button class="myCart-button" @click="dish.cartClicked = true, addToCart(dish)" :class="dish.cartClicked === true ? 'myClicked' : ''">
+                            <span class="myAdd-to-cart">
+                                Add to cart
+                            </span>
+                            <span class="myAdded">
+                                Added
+                            </span>
+                            <i class="fas fa-shopping-cart"></i>
+                            <i class="fas fa-box"></i>
+                        </button>
+					</div>
+				</div>
+			</div>
+			<h4 class="text-center">Secondi piatti</h4>
+			<div class="myCard col-3-custom mx-auto mb-5" v-for="dish in this.secondCourse" :class="!showSelectedDish(dish.categories) ? 'notSelected' : ''">
+				<div class="content-info">
+					<p class="title fw-bold">
+							{{ dish.name }}
+						<i class="fa-solid fa-xmark ms-2" style="color: #ff0000;" @click="seeDescription(dish)"></i>
+					</p>
+					<p class="text-center">
+						{{ dish.description }}
+					</p>
+					<div class="ingredients text-center mb-3">
+						<p class="fw-semibold mt-1">Ingredienti:</p>
+						<span class="fst-italic" v-for="(ingredient, index) in dish.ingredients" :key="index">
+							{{ ingredient.name + (index !== (dish.ingredients.length - 1) ? ", " : "")}}
+						</span>
+					</div>
+					<p class="btn btn-success" @click="addToCart(dish)">Add to cart</p>
+				</div>
+				<div class="content" :class="showDescription[dish.id] ? 'description-hidden': ''">
+					<div class="boxImg">
+						<img :src="dish.photo" :alt="dish.name">
+					</div>
+					<div class="description">
+						<p class="title fw-bold">
+                                {{ dish.name }}
+                            <i class="fa-solid fa-circle-info ms-2" @click="seeDescription(dish)"></i>
+						</p>
+						<p class="price">
+							{{ dish.price.toFixed(2) }}
+						</p>
+                        <button class="myCart-button" @click="dish.cartClicked = true, addToCart(dish)" :class="dish.cartClicked === true ? 'myClicked' : ''">
+                            <span class="myAdd-to-cart">
+                                Add to cart
+                            </span>
+                            <span class="myAdded">
+                                Added
+                            </span>
+                            <i class="fas fa-shopping-cart"></i>
+                            <i class="fas fa-box"></i>
+                        </button>
+					</div>
+				</div>
+			</div>
+			<h4 class="text-center">Dessert</h4>
+			<div class="myCard col-3-custom mx-auto mb-5" v-for="dish in this.dessertCourse" :class="!showSelectedDish(dish.categories) ? 'notSelected' : ''">
+				<div class="content-info">
+					<p class="title fw-bold">
+							{{ dish.name }}
+						<i class="fa-solid fa-xmark ms-2" style="color: #ff0000;" @click="seeDescription(dish)"></i>
+					</p>
+					<p class="text-center">
+						{{ dish.description }}
+					</p>
+					<div class="ingredients text-center mb-3">
+						<p class="fw-semibold mt-1">Ingredienti:</p>
+						<span class="fst-italic" v-for="(ingredient, index) in dish.ingredients" :key="index">
+							{{ ingredient.name + (index !== (dish.ingredients.length - 1) ? ", " : "")}}
+						</span>
+					</div>
+					<p class="btn btn-success" @click="addToCart(dish)">Add to cart</p>
+				</div>
+				<div class="content" :class="showDescription[dish.id] ? 'description-hidden': ''">
+					<div class="boxImg">
+						<img :src="dish.photo" :alt="dish.name">
+					</div>
 					<div class="description">
 						<p class="title fw-bold">
                                 {{ dish.name }}
@@ -107,6 +196,9 @@
 				showDescription: {},
 				selectedRestaurant: [],
                 cartClicked: false,
+				firstCourse: [],
+				secondCourse: [],
+				dessertCourse: [],
 			}
 		},
 
@@ -139,10 +231,9 @@
 					this.resDishes = response.data.results.restaurant.dishes
                     this.resDishes.forEach((dish)=>{
                         dish['cartClicked'] = false;
-                    })
-					this.resDishes.forEach(dish => {
 						this.showDescription[dish.id] = false;
-					});
+                    })
+					this.getCourse(this.resDishes)
 					// ---Creazione array con le category prese dai piatti presenti---
 					const mergedCategories = [];
 					this.resDishes.forEach((dish) => {
@@ -162,6 +253,18 @@
                 .catch(error => {
                     console.log(error)
                 });
+			},
+			// Funzione per dividere i piatti in base alle portate
+			getCourse(dishes){
+				dishes.forEach(dish => {
+					if(dish.course === 'Primi'){
+						this.firstCourse.push(dish)
+					}else if(dish.course === 'Secondi'){
+						this.secondCourse.push(dish)
+					}else{
+						this.dessertCourse.push(dish)
+					}
+				});
 			},
 			// --Funzione per attivare e disattivare le categorie---
 			toggleCategory(selectedCategory){
@@ -237,7 +340,7 @@
 </script>
 
 <style lang="scss" scoped>
-
+	@use '../../styles/variables.scss' as *;
     @use '../../styles/general.scss' as *;
 
     .myFont {
@@ -247,7 +350,20 @@
     .myCircle {
         border-radius: 50%;
     }
-
+	.boxImg{
+		width: 300px;
+		height: 200px;
+		border: 1px solid #ccc;
+		overflow: hidden;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		.image {
+			width: 100%;
+			height: auto;
+			display: block;
+		}
+	}
     .resImgCont {
         height: 20rem;
         width: 20rem;
@@ -434,7 +550,7 @@
 	height: 60px;
 	border: 0;
 	border-radius: 10px;
-	background-color: #4834d4;
+	background-color: $primary;
 	outline: none;
 	cursor: pointer;
 	color: #fff;
@@ -442,7 +558,7 @@
 	overflow: hidden;
 
     &:hover {
-        background-color: #35269b;
+        background-color: $secondary;
     }
 
     &:active {
