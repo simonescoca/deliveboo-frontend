@@ -5,6 +5,7 @@ const store = reactive({
     selectedDish: "",
     deletedItemId: "",
     cart: [],
+    dishQuantity: 0,
 });
 
 export { store };
