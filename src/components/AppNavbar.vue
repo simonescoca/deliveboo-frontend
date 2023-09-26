@@ -169,6 +169,7 @@
             let cartString = localStorage.getItem('cart')
             this.cart = cartString ? JSON.parse(cartString) : []
             store.cart = cartString ? JSON.parse(cartString) : []
+            store.dishQuantity = this.getTotalQuantity(store.cart)
 		},
 
 		methods: {
@@ -200,6 +201,12 @@
                 // Se l'elemento è stato trovato, aggiorna dish.quantity in cart
                 if (index !== -1) {
                     this.cart[index].quantity = dish.quantity;
+                
+                // Aggiorno i piatti al totale del carrello
+				store.dishQuantity = 0
+				this.cart.forEach(dish => {
+                    store.dishQuantity += dish.quantity
+                });
 
                 // Salva l'array cart aggiornato nel localStorage
                 localStorage.setItem('cart', JSON.stringify(this.cart));
@@ -220,6 +227,14 @@
                 })
                 return this.totale.toFixed(2); // Usiamo toFixed per avere due decimali
             },
+            getTotalQuantity(cart){
+                let total = 0
+                cart.forEach(dish => {
+                    total += dish.quantity
+                });
+                console.log(total)
+                return total
+            }
 		}
 	}
 </script>
