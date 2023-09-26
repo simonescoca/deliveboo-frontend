@@ -25,7 +25,7 @@
                         <div class="col-2 col-md-4 col-lg-6">
                             <div class="row">
                                 <div class="col-12 col-sm-4">
-                                    <img src="../../images/biglogo.png" alt="" class="w-100">
+                                    <img :src="dish.photo" :alt="dish.name" class="w-100">
                                 </div>
                                 <div class="col-12 col-sm my-auto">
                                     <h6 class="my-2">{{ dish.name }}</h6>
@@ -195,17 +195,13 @@
                         status:this.paymentSuccessful,
                         dishes:this.cart.map(item => item.id)
                     }).then(response => {
-
                         if (response.status === 200 || response.status === 204) {
-                           console.log("ordine riuscito") 
-                     }   
-                    
+                            console.log("ordine riuscito") 
+                        }  
                     console.log(response)
-                  })
-                          
+                    })    
                 }
-                
-             },
+            },
             addToCart(dish) {
                 // Ottenere il carrello dal localStorage come stringa JSON o inizializzarlo come array vuoto se non esiste
                 const cartString = localStorage.getItem('cart');
@@ -252,6 +248,12 @@
                 // Se l'elemento è stato trovato, aggiorna dish.quantity in cart
                 if (index !== -1) {
                     this.cart[index].quantity = dish.quantity;
+                
+                // Aggiorno i piatti al totale del carrello
+                store.dishQuantity = 0
+				this.cart.forEach(dish => {
+                    store.dishQuantity += dish.quantity
+                });
 
                 // Salva l'array cart aggiornato nel localStorage
                 localStorage.setItem('cart', JSON.stringify(this.cart));
@@ -269,6 +271,12 @@
                     // Salva l'array cart aggiornato nel localStorage
                     localStorage.setItem('cart', JSON.stringify(this.cart));
                 }
+
+                // Aggiorno i piatti nel totale del carrello
+				store.dishQuantity = 0
+				this.cart.forEach(dish => {
+                    store.dishQuantity += dish.quantity
+                });
             },
             calculateTotalPrice(dish){
                 return (dish.price * dish.quantity).toFixed(2)
