@@ -111,7 +111,7 @@
             </main>
 
             <!-- ? cart - bill -->
-            <footer class="d-flex justify-content-around align-items-center">
+            <footer class="d-flex justify-content-around align-items-center" :class="isCartVisible === false ? 'd-none' : ''">
                 <h4 class="m-0">
                     {{ "Totale: " + totale }}
                 </h4>
