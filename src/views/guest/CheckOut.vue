@@ -193,7 +193,8 @@
                         phone_number:'334352635267',
                         restaurant_id: this.restaurant_id,
                         status:this.paymentSuccessful,
-                        dishes:this.cart.map(item => item.id)
+                        dishes:this.cart.map(item => item.id),
+                        quantities:this.cart.map(item => item.quantity)
                     }).then(response => {
                         if (response.status === 200 || response.status === 204) {
                             console.log("ordine riuscito") 
