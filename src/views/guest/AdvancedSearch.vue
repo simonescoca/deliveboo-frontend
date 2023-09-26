@@ -163,6 +163,7 @@
 
 		methods: {
             getRestaurants(){
+                store.search = this.restCategOrName 
                 const selectedTypes = Array.from(document.querySelectorAll('input[name="type[]"]:checked')).map(input => input.value);
                 // console.log(selectedTypes)
                 axios.get(`${this.apiUrl}/restaurants`,{
