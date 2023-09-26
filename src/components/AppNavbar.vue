@@ -65,9 +65,11 @@
                 </router-link>
 
                 <!-- ? cart-button -->
-                <div class="d-flex justify-content-center align-items-center bg-danger py-1 px-2 rounded" @click="getCart(), calculateGrandTotal(), isCartVisible = true">
+                <div class="d-flex justify-content-center align-items-center py-1 px-2 rounded cartIcon" @click="getCart(), calculateGrandTotal(), isCartVisible = true">
                     <span>
-                        <i class="fa-solid fa-cart-shopping"></i>
+                        <i class="fa-solid fa-cart-shopping position-relative">
+                            <span class="position-absolute" v-if="store.dishQuantity">{{ store.dishQuantity }}</span>
+                        </i>
                     </span>
                 </div>
             </div>
@@ -325,6 +327,24 @@
             height: 7rem;
         }
 
+        .cartIcon{
+            background-color: $secondarysoft;
+        }
+
+        .fa-cart-shopping{
+            span{
+                bottom: -12px;
+                right: -12px;
+                background-color: $primary;
+                border-radius: 50%;
+                width: 15px;
+                aspect-ratio: 1;
+                text-align: center;
+                color: white;
+                font-size: 10px;
+                padding-top: 2px;
+            }
+        }
         .imgCont {
             object-fit: contain;
             width: 7rem;
