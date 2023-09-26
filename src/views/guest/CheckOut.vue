@@ -45,9 +45,6 @@
                     <!-- ---Total and update section--- -->
                     <div class="col-12 spacer"><!-- ---Spacer to avoid bottom overlap of total--- --></div>
                     <div class="row update position-absolute">
-                        <div class="col-12 col-md-4 col-lg-6 cl-xl-7">
-                            <button class="btn">Update</button>
-                        </div>
                         <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                             <div class="row">
                                 <div class="col-8">
