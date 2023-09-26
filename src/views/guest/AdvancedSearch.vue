@@ -116,13 +116,13 @@
 </template>
 
 <script>
-	// import {store} from "../store.js";
+	import {store} from "../../store.js";
 	import axios from "axios";
 
 	export default {
 		data() {
 			return {
-				// store
+				store,
                 selectedOptions: '',
                 checkSelect: [],
                 restCategOrName: '',
@@ -156,11 +156,14 @@
 		},
 
 		created () {
+            this.restCategOrName = store.search
             this.getRestaurants();
+
 		},
 
 		methods: {
             getRestaurants(){
+                store.search = this.restCategOrName 
                 const selectedTypes = Array.from(document.querySelectorAll('input[name="type[]"]:checked')).map(input => input.value);
                 // console.log(selectedTypes)
                 axios.get(`${this.apiUrl}/restaurants`,{
