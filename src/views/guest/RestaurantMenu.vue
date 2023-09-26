@@ -195,6 +195,12 @@
                 // Salva il carrello aggiornato nel localStorage come stringa JSON
                 localStorage.setItem('cart', JSON.stringify(cart));
 
+				// Aggiungo i piatti al totale del carrello
+				store.dishQuantity = 0
+				cart.forEach(dish => {
+                    store.dishQuantity += dish.quantity
+                });
+				
                 // Assegna il carrello come array a this.cart
                 this.cart = cart;
 				store.cart = cart;
