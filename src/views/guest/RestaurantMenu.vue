@@ -340,7 +340,7 @@
 </script>
 
 <style lang="scss" scoped>
-
+	@use '../../styles/variables.scss' as *;
     @use '../../styles/general.scss' as *;
 
     .myFont {
@@ -550,7 +550,7 @@
 	height: 60px;
 	border: 0;
 	border-radius: 10px;
-	background-color: #4834d4;
+	background-color: $primary;
 	outline: none;
 	cursor: pointer;
 	color: #fff;
@@ -558,7 +558,7 @@
 	overflow: hidden;
 
     &:hover {
-        background-color: #35269b;
+        background-color: $secondary;
     }
 
     &:active {
