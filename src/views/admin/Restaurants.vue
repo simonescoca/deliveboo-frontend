@@ -48,7 +48,7 @@
                 </div>
             </div>
         </div>
-
+        <!-- modale di conferma per eliminare -->
         <div class="delete-modal position-fixed card p-3 bg-dark" v-if="showDeleteConfirmationModal">
             <p>Spostare nel cestino?</p>
             <div class="btn-group d-flex justify-content-evenly">
@@ -183,34 +183,32 @@ export default {
 header {
     .my_btn {
         border: 1px solid rgba(0, 0, 0, 0.223);
-        width: 100px;
+        border-radius: 50%;
         position: fixed;
         top: 16%;
-        left: -4.5%;
+        right: 20px;
         transition: all 500ms;
+        z-index: 2;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
         &:hover {
-            left: -3.5%;
+            scale: 1.2;
+            border-color: #e8726498;
+            transition: all 500ms;
+
+            i {
+                color: #e8726498;
+                transition: all 500ms;
+            }
         }
 
         i {
-            margin-left: 60px;
-            color: #000000a2;
+            color: #00000083;
         }
     }
 
     .my_btn.add {
         top: 23%;
-
-        &:hover {
-            background-color: rgba(110, 174, 206, 0.447);
-        }
-    }
-
-    .my_btn.deleted {
-        &:hover {
-            background-color: rgba(240, 133, 133, 0.481);
-        }
     }
 }
 
