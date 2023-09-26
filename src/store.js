@@ -6,6 +6,7 @@ const store = reactive({
     deletedItemId: "",
     cart: [],
     dishQuantity: 0,
+    search: "",
 });
 
 export { store };
