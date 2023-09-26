@@ -44,7 +44,7 @@
 	<!-- ---Sezione piatti, divisa in Primi, Secondi, Dolci--- -->
 	<div class="container">
 		<div class="row myGap">
-			<h4>Primi piatti</h4>
+			<h4 class="text-center">Primi piatti</h4>
 			<div class="myCard col-3-custom mx-auto mb-5" v-for="dish in this.firstCourse" :class="!showSelectedDish(dish.categories) ? 'notSelected' : ''">
 				<div class="content-info">
 					<p class="title fw-bold">
@@ -63,7 +63,9 @@
 					<p class="btn btn-success" @click="addToCart(dish)">Add to cart</p>
 				</div>
 				<div class="content" :class="showDescription[dish.id] ? 'description-hidden': ''">
-					<img src="https://www.cypressgreen.in/blog/wp-content/uploads/2021/03/food.jpg" alt="food image">
+					<div class="boxImg">
+						<img :src="dish.photo" :alt="dish.name">
+					</div>
 					<div class="description">
 						<p class="title fw-bold">
                                 {{ dish.name }}
@@ -85,7 +87,7 @@
 					</div>
 				</div>
 			</div>
-			<h4>Secondi piatti</h4>
+			<h4 class="text-center">Secondi piatti</h4>
 			<div class="myCard col-3-custom mx-auto mb-5" v-for="dish in this.secondCourse" :class="!showSelectedDish(dish.categories) ? 'notSelected' : ''">
 				<div class="content-info">
 					<p class="title fw-bold">
@@ -104,7 +106,9 @@
 					<p class="btn btn-success" @click="addToCart(dish)">Add to cart</p>
 				</div>
 				<div class="content" :class="showDescription[dish.id] ? 'description-hidden': ''">
-					<img src="https://www.cypressgreen.in/blog/wp-content/uploads/2021/03/food.jpg" alt="food image">
+					<div class="boxImg">
+						<img :src="dish.photo" :alt="dish.name">
+					</div>
 					<div class="description">
 						<p class="title fw-bold">
                                 {{ dish.name }}
@@ -126,7 +130,7 @@
 					</div>
 				</div>
 			</div>
-			<h4>Dessert</h4>
+			<h4 class="text-center">Dessert</h4>
 			<div class="myCard col-3-custom mx-auto mb-5" v-for="dish in this.dessertCourse" :class="!showSelectedDish(dish.categories) ? 'notSelected' : ''">
 				<div class="content-info">
 					<p class="title fw-bold">
@@ -145,7 +149,9 @@
 					<p class="btn btn-success" @click="addToCart(dish)">Add to cart</p>
 				</div>
 				<div class="content" :class="showDescription[dish.id] ? 'description-hidden': ''">
-					<img src="https://www.cypressgreen.in/blog/wp-content/uploads/2021/03/food.jpg" alt="food image">
+					<div class="boxImg">
+						<img :src="dish.photo" :alt="dish.name">
+					</div>
 					<div class="description">
 						<p class="title fw-bold">
                                 {{ dish.name }}
@@ -344,7 +350,20 @@
     .myCircle {
         border-radius: 50%;
     }
-
+	.boxImg{
+		width: 300px;
+		height: 200px;
+		border: 1px solid #ccc;
+		overflow: hidden;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		.image {
+			width: 100%;
+			height: auto;
+			display: block;
+		}
+	}
     .resImgCont {
         height: 20rem;
         width: 20rem;
