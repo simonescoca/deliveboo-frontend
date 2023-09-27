@@ -45,5 +45,9 @@
 </script>
 
 <style lang="scss">
+	@use './styles/variables' as *;
 	@import "bootstrap/scss/bootstrap";
+	*{
+		font-family: Nunito;
+	}
 </style>
