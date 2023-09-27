@@ -2,8 +2,11 @@
     <!-- ---Sezione dati ristorante--- -->
     <header class="my-5">
         <div class="d-flex justify-content-center align-items-center container">
-            <div class="resImgCont myCircle bg-dark d-flex">
+			<div class="resImgCont myCircle bg-dark d-flex" v-if="resData.image.startsWith('http')">
                 <img :src="resData.image" :alt="resData.name" class="myCircle m-auto">
+            </div>
+            <div class="resImgCont myCircle bg-dark d-flex" v-else>
+                <img :src="getImageUrl(resData.image)" :alt="resData.name" class="myCircle m-auto">
             </div>
             <div class="ms-5 myFont">
                 <h1 class="m-0 mx-auto">
@@ -63,8 +66,11 @@
 					<p class="btn btn-success" @click="addToCart(dish)">Add to cart</p>
 				</div>
 				<div class="content" :class="showDescription[dish.id] ? 'description-hidden': ''">
-					<div class="boxImg">
+					<div class="boxImg" v-if="dish.photo.startsWith('http')">
 						<img :src="dish.photo" :alt="dish.name">
+					</div>
+					<div class="boxImg" v-else>
+						<img :src="getImageUrl(dish.photo)" :alt="dish.name">
 					</div>
 					<div class="description">
 						<p class="title fw-bold">
@@ -106,8 +112,11 @@
 					<p class="btn btn-success" @click="addToCart(dish)">Add to cart</p>
 				</div>
 				<div class="content" :class="showDescription[dish.id] ? 'description-hidden': ''">
-					<div class="boxImg">
+					<div class="boxImg" v-if="dish.photo.startsWith('http')">
 						<img :src="dish.photo" :alt="dish.name">
+					</div>
+					<div class="boxImg" v-else>
+						<img :src="getImageUrl(dish.photo)" :alt="dish.name">
 					</div>
 					<div class="description">
 						<p class="title fw-bold">
@@ -149,8 +158,11 @@
 					<p class="btn btn-success" @click="addToCart(dish)">Add to cart</p>
 				</div>
 				<div class="content" :class="showDescription[dish.id] ? 'description-hidden': ''">
-					<div class="boxImg">
+					<div class="boxImg" v-if="dish.photo.startsWith('http')">
 						<img :src="dish.photo" :alt="dish.name">
+					</div>
+					<div class="boxImg" v-else>
+						<img :src="getImageUrl(dish.photo)" :alt="dish.name">
 					</div>
 					<div class="description">
 						<p class="title fw-bold">
@@ -189,6 +201,7 @@
 				apiUrl: 'http://127.0.0.1:8000/api/',
                 cart: [],
 				resData: [],
+				imageUrl: '',
 				resTypes: [],
 				resDishes: [],
 				resCategories: [],
@@ -334,6 +347,9 @@
 			seeDescription(dish) {
 				this.showDescription[dish.id] = !this.showDescription[dish.id];
 				console.log(this.showDescription[dish.id]);
+			},
+			getImageUrl(filename) {
+				return this.imageUrl = 'http://localhost:5173/public' + `/storage/${filename}`;
 			},
 		}
 	}
