@@ -75,7 +75,7 @@
         <div class="collapse show" id="joinDeliveboo">
             <div class="row">
                 <div class="col-12 col-md text-center">
-					<img src="../../images/joinrider.png" alt="rider image" class="w-50">
+					<img src="../../images/rider.png" alt="rider image" class="w-50">
 				</div>
 				<div class="col-12 col-md-4 my-auto">
 					<h3>As a rider</h3>
@@ -85,7 +85,7 @@
             </div>
 			<div class="row border-top border-bottom">
                 <div class="col-12 col-md text-center">
-					<img src="../../images/joinpartner.png" alt="chef image" class="w-50">
+					<img src="../../images/chef.png" alt="chef image" class="w-50">
 				</div>
 				<div class="col-12 col-md-4 my-auto">
 					<h3>As a partner</h3>
@@ -95,7 +95,7 @@
             </div>
 			<div class="row">
                 <div class="col-12 col-md text-center">
-					<img src="../../images/joincolleague.png" alt="colleagues image" class="w-50">
+					<img src="../../images/colleague.png" alt="colleagues image" class="w-50">
 				</div>
 				<div class="col-12 col-md-4 my-auto">
 					<h3>As a colleague</h3>
