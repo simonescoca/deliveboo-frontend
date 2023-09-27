@@ -25,9 +25,10 @@
 		</div>
 	</div>
 	<div>
-		<router-link :to="{ name: 'order-statistics' }" class="btn btn-secondary">
-			Order statistics
-		</router-link>
+		
+		<button
+            @click="$router.push({ name: 'order-statistics',params: { monthlySales: monthly_sales, orderCount:monthly_order_count  }})"
+        >...</button>
 	</div>
 </template>
 
@@ -47,6 +48,8 @@ export default {
 			infodish: [],
 			infotoggle: false,
 			selectedRes: null,
+			monthly_sales:[],
+			monthly_order_count:[]
 		}
 	},
 
@@ -82,6 +85,9 @@ export default {
 				.then(response => {
 					console.log(response.data.results)
 					this.orders = response.data.results
+					this.monthly_sales = response.data.monthly_sales
+					this.monthly_order_count = response.data.monthly_order_count
+					
 				})
 				.catch(error => {
 					console.log(error)
