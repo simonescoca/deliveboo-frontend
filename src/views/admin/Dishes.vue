@@ -16,8 +16,12 @@
         </div>
         <div class=" my_dishes">
             <div v-for="dish in dishes" class="d-flex my_dish my-3">
-                <div class="my_r-img w-25">
+
+                <div class="my_r-img w-25" v-if="dish.photo.startsWith('http')">
                     <img :src="dish.photo" :alt="dish.name">
+                </div>
+                <div class="my_r-img w-25" v-else>
+                    <img :src="getImageUrl(dish.photo)" :alt="dish.name">
                 </div>
                 <div class="dishinfo w-75 d-flex flex-column align-items-center justify-content-between mb-3">
                     <div class="my_r-name">
@@ -96,6 +100,7 @@ export default {
             selectedRes: null,
             showDeleteConfirmationModal: false,
             dishToDelete: null,
+            imageUrl: null
 
         }
     },
@@ -183,6 +188,11 @@ export default {
         itemToSoftDelete(dishId) {
             this.showDeleteConfirmationModal = true;
             this.dishToDelete = dishId;
+        },
+        getImageUrl(filename) {
+            // Genera l'URL pubblico per l'immagine
+            console.log(filename);
+            return this.imageUrl = 'http://localhost:5173/public' + `/storage/${filename}`;
         },
     }
 }

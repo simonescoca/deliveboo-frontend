@@ -19,8 +19,11 @@
                 <div v-for="restaurant in restaurants" :key="restaurant.inHover = false"
                     @mouseenter="restaurant.inHover = true" @mouseleave="restaurant.inHover = false"
                     class="d-flex position-relative my_restaurant col-12 my-3">
-                    <div class="my_r-img">
+                    <div class="my_r-img" v-if="restaurant.image.startsWith('http')">
                         <img :src="restaurant.image" :alt="restaurant.name">
+                    </div>
+                    <div class="my_r-img" v-else>
+                        <img :src="getImageUrl(restaurant.image)" :alt="restaurant.name">
                     </div>
                     <div class="my_r-name">
                         <h3 class="fw-bold p-3 ">{{ restaurant.name }}</h3>
@@ -94,6 +97,7 @@ export default {
                 },
             ],
             restaurants: [],
+            imageUrl: null
         }
     },
 
@@ -173,6 +177,10 @@ export default {
                 .catch(error => {
                     console.log(error)
                 });
+        },
+        getImageUrl(filename) {
+            // Genera l'URL pubblico per l'immagine
+            return this.imageUrl = 'http://localhost:5173/public' + `/storage/${filename}`;
         },
 
     }

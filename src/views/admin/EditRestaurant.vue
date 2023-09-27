@@ -27,6 +27,26 @@
                     </label>
                 </div>
             </div>
+            <div v-if="currentImage">
+                <div class="mb-3" v-if="currentImage.startsWith('http')">
+                    <label for="prevImg">Immagine in uso</label>
+                    <div class="current-img-box d-flex">
+                        <img :src="currentImage" class="current-img w-100 h-100">
+                    </div>
+                </div>
+                <div class="mb-3" v-else>
+                    <p>Immagine in uso</p>
+                    <div class="current-img-box d-flex">
+                        <img :src="getImageUrl(currentImage)" class="current-img w-100 h-100">
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3 d-flex flex-column">
+                <label for="formFile" class="form-label">
+                    Carica un'altra immagine
+                </label>
+                <input class="form-control" name="image" type="file" @change="handleImageDish">
+            </div>
             <button type="submit" class="d-flex btn btn-primary mx-auto mt-3">
                 Aggiorna
             </button>
@@ -80,10 +100,13 @@ export default {
                 address: '',
                 city: '',
                 types: [],
+                image: null,
             },
             isUpdateSuccess: false,
             isUpdateFailure: false,
-            selectedRes: null
+            selectedRes: null,
+            currentImage: null,
+            imageUrl: null
         }
     },
 
@@ -123,7 +146,9 @@ export default {
                     this.editData.address = restaurantData.address;
                     this.editData.city = restaurantData.city;
                     this.editData.types = restaurantData.types.map(type => type.name);
-                    console.log(this.editData.types)
+                    this.editData.image = restaurantData.image;
+                    this.currentImage = this.editData.image;
+
                 })
                 .catch(error => {
                     console.log(error)
@@ -131,13 +156,15 @@ export default {
         },
 
         updateRestaurant() {
-            axios.put(`${this.apiUrl}${this.userId}/restaurants/${store.selectedRes}`, {
+            axios.post(`${this.apiUrl}${this.userId}/restaurants/${store.selectedRes}`, {
                 name: this.editData.name,
                 address: this.editData.address,
                 city: this.editData.city,
                 types: this.editData.types,
+                image: this.editData.image,
             }, {
                 headers: {
+                    'Content-Type': 'multipart/form-data',
                     'Authorization': `Bearer ${this.userToken}`
                 }
             })
@@ -159,10 +186,31 @@ export default {
                     this.isUpdateSuccess = false;
                     this.isUpdateFailure = true;
                 });
-        }
+        },
+
+        handleImageDish(event) {
+            // Ottieni il file selezionato dall'utente
+            const file = event.target.files[0];
+            this.editData.image = file;
+        },
+        getImageUrl(filename) {
+            // Genera l'URL pubblico per l'immagine
+            return this.imageUrl = 'http://localhost:5173/public' + `/storage/${filename}`;
+        },
 
     }
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.current-img-box {
+    width: 200px;
+    height: 250px;
+
+}
+
+.current-img {
+    object-fit: cover;
+    border-radius: 0.375rem;
+}
+</style>

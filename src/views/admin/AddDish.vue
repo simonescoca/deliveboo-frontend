@@ -9,7 +9,7 @@
         <div v-if="isUpdateFailure" class="alert alert-danger">
             La creazione del tuo piatto non è andata a buon fine. Si è verificato un errore.
         </div>
-        <form @submit.prevent="createDish">
+        <form @submit.prevent="createDish" enctype="multipart/form-data">
             <div v-for="formSection in formSections" class="mb-3">
                 <div v-if="formSection.labelFor != 'description'">
                     <label :for="formSection.labelFor" class="form-label">
@@ -38,7 +38,7 @@
                 <label for="formFile" class="form-label">
                     Aggiungi immagine
                 </label>
-                <input class="form-control" type="text" id="formFile" v-model=newDish.photo>
+                <input class="form-control" type="file" id="formFile" @change="handleImageDish">
             </div>
             <select class="form-select" aria-label="select-course" id="course" v-model="newDish.course">
                 <option selected>
@@ -180,11 +180,12 @@ export default {
                 price: this.newDish.price,
                 course: this.newDish.course,
                 photo: this.newDish.photo,
-                available: this.newDish.available,
+                available: this.newDish.available ? '1' : '0',
                 ingredients: this.newDish.ingredients,
                 type: this.newDish.type
             }, {
                 headers: {
+                    'Content-Type': 'multipart/form-data',
                     'Authorization': `Bearer ${this.userToken}`
                 }
             })
@@ -204,6 +205,9 @@ export default {
                 })
                 .catch(error => {
                     console.error(error);
+                    console.error('Response', error.response);
+                    console.error('Error data', error.response.data);
+                    console.log(this.newDish);
                     this.isUpdateSuccess = false;
                     this.isUpdateFailure = true;
                 });
@@ -221,6 +225,11 @@ export default {
         },
         removeFromArray(index) {
             this.newDish.ingredients.splice(index, 1);
+        },
+        handleImageDish(event) {
+            // Ottieni il file selezionato dall'utente
+            const file = event.target.files[0];
+            this.newDish.photo = file;
         }
     }
 }
