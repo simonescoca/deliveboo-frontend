@@ -40,17 +40,17 @@
         <div class="collapse show" id="howItWorks">
             <div class="row">
                 <div class="col-12 col-md-4">
-					<img src="../../images/stepone.png" alt="step one image" class="w-75 m-5">
+					<img src="../../images/position.png" alt="step one image" class="w-75 m-5">
 					<h3>Step 1</h3>
 					<p>Enter your location. Input your address or enable location services to pin your location.</p>
 				</div>
 				<div class="col-12 col-md-4 border-start border-end">
-					<img src="../../images/steptwo.png" alt="step two image" class="w-75 m-5">
+					<img src="../../images/store.png" alt="step two image" class="w-75 m-5">
 					<h3>Step 2</h3>
 					<p>Select a restaurant and add items to your cart. You're one step closer to a satisfying meal.</p>
 				</div>
 				<div class="col-12 col-md-4">
-					<img src="../../images/stepthree.png" alt="step three image" class="w-75 m-5">
+					<img src="../../images/payment.png" alt="step three image" class="w-75 m-5">
 					<h3>Step 3</h3>
 					<p>Complete your payment. Sit back and relax as we prepare your order!</p>
 				</div>
