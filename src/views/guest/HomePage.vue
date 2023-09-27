@@ -2,27 +2,24 @@
 	<!-- ---Jumbotron section--- -->
     <div class="container">
 		<div class="row text-center my-5">
-			<div class="col-1 left-image">
-				<img src="../../images/jumboleft.png" alt="" class="">
+			<div class="col-3 col-sm-4 col-md-5 left-image">
+				<img src="../../images/search.png" alt="" class="w-100">
 			</div>
-				<div class="col-9 my-auto">
-					<div class="row">
-						<div class="col-12 d-flex justify-content-center position-relative">
-							<h1>Find the perfect bite in <br> seconds</h1>
+			<div class="col-9 col-sm-8 col-md-7 my-auto">
+				<div class="row">
+					<div class="col-12 d-flex justify-content-center position-relative">
+						<h1>Find the perfect bite in <br> seconds</h1>
+					</div>
+					<div class="col-12 d-flex justify-content-center align-items-center">
+						<div class="search w-50">
+							<input type="text" placeholder="Restaurant name or type" v-model="search" @keyup.enter="saveSearch(search), advancedSearch">
+							<i class="fa-solid fa-magnifying-glass"></i>
 						</div>
-						<div class="col-12 d-flex justify-content-center align-items-center">
-							<div class="search w-50">
-								<input type="text" placeholder="Restaurant name or type" v-model="search" @keyup.enter="saveSearch(search), advancedSearch">
-								<i class="fa-solid fa-magnifying-glass"></i>
-							</div>
-                            <router-link :to="{name: 'advanced-search'}" class="btn btn-red fw-semibold ms-3" @click="saveSearch(search)">
-                                Search
-                            </router-link>
-						</div>
+						<router-link :to="{name: 'advanced-search'}" class="btn btn-red fw-semibold ms-3" @click="saveSearch(search)">
+							Search
+						</router-link>
 					</div>
 				</div>
-			<div class="col-1 right-image">
-				<img src="../../images/jumboright.png" alt="" class="">
 			</div>
 		</div>
 	</div>
@@ -195,12 +192,6 @@
 				box-shadow: none;
 			}
 		}
-	}
-	.left-image{
-		margin-bottom: 10rem;
-	}
-	.right-image{
-		margin-top: 10rem;
 	}
 	.btn-red{
 		background-color: $primary;
