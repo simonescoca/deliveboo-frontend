@@ -12,10 +12,10 @@
 					</div>
 					<div class="col-12 d-flex justify-content-center align-items-center">
 						<div class="search w-50">
-							<input type="text" placeholder="Restaurant name or type" v-model="search" @keyup.enter="saveSearch(search), advancedSearch">
+							<input type="text" placeholder="Restaurant name or type" v-model="search" @keyup.enter="advancedSearch" @change="saveSearch(search)">
 							<i class="fa-solid fa-magnifying-glass"></i>
 						</div>
-						<router-link :to="{name: 'advanced-search'}" class="btn btn-red fw-semibold ms-3" @click="saveSearch(search)">
+						<router-link :to="{name: 'advanced-search'}" class="btn btn-orange fw-semibold ms-3" @click="saveSearch(search)">
 							Search
 						</router-link>
 					</div>
@@ -193,8 +193,8 @@
 			}
 		}
 	}
-	.btn-red{
-		background-color: $primary;
+	.btn-orange{
+		background-color: $primarydark;
 		color: white;
 		&:hover{
 			background-color: $primarysoft;
