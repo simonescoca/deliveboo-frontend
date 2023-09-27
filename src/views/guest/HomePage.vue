@@ -128,7 +128,7 @@
 					<a href="" class="btn btn-orange fw-semibold">Download</a>
 				</div>
                 <div class="col-12 col-md text-center">
-					<img src="../../images/downloadapp.png" alt="table with food image" class="w-50">
+					<img src="../../images/enjoy.png" alt="table with food image" class="w-75">
 				</div>
             </div>
         </div>
