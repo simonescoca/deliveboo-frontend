@@ -23,7 +23,7 @@
                         <img :src="restaurant.image" :alt="restaurant.name">
                     </div>
                     <div class="my_r-img" v-else>
-                        <img :src="imageUrl(restaurant.image)" :alt="restaurant.name">
+                        <img :src="getImageUrl(restaurant.image)" :alt="restaurant.name">
                     </div>
                     <div class="my_r-name">
                         <h3 class="fw-bold p-3 ">{{ restaurant.name }}</h3>
