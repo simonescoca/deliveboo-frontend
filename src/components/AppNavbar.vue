@@ -1,20 +1,21 @@
 <template>
 	<nav class="position-relative d-flex justify-content-center">
-        <div class=" d-flex justify-content-around align-items-center w-100">
+        <div class="d-flex container-fluid container-sm container-fluid-md container-lg justify-content-between align-items-center">
+
             <!-- ? logo container -->
-            <div class="d-flex align-items-center my_logo-container">
-                <img src="../../src/images/logo.jpeg" alt="logo">
+            <div class="d-none d-lg-flex align-items-center rounded-pill my_logo-container">
+                <img src="../../src/images/logo.jpeg" alt="logo" class="rounded-pill">
             </div>
 
             <!-- ? central links -->
             <ul class="d-flex justify-content-center align-items-center list-unstyled m-0">
-                <li v-for="link in links"> <!--class="d-flex align-items-center"-->
-                    <router-link :to="{ name: link.routeName }" class="d-flex align-items-center my_link">
+                <li v-for="(link, index) in links" :key="index" :class="index !== 0 ? 'ms-2 ms-lg-5' : ''">
+                    <router-link :to="{ name: link.routeName }" class="d-flex align-items-center bg-mySecondary rounded-pill btn linkOnHover">
                         <span>
                             <i :class="link.icon">
                             </i>
                         </span>
-                        <span class="ms-2">
+                        <span class="d-none d-md-inline ms-2">
                             {{ link.text }}
                         </span>
                     </router-link>
@@ -22,56 +23,56 @@
             </ul>
 
             <!-- ? login or profile -->
-            <div class="d-flex align-items-center my_gap2">
+            <div class="d-flex align-items-center ms-2 ms-lg-5">
                 <div v-if="userName === null" @click="store.access = false"> <!--class="d-flex align-items-center"-->
-                    <router-link :to="{ name: 'profile' }" class="d-flex align-items-center my_link">
+                    <router-link :to="{ name: 'profile' }" class="d-flex align-items-center bg-mySecondary rounded-pill btn">
                         <span>
                             <i class="fa-solid fa-user-pen"></i>
                         </span>
-                        <span class="ms-2">
+                        <span class="d-none d-md-inline ms-2">
                             Register
                         </span>
                     </router-link>
                 </div>
                 <div v-if="userName === null" @click="store.access = true"> <!--class="d-flex align-items-center"-->
-                    <router-link :to="{ name: 'profile' }" class="d-flex align-items-center my_link">
+                    <router-link :to="{ name: 'profile' }" class="d-flex align-items-center bg-mySecondary rounded-pill btn">
                         <span>
                             <i class="fa-solid fa-arrow-right-to-bracket"></i>
                         </span>
-                        <span class="ms-2">
+                        <span class="d-none d-md-inline ms-2">
                             Login
                         </span>
                     </router-link>
                 </div>
                 <div v-if="userName !== null"> <!--class="d-flex align-items-center"-->
-                    <a href="/" class="d-flex align-items-center my_link btn" @click="logout()">
+                    <button class="d-flex align-items-center bg-mySecondary rounded-pill btn" @click="logout()">
                         <span>
                             <i class="fa-solid fa-arrow-right-from-bracket"></i>
                         </span>
-                        <span class="ms-2">
+                        <span class="d-none d-md-inline ms-2">
                             Logout
                         </span>
-                    </a>
+                    </button>
                 </div>
-                <router-link :to="{name: 'restaurants'}" v-if="userName !== null">
-                    <div class="d-flex my_gap2">
-                        <div class="my_user-img-cont">
-                            <img src="../../src/images/user.png" alt="user profile img" class="my_user-img">
+                <router-link :to="{name: 'restaurants'}" v-if="userName !== null" class="text-decoration-none rounded-pill btn btn-outline-dark ms-3">
+                    <div class="d-flex align-items-center">
+                        <div class="my_user-img-cont bg-white rounded-pill">
+                            <img src="../../src/images/user.png" alt="user profile img" class="rounded-pill">
                         </div>
-                        <div class="d-flex align-items-center my_username">
-                            {{ this.userName }}
+                        <div class="d-none d-md-inline ms-2">
+                            {{ "@" + this.userName.toLowerCase() }}
                         </div>
                     </div>
                 </router-link>
 
                 <!-- ? cart-button -->
-                <div class="d-flex justify-content-center align-items-center py-1 px-2 rounded cartIcon" @click="getCart(), calculateGrandTotal(), isCartVisible = true">
+                <button class="d-flex justify-content-center align-items-center py-1 px-2 rounded-pill btn bg-mySecondary ms-3 ms-lg-5" @click="getCart(), calculateGrandTotal(), isCartVisible = true">
                     <span>
                         <i class="fa-solid fa-cart-shopping position-relative">
                             <span class="position-absolute" v-if="store.dishQuantity">{{ store.dishQuantity }}</span>
                         </i>
                     </span>
-                </div>
+                </button>
             </div>
         </div>
 
@@ -139,7 +140,7 @@
                     },
                     {
                         routeName: "about",
-                        text: "about us",
+                        text: "about",
                         icon: 'fa-solid fa-burger',
                     },
                     {
@@ -253,48 +254,30 @@
         .my_logo-container {
             height: 3.5rem;
             width: 3.5rem;
-            border-radius: 50%;
-            object-fit: contain;
-
+            
             img {
+                object-fit: contain;
                 height: 100%;
                 width: 100%;
-                border-radius: 50%;
             }
         }
 
-        ul {
-            gap: 3rem;
-        }
-
-        .my_link {
-            text-decoration: none;
-            color: black;
-            padding: .3rem .7rem;
+        .bg-mySecondary {
             background-color: $secondary;
-            border-radius: 6px;
+            &:hover {
+                background-color: $secondarysoft;
+            }
         }
 
         .my_user-img-cont {
             height: 3.5rem;
             width: 3.5rem;
-            border-radius: 50%;
-            object-fit: contain;
-            background-color: white;
-
+            
             img {
+                object-fit: contain;
                 height: 100%;
                 width: 100%;
-                border-radius: 50%;
             }
-        }
-
-        .my_gap {
-            gap: 3rem;
-        }
-
-        .my_gap2 {
-            gap: .4rem;
         }
 
         .myCart {
@@ -329,10 +312,6 @@
             height: 7rem;
         }
 
-        .cartIcon{
-            background-color: $secondarysoft;
-        }
-
         .fa-cart-shopping{
             span{
                 bottom: -12px;
@@ -364,38 +343,4 @@
             }
         }
     }
-        @media (max-width: 768px) {
-  .my_link span:nth-child(2) {
-    display: none;
-  }
-}
-
-@media (max-width: 420px) {
-    .my_logo-container,
-    .my_logo-container img {
-      display: none !important; /* Hide the logo container and its image */
-    }
-
-    ul.list-unstyled:first-of-type {
-      margin-left: 10px; 
-      gap: 10px; 
-    }
-
-    ul.list-unstyled:first-of-type li {
-      margin-right: 5px; 
-    }
-
-    
-    .d-flex.align-items-center.my_gap2 {
-      display: none;
-    }
-
-    
-    nav > div > div:first-child {
-      display: flex;
-      justify-content: space-between;
-      align-items: center; 
-    }
-}
-
 </style>
