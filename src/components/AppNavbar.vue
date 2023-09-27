@@ -3,8 +3,11 @@
         <div class="d-flex container-fluid container-sm container-fluid-md container-lg justify-content-between align-items-center">
 
             <!-- ? logo container -->
-            <div class="d-none d-lg-flex align-items-center rounded-pill my_logo-container">
-                <img src="../../src/images/logo.jpeg" alt="logo" class="rounded-pill">
+            <div class="d-none d-lg-flex align-items-center my_logo-container">
+                <div class="position-relative h-100 duckbox">
+                    <div class="scroll-animation" :style="animationStyle"></div>
+                </div>
+                <img src="../../src/images/logo.png" alt="logo" class="logo">
             </div>
 
             <!-- ? central links -->
@@ -153,6 +156,8 @@
                 isCartVisible: false,
                 totale: 0,
                 cart: [],
+				scrollY: 0,
+				topPosition: 0,
 			}
 		},
 
@@ -164,9 +169,22 @@
 
 		},
 
-        mounted(){
+        computed: {
+			animationStyle() {
+				return {
+					transform: `translateY(${this.scrollY}px) rotate(${this.scrollY / 3}deg)`,
+					top: `${this.topPosition}px`,
+				};
+			},
+		},
 
-        },
+		mounted () {
+			window.addEventListener('scroll', this.handleScroll);
+		},
+
+		beforeUnmount() {
+			window.removeEventListener('scroll', this.handleScroll);
+		},
 
 		created () {
             let cartString = localStorage.getItem('cart')
@@ -176,6 +194,10 @@
 		},
 
 		methods: {
+			handleScroll() {
+				this.scrollY = window.scrollY;
+				this.topPosition = this.scrollY/2.5;
+			},
             logout () {
                 localStorage.removeItem('userToken');
                 localStorage.removeItem('userId');
@@ -246,6 +268,19 @@
 
 <style lang="scss" scoped>
 	@use "../styles/variables" as *;
+    .scroll-animation {
+		position: absolute;
+		left: 0;
+		background-image: url('../images/duck.png');
+		height: 50px;
+		width: 50px;
+		background-size: contain;
+		background-repeat: no-repeat;
+		transition: transform 0.1s ease; /* Aggiungi una transizione per un effetto più fluido */
+	}
+    .duckbox{
+        width: 56px;
+    }
 
     nav {
         background-color: $primarysoft;
@@ -253,12 +288,12 @@
 
         .my_logo-container {
             height: 3.5rem;
-            width: 3.5rem;
+            width: 100%;
             
             img {
                 object-fit: contain;
                 height: 100%;
-                width: 100%;
+                width: 160px;
             }
         }
 
