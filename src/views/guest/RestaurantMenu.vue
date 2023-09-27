@@ -63,7 +63,7 @@
 							{{ ingredient.name + (index !== (dish.ingredients.length - 1) ? ", " : "")}}
 						</span>
 					</div>
-					<p class="btn btn-success" @click="addToCart(dish)">Add to cart</p>
+					<p class="btn btn-yellow" @click="addToCart(dish)">Add to cart</p>
 				</div>
 				<div class="content" :class="showDescription[dish.id] ? 'description-hidden': ''">
 					<div class="boxImg" v-if="dish.photo.startsWith('http')">
@@ -109,7 +109,7 @@
 							{{ ingredient.name + (index !== (dish.ingredients.length - 1) ? ", " : "")}}
 						</span>
 					</div>
-					<p class="btn btn-success" @click="addToCart(dish)">Add to cart</p>
+					<p class="btn btn-yellow" @click="addToCart(dish)">Add to cart</p>
 				</div>
 				<div class="content" :class="showDescription[dish.id] ? 'description-hidden': ''">
 					<div class="boxImg" v-if="dish.photo.startsWith('http')">
@@ -155,7 +155,7 @@
 							{{ ingredient.name + (index !== (dish.ingredients.length - 1) ? ", " : "")}}
 						</span>
 					</div>
-					<p class="btn btn-success" @click="addToCart(dish)">Add to cart</p>
+					<p class="btn btn-yellow" @click="addToCart(dish)">Add to cart</p>
 				</div>
 				<div class="content" :class="showDescription[dish.id] ? 'description-hidden': ''">
 					<div class="boxImg" v-if="dish.photo.startsWith('http')">
@@ -358,7 +358,12 @@
 <style lang="scss" scoped>
 	@use '../../styles/variables.scss' as *;
     @use '../../styles/general.scss' as *;
-
+    .btn-yellow{
+		background-color: $primarydark;
+		&:hover{
+			background-color: $primary;
+		}
+	}
     .myFont {
         font-family: 'Borel', cursive;
     }
@@ -448,7 +453,7 @@
 		display: none;
 	}
 	.customCheckBoxInput:checked + .customCheckBoxWrapper .customCheckBox {
-		background-color: #2d6737;
+		background-color: $secondarydark;
 		color: white;
 		box-shadow: rgba(0, 0, 0, 0.23) 0px -4px 1px 0px inset, rgba(255, 255, 255, 0.17) 0px -1px 1px 0px, rgba(0, 0, 0, 0.17) 0px 2px 4px 1px;
 	}
@@ -456,7 +461,7 @@
 		transform: translateY(-2px);
 	}
 	.customCheckBoxInput:checked + .customCheckBoxWrapper .customCheckBox:hover {
-		background-color: #34723f;
+		background-color: $primary;
 		box-shadow: rgba(0, 0, 0, 0.26) 0px -4px 1px 0px inset, rgba(255, 255, 255, 0.17) 0px -1px 1px 0px, rgba(0, 0, 0, 0.15) 0px 3px 6px 2px;
 	}
 	.customCheckBoxWrapper .customCheckBox:hover .inner {
@@ -490,7 +495,7 @@
 		right: 5%;
         width: 90%;
         height: 90%;
-        background-color: #ee9933;
+        background-color: $primarysoft;
         padding: 20px;
         display: flex;
         flex-direction: column;
@@ -548,7 +553,7 @@
 }
 .price {
 	font-weight: bold;
-	color: #ee9933;
+	color: $primary;
 }
 .description p {
 	margin-bottom: 10px;
@@ -566,7 +571,7 @@
 	height: 60px;
 	border: 0;
 	border-radius: 10px;
-	background-color: $primary;
+	background-color: $primarydark;
 	outline: none;
 	cursor: pointer;
 	color: #fff;
@@ -574,7 +579,7 @@
 	overflow: hidden;
 
     &:hover {
-        background-color: $secondary;
+        background-color: $primary;
     }
 
     &:active {
