@@ -521,7 +521,7 @@
 
 // ---Login button---
 	.loginbtn{
-		color: $secondary;
+		color: $secondarydark;
 		font-size: 15px;
 		padding: 0.7em 2.7em;
 		letter-spacing: 0.06em;
