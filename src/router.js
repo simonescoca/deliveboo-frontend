@@ -115,9 +115,10 @@ const router = createRouter({
             component: Orders,
         },
         {
-            path: '/user/order-statistics',
+            path: '/user/order-statistics/:monthlySales*/:orderCount*',
             name: 'order-statistics',
             component: OrderStatistics,
+            params: true, 
         },
         {
             path: '/user/restaurants/deleted',

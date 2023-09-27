@@ -133,6 +133,8 @@
                 orderDishes: [],
                 infotoggle: false,
                 selectedRes: null,
+			monthly_sales:[],
+			monthly_order_count:[]
             }
         },
 
@@ -168,6 +170,9 @@
                 })
                 .then(response => {
                     this.orders = response.data.results
+					this.monthly_sales = response.data.monthly_sales
+					this.monthly_order_count = response.data.monthly_order_count
+					
                 })
                 .catch(error => {
                     console.log(error)
