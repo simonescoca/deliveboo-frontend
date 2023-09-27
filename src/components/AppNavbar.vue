@@ -66,7 +66,7 @@
                 </router-link>
 
                 <!-- ? cart-button -->
-                <button class="d-flex justify-content-center align-items-center py-1 px-2 rounded-pill btn bg-mySecondary ms-3 ms-lg-5" @click="getCart(), calculateGrandTotal(), isCartVisible = true">
+                <button class="d-flex justify-content-center align-items-center rounded-pill btn bg-mySecondary ms-3 ms-lg-5" @click="getCart(), calculateGrandTotal(), isCartVisible = true">
                     <span>
                         <i class="fa-solid fa-cart-shopping position-relative">
                             <span class="position-absolute" v-if="store.dishQuantity">{{ store.dishQuantity }}</span>
