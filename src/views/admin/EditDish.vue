@@ -9,13 +9,13 @@
         <div v-if="isUpdateFailure" class="alert alert-danger">
             La modifica del piatto non è andata a buon fine. Si è verificato un errore.
         </div>
-        <form @submit.prevent="updateDish">
-            <div v-for="formSection in formSections" class="mb-3">
+        <form @submit.prevent="updateDish" enctype="multipart/form-data">
+            <!-- <div v-for="formSection in formSections" class="mb-3">
                 <div v-if="formSection.labelFor != 'description'">
                     <label :for="formSection.labelFor" class="form-label">
                         {{ formSection.labelContent }}
                     </label>
-                    <input :type="formSection.inputType" :class="formSection.inputClass" :id="formSection.inputID"
+                    <input :type="formSection.inputType" :class="formSection.inputClass" :name="formSection.inputID"
                         :aria-describedby="formSection.labelFor" v-model="editData[formSection.inputID]">
                 </div>
                 <div v-else class="form-floating">
@@ -27,31 +27,48 @@
                         {{ formSection.labelContent }}
                     </label>
                 </div>
+            </div> -->
+            <div class="mb-3">
+                <label for="name">Nome</label>
+                <input type="name" class="form-control" name="name" aria-describedby="name" v-model="editData.name">
+                <label for="price">Prezzo</label>
+                <input v-model="editData.price" type="number" class="form-control" name="price" aria-describedby="price">
+
+                <label for="description">Descrizione</label>
+                <textarea v-model="editData.description" class="form-control" name="description" id="description"
+                    cols="30"></textarea>
             </div>
             <div class="form-check form-switch form-check-reverse">
-                <input class="form-check-input" type="checkbox" id="is-it-available" v-model="editData.available">
+                <input class="form-check-input" type="checkbox" id="available" name="available"
+                    v-model="editData.available">
                 <label class="form-check-label" for="is-it-available">
                     E' disponibile?
                 </label>
             </div>
-            <div class="mb-3">
-                <label for="formFile" class="form-label">
-                    Aggiungi immagine
-                </label>
-                <input class="form-control" type="url" id="image" v-model="editData.photo">
+            <div class="mb-3" v-if="currentImage ? currentImage.startsWith('http') : ''">
+                <label for="prevImg">Immagine in uso</label>
+                <div class="current-img d-flex">
+                    <img :src="currentImage" class="w-100 h-100">
+                </div>
             </div>
-            <select class="form-select" aria-label="select-course" v-model="editData.course">
+            <div class="mb-3 d-flex flex-column">
+                <label for="formFile" class="form-label">
+                    Carica un'altra immagine
+                </label>
+                <input class="form-control" name="photo" type="file" @change="handleImageDish">
+            </div>
+            <select class="form-select" aria-label="select-course" name="course" v-model="editData.course">
                 <option selected>
                     {{ editData.course }}
                 </option>
-                <option v-for="course in courses" :value="course">
+                <option v-for="course in courses">
                     {{ course }}
                 </option>
             </select>
             <label for="ingredients" class="form-label mt-4">
                 Scrivi un ingrediente
             </label>
-            <input type="text" class="form-control mb-3" id="ingredient" v-model="ingredient">
+            <input type="text" name="ingredients[]" class="form-control mb-3" v-model="ingredient">
             <div v-if="editData.ingredients.length > 0" class="py-3">
                 <span class="me-2 pill-ingr" v-for="ingredientDish, index in editData.ingredients">
                     <i class="fa-solid fa-sm fa-xmark me-2" @click="removeFromArray(index)"></i>{{ ingredientDish }}
@@ -131,7 +148,8 @@ export default {
             isUpdateSuccess: false,
             isUpdateFailure: false,
             selectedRes: null,
-            selectedDish: null
+            selectedDish: null,
+            currentImage: null
         }
     },
 
@@ -144,6 +162,7 @@ export default {
     },
 
     mounted() {
+
         this.selectedRes = localStorage.getItem('currentRestaurant');
         this.selectedDish = localStorage.getItem('currentDish');
         this.getDish();
@@ -164,8 +183,8 @@ export default {
     },
 
     methods: {
-        getDish() {
-            axios.get(`${this.apiUrl}${this.userId}/restaurants/${this.selectedRes}/dishes/${this.selectedDish}`, {
+        async getDish() {
+            await axios.get(`${this.apiUrl}${this.userId}/restaurants/${this.selectedRes}/dishes/${this.selectedDish}`, {
                 headers: {
                     'Authorization': `Bearer ${this.userToken}`
                 }
@@ -181,13 +200,16 @@ export default {
                     this.editData.available = response.data.results.dish.available
                     this.editData.ingredients = response.data.results.dish.ingredients.map(item => item.name)
                     console.log(this.editData.ingredients)
+
+                    this.currentImage = this.editData.photo;
+
                 })
                 .catch(error => {
-                    console.log(error)
+                    console.error(error.config.data)
                 });
         },
         updateDish() {
-            axios.put(`${this.apiUrl}${this.userId}/restaurants/${this.selectedRes}/dishes/${this.selectedDish}`, {
+            axios.post(`${this.apiUrl}${this.userId}/restaurants/${this.selectedRes}/dishes/${this.selectedDish}`, {
                 name: this.editData.name,
                 description: this.editData.description,
                 price: this.editData.price,
@@ -197,6 +219,7 @@ export default {
                 ingredients: this.editData.ingredients,
             }, {
                 headers: {
+                    'Content-Type': 'multipart/form-data',
                     'Authorization': `Bearer ${this.userToken}`
                 }
             })
@@ -209,7 +232,10 @@ export default {
                     console.log(response);
                 })
                 .catch(error => {
-                    console.error(error);
+
+                    console.log(this.editData);
+                    console.error(error.response.data);
+                    console.error(error.response.message);
                     this.isUpdateSuccess = false;
                     this.isUpdateFailure = true;
                 });
@@ -229,6 +255,11 @@ export default {
         },
         removeFromArray(index) {
             this.editData.ingredients.splice(index, 1);
+        },
+        handleImageDish(event) {
+            // Ottieni il file selezionato dall'utente
+            const file = event.target.files[0];
+            this.editData.photo = file;
         }
     }
 }
@@ -239,5 +270,11 @@ export default {
     background-color: rgb(189, 181, 181);
     border-radius: 0.375rem;
     padding: 0.3rem 0.5rem;
+}
+
+.current-img {
+    width: 200px;
+    height: 250px;
+    object-fit: contain;
 }
 </style>
