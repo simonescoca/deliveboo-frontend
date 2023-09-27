@@ -1,4 +1,5 @@
 <template>
+	<div class="scroll-animation" :style="animationStyle"></div>
 	<!-- ---Jumbotron section--- -->
     <div class="container">
 		<div class="row text-center my-5">
@@ -149,6 +150,8 @@
 			return {
 				store,
 				search: '',
+				scrollY: 0,
+				topPosition: 20,
 			}
 		},
 
@@ -159,9 +162,20 @@
 		props: {
 
 		},
-
+		computed: {
+			animationStyle() {
+				return {
+					transform: `translateY(${this.scrollY}px) rotate(${this.scrollY / 3}deg)`,
+					top: `${this.topPosition}px`,
+				};
+			},
+		},
 		mounted () {
+			window.addEventListener('scroll', this.handleScroll);
+		},
 
+		beforeUnmount() {
+			window.removeEventListener('scroll', this.handleScroll);
 		},
 
 		created () {
@@ -175,14 +189,31 @@
 			saveSearch(search){
 				store.search = search
 				console.log(store.search)
-			}
+			},
+			handleScroll() {
+				this.scrollY = window.scrollY;
+				if(this.topPosition >= 20){
+					this.topPosition = this.scrollY/2.5;
+				}else{
+					this.topPosition = 20
+				}
+			},
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
 @use '../../styles/variables' as *;
-
+	.scroll-animation {
+		position: absolute;
+		left: 200px;
+		background-image: url('../../images/duck.png');
+		height: 50px;
+		width: 50px;
+		background-size: contain;
+		background-repeat: no-repeat;
+		transition: transform 0.1s ease; /* Aggiungi una transizione per un effetto più fluido */
+	}
 	.search {
 		background-color: $grey;
 		padding: 10px 5px;
