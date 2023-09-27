@@ -1,5 +1,5 @@
 <template>
-    <header class="mt-4 mb-3 bg-primary py-4">
+    <header class="mb-3 bg-yellow py-4">
         <div class="d-flex justify-content-around align-items-center container">
             <div>
                 <h2 class="findYourFavorite">
@@ -107,7 +107,7 @@
                         {{ category.name }}
                     </p>
                 </div>
-            <router-link :to="{ name: 'restaurant-menu' }" class="btn btn-primary" @click="saveSelectedRestaurant(restaurant.id)">
+            <router-link :to="{ name: 'restaurant-menu' }" class="btn btn-orange" @click="saveSelectedRestaurant(restaurant.id)">
                         Restaurant Menu
             </router-link>
             </div>
@@ -214,9 +214,20 @@
     @use '../../styles/variables' as *;
     @use '../../styles/general.scss' as *;
 
+    .bg-yellow{
+        background-color: $secondarysoft;
+    }
+    .btn-orange{
+		background-color: $primarydark;
+		color: white;
+		&:hover{
+			background-color: $primarysoft;
+		}
+	}
     .findYourFavorite {
-        font-family: 'Borel', cursive;
-        color: white;
+        font-size: 3rem;
+        font-weight: 700;
+        font-family: NunitoItalic;
     }
 
     .my_searchbar {
@@ -247,7 +258,6 @@
   padding: 2px 8px;
   background-color: rgba(0, 0, 0, 0.16);
   border-radius: 0px;
-  color: rgba(255, 255, 255, 0.7);
   transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
   transition-duration: 300ms;
   transition-property: color, background-color, box-shadow;
@@ -295,7 +305,7 @@
 }
 
 .customCheckBoxInput:checked + .customCheckBoxWrapper .customCheckBox {
-  background-color: #2d6737;
+  background-color: $secondarydark;
   color: white;
   box-shadow: rgba(0, 0, 0, 0.23) 0px -4px 1px 0px inset, rgba(255, 255, 255, 0.17) 0px -1px 1px 0px, rgba(0, 0, 0, 0.17) 0px 2px 4px 1px;
 }
@@ -305,7 +315,7 @@
 }
 
 .customCheckBoxInput:checked + .customCheckBoxWrapper .customCheckBox:hover {
-  background-color: #34723f;
+  background-color: $primary;
   box-shadow: rgba(0, 0, 0, 0.26) 0px -4px 1px 0px inset, rgba(255, 255, 255, 0.17) 0px -1px 1px 0px, rgba(0, 0, 0, 0.15) 0px 3px 6px 2px;
 }
 
@@ -316,9 +326,9 @@
 .form-control:focus {
   color: var(--bs-body-color);
   background-color: var(--bs-body-bg);
-  border-color: #000;
+  border-color: $primarysoft;
   outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 0 0.2rem #f8884396;
 }
 
 .card img {
