@@ -115,6 +115,9 @@
             </div>
         </div>
     </div>
+	<button
+            @click="$router.push({ name: 'order-statistics',params: { monthlySales: monthly_sales, orderCount:monthly_order_count  }})"
+        >...</button>
 </template>
 
 <script>
