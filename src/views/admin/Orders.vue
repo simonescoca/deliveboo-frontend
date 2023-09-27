@@ -74,8 +74,11 @@
                                     <th scope="col">
                                         Dish Name
                                     </th>
-                                    <th scope="col fw-bold">
+                                    <th scope="col">
                                         Dish Price
+                                    </th>
+                                    <th scope="col">
+                                        Dish Quantity
                                     </th>
                                     <th scope="col">
                                         Dish Course
@@ -92,6 +95,9 @@
                                     </td>
                                     <td class="fw-bold text-success">
                                         {{ "$" + orderDish.price.toFixed(2) }}
+                                    </td>
+                                    <td>
+                                        {{ orderDish.pivot.quantity }}
                                     </td>
                                     <td>
                                         {{ orderDish.course }}
