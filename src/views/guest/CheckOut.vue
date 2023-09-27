@@ -25,7 +25,8 @@
                         <div class="col-2 col-md-4 col-lg-6">
                             <div class="row">
                                 <div class="col-12 col-sm-4">
-                                    <img :src="dish.photo" :alt="dish.name" class="w-100">
+                                    <img :src="dish.photo" :alt="dish.name" class="w-100" v-if="dish.photo.startsWith('http')">
+                                    <img :src="getImageUrl(dish.photo)" :alt="dish.name" class="w-100" v-else>
                                 </div>
                                 <div class="col-12 col-sm my-auto">
                                     <h6 class="my-2">{{ dish.name }}</h6>
@@ -300,6 +301,10 @@
                 this.amount = (parseFloat(this.grandTotal) + this.shippingCost).toFixed(2);
                 return this.amount;
             },
+            getImageUrl(filename) {
+                return this.imageUrl = 'http://localhost:5173/public' + `/storage/${filename}`;
+            },
+            
 		}
 	}
 </script>
