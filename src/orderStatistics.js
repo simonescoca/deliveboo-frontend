@@ -11,7 +11,7 @@ export function initChart($orderedMonthlySales,$orderedMonthlyOrderCount) {
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
         borderColor: 'rgba(75, 192, 192, 1)',
         borderWidth: 1,
-        data: [$orderedMonthlyOrderCount,80,70,40,55,93,64,80,14,23,43,28]
+        data: [80,80,70,40,55,93,64,80,$orderedMonthlyOrderCount,23,43,28]
       },
       {
         label: 'ammontare delle entrate',
@@ -19,7 +19,7 @@ export function initChart($orderedMonthlySales,$orderedMonthlyOrderCount) {
         backgroundColor: 'rgba(13, 255, 0, 1)',
         borderColor: 'rgba(75, 192, 192, 0.2)',
         borderWidth: 1,
-        data: [$orderedMonthlySales,320,500,180,355,593,364,180,414,523,143,128]
+        data: [120,120,100,180,155,193,164,180,$orderedMonthlySales,123,143,128]
       }
     ]
     };
