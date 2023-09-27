@@ -45,10 +45,18 @@
                     E' disponibile?
                 </label>
             </div>
-            <div class="mb-3" v-if="currentImage ? currentImage.startsWith('http') : ''">
-                <label for="prevImg">Immagine in uso</label>
-                <div class="current-img d-flex">
-                    <img :src="currentImage" class="w-100 h-100">
+            <div v-if="currentImage">
+                <div class="mb-3" v-if="currentImage.startsWith('http')">
+                    <label for="prevImg">Immagine in uso</label>
+                    <div class="current-img-box d-flex">
+                        <img :src="currentImage" class="current-img w-100 h-100">
+                    </div>
+                </div>
+                <div class="mb-3" v-else>
+                    <p>Immagine in uso</p>
+                    <div class="current-img-box d-flex">
+                        <img :src="getImageUrl(currentImage)" class="current-img w-100 h-100">
+                    </div>
                 </div>
             </div>
             <div class="mb-3 d-flex flex-column">
@@ -149,7 +157,8 @@ export default {
             isUpdateFailure: false,
             selectedRes: null,
             selectedDish: null,
-            currentImage: null
+            currentImage: null,
+            imageUrl: null
         }
     },
 
@@ -260,7 +269,11 @@ export default {
             // Ottieni il file selezionato dall'utente
             const file = event.target.files[0];
             this.editData.photo = file;
-        }
+        },
+        getImageUrl(filename) {
+            // Genera l'URL pubblico per l'immagine
+            return this.imageUrl = 'http://localhost:5173/public' + `/storage/${filename}`;
+        },
     }
 }
 </script>
@@ -272,9 +285,14 @@ export default {
     padding: 0.3rem 0.5rem;
 }
 
-.current-img {
+.current-img-box {
     width: 200px;
     height: 250px;
-    object-fit: contain;
+
+}
+
+.current-img {
+    object-fit: cover;
+    border-radius: 0.375rem;
 }
 </style>

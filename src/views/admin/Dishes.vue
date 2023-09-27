@@ -16,11 +16,7 @@
         </div>
         <div class=" my_dishes">
             <div v-for="dish in dishes" class="d-flex my_dish my-3">
-                <!-- @if (str_starts_with($post->image, 'http' ))
-                    <img src="{{ $post->image }}" alt="{{ $post->title }}">
-                @else
-                    <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}">
-                @endif -->
+
                 <div class="my_r-img w-25" v-if="dish.photo.startsWith('http')">
                     <img :src="dish.photo" :alt="dish.name">
                 </div>
