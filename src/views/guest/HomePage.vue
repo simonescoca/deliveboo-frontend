@@ -31,7 +31,7 @@
 			</div>
 			<div class="col-1">
 				<!-- Bottone per aprire/chudere la section -->
-				<button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#howItWorks" aria-expanded="true" aria-controls="howItWorks">
+				<button class="btn btn-yellow" type="button" data-bs-toggle="collapse" data-bs-target="#howItWorks" aria-expanded="true" aria-controls="howItWorks">
 					<i class="fas fa-chevron-down"></i>
 				</button>
 			</div>
@@ -65,7 +65,7 @@
 			</div>
 			<div class="col-1">
 				<!-- Bottone per aprire/chudere la section -->
-				<button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#joinDeliveboo" aria-expanded="true" aria-controls="joinDeliveboo">
+				<button class="btn btn-yellow" type="button" data-bs-toggle="collapse" data-bs-target="#joinDeliveboo" aria-expanded="true" aria-controls="joinDeliveboo">
 					<i class="fas fa-chevron-down"></i>
 				</button>
 			</div>
@@ -80,7 +80,7 @@
 				<div class="col-12 col-md-4 my-auto">
 					<h3>As a rider</h3>
 					<p>Earn money by delivering food from local vendors. All you need is a bike and the passion for riding.</p>
-					<a href="" class="btn btn-secondary fw-semibold">Ride with us</a>
+					<a href="" class="btn btn-orange fw-semibold">Ride with us</a>
 				</div>
             </div>
 			<div class="row border-top border-bottom">
@@ -90,7 +90,7 @@
 				<div class="col-12 col-md-4 my-auto">
 					<h3>As a partner</h3>
 					<p>BiteEats helps local vendors grow with online ordering, loyalty programs, and more.</p>
-					<a href="" class="btn btn-secondary fw-semibold">Partner with us</a>
+					<a href="" class="btn btn-orange fw-semibold">Partner with us</a>
 				</div>
             </div>
 			<div class="row">
@@ -100,7 +100,7 @@
 				<div class="col-12 col-md-4 my-auto">
 					<h3>As a colleague</h3>
 					<p>Join our team and help build a top-notch food delivery service.</p>
-					<a href="" class="btn btn-secondary fw-semibold">Work with us</a>
+					<a href="" class="btn btn-orange fw-semibold">Work with us</a>
 				</div>
             </div>
         </div>
@@ -113,7 +113,7 @@
 			</div>
 			<div class="col-1">
 				<!-- Bottone per aprire/chudere la section -->
-				<button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#downloadApp" aria-expanded="true" aria-controls="downloadApp">
+				<button class="btn btn-yellow" type="button" data-bs-toggle="collapse" data-bs-target="#downloadApp" aria-expanded="true" aria-controls="downloadApp">
 					<i class="fas fa-chevron-down"></i>
 				</button>
 			</div>
@@ -125,7 +125,7 @@
 				<div class="col-12 col-md-4 my-auto">
 					<h3>Order with ease!</h3>
 					<p>Get the most delicious bites delivered to your door with BiteEats. Our fast and reliable delivery service offers a variety of cuisines from local vendors.</p>
-					<a href="" class="btn btn-red fw-semibold">Download</a>
+					<a href="" class="btn btn-orange fw-semibold">Download</a>
 				</div>
                 <div class="col-12 col-md text-center">
 					<img src="../../images/downloadapp.png" alt="table with food image" class="w-50">
@@ -198,6 +198,14 @@
 		color: white;
 		&:hover{
 			background-color: $primarysoft;
+		}
+	}
+
+	.btn-yellow{
+		background-color: $secondarydark;
+		color: white;
+		&:hover{
+			background-color: $secondary;
 		}
 	}
 </style>
