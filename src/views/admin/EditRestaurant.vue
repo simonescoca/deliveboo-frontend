@@ -27,6 +27,12 @@
                     </label>
                 </div>
             </div>
+            <div class="mb-3 d-flex flex-column">
+                <label for="formFile" class="form-label">
+                    Carica un'altra immagine
+                </label>
+                <input class="form-control" name="image" type="file" @change="handleImageDish">
+            </div>
             <button type="submit" class="d-flex btn btn-primary mx-auto mt-3">
                 Aggiorna
             </button>
@@ -80,6 +86,7 @@ export default {
                 address: '',
                 city: '',
                 types: [],
+                image: null,
             },
             isUpdateSuccess: false,
             isUpdateFailure: false,
@@ -131,13 +138,15 @@ export default {
         },
 
         updateRestaurant() {
-            axios.put(`${this.apiUrl}${this.userId}/restaurants/${store.selectedRes}`, {
+            axios.post(`${this.apiUrl}${this.userId}/restaurants/${store.selectedRes}`, {
                 name: this.editData.name,
                 address: this.editData.address,
                 city: this.editData.city,
                 types: this.editData.types,
+                image: this.editData.image,
             }, {
                 headers: {
+                    'Content-Type': 'multipart/form-data',
                     'Authorization': `Bearer ${this.userToken}`
                 }
             })
@@ -159,6 +168,12 @@ export default {
                     this.isUpdateSuccess = false;
                     this.isUpdateFailure = true;
                 });
+        },
+        
+        handleImageDish(event) {
+            // Ottieni il file selezionato dall'utente
+            const file = event.target.files[0];
+            this.editData.image = file;
         }
 
     }
