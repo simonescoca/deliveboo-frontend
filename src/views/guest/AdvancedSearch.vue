@@ -93,7 +93,8 @@
     <main class="d-flex flex-wrap justify-content-around align-items-center container">
         <div v-for="restaurant in restaurants" class="mb-4">
             <div class="card" style="width: 24rem;">
-                <img :src="restaurant.image" class="card-img-top" :alt="restaurant.name">
+                <img :src="restaurant.image" class="card-img-top" :alt="restaurant.name" v-if="restaurant.image.startsWith('http')">
+                <img :src="getImageUrl(restaurant.image)" class="card-img-top" :alt="restaurant.name" v-else>
                 <div class="card-body">
                 <h5 class="card-title">
                     {{ restaurant.name }}
@@ -200,7 +201,10 @@
             },
             saveSelectedRestaurant(selectedRestaurant) {
                 localStorage.setItem('selectedRestaurant', selectedRestaurant.toString());
-            }
+            },
+            getImageUrl(filename) {
+                return this.imageUrl = 'http://localhost:5173/public' + `/storage/${filename}`;
+            },
 		}
 	}
 </script>
