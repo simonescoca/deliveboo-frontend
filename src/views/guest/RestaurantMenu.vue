@@ -365,7 +365,6 @@
 		}
 	}
     .myFont {
-        font-family: 'Borel', cursive;
     }
 
     .myCircle {
