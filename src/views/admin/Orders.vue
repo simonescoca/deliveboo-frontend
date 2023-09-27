@@ -68,7 +68,7 @@
                     <div class="card d-inline-block m-5 text-center position-relative">
                         <i class="fa-solid fa-xmark position-absolute" style="color: #ff0000;" @click="this.infotoggle = false"></i>
 
-                        <table class="table table-dark table-striped table-hover">
+                        <table class="table table-dark table-striped table-hover ">
                             <thead>
                                 <tr class="fw-bold">
                                     <th scope="col">
@@ -102,8 +102,9 @@
                                     <td>
                                         {{ orderDish.course }}
                                     </td>
-                                    <td>
-                                        {{ orderDish.photo }}
+                                    <td class="boxImg">
+                                        <img :src="orderDish.photo" :alt="orderDish.name" class="image" v-if="orderDish.photo.startsWith('http')">
+                                        <img :src="getImageUrl(orderDish.photo)" :alt="orderDish.name" class="image" v-else>
                                     </td>
                                 </tr>
                             </tbody>
@@ -187,6 +188,9 @@
                     console.log(error)
                 });
             },
+            getImageUrl(filename) {
+                return this.imageUrl = 'http://localhost:5173/public' + `/storage/${filename}`;
+            },
         },
     }
 </script>
@@ -215,7 +219,24 @@
             width: calc(100%/5);
         }
     }
-
+    tr{
+        vertical-align: middle;
+    }
+    .boxImg{
+		width: 300px;
+		height: 200px;
+		overflow: hidden;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+        border: 2px solid black;
+        padding: 0;
+		.image {
+			width: 100%;
+			height: auto;
+			display: block;
+		}
+	}
     .invisible {
         display: none;
     }
