@@ -271,6 +271,7 @@
     .scroll-animation {
 		position: absolute;
 		left: 0;
+        z-index: 3;
 		background-image: url('../images/duck.png');
 		height: 50px;
 		width: 50px;
