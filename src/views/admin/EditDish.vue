@@ -102,7 +102,7 @@
 <script>
 import { store } from "../../store.js";
 import axios from "axios";
-
+import {router} from '../../router.js'
 export default {
     data() {
         return {
@@ -237,6 +237,7 @@ export default {
 
                         this.isUpdateSuccess = true;
                         this.isUpdateFailure = false;
+                        router.push({name:'dishes'});
                     }
                     console.log(response);
                 })
