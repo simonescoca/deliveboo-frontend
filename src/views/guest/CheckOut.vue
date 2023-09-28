@@ -116,7 +116,9 @@
                     </form>
                     <input type="hidden" id="amountInput" :value=amount>
                     <div id="dropin-container"></div>
-                    <button id="submit-button" class="purchase--btn"  >Checkout</button>
+                    <div class="w-100">
+                        <button id="submit-button" class="purchase--btn "  >Checkout</button>
+                    </div>
                         <!-- ---Checkout button--- -->
                             
                             
@@ -200,10 +202,13 @@
                         status:this.paymentSuccessful,
                         dishes:this.cart.map(item => item.id),
                         quantities:this.cart.map(item => item.quantity)
-
                     }).then(response => {
                         if (response.status === 200 || response.status === 204) {
                             console.log("ordine riuscito") 
+                            localStorage.removeItem('cart')
+                            this.store.cart = []
+                            this.cart = []
+                            this.store.dishQuantity = 0
                         }  
                     console.log(response)
                     })    
@@ -471,21 +476,23 @@
 }
 
 .purchase--btn {
-  height: 55px;
-  background: #F2F2F2;
+  height: 50px;
+  width: 200px;
+  background: white;
   border-radius: 11px;
   border: 0;
+  margin-bottom: 1rem;
   outline: none;
-  color: #ffffff;
+  color: white;
   font-size: 13px;
   font-weight: 700;
-  background: linear-gradient(180deg, $primary 0%, $primarysoft 50%, $primary 100%);
-  box-shadow: 0px 0px 0px 0px #FFFFFF, 0px 0px 0px 0px #000000;
+  background: linear-gradient(180deg, $primarydark 0%, $primary 50%, $primarydark 100%);
+  box-shadow: 0px 0px 0px 0px white, 0px 0px 0px 0px #000000;
   transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
 }
 
 .purchase--btn:hover {
-  box-shadow: 0px 0px 0px 2px #FFFFFF, 0px 0px 0px 4px #0000003a;
+  box-shadow: 0px 0px 0px 2px white, 0px 0px 0px 4px #0000003a;
 }
 
 /* Reset input number styles */
