@@ -293,7 +293,7 @@
 		font-size: 13px;
 		margin-top: 30px;
 		a{
-			color: $primary;
+			color: $primarydark;
 			text-decoration: none;
 			&:hover{
 				color: $primarysoft;
@@ -343,9 +343,9 @@
 // ---Submit---
 .continue-application {
 		--color: black;
-		--background: #ffd07e;
-		--background-hover: #ff9474;
-		--background-left: #FA6639;
+		--background: #ffda32;
+		--background-hover: #ff9654;
+		--background-left: #f76627;
 		--folder: #F3E9CB;
 		--folder-inner: #BEB393;
 		--paper: #FFFFFF;
