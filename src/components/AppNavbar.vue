@@ -38,7 +38,7 @@
                     </router-link>
                 </div>
                 <div v-if="userName === null" @click="store.access = true"> <!--class="d-flex align-items-center"-->
-                    <router-link :to="{ name: 'profile' }" class="d-flex align-items-center bg-mySecondary rounded-pill btn">
+                    <router-link :to="{ name: 'profile' }" class="d-flex align-items-center bg-mySecondary rounded-pill btn ms-2">
                         <span>
                             <i class="fa-solid fa-arrow-right-to-bracket"></i>
                         </span>
