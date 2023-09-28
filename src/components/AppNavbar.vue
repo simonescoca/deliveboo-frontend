@@ -196,7 +196,10 @@
 		methods: {
 			handleScroll() {
 				this.scrollY = window.scrollY;
-				this.topPosition = this.scrollY/2.5;
+                this.topPosition = this.scrollY/2.5;
+                if(this.topPosition >= 840){
+                    this.topPosition = 840
+                }
 			},
             logout () {
                 localStorage.removeItem('userToken');
