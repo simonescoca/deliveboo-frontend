@@ -1,116 +1,123 @@
 <template>
-    <header class="mb-3 bg-yellow py-4">
-        <div class="d-flex justify-content-around align-items-center container">
-            <div>
-                <h2 class="findYourFavorite">
-                    Find your favorite
-                </h2>
+    <header class="position-relative pt-5 bg-yellow">
+        <svg style="height: 4rem; width: 100%; position: absolute; top: 0; left: 0; right: 0; transform: rotate(180deg);" class="wave-1hkxOo" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" preserveAspectRatio="none"><path class="wavePath-haxJK1 animationPaused-2hZ4IO" d="M826.337463,25.5396311 C670.970254,58.655965 603.696181,68.7870267 447.802481,35.1443383 C293.342778,1.81111414 137.33377,1.81111414 0,1.81111414 L0,150 L1920,150 L1920,1.81111414 C1739.53523,-16.6853983 1679.86404,73.1607868 1389.7826,37.4859505 C1099.70117,1.81111414 981.704672,-7.57670281 826.337463,25.5396311 Z" fill="#ff9654"></path></svg>
+        <div class="py-4">
+            <div class="d-flex justify-content-around align-items-center container">
+                <div>
+                    <h2 class="findYourFavorite">
+                        Find your favorite
+                    </h2>
+                </div>
             </div>
+            <form @submit.prevent="getRestaurants()">
+                <div class="input-group mb-3 w-50 mx-auto">
+                    <input type="text" v-model="restCategOrName" class="form-control" placeholder="Restaurant name or type..." @keyup.enter="getRestaurants()">
+                    <button class="btn btn-outline-dark" type="submit">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+                <div class="d-flex justify-content-center align-items-center container">
+                    <div class="customCheckBoxHolder">
+                        <input type="checkbox" id="cCB1" class="customCheckBoxInput" name="type[]" value="Italiana">
+                        <label for="cCB1" class="customCheckBoxWrapper me-2">
+                            <div class="customCheckBox">
+                                <div class="inner">Italiana</div>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="customCheckBoxHolder">
+                        <input type="checkbox" id="cCB2" class="customCheckBoxInput" name="type[]" value="Francese">
+                        <label for="cCB2" class="customCheckBoxWrapper">
+                            <div class="customCheckBox">
+                                <div class="inner">Francese</div>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="customCheckBoxHolder">
+                        <input type="checkbox" id="cCB3" class="customCheckBoxInput" name="type[]" value="Giapponese">
+                        <label for="cCB3" class="customCheckBoxWrapper">
+                            <div class="customCheckBox">
+                                <div class="inner">Giapponese</div>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="customCheckBoxHolder">
+                        <input type="checkbox" id="cCB4" class="customCheckBoxInput" name="type[]" value="Cinese">
+                        <label for="cCB4" class="customCheckBoxWrapper">
+                            <div class="customCheckBox">
+                                <div class="inner">Cinese</div>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="customCheckBoxHolder">
+                        <input type="checkbox" id="cCB5" class="customCheckBoxInput" name="type[]" value="Americana">
+                        <label for="cCB5" class="customCheckBoxWrapper">
+                            <div class="customCheckBox">
+                                <div class="inner">Americana</div>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="customCheckBoxHolder">
+                        <input type="checkbox" id="cCB6" class="customCheckBoxInput" name="type[]" value="Indiano">
+                        <label for="cCB6" class="customCheckBoxWrapper">
+                            <div class="customCheckBox">
+                                <div class="inner">Indiano</div>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="customCheckBoxHolder">
+                        <input type="checkbox" id="cCB7" class="customCheckBoxInput" name="type[]" value="Mediterranea">
+                        <label for="cCB7" class="customCheckBoxWrapper">
+                            <div class="customCheckBox">
+                                <div class="inner">Mediterranea</div>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="customCheckBoxHolder">
+                        <input type="checkbox" id="cCB8" class="customCheckBoxInput" name="type[]" value="Mediorientale">
+                        <label for="cCB8" class="customCheckBoxWrapper">
+                            <div class="customCheckBox">
+                                <div class="inner">Mediorientale</div>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="customCheckBoxHolder">
+                        <input type="checkbox" id="cCB9" class="customCheckBoxInput" name="type[]" value="Vietnamita">
+                        <label for="cCB9" class="customCheckBoxWrapper">
+                            <div class="customCheckBox">
+                                <div class="inner">Vietnamita</div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </form>
         </div>
-        <form @submit.prevent="getRestaurants()">
-            <div class="input-group mb-3 w-50 mx-auto">
-                <input type="text" v-model="restCategOrName" class="form-control" placeholder="Restaurant name or type..." @keyup.enter="getRestaurants()">
-                <button class="btn btn-outline-dark" type="submit">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
-            </div>
-            <div class="d-flex justify-content-center align-items-center container">
-                <div class="customCheckBoxHolder">
-                    <input type="checkbox" id="cCB1" class="customCheckBoxInput" name="type[]" value="Italiana">
-                    <label for="cCB1" class="customCheckBoxWrapper me-2">
-                        <div class="customCheckBox">
-                            <div class="inner">Italiana</div>
-                        </div>
-                    </label>
-                </div>
-                <div class="customCheckBoxHolder">
-                    <input type="checkbox" id="cCB2" class="customCheckBoxInput" name="type[]" value="Francese">
-                    <label for="cCB2" class="customCheckBoxWrapper">
-                        <div class="customCheckBox">
-                            <div class="inner">Francese</div>
-                        </div>
-                    </label>
-                </div>
-                <div class="customCheckBoxHolder">
-                    <input type="checkbox" id="cCB3" class="customCheckBoxInput" name="type[]" value="Giapponese">
-                    <label for="cCB3" class="customCheckBoxWrapper">
-                        <div class="customCheckBox">
-                            <div class="inner">Giapponese</div>
-                        </div>
-                    </label>
-                </div>
-                <div class="customCheckBoxHolder">
-                    <input type="checkbox" id="cCB4" class="customCheckBoxInput" name="type[]" value="Cinese">
-                    <label for="cCB4" class="customCheckBoxWrapper">
-                        <div class="customCheckBox">
-                            <div class="inner">Cinese</div>
-                        </div>
-                    </label>
-                </div>
-                <div class="customCheckBoxHolder">
-                    <input type="checkbox" id="cCB5" class="customCheckBoxInput" name="type[]" value="Americana">
-                    <label for="cCB5" class="customCheckBoxWrapper">
-                        <div class="customCheckBox">
-                            <div class="inner">Americana</div>
-                        </div>
-                    </label>
-                </div>
-                <div class="customCheckBoxHolder">
-                    <input type="checkbox" id="cCB6" class="customCheckBoxInput" name="type[]" value="Indiano">
-                    <label for="cCB6" class="customCheckBoxWrapper">
-                        <div class="customCheckBox">
-                            <div class="inner">Indiano</div>
-                        </div>
-                    </label>
-                </div>
-                <div class="customCheckBoxHolder">
-                    <input type="checkbox" id="cCB7" class="customCheckBoxInput" name="type[]" value="Mediterranea">
-                    <label for="cCB7" class="customCheckBoxWrapper">
-                        <div class="customCheckBox">
-                            <div class="inner">Mediterranea</div>
-                        </div>
-                    </label>
-                </div>
-                <div class="customCheckBoxHolder">
-                    <input type="checkbox" id="cCB8" class="customCheckBoxInput" name="type[]" value="Mediorientale">
-                    <label for="cCB8" class="customCheckBoxWrapper">
-                        <div class="customCheckBox">
-                            <div class="inner">Mediorientale</div>
-                        </div>
-                    </label>
-                </div>
-                <div class="customCheckBoxHolder">
-                    <input type="checkbox" id="cCB9" class="customCheckBoxInput" name="type[]" value="Vietnamita">
-                    <label for="cCB9" class="customCheckBoxWrapper">
-                        <div class="customCheckBox">
-                            <div class="inner">Vietnamita</div>
-                        </div>
-                    </label>
-                </div>
-            </div>
-        </form>
     </header>
-    <main class="d-flex flex-wrap justify-content-around align-items-center container">
-        <div v-for="restaurant in restaurants" class="mb-4">
-            <div class="card" style="width: 24rem;">
-                <img :src="restaurant.image" class="card-img-top" :alt="restaurant.name" v-if="restaurant.image.startsWith('http')">
-                <img :src="getImageUrl(restaurant.image)" class="card-img-top" :alt="restaurant.name" v-else>
-                <div class="card-body">
-                <h5 class="card-title">
-                    {{ restaurant.name }}
-                </h5>
-                <p class="card-text">
-                    {{ restaurant.city + ", " + restaurant.address }}
-                </p>
-                <div class="d-flex align-items-center my_categories">
-                    <p v-for="category in restaurant.types" class="m-0 ms-2 mb-2 card-text">
-                        {{ category.name }}
+    <main class="position-relative py-5">
+        <svg style="height: 4rem; width: 100%; position: absolute; top: 0; left: 0; right: 0; transform: rotate(180deg); transform: scaleY(-1)" class="wave-1hkxOo" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" preserveAspectRatio="none"><path class="wavePath-haxJK1 animationPaused-2hZ4IO" d="M826.337463,25.5396311 C670.970254,58.655965 603.696181,68.7870267 447.802481,35.1443383 C293.342778,1.81111414 137.33377,1.81111414 0,1.81111414 L0,150 L1920,150 L1920,1.81111414 C1739.53523,-16.6853983 1679.86404,73.1607868 1389.7826,37.4859505 C1099.70117,1.81111414 981.704672,-7.57670281 826.337463,25.5396311 Z" fill="#fff2b0"></path></svg>
+        <svg style="height: 4rem; width: 100%; position: absolute; bottom: 0; left: 0; right: 0;" class="wave-1hkxOo" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" preserveAspectRatio="none"><path class="wavePath-haxJK1 animationPaused-2hZ4IO" d="M826.337463,25.5396311 C670.970254,58.655965 603.696181,68.7870267 447.802481,35.1443383 C293.342778,1.81111414 137.33377,1.81111414 0,1.81111414 L0,150 L1920,150 L1920,1.81111414 C1739.53523,-16.6853983 1679.86404,73.1607868 1389.7826,37.4859505 C1099.70117,1.81111414 981.704672,-7.57670281 826.337463,25.5396311 Z" fill="#ff9654"></path></svg>
+        <div class="d-flex flex-wrap justify-content-around align-items-center container pt-5">
+            <div v-for="restaurant in restaurants" class="mb-4">
+                <div class="card" style="width: 24rem;">
+                    <img :src="restaurant.image" class="card-img-top" :alt="restaurant.name" v-if="restaurant.image.startsWith('http')">
+                    <img :src="getImageUrl(restaurant.image)" class="card-img-top" :alt="restaurant.name" v-else>
+                    <div class="card-body">
+                    <h5 class="card-title">
+                        {{ restaurant.name }}
+                    </h5>
+                    <p class="card-text">
+                        {{ restaurant.city + ", " + restaurant.address }}
                     </p>
+                    <div class="d-flex align-items-center my_categories">
+                        <p v-for="category in restaurant.types" class="m-0 ms-2 mb-2 card-text">
+                            {{ category.name }}
+                        </p>
+                    </div>
+                <router-link :to="{ name: 'restaurant-menu' }" class="btn btn-orange" @click="saveSelectedRestaurant(restaurant.id)">
+                    Restaurant Menu
+                </router-link>
                 </div>
-            <router-link :to="{ name: 'restaurant-menu' }" class="btn btn-orange" @click="saveSelectedRestaurant(restaurant.id)">
-                        Restaurant Menu
-            </router-link>
-            </div>
+                </div>
             </div>
         </div>
     </main>
