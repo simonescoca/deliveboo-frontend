@@ -116,8 +116,8 @@
                     </form>
                     <input type="hidden" id="amountInput" :value=amount>
                     <div id="dropin-container"></div>
-                    <div class="w-100">
-                        <button id="submit-button" class="purchase--btn "  >Checkout</button>
+                    <div class="w-100 d-flex">
+                        <button id="submit-button" class="purchase--btn mx-auto"  >Checkout</button>
                     </div>
                         <!-- ---Checkout button--- -->
                             
