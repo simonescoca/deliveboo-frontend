@@ -81,6 +81,7 @@
 </template>
 
 <script>
+import { router } from "../../router";
 import { store } from "../../store.js";
 import axios from "axios";
 
@@ -191,8 +192,10 @@ export default {
             })
                 .then(response => {
                     if (response.status === 200 || response.status === 204) {
-
+                        
                         this.isUpdateSuccess = true;
+                        router.push({name:'dishes'});
+                        
                         setTimeout(() => {
                             this.isUpdateSuccess = false;
                         }, 3000);
