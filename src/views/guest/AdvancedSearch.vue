@@ -336,4 +336,8 @@
     object-position: center;
     height: 20rem;
 }
+
+.card{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
 </style>
