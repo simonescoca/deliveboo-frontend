@@ -1,10 +1,10 @@
 <template>
 	<AppNavbar />
 	<main>
-		<transition name="slide-fade" mode="in-out">
-			<router-view>
-			</router-view>
-		</transition>
+
+		<router-view>
+		</router-view>
+
 	</main>
 	<AppFooter />
 </template>
@@ -54,17 +54,17 @@ export default {
 	font-family: Nunito;
 }
 
-.slide-fade-enter-active,
-.slide-fade-leave-active {
-	transition: all 0.5s;
-}
+// .slide-fade-enter-active,
+// .slide-fade-leave-active {
+// 	transition: all 0.5s;
+// }
 
-.slide-fade-enter,
-.slide-fade-leave-to
+// .slide-fade-enter,
+// .slide-fade-leave-to
 
-/* .slide-fade-leave-active in <2.1.8 */
-	{
-	transform: translateX(10px);
-	opacity: 0;
-}
+// /* .slide-fade-leave-active in <2.1.8 */
+// 	{
+// 	transform: translateX(10px);
+// 	opacity: 0;
+// }
 </style>
