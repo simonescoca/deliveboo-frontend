@@ -8,7 +8,7 @@
             <div v-if="isRestoreSuccess" class="alert alert-success">
                 Il ristorante è stato ripristinato correttamente!
             </div>
-            <div class="col-12" v-if="deletedRestaurants.lenght > 0">
+            <div class="col-12" v-if="deletedRestaurants.length > 0">
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
