@@ -57,7 +57,7 @@
 <script>
 import { store } from "../../store.js";
 import axios from "axios";
-
+import {router} from'../../router.js';
 export default {
     data() {
         return {
@@ -172,6 +172,7 @@ export default {
                     if (response.status === 200 || response.status === 204) {
 
                         this.isUpdateSuccess = true;
+                        router.push({name:'restaurants'});
                         setTimeout(() => {
                             this.isUpdateSuccess = false;
                         }, 3000);
