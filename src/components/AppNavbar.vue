@@ -288,7 +288,7 @@
 
     nav {
         background-color: $primarysoft;
-        padding: 1rem 0;
+        padding: 1rem 0 0 0;
 
         .my_logo-container {
             height: 3.5rem;
