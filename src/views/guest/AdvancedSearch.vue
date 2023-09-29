@@ -11,15 +11,15 @@
             <div class="d-flex justify-content-around align-items-center container">
                 <div>
                     <h2 class="findYourFavorite">
-                        Find your favorite
+                        Trova un ristorante
                     </h2>
                 </div>
             </div>
             <form @submit.prevent="getRestaurants()">
                 <div class="input-group mb-3 w-50 mx-auto">
-                    <input type="text" v-model="restCategOrName" class="form-control"
-                        placeholder="Restaurant name or type..." @keyup.enter="getRestaurants()">
-                    <button class="btn btn-outline-dark" type="submit">
+                    <input type="text" v-model="restCategOrName" class="form-control" placeholder="Cerca"
+                        @keyup.enter="getRestaurants()">
+                    <button class="btn search-btn" @click="searchResults = true" type="submit">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </button>
                 </div>
@@ -101,9 +101,7 @@
         </div>
     </header>
     <main>
-        <h3 class="text-center" v-if="restaurants && restaurants.length === 0">La tua ricerca non ha prodotto risultati.
-        </h3>
-        <h3 class="text-center my-3" v-else-if="restaurants.length > 1">Trovati {{ restaurants.length }} risultati</h3>
+
         <div class="position-relative py-5">
             <svg style="height: 4rem; width: 100%; position: absolute; top: 0; left: 0; right: 0; transform: rotate(180deg); transform: scaleY(-1)"
                 class="wave-1hkxOo" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100"
@@ -118,6 +116,12 @@
                     d="M826.337463,25.5396311 C670.970254,58.655965 603.696181,68.7870267 447.802481,35.1443383 C293.342778,1.81111414 137.33377,1.81111414 0,1.81111414 L0,150 L1920,150 L1920,1.81111414 C1739.53523,-16.6853983 1679.86404,73.1607868 1389.7826,37.4859505 C1099.70117,1.81111414 981.704672,-7.57670281 826.337463,25.5396311 Z"
                     fill="#ff9654"></path>
             </svg>
+            <h3 class="text-center my-3" v-if="searchResults && restaurants.length === 0">La tua ricerca non ha
+                prodotto risultati.
+            </h3>
+            <h3 class="text-center my-3" v-else-if="searchResults && restaurants.length > 1">Trovati {{ restaurants.length
+            }}
+                risultati</h3>
             <div class="d-flex flex-wrap justify-content-around align-items-center container pt-5">
                 <div v-for="restaurant in restaurants" class="mb-4">
                     <div class="card" style="width: 24rem;">
@@ -156,6 +160,7 @@ export default {
     data() {
         return {
             store,
+            searchResults: false,
             selectedOptions: '',
             checkSelect: [],
             restCategOrName: '',
@@ -189,9 +194,9 @@ export default {
     },
 
     created() {
+        this.store.isFooterVisible = true;
         this.restCategOrName = store.search
-        this.getRestaurants();
-
+        this.getRestaurants()
     },
 
     methods: {
@@ -213,6 +218,7 @@ export default {
                     } else {
                         this.restaurants = response.data.results
                     }
+
                 })
                 .catch(error => {
                     console.log(error)
@@ -385,4 +391,5 @@ export default {
     border: 1px solid #ff9654;
     background-color: #ff9654;
     color: white;
-}</style>
+}
+</style>

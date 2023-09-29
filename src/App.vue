@@ -47,24 +47,11 @@ export default {
 </script>
 
 <style lang="scss">
+@use "./styles/general.scss";
 @use './styles/variables' as *;
 @import "bootstrap/scss/bootstrap";
 
 * {
 	font-family: Nunito;
 }
-
-// .slide-fade-enter-active,
-// .slide-fade-leave-active {
-// 	transition: all 0.5s;
-// }
-
-// .slide-fade-enter,
-// .slide-fade-leave-to
-
-// /* .slide-fade-leave-active in <2.1.8 */
-// 	{
-// 	transform: translateX(10px);
-// 	opacity: 0;
-// }
 </style>

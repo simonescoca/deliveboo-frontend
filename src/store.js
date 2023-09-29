@@ -7,6 +7,7 @@ const store = reactive({
     cart: [],
     dishQuantity: 0,
     search: "",
+    isFooterVisible: true,
 });
 
 export { store };

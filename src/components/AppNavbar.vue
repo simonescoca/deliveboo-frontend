@@ -96,14 +96,13 @@
         </div>
 
         <!-- ? cart -->
-        <div class="position-fixed top-0 end-0 bg-secondary bg-opacity-75 myCart"
-            :class="isCartVisible === false ? 'w-0' : 'w-30rem'">
-            <div class="position-absolute top-0 start-0 text-white fw-bold fs-1" @click="isCartVisible = false">
-                <i class="fa-solid fa-xmark"></i>
-            </div>
+        <div class="position-fixed top-0 end-0 bg-opacity-25 myCart" :class="isCartVisible === false ? 'w-0' : 'col-12 col-sm9 col-md-6 col-xxl-3 cartBoxShadow'">
+            <button class="position-absolute top-0 start-0 fw-bold fs-3 d-flex mt-4 ms-4 btn rounded-pill X-button" @click="isCartVisible = false">
+                <i class="fa-solid fa-xmark m-auto"></i>
+            </button>
 
             <!-- ? cart - restaurant -->
-            <header class="mt-5 d-flex">
+            <header class="mt-5 pt-3 d-flex">
                 <h2 class="m-0 m-auto">
                     Ristorante selezionato
                 </h2>
@@ -112,9 +111,8 @@
             <!-- ? cart - dishes -->
             <main class="overflow">
                 <div v-for="dish in store.cart" class="d-flex mt-3 cartSection">
-                    <div
-                        class="m-auto d-flex justify-content-between bg-secondary rounded py-2 px-3 position-relative myAdded">
-                        <div class="imgCont">
+                    <div class="m-auto d-flex rounded py-2 px-3 position-relative myAdded">
+                        <div class="imgCont me-4">
                             <img :src="dish.photo" :alt="dish.name" class="rounded">
                         </div>
                         <div class="infoCont">
@@ -122,12 +120,11 @@
                                 {{ dish.name }}
                             </p>
                             <p class="m-0">
-                                {{ "$" + dish.price }}
+                                {{ "$" + dish.price.toFixed(2) }}
                             </p>
                         </div>
-                        <div class="position-absolute bottom-0 end-0 myCounter">
-                            <input type="number" v-model="dish.quantity"
-                                @input="updateTotalPrice(dish), calculateGrandTotal()" @change="calculateGrandTotal()">
+                        <div class="position-absolute bottom-0 end-0 pb-2 pe-2 myCounter">
+                            <input type="number" v-model="dish.quantity" @input="updateTotalPrice(dish), calculateGrandTotal()" @change="calculateGrandTotal()">
                         </div>
                     </div>
                 </div>
@@ -137,7 +134,7 @@
             <footer class="d-flex justify-content-around align-items-center"
                 :class="isCartVisible === false ? 'd-none' : ''">
                 <h4 class="m-0">
-                    {{ "Totale: " + totale }}
+                    {{ "Totale: $" + totale.toFixed(2) }}
                 </h4>
                 <transition name="slide-fade" mode="in-out">
                     <router-link :to="{ name: 'checkout' }" key="Page6" class="btn btn-warning"
@@ -295,6 +292,19 @@ export default {
 <style lang="scss" scoped>
 @use "../styles/variables" as *;
 
+.X-button {
+
+    &:hover {
+        -webkit-box-shadow: 0px 0px 6px 3px rgb(0, 0, 0); 
+        box-shadow: 0px 0px 6px 3px rgb(0, 0, 0);
+
+        i {
+            transform: rotate(90deg);
+            transition: all .3s;
+        }
+    }
+}
+
 .scroll-animation {
     position: absolute;
     left: 0;
@@ -350,6 +360,13 @@ nav {
         height: 100vh;
         transition: all .3s ease-in-out;
         z-index: 3;
+        backdrop-filter: blur(.4rem);
+        background-color: #ff985438;
+    }
+    
+    .cartBoxShadow {
+        -webkit-box-shadow: -9px 0px 15px 3px rgba(58,22,9,0.75); 
+        box-shadow: -9px 0px 15px 3px rgba(58,22,9,0.75);
     }
 
     .w-0 {
@@ -372,6 +389,9 @@ nav {
     .myAdded {
         width: 80%;
         height: 95%;
+        background-color: #ff632699;
+        -webkit-box-shadow: 0px 0px 13px 0px #722C11; 
+        box-shadow: 0px 0px 13px 0px #722C11;
     }
 
     .cartSection {
@@ -407,6 +427,13 @@ nav {
 
         input {
             width: 5rem;
+            border-radius: 9px;
+
+            &:focus {
+                outline: #ff6326 solid 1px;
+                -webkit-box-shadow: 0px 0px 13px 0px #722C11; 
+                box-shadow: 0px 0px 13px 0px #722C11;
+            }
         }
     }
 }

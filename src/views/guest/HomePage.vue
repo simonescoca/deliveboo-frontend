@@ -168,6 +168,7 @@
 		},
 
 		created () {
+            this.store.isFooterVisible = true;
 			store.search = this.search
 		},
 
