@@ -23,7 +23,7 @@
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </button>
                 </div>
-                <div class="d-flex justify-content-center align-items-center container">
+                <div class="d-flex justify-content-center flex-wrap align-items-center container">
                     <div class="customCheckBoxHolder">
                         <input type="checkbox" id="cCB1" class="customCheckBoxInput" name="type[]" value="Italiana">
                         <label for="cCB1" class="customCheckBoxWrapper me-2">
