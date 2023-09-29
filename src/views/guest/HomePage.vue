@@ -31,8 +31,8 @@
         <!-- ---How it works section--- -->
         <div class="container">
             <div class="row border-top border-bottom py-3">
-                <div class="col-10 col-sm">
-                    <h3>How it works</h3>
+                <div class="col-10 col-sm-1">
+                    <h3 class="mt-2 mt-sm-0">How it works</h3>
                 </div>
                 <div class="col-1">
                     <!-- Bottone per aprire/chudere la section -->
@@ -49,11 +49,13 @@
                         <h3>Step 1</h3>
                         <p>Enter your location. Input your address or enable location services to pin your location.</p>
                     </div>
+                    <hr class="d-block d-sm-none">
                     <div class="col-12 col-md-4 border-start border-end">
                         <img src="../../images/store.png" alt="step two image" class="w-75 m-5">
                         <h3>Step 2</h3>
                         <p>Select a restaurant and add items to your cart. You're one step closer to a satisfying meal.</p>
                     </div>
+                    <hr class="d-block d-sm-none">
                     <div class="col-12 col-md-4">
                         <img src="../../images/payment.png" alt="step three image" class="w-75 m-5">
                         <h3>Step 3</h3>
@@ -66,7 +68,7 @@
         <div class="container">
             <div class="row border-top border-bottom py-3">
                 <div class="col-10 col-sm">
-                    <h3>Join Deliveboo</h3>
+                    <h3 class="mt-2 mt-sm-1">Join Deliveboo</h3>
                 </div>
                 <div class="col-1">
                     <!-- Bottone per aprire/chudere la section -->
@@ -114,7 +116,7 @@
         <div class="container">
             <div class="row border-top border-bottom py-3">
                 <div class="col-10 col-sm">
-                    <h3>Download our app</h3>
+                    <h3 class="mt-2 mt-sm-1">Download our app</h3>
                 </div>
                 <div class="col-1">
                     <!-- Bottone per aprire/chudere la section -->
