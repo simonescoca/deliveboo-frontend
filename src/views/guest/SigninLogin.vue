@@ -6,11 +6,11 @@
         <div class="container register myPadding" v-if="store.access === false">
             <div class="row">
                 <!-- ---Register img--- -->
-                <div class="col-5 d-flex">
+                <div class="col-12 col-sm-5 d-flex">
                     <img src="../../images/register.png" alt="" class="w-100 m-auto">
                 </div>
                 <!-- ---Form Register--- -->
-                <div class="col-7 text-center">
+                <div class="col-12 col-sm-7 text-center">
                     <h1>Sign up</h1>
                     <h5>Enter your information to get started</h5>
                     <form action="" class="mx-5" @submit.prevent="registerUser">
@@ -120,13 +120,13 @@
         </div>
         <!-- ---Login section, active when store access is true--- -->
         <div class="container login myPadding" v-if="store.access === true">
-            <div class="row my-5">
+            <div class="row">
                 <!-- ---Login img--- -->
-                <div class="col-5 d-flex">
+                <div class="col-12 col-sm-5 d-flex">
                     <img src="../../images/login.png" alt="" class="w-100 m-auto">
                 </div>
                 <!-- ---Form Login--- -->
-                <div class="col-7 text-center">
+                <div class="col-12 col-sm-7 text-center">
                     <h1>Log in</h1>
                     <h5>Enter your information to access</h5>
                     <form action="" class="mx-5" @submit.prevent="loginUser">

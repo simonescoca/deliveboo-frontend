@@ -13,14 +13,16 @@
                         <div class="col-12 d-flex justify-content-center position-relative">
                             <h1>Find the perfect bite in <br> seconds</h1>
                         </div>
-                        <div class="col-12 d-flex justify-content-center align-items-center">
-                            <div class="search w-50">
-                                <input type="text" placeholder="Restaurant name or type" v-model="search" @keyup.enter="advancedSearch" @change="saveSearch(search)">
-                                <i class="fa-solid fa-magnifying-glass"></i>
+                        <div class="col-12">
+                            <div class="row d-flex justify-content-center align-items-center">
+                                <div class="search col-10 col-sm-8">
+                                    <input type="text" placeholder="Restaurant name or type" v-model="search" @keyup.enter="advancedSearch" @change="saveSearch(search)">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                </div>
+                                <router-link :to="{name: 'advanced-search'}" class="btn btn-orange fw-semibold ms-3 col-5 col-sm-3 mt-2 mt-sm-0" @click="saveSearch(search)">
+                                    Search
+                                </router-link>
                             </div>
-                            <router-link :to="{name: 'advanced-search'}" class="btn btn-orange fw-semibold ms-3" @click="saveSearch(search)">
-                                Search
-                            </router-link>
                         </div>
                     </div>
                 </div>
@@ -29,8 +31,8 @@
         <!-- ---How it works section--- -->
         <div class="container">
             <div class="row border-top border-bottom py-3">
-                <div class="col">
-                    <h3>How it works</h3>
+                <div class="col-10 col-sm">
+                    <h3 class="mt-2 mt-sm-0">How it works</h3>
                 </div>
                 <div class="col-1">
                     <!-- Bottone per aprire/chudere la section -->
@@ -47,11 +49,13 @@
                         <h3>Step 1</h3>
                         <p>Enter your location. Input your address or enable location services to pin your location.</p>
                     </div>
+                    <hr class="d-block d-sm-none">
                     <div class="col-12 col-md-4 border-start border-end">
                         <img src="../../images/store.png" alt="step two image" class="w-75 m-5">
                         <h3>Step 2</h3>
                         <p>Select a restaurant and add items to your cart. You're one step closer to a satisfying meal.</p>
                     </div>
+                    <hr class="d-block d-sm-none">
                     <div class="col-12 col-md-4">
                         <img src="../../images/payment.png" alt="step three image" class="w-75 m-5">
                         <h3>Step 3</h3>
@@ -63,8 +67,8 @@
         <!-- ---Join Deliveroo section--- -->
         <div class="container">
             <div class="row border-top border-bottom py-3">
-                <div class="col">
-                    <h3>Join Deliveboo</h3>
+                <div class="col-10 col-sm">
+                    <h3 class="mt-2 mt-sm-1">Join Deliveboo</h3>
                 </div>
                 <div class="col-1">
                     <!-- Bottone per aprire/chudere la section -->
@@ -83,7 +87,7 @@
                     <div class="col-12 col-md-4 my-auto">
                         <h3>As a rider</h3>
                         <p>Earn money by delivering food from local vendors. All you need is a bike and the passion for riding.</p>
-                        <a href="" class="btn btn-orange fw-semibold">Ride with us</a>
+                        <a href="" class="btn btn-orange fw-semibold mb-4 mb-sm-0">Ride with us</a>
                     </div>
                 </div>
                 <div class="row border-top border-bottom">
@@ -93,7 +97,7 @@
                     <div class="col-12 col-md-4 my-auto">
                         <h3>As a partner</h3>
                         <p>BiteEats helps local vendors grow with online ordering, loyalty programs, and more.</p>
-                        <a href="" class="btn btn-orange fw-semibold">Partner with us</a>
+                        <a href="" class="btn btn-orange fw-semibold mb-4 mb-sm-0">Partner with us</a>
                     </div>
                 </div>
                 <div class="row">
@@ -103,7 +107,7 @@
                     <div class="col-12 col-md-4 my-auto">
                         <h3>As a colleague</h3>
                         <p>Join our team and help build a top-notch food delivery service.</p>
-                        <a href="" class="btn btn-orange fw-semibold">Work with us</a>
+                        <a href="" class="btn btn-orange fw-semibold mb-4 mb-sm-0">Work with us</a>
                     </div>
                 </div>
             </div>
@@ -111,8 +115,8 @@
         <!-- ---Download our app section--- -->
         <div class="container">
             <div class="row border-top border-bottom py-3">
-                <div class="col">
-                    <h3>Download our app</h3>
+                <div class="col-10 col-sm">
+                    <h3 class="mt-2 mt-sm-1">Download our app</h3>
                 </div>
                 <div class="col-1">
                     <!-- Bottone per aprire/chudere la section -->
@@ -123,10 +127,10 @@
             </div>
             
             <!-- Section "Download our app" con Collapse -->
-            <div class="collapse show" id="downloadApp">
+            <div class="collapse show pb-5" id="downloadApp">
                 <div class="row">
                     <div class="col-12 col-md-4 my-auto">
-                        <h3>Order with ease!</h3>
+                        <h3 class="mt-4 mt-sm-0">Order with ease!</h3>
                         <p>Get the most delicious bites delivered to your door with BiteEats. Our fast and reliable delivery service offers a variety of cuisines from local vendors.</p>
                         <a href="" class="btn btn-orange fw-semibold">Download</a>
                     </div>
