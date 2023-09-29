@@ -1,4 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Borel&display=swap');
+// @import url("https://fonts.googleapis.com/css2?family=Borel&display=swap");
 /**
 *   font-family: 'Borel', cursive;
 */
+
+html,
+body {
+    scrollbar-width: none;
+}

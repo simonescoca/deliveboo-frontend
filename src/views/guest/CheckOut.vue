@@ -13,24 +13,24 @@
                 d="M826.337463,25.5396311 C670.970254,58.655965 603.696181,68.7870267 447.802481,35.1443383 C293.342778,1.81111414 137.33377,1.81111414 0,1.81111414 L0,150 L1920,150 L1920,1.81111414 C1739.53523,-16.6853983 1679.86404,73.1607868 1389.7826,37.4859505 C1099.70117,1.81111414 981.704672,-7.57670281 826.337463,25.5396311 Z"
                 fill="#ff9654"></path>
         </svg>
-        <div class="container myPadding">
+        <div class="container myPadding px-3 px-sm-0">
             <div class="row">
                 <p class="fw-semibold ms-3">Shopping Cart / <span class="fw-bold">Checkout Step</span></p>
                 <!-- ---Shopping Cart Section--- -->
                 <div class="col-12 mb-3 mb-lg-0 col-lg-7 mx-auto cart position-relative">
                     <h2 class="m-3">Shopping Cart</h2>
                     <!-- ---Dishes header--- -->
-                    <div class="row">
-                        <div class="col-2 col-md-4 col-lg-6">
-                            <h5>Product</h5>
+                    <div class="row d-flex">
+                        <div class="col-3 col-sm-2 col-md-4 col-lg-6">
+                            <h5>Prodotto</h5>
                             <hr>
                         </div>
                         <div class="col">
-                            <h5>Quantity</h5>
+                            <h5>Quantità</h5>
 
                         </div>
                         <div class="col">
-                            <h5>Total Price</h5>
+                            <h5>Prezzo</h5>
 
                         </div>
                         <div class="col-12"><!-- ---Make sure that it goes on the next line--- --></div>
@@ -43,7 +43,7 @@
                                             v-if="dish.photo.startsWith('http')">
                                         <img :src="getImageUrl(dish.photo)" :alt="dish.name" class="w-100" v-else>
                                     </div>
-                                    <div class="col-12 col-md my-auto ">
+                                    <div class="col-12 d-none d-sm-block col-md my-auto ">
                                         <h6 class="my-2">{{ dish.name }}</h6>
                                     </div>
                                 </div>
@@ -64,11 +64,11 @@
                             <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                                 <div class="row">
                                     <div class="col-8">
-                                        <h5 class="d-inline">Subtotal:</h5>
+                                        <h5 class="d-inline">Subtotale:</h5>
                                         <br>
-                                        <h5 class="d-inline">Shipping:</h5>
+                                        <h5 class="d-inline">Spedizione:</h5>
                                         <hr>
-                                        <h5 class="d-inline">Total:</h5>
+                                        <h5 class="d-inline">Totale:</h5>
                                     </div>
                                     <div class="col-4 text-end">
                                         <span>$ {{ calculateGrandTotal(cart) }}</span>
@@ -84,7 +84,7 @@
                 </div>
                 <!-- ---Payment info section--- -->
                 <div class="col-12 col-lg-4 mx-auto payment position-relative">
-                    <h2 class="m-3 text-white">Payment Info</h2>
+                    <h2 class="m-3 text-white">Info pagamento</h2>
                     <!-- ---Card data--- -->
                     <div class="row">
                         <div class="col-12">
