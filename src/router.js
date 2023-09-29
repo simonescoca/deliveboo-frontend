@@ -31,7 +31,11 @@ import DeletedDishes from './views/admin/DeletedDishes.vue';
 const router = createRouter({
     history: createWebHistory(),
     routes : [
-        
+        {
+            path: '/:pathMatch(.*)*',
+            name: 'not-found',
+            component: NotFound // Questa è la rotta per la pagina 404
+        },
         // ? guest
         {
             path: '/',
@@ -73,11 +77,7 @@ const router = createRouter({
             name: 'success',
             component: Success,
         },
-        {
-            path: '/not-found',
-            name: 'not-found',
-            component: NotFound,
-        },
+        
         // ? admin
         {
             path: '/user/restaurant/dish/edit',
