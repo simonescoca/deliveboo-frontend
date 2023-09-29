@@ -1,17 +1,25 @@
 <template>
-    <main class="position-relative">
-        <svg style="height: 4rem; width: 100%; position: absolute; top: 0; left: 0; right: 0; transform: rotate(180deg);" class="wave-1hkxOo" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" preserveAspectRatio="none"><path class="wavePath-haxJK1 animationPaused-2hZ4IO" d="M826.337463,25.5396311 C670.970254,58.655965 603.696181,68.7870267 447.802481,35.1443383 C293.342778,1.81111414 137.33377,1.81111414 0,1.81111414 L0,150 L1920,150 L1920,1.81111414 C1739.53523,-16.6853983 1679.86404,73.1607868 1389.7826,37.4859505 C1099.70117,1.81111414 981.704672,-7.57670281 826.337463,25.5396311 Z" fill="#ff9654"></path></svg>
-        <div class="container py-5">
+    <div class="position-relative">
+        <svg style="height: 4rem; width: 100%; position: absolute; top: 0; left: 0; right: 0; transform: rotate(180deg);"
+            class="wave-1hkxOo" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100"
+            preserveAspectRatio="none">
+            <path class="wavePath-haxJK1 animationPaused-2hZ4IO"
+                d="M826.337463,25.5396311 C670.970254,58.655965 603.696181,68.7870267 447.802481,35.1443383 C293.342778,1.81111414 137.33377,1.81111414 0,1.81111414 L0,150 L1920,150 L1920,1.81111414 C1739.53523,-16.6853983 1679.86404,73.1607868 1389.7826,37.4859505 C1099.70117,1.81111414 981.704672,-7.57670281 826.337463,25.5396311 Z"
+                fill="#ff9654"></path>
+        </svg>
+        <div class="container-fluid py-5">
             <h3>
                 Admin - Crea un piatto
             </h3>
+            <hr>
+
             <div v-if="isUpdateSuccess" class="alert alert-success">
                 La creazione del tuo piatto è andata a buon fine!
             </div>
             <div v-if="isUpdateFailure" class="alert alert-danger">
                 La creazione del tuo piatto non è andata a buon fine. Si è verificato un errore.
             </div>
-            <form @submit.prevent="createDish" enctype="multipart/form-data">
+            <form @submit.prevent="createDish" class="p-3" enctype="multipart/form-data">
                 <div v-for="formSection in formSections" class="mb-3">
                     <div v-if="formSection.labelFor != 'description'">
                         <label :for="formSection.labelFor" class="form-label">
@@ -23,7 +31,7 @@
                     <div v-else class="form-floating">
                         <textarea class="form-control" :placeholder="formSection.textareaPlaceholder"
                             :id="formSection.textareaID" v-model="newDish.description">
-    
+
                         </textarea>
                         <label :for="formSection.labelFor" class="form-label">
                             {{ formSection.labelContent }}
@@ -50,21 +58,23 @@
                         {{ course }}
                     </option>
                 </select>
-    
+
                 <label for="ingredients" class="form-label mt-4">
                     Scrivi un ingrediente
                 </label>
                 <input type="text" class="form-control mb-3" id="ingredient" v-model="ingredient">
                 <div v-if="newDish.ingredients.length > 0" class="py-3">
+                    <p>Ingredienti aggiunti:</p>
                     <span class="me-2 pill-ingr" v-for="ingredientNewDish, index in newDish.ingredients"><i
                             class="fa-solid fa-sm fa-xmark me-2" @click="removeFromArray(index)"></i>{{ ingredientNewDish
                             }}</span>
+                    <hr>
                 </div>
-    
-                <div class="btn btn-success me-3" @click="addIngredient">
+
+                <div class="btn add-ingr me-3" @click="addIngredient">
                     Aggiungi ingrediente
                 </div>
-                <div class="btn btn-secondary" @click="emptyIngredients">
+                <div class="btn btn-outline-secondary" @click="emptyIngredients">
                     Svuota
                 </div>
                 <select class="form-select my-3" aria-label="select-course" id="type" v-model="newDish.type">
@@ -75,12 +85,12 @@
                         {{ formCheck }}
                     </option>
                 </select>
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn my-btn d-flex mx-auto px-3">
                     Crea
                 </button>
             </form>
         </div>
-    </main>
+    </div>
 </template>
 
 <script>
@@ -196,10 +206,10 @@ export default {
             })
                 .then(response => {
                     if (response.status === 200 || response.status === 204) {
-                        
+
                         this.isUpdateSuccess = true;
-                        router.push({name:'dishes'});
-                        
+                        router.push({ name: 'dishes' });
+
                         setTimeout(() => {
                             this.isUpdateSuccess = false;
                         }, 3000);
@@ -243,17 +253,55 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use " ../../../../styles/variables" as *;
+
 h3 {
-    border-bottom: 3px solid #ff9474;
+
     border-radius: 5px;
     text-align: center;
     padding: 0.6rem 0;
     margin: 1rem 0;
 }
 
-.pill-ingr {
-    background-color: rgb(189, 181, 181);
+.container-fluid {
+    background-color: $secondarysoft;
+
+
+}
+
+form {
+
     border-radius: 0.375rem;
+
+    .add-ingr {
+        background-color: $primarysoft;
+    }
+}
+
+input {
+    box-shadow: #ff94747b 0px 2px 4px, #ff947448 0px 7px 13px -3px, #ff94741d 0px -3px 0px inset;
+}
+
+select {
+    box-shadow: #ff94747b 0px 2px 4px, #ff947448 0px 7px 13px -3px, #ff94741d 0px -3px 0px inset;
+}
+
+textarea {
+    box-shadow: #ff94747b 0px 2px 4px, #ff947448 0px 7px 13px -3px, #ff94741d 0px -3px 0px inset;
+}
+
+.pill-ingr {
+    background-color: #ff9474;
+    border-radius: 1rem;
     padding: 0.3rem 0.5rem;
+    color: #fff;
+
+    .fa-xmark {
+        color: #fff;
+    }
+}
+
+.my-btn {
+    background-color: $secondary;
 }
 </style>

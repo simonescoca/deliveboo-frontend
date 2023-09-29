@@ -1,9 +1,15 @@
 <template>
-    <main class="position-relative">
-        <svg style="height: 4rem; width: 100%; position: absolute; top: 0; left: 0; right: 0; transform: rotate(180deg);" class="wave-1hkxOo" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" preserveAspectRatio="none"><path class="wavePath-haxJK1 animationPaused-2hZ4IO" d="M826.337463,25.5396311 C670.970254,58.655965 603.696181,68.7870267 447.802481,35.1443383 C293.342778,1.81111414 137.33377,1.81111414 0,1.81111414 L0,150 L1920,150 L1920,1.81111414 C1739.53523,-16.6853983 1679.86404,73.1607868 1389.7826,37.4859505 C1099.70117,1.81111414 981.704672,-7.57670281 826.337463,25.5396311 Z" fill="#ff9654"></path></svg>
-        <div class="container myPadding">
+    <div class="position-relative">
+        <svg style="height: 4rem; width: 100%; position: absolute; top: 0; left: 0; right: 0; transform: rotate(180deg);"
+            class="wave-1hkxOo" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100"
+            preserveAspectRatio="none">
+            <path class="wavePath-haxJK1 animationPaused-2hZ4IO"
+                d="M826.337463,25.5396311 C670.970254,58.655965 603.696181,68.7870267 447.802481,35.1443383 C293.342778,1.81111414 137.33377,1.81111414 0,1.81111414 L0,150 L1920,150 L1920,1.81111414 C1739.53523,-16.6853983 1679.86404,73.1607868 1389.7826,37.4859505 C1099.70117,1.81111414 981.704672,-7.57670281 826.337463,25.5396311 Z"
+                fill="#ff9654"></path>
+        </svg>
+        <div class="container-fluid px-3 myPadding">
             <h3>
-                Admin - Edit Dish
+                Admin - Modifica piatto
             </h3>
             <div v-if="isUpdateSuccess" class="alert alert-success">
                 La modifica del piatto è andata a buon fine!
@@ -12,35 +18,25 @@
                 La modifica del piatto non è andata a buon fine. Si è verificato un errore.
             </div>
             <form @submit.prevent="updateDish" enctype="multipart/form-data">
-                <!-- <div v-for="formSection in formSections" class="mb-3">
-                    <div v-if="formSection.labelFor != 'description'">
-                        <label :for="formSection.labelFor" class="form-label">
-                            {{ formSection.labelContent }}
-                        </label>
-                        <input :type="formSection.inputType" :class="formSection.inputClass" :name="formSection.inputID"
-                            :aria-describedby="formSection.labelFor" v-model="editData[formSection.inputID]">
-                    </div>
-                    <div v-else class="form-floating">
-                        <textarea class="form-control" :placeholder="formSection.textareaPlaceholder"
-                            :id="formSection.textareaID" v-model="editData.description">
-    
-                        </textarea>
-                        <label :for="formSection.labelFor" class="form-label">
-                            {{ formSection.labelContent }}
-                        </label>
-                    </div>
-                </div> -->
+
                 <div class="mb-3">
-                    <label for="name">Nome</label>
-                    <input type="name" class="form-control" name="name" aria-describedby="name" v-model="editData.name">
-                    <label for="price">Prezzo</label>
-                    <input v-model="editData.price" type="number" class="form-control" name="price" aria-describedby="price">
-    
-                    <label for="description">Descrizione</label>
-                    <textarea v-model="editData.description" class="form-control" name="description" id="description"
-                        cols="30"></textarea>
+                    <div class="mb-3">
+                        <label for="name">Nome</label>
+                        <input type="name" class="form-control" name="name" aria-describedby="name" v-model="editData.name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="price">Prezzo</label>
+                        <input v-model="editData.price" type="number" class="form-control" name="price"
+                            aria-describedby="price">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="description">Descrizione</label>
+                        <textarea v-model="editData.description" class="form-control" name="description" id="description"
+                            cols="30"></textarea>
+                    </div>
                 </div>
-                <div class="form-check form-switch form-check-reverse">
+                <div class="form-check form-switch mb-3">
                     <input class="form-check-input" type="checkbox" id="available" name="available"
                         v-model="editData.available">
                     <label class="form-check-label" for="is-it-available">
@@ -83,29 +79,30 @@
                     <span class="me-2 pill-ingr" v-for="ingredientDish, index in editData.ingredients">
                         <i class="fa-solid fa-sm fa-xmark me-2" @click="removeFromArray(index)"></i>{{ ingredientDish }}
                     </span>
+                    <hr>
                 </div>
-    
-                <div class="btn btn-success me-3" @click="addIngredient">
+
+                <div class="btn add-ingr me-3" @click="addIngredient">
                     Aggiungi ingrediente
                 </div>
-                <div class="btn btn-secondary" @click="emptyIngredients">
+                <div class="btn btn-outline-secondary" @click="emptyIngredients">
                     Svuota
                 </div>
-    
+
                 <div class="my-3">
-                    <button type="submit" class="btn btn-primary d-flex mx-auto">
+                    <button type="submit" class="btn my-btn d-flex mx-auto">
                         Aggiorna
                     </button>
                 </div>
             </form>
         </div>
-    </main>
+    </div>
 </template>
 
 <script>
 import { store } from "../../store.js";
 import axios from "axios";
-import {router} from '../../router.js'
+import { router } from '../../router.js'
 export default {
     data() {
         return {
@@ -241,7 +238,7 @@ export default {
 
                         this.isUpdateSuccess = true;
                         this.isUpdateFailure = false;
-                        router.push({name:'dishes'});
+                        router.push({ name: 'dishes' });
                     }
                     console.log(response);
                 })
@@ -284,15 +281,60 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use " ../../../../styles/variables" as *;
 
-.myPadding {
-    padding: 5rem 0;
+h3 {
+
+    border-radius: 5px;
+    text-align: center;
+    padding: 0.6rem 0;
+    margin: 1rem 0;
+}
+
+.container-fluid {
+    background-color: $secondarysoft;
+
+
+}
+
+form {
+
+    border-radius: 0.375rem;
+
+    .add-ingr {
+        background-color: $primarysoft;
+    }
+}
+
+input {
+    box-shadow: #ff94747b 0px 2px 4px, #ff947448 0px 7px 13px -3px, #ff94741d 0px -3px 0px inset;
+}
+
+select {
+    box-shadow: #ff94747b 0px 2px 4px, #ff947448 0px 7px 13px -3px, #ff94741d 0px -3px 0px inset;
+}
+
+textarea {
+    box-shadow: #ff94747b 0px 2px 4px, #ff947448 0px 7px 13px -3px, #ff94741d 0px -3px 0px inset;
 }
 
 .pill-ingr {
-    background-color: rgb(189, 181, 181);
-    border-radius: 0.375rem;
+    background-color: #ff9474;
+    border-radius: 1rem;
     padding: 0.3rem 0.5rem;
+    color: #fff;
+
+    .fa-xmark {
+        color: #fff;
+    }
+}
+
+.my-btn {
+    background-color: $secondary;
+}
+
+.myPadding {
+    padding: 5rem 0;
 }
 
 .current-img-box {
