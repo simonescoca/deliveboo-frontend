@@ -38,7 +38,9 @@
 						<div class="text">
 							<article>
 								<p>Uh oh! Looks like you got lost. <br>Go back to the homepage!</p>
-								<button>Go back to home</button>
+								<router-link :to="{ name: 'homepage' }">
+                                    <button>Go back to home</button>
+                                </router-link>
 							</article>
 						</div>
 					</div>
