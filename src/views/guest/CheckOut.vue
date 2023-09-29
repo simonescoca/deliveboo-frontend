@@ -1,5 +1,5 @@
 <template>
-    <main class="position-relative">
+    <div class="position-relative">
         <svg style="height: 4rem; width: 100%; position: absolute; top: 0; left: 0; right: 0; transform: rotate(180deg);"
             class="wave-1hkxOo" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100"
             preserveAspectRatio="none">
@@ -14,25 +14,26 @@
                 fill="#ff9654"></path>
         </svg>
         <div class="container myPadding px-3 px-sm-0">
-            <div class="row">
+            <div class="row px-3 px-sm-0">
                 <p class="fw-semibold ms-3">Shopping Cart / <span class="fw-bold">Checkout Step</span></p>
                 <!-- ---Shopping Cart Section--- -->
                 <div class="col-12 mb-3 mb-lg-0 col-lg-7 mx-auto cart position-relative">
                     <h2 class="m-3">Shopping Cart</h2>
                     <!-- ---Dishes header--- -->
                     <div class="row d-flex">
-                        <div class="col-3 col-sm-2 col-md-4 col-lg-6">
-                            <h5>Prodotto</h5>
+                        <div class="col-3 col-md-4 col-lg-6">
+                            <h5 class="text-center">Prodotto</h5>
                             <hr>
                         </div>
                         <div class="col">
                             <h5>Quantità</h5>
 
                         </div>
-                        <div class="col">
+                        <div class="col ms-3">
                             <h5>Prezzo</h5>
 
                         </div>
+                        <div class="col-1"></div>
                         <div class="col-12"><!-- ---Make sure that it goes on the next line--- --></div>
                         <!-- ---Dishes section--- -->
                         <div class="row" v-for="dish in cart">
@@ -51,7 +52,7 @@
                             <div class="col my-auto">
                                 <input type="number" v-model="dish.quantity" @input="updateTotalPrice(dish)">
                             </div>
-                            <div class="col d-flex justify-content-center align-items-center position-relative">
+                            <div class="col d-flex align-items-center position-relative">
                                 <h6 class="d-inline mb-0">$ {{ calculateTotalPrice(dish) }}</h6>
                                 <i class="fa-solid fa-xmark position-absolute" @click="removeDish(dish)"></i>
                             </div>
@@ -84,7 +85,7 @@
                 </div>
                 <!-- ---Payment info section--- -->
                 <div class="col-12 col-lg-4 mx-auto payment position-relative">
-                    <h2 class="m-3 text-white">Info pagamento</h2>
+                    <h2 class="m-3 text-white">Checkout</h2>
                     <!-- ---Card data--- -->
                     <div class="row">
                         <div class="col-12">
@@ -165,24 +166,24 @@
                                 </div>
                                 <div class="separator">
                                     <hr class="line">
-                                    <p>or pay using credit card</p>
+                                    <p class="fs-6">or pay using credit card</p>
                                     <hr class="line">
                                 </div>
                                 <!-- ---User credit card info--- -->
                                 <div class="credit-card-info--form">
                                     <div class="input_container">
-                                        <label for="customer_name" class="input_label">Customer Name</label>
+                                        <label for="customer_name" class="input_label fs-6">Nome</label>
                                         <input id="customer_name" class="input_field" type="text" name="address"
                                             title="customer_name" placeholder="Enter your name and surname"
                                             v-model="customer_name">
                                     </div>
                                     <div class="input_container">
-                                        <label for="address" class="input_label">Home Address</label>
+                                        <label for="address" class="input_label fs-6">Indirizzo di domicilio</label>
                                         <input id="address" class="input_field" type="text" name="address" title="address"
                                             placeholder="Enter your home address" v-model="customer_address">
                                     </div>
                                     <div class="input_container">
-                                        <label for="phone" class="input_label">Phone Number</label>
+                                        <label for="phone" class="input_label fs-6">Numero di cellulare</label>
                                         <input id="phone" class="input_field" type="text" name="phone" title="phone"
                                             placeholder="Enter your phone number" v-model="phone_number">
                                     </div>
@@ -191,8 +192,8 @@
                             </form>
                             <input type="hidden" id="amountInput" :value=amount>
                             <div v-show="cart.length > 0" id="dropin-container"></div>
-                            <div class="w-100 d-flex">
-                                <button id="submit-button" class="purchase--btn mx-auto">Checkout</button>
+                            <div class="w-100 align-items-center d-flex">
+                                <button id="submit-button" class="purchase--btn mx-auto">Conferma</button>
                             </div>
                             <!-- ---Checkout button--- -->
 
@@ -205,7 +206,7 @@
             </div>
         </div>
 
-    </main>
+    </div>
 </template>
 
 <script>
@@ -571,7 +572,7 @@ export default {
         background: white;
         border-radius: 11px;
         border: 0;
-        margin-bottom: 1rem;
+        margin-top: 2rem;
         outline: none;
         color: white;
         font-size: 13px;
