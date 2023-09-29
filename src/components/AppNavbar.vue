@@ -96,7 +96,7 @@
         </div>
 
         <!-- ? cart -->
-        <div class="position-fixed top-0 end-0 bg-opacity-25 myCart" :class="isCartVisible === false ? 'w-0' : 'w-30rem cartBoxShadow'">
+        <div class="position-fixed top-0 end-0 bg-opacity-25 myCart" :class="isCartVisible === false ? 'w-0' : 'col-12 col-sm9 col-md-6 col-xxl-3 cartBoxShadow'">
             <button class="position-absolute top-0 start-0 fw-bold fs-3 d-flex mt-4 ms-4 btn rounded-pill X-button" @click="isCartVisible = false">
                 <i class="fa-solid fa-xmark m-auto"></i>
             </button>
@@ -111,8 +111,8 @@
             <!-- ? cart - dishes -->
             <main class="overflow">
                 <div v-for="dish in store.cart" class="d-flex mt-3 cartSection">
-                    <div class="m-auto d-flex justify-content-between rounded py-2 px-3 position-relative myAdded">
-                        <div class="imgCont">
+                    <div class="m-auto d-flex rounded py-2 px-3 position-relative myAdded">
+                        <div class="imgCont me-4">
                             <img :src="dish.photo" :alt="dish.name" class="rounded">
                         </div>
                         <div class="infoCont">
@@ -120,7 +120,7 @@
                                 {{ dish.name }}
                             </p>
                             <p class="m-0">
-                                {{ "$" + dish.price }}
+                                {{ "$" + dish.price.toFixed(2) }}
                             </p>
                         </div>
                         <div class="position-absolute bottom-0 end-0 pb-2 pe-2 myCounter">
@@ -134,7 +134,7 @@
             <footer class="d-flex justify-content-around align-items-center"
                 :class="isCartVisible === false ? 'd-none' : ''">
                 <h4 class="m-0">
-                    {{ "Totale: $" + totale }}
+                    {{ "Totale: $" + totale.toFixed(2) }}
                 </h4>
                 <transition name="slide-fade" mode="in-out">
                     <router-link :to="{ name: 'checkout' }" key="Page6" class="btn btn-warning"
