@@ -31,7 +31,7 @@
         <!-- ---How it works section--- -->
         <div class="container">
             <div class="row border-top border-bottom py-3">
-                <div class="col-10 col-sm-1">
+                <div class="col-10 col-sm">
                     <h3 class="mt-2 mt-sm-0">How it works</h3>
                 </div>
                 <div class="col-1">
