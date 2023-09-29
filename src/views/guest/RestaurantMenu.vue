@@ -1,7 +1,8 @@
 <template>
     <!-- ---Sezione dati ristorante--- -->
-    <header class="my-5">
-        <div class="d-flex justify-content-center align-items-center container">
+    <header class="position-relative">
+        <svg style="height: 4rem; width: 100%; position: absolute; top: 0; left: 0; right: 0; transform: rotate(180deg);" class="wave-1hkxOo" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" preserveAspectRatio="none"><path class="wavePath-haxJK1 animationPaused-2hZ4IO" d="M826.337463,25.5396311 C670.970254,58.655965 603.696181,68.7870267 447.802481,35.1443383 C293.342778,1.81111414 137.33377,1.81111414 0,1.81111414 L0,150 L1920,150 L1920,1.81111414 C1739.53523,-16.6853983 1679.86404,73.1607868 1389.7826,37.4859505 C1099.70117,1.81111414 981.704672,-7.57670281 826.337463,25.5396311 Z" fill="#ff9654"></path></svg>
+        <div class="d-flex justify-content-center align-items-center container myPaddingTop">
 			<div class="resImgCont myCircle bg-dark d-flex" v-if="resData.image.startsWith('http')">
                 <img :src="resData.image" :alt="resData.name" class="myCircle m-auto">
             </div>
@@ -45,148 +46,151 @@
 	</div>
 
 	<!-- ---Sezione piatti, divisa in Primi, Secondi, Dolci--- -->
-	<div class="container">
-		<div class="row myGap">
-			<h4 class="text-center">Primi piatti</h4>
-			<div class="myCard col-3-custom mx-auto mb-5" v-for="dish in this.firstCourse" :class="!showSelectedDish(dish.categories) ? 'notSelected' : ''">
-				<div class="content-info">
-					<p class="title fw-bold">
-							{{ dish.name }}
-						<i class="fa-solid fa-xmark ms-2" style="color: #ff0000;" @click="seeDescription(dish)"></i>
-					</p>
-					<p class="text-center">
-						{{ dish.description }}
-					</p>
-					<div class="ingredients text-center mb-3">
-						<p class="fw-semibold mt-1">Ingredienti:</p>
-						<span class="fst-italic" v-for="(ingredient, index) in dish.ingredients" :key="index">
-							{{ ingredient.name + (index !== (dish.ingredients.length - 1) ? ", " : "")}}
-						</span>
-					</div>
-					<p class="btn btn-yellow" @click="addToCart(dish)">Add to cart</p>
-				</div>
-				<div class="content" :class="showDescription[dish.id] ? 'description-hidden': ''">
-					<div class="boxImg" v-if="dish.photo.startsWith('http')">
-						<img :src="dish.photo" :alt="dish.name">
-					</div>
-					<div class="boxImg" v-else>
-						<img :src="getImageUrl(dish.photo)" :alt="dish.name">
-					</div>
-					<div class="description">
-						<p class="title fw-bold">
+    <main class="position-relative">
+        <svg style="height: 4rem; width: 100%; position: absolute; bottom: 0; left: 0; right: 0;" class="wave-1hkxOo" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" preserveAspectRatio="none"><path class="wavePath-haxJK1 animationPaused-2hZ4IO" d="M826.337463,25.5396311 C670.970254,58.655965 603.696181,68.7870267 447.802481,35.1443383 C293.342778,1.81111414 137.33377,1.81111414 0,1.81111414 L0,150 L1920,150 L1920,1.81111414 C1739.53523,-16.6853983 1679.86404,73.1607868 1389.7826,37.4859505 C1099.70117,1.81111414 981.704672,-7.57670281 826.337463,25.5396311 Z" fill="#ff9654"></path></svg>
+        <div class="container pb-5">
+            <div class="row myGap">
+                <h4 class="text-center">Primi piatti</h4>
+                <div class="myCard col-3-custom mx-auto mb-5" v-for="dish in this.firstCourse" :class="!showSelectedDish(dish.categories) ? 'notSelected' : ''">
+                    <div class="content-info">
+                        <p class="title fw-bold">
                                 {{ dish.name }}
-                            <i class="fa-solid fa-circle-info ms-2" @click="seeDescription(dish)"></i>
-						</p>
-						<p class="price">
-							{{ dish.price.toFixed(2) }}
-						</p>
-                        <button class="myCart-button" @click="dish.cartClicked = true, addToCart(dish)" :class="dish.cartClicked === true ? 'myClicked' : ''">
-                            <span class="myAdd-to-cart">
-                                Add to cart
+                            <i class="fa-solid fa-xmark ms-2" style="color: #ff0000;" @click="seeDescription(dish)"></i>
+                        </p>
+                        <p class="text-center">
+                            {{ dish.description }}
+                        </p>
+                        <div class="ingredients text-center mb-3">
+                            <p class="fw-semibold mt-1">Ingredienti:</p>
+                            <span class="fst-italic" v-for="(ingredient, index) in dish.ingredients" :key="index">
+                                {{ ingredient.name + (index !== (dish.ingredients.length - 1) ? ", " : "")}}
                             </span>
-                            <span class="myAdded">
-                                Added
-                            </span>
-                            <i class="fas fa-shopping-cart"></i>
-                            <i class="fas fa-box"></i>
-                        </button>
-					</div>
-				</div>
-			</div>
-			<h4 class="text-center">Secondi piatti</h4>
-			<div class="myCard col-3-custom mx-auto mb-5" v-for="dish in this.secondCourse" :class="!showSelectedDish(dish.categories) ? 'notSelected' : ''">
-				<div class="content-info">
-					<p class="title fw-bold">
-							{{ dish.name }}
-						<i class="fa-solid fa-xmark ms-2" style="color: #ff0000;" @click="seeDescription(dish)"></i>
-					</p>
-					<p class="text-center">
-						{{ dish.description }}
-					</p>
-					<div class="ingredients text-center mb-3">
-						<p class="fw-semibold mt-1">Ingredienti:</p>
-						<span class="fst-italic" v-for="(ingredient, index) in dish.ingredients" :key="index">
-							{{ ingredient.name + (index !== (dish.ingredients.length - 1) ? ", " : "")}}
-						</span>
-					</div>
-					<p class="btn btn-yellow" @click="addToCart(dish)">Add to cart</p>
-				</div>
-				<div class="content" :class="showDescription[dish.id] ? 'description-hidden': ''">
-					<div class="boxImg" v-if="dish.photo.startsWith('http')">
-						<img :src="dish.photo" :alt="dish.name">
-					</div>
-					<div class="boxImg" v-else>
-						<img :src="getImageUrl(dish.photo)" :alt="dish.name">
-					</div>
-					<div class="description">
-						<p class="title fw-bold">
+                        </div>
+                        <p class="btn btn-yellow" @click="addToCart(dish)">Add to cart</p>
+                    </div>
+                    <div class="content" :class="showDescription[dish.id] ? 'description-hidden': ''">
+                        <div class="boxImg" v-if="dish.photo.startsWith('http')">
+                            <img :src="dish.photo" :alt="dish.name">
+                        </div>
+                        <div class="boxImg" v-else>
+                            <img :src="getImageUrl(dish.photo)" :alt="dish.name">
+                        </div>
+                        <div class="description">
+                            <p class="title fw-bold">
+                                    {{ dish.name }}
+                                <i class="fa-solid fa-circle-info ms-2" @click="seeDescription(dish)"></i>
+                            </p>
+                            <p class="price">
+                                {{ dish.price.toFixed(2) }}
+                            </p>
+                            <button class="myCart-button" @click="dish.cartClicked = true, addToCart(dish)" :class="dish.cartClicked === true ? 'myClicked' : ''">
+                                <span class="myAdd-to-cart">
+                                    Add to cart
+                                </span>
+                                <span class="myAdded">
+                                    Added
+                                </span>
+                                <i class="fas fa-shopping-cart"></i>
+                                <i class="fas fa-box"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <h4 class="text-center">Secondi piatti</h4>
+                <div class="myCard col-3-custom mx-auto mb-5" v-for="dish in this.secondCourse" :class="!showSelectedDish(dish.categories) ? 'notSelected' : ''">
+                    <div class="content-info">
+                        <p class="title fw-bold">
                                 {{ dish.name }}
-                            <i class="fa-solid fa-circle-info ms-2" @click="seeDescription(dish)"></i>
-						</p>
-						<p class="price">
-							{{ dish.price.toFixed(2) }}
-						</p>
-                        <button class="myCart-button" @click="dish.cartClicked = true, addToCart(dish)" :class="dish.cartClicked === true ? 'myClicked' : ''">
-                            <span class="myAdd-to-cart">
-                                Add to cart
+                            <i class="fa-solid fa-xmark ms-2" style="color: #ff0000;" @click="seeDescription(dish)"></i>
+                        </p>
+                        <p class="text-center">
+                            {{ dish.description }}
+                        </p>
+                        <div class="ingredients text-center mb-3">
+                            <p class="fw-semibold mt-1">Ingredienti:</p>
+                            <span class="fst-italic" v-for="(ingredient, index) in dish.ingredients" :key="index">
+                                {{ ingredient.name + (index !== (dish.ingredients.length - 1) ? ", " : "")}}
                             </span>
-                            <span class="myAdded">
-                                Added
-                            </span>
-                            <i class="fas fa-shopping-cart"></i>
-                            <i class="fas fa-box"></i>
-                        </button>
-					</div>
-				</div>
-			</div>
-			<h4 class="text-center">Dessert</h4>
-			<div class="myCard col-3-custom mx-auto mb-5" v-for="dish in this.dessertCourse" :class="!showSelectedDish(dish.categories) ? 'notSelected' : ''">
-				<div class="content-info">
-					<p class="title fw-bold">
-							{{ dish.name }}
-						<i class="fa-solid fa-xmark ms-2" style="color: #ff0000;" @click="seeDescription(dish)"></i>
-					</p>
-					<p class="text-center">
-						{{ dish.description }}
-					</p>
-					<div class="ingredients text-center mb-3">
-						<p class="fw-semibold mt-1">Ingredienti:</p>
-						<span class="fst-italic" v-for="(ingredient, index) in dish.ingredients" :key="index">
-							{{ ingredient.name + (index !== (dish.ingredients.length - 1) ? ", " : "")}}
-						</span>
-					</div>
-					<p class="btn btn-yellow" @click="addToCart(dish)">Add to cart</p>
-				</div>
-				<div class="content" :class="showDescription[dish.id] ? 'description-hidden': ''">
-					<div class="boxImg" v-if="dish.photo.startsWith('http')">
-						<img :src="dish.photo" :alt="dish.name">
-					</div>
-					<div class="boxImg" v-else>
-						<img :src="getImageUrl(dish.photo)" :alt="dish.name">
-					</div>
-					<div class="description">
-						<p class="title fw-bold">
+                        </div>
+                        <p class="btn btn-yellow" @click="addToCart(dish)">Add to cart</p>
+                    </div>
+                    <div class="content" :class="showDescription[dish.id] ? 'description-hidden': ''">
+                        <div class="boxImg" v-if="dish.photo.startsWith('http')">
+                            <img :src="dish.photo" :alt="dish.name">
+                        </div>
+                        <div class="boxImg" v-else>
+                            <img :src="getImageUrl(dish.photo)" :alt="dish.name">
+                        </div>
+                        <div class="description">
+                            <p class="title fw-bold">
+                                    {{ dish.name }}
+                                <i class="fa-solid fa-circle-info ms-2" @click="seeDescription(dish)"></i>
+                            </p>
+                            <p class="price">
+                                {{ dish.price.toFixed(2) }}
+                            </p>
+                            <button class="myCart-button" @click="dish.cartClicked = true, addToCart(dish)" :class="dish.cartClicked === true ? 'myClicked' : ''">
+                                <span class="myAdd-to-cart">
+                                    Add to cart
+                                </span>
+                                <span class="myAdded">
+                                    Added
+                                </span>
+                                <i class="fas fa-shopping-cart"></i>
+                                <i class="fas fa-box"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <h4 class="text-center">Dessert</h4>
+                <div class="myCard col-3-custom mx-auto mb-5" v-for="dish in this.dessertCourse" :class="!showSelectedDish(dish.categories) ? 'notSelected' : ''">
+                    <div class="content-info">
+                        <p class="title fw-bold">
                                 {{ dish.name }}
-                            <i class="fa-solid fa-circle-info ms-2" @click="seeDescription(dish)"></i>
-						</p>
-						<p class="price">
-							{{ dish.price.toFixed(2) }}
-						</p>
-                        <button class="myCart-button" @click="dish.cartClicked = true, addToCart(dish)" :class="dish.cartClicked === true ? 'myClicked' : ''">
-                            <span class="myAdd-to-cart">
-                                Add to cart
+                            <i class="fa-solid fa-xmark ms-2" style="color: #ff0000;" @click="seeDescription(dish)"></i>
+                        </p>
+                        <p class="text-center">
+                            {{ dish.description }}
+                        </p>
+                        <div class="ingredients text-center mb-3">
+                            <p class="fw-semibold mt-1">Ingredienti:</p>
+                            <span class="fst-italic" v-for="(ingredient, index) in dish.ingredients" :key="index">
+                                {{ ingredient.name + (index !== (dish.ingredients.length - 1) ? ", " : "")}}
                             </span>
-                            <span class="myAdded">
-                                Added
-                            </span>
-                            <i class="fas fa-shopping-cart"></i>
-                            <i class="fas fa-box"></i>
-                        </button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                        </div>
+                        <p class="btn btn-yellow" @click="addToCart(dish)">Add to cart</p>
+                    </div>
+                    <div class="content" :class="showDescription[dish.id] ? 'description-hidden': ''">
+                        <div class="boxImg" v-if="dish.photo.startsWith('http')">
+                            <img :src="dish.photo" :alt="dish.name">
+                        </div>
+                        <div class="boxImg" v-else>
+                            <img :src="getImageUrl(dish.photo)" :alt="dish.name">
+                        </div>
+                        <div class="description">
+                            <p class="title fw-bold">
+                                    {{ dish.name }}
+                                <i class="fa-solid fa-circle-info ms-2" @click="seeDescription(dish)"></i>
+                            </p>
+                            <p class="price">
+                                {{ dish.price.toFixed(2) }}
+                            </p>
+                            <button class="myCart-button" @click="dish.cartClicked = true, addToCart(dish)" :class="dish.cartClicked === true ? 'myClicked' : ''">
+                                <span class="myAdd-to-cart">
+                                    Add to cart
+                                </span>
+                                <span class="myAdded">
+                                    Added
+                                </span>
+                                <i class="fas fa-shopping-cart"></i>
+                                <i class="fas fa-box"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 	
 </template>
 
@@ -364,7 +368,10 @@
 			background-color: $primary;
 		}
 	}
-    .myFont {
+
+    .myPaddingTop {
+        padding-top: 5rem;
+        margin-bottom: 2rem;
     }
 
     .myCircle {
