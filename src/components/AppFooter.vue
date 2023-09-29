@@ -1,5 +1,5 @@
 <template>
-	<footer class="pb-5"> 
+	<footer v-if="store.isFooterVisible" class="pb-5"> 
 
         <div class="container">
             <div class="row justify-content-around">
@@ -56,13 +56,13 @@
 </template>
 
 <script>
-	// import {store} from "../store.js";
+	import {store} from "../store.js";
 	// import axios from "axios";
 
 	export default {
 		data() {
 			return {
-				// store
+				store,
                 members: [
                     {
                         image: '../../src/images/gabri.png',

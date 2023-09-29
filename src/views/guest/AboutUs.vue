@@ -80,9 +80,11 @@
 </template>
 
 <script>
+	import {store} from "../../store.js";
 	export default {
 		data() {
 			return {
+                store,
                 sections: [
                     {
                         name: 'la nostra storia',
@@ -169,7 +171,7 @@
 		},
 
 		created () {
-
+            this.store.isFooterVisible = true;
 		},
 
 		methods: {

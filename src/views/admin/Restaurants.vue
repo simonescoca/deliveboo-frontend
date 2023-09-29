@@ -1,66 +1,70 @@
 <template>
-    <div class="container">
-        <header class="d-flex justify-content-between">
-            <router-link :to="{ name: 'deleted-restaurants' }" class="btn my_btn deleted">
-                <i class="fa-regular fa-trash-can"></i>
-            </router-link>
-            <router-link :to="{ name: 'addRestaurant' }" class="btn my_btn add">
-                <i class="fa-solid fa-plus"></i>
-            </router-link>
-        </header>
-        <h1 class="text-center my-3 fw-bold">
-            I tuoi ristoranti
-        </h1>
-        <div v-if="isDeleteSuccess" class="alert alert-success">
-            Il ristorante è stato eliminato.
-        </div>
-        <div class="my_restaurants container">
-            <div class="row">
-                <div v-for="restaurant in restaurants" :key="restaurant.inHover = false"
-                    @mouseenter="restaurant.inHover = true" @mouseleave="restaurant.inHover = false"
-                    class="d-flex position-relative my_restaurant col-12 my-3">
-                    <div class="my_r-img" v-if="restaurant.image.startsWith('http')">
-                        <img :src="restaurant.image" :alt="restaurant.name">
+    <main class="position-relative">
+        <svg style="height: 4rem; width: 100%; position: absolute; top: 0; left: 0; right: 0; transform: rotate(180deg);" class="wave-1hkxOo" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" preserveAspectRatio="none"><path class="wavePath-haxJK1 animationPaused-2hZ4IO" d="M826.337463,25.5396311 C670.970254,58.655965 603.696181,68.7870267 447.802481,35.1443383 C293.342778,1.81111414 137.33377,1.81111414 0,1.81111414 L0,150 L1920,150 L1920,1.81111414 C1739.53523,-16.6853983 1679.86404,73.1607868 1389.7826,37.4859505 C1099.70117,1.81111414 981.704672,-7.57670281 826.337463,25.5396311 Z" fill="#ff9654"></path></svg>
+        <svg style="height: 4rem; width: 100%; position: absolute; bottom: 0; left: 0; right: 0;" class="wave-1hkxOo" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" preserveAspectRatio="none"><path class="wavePath-haxJK1 animationPaused-2hZ4IO" d="M826.337463,25.5396311 C670.970254,58.655965 603.696181,68.7870267 447.802481,35.1443383 C293.342778,1.81111414 137.33377,1.81111414 0,1.81111414 L0,150 L1920,150 L1920,1.81111414 C1739.53523,-16.6853983 1679.86404,73.1607868 1389.7826,37.4859505 C1099.70117,1.81111414 981.704672,-7.57670281 826.337463,25.5396311 Z" fill="#ff9654"></path></svg>
+        <div class="container myPadding">
+            <header class="d-flex justify-content-between">
+                <router-link :to="{ name: 'deleted-restaurants' }" class="btn my_btn deleted">
+                    <i class="fa-regular fa-trash-can"></i>
+                </router-link>
+                <router-link :to="{ name: 'addRestaurant' }" class="btn my_btn add">
+                    <i class="fa-solid fa-plus"></i>
+                </router-link>
+            </header>
+            <h1 class="text-center my-3 fw-bold">
+                I tuoi ristoranti
+            </h1>
+            <div v-if="isDeleteSuccess" class="alert alert-success">
+                Il ristorante è stato eliminato.
+            </div>
+            <div class="my_restaurants container">
+                <div class="row">
+                    <div v-for="restaurant in restaurants" :key="restaurant.inHover = false"
+                        @mouseenter="restaurant.inHover = true" @mouseleave="restaurant.inHover = false"
+                        class="d-flex position-relative my_restaurant col-12 my-3">
+                        <div class="my_r-img" v-if="restaurant.image.startsWith('http')">
+                            <img :src="restaurant.image" :alt="restaurant.name">
+                        </div>
+                        <div class="my_r-img" v-else>
+                            <img :src="getImageUrl(restaurant.image)" :alt="restaurant.name">
+                        </div>
+                        <div class="my_r-name">
+                            <h3 class="fw-bold p-3 ">{{ restaurant.name }}</h3>
+                            <p class="p-3">{{ restaurant.city }}, {{ restaurant.address }}</p>
+                            <h5 class="fw-bold p-3">Tipi di cucina</h5>
+                            <ul>
+                                <li class="mb-0 ps-3" v-for="objTypes in restaurant.types">{{ objTypes.name }}</li>
+                            </ul>
+                        </div>
+    
+                        <button @click="itemToSoftDelete(restaurant.id)" :disabled="showDeleteConfirmationModal"
+                            class="my_del-btn btn d-flex justify-content-center align-items-center">
+                            <i class="fa-solid fa-xmark fa-xs"></i>
+                        </button>
+    
+                        <div class="position-relative d-flex flex-column ms-auto justify-content-evenly"
+                            v-if="!showDeleteConfirmationModal">
+                            <router-link v-for="link in links" :to="{ name: link.routeName }" :class="link.class"
+                                @click="store.selectedRes = restaurant.id">
+                                <i class="position-absolute fa-solid my-btn"
+                                    :class="link.icon, restaurant.inHover ? 'active' : 'invisible'"></i>
+                            </router-link>
+                        </div>
+    
                     </div>
-                    <div class="my_r-img" v-else>
-                        <img :src="getImageUrl(restaurant.image)" :alt="restaurant.name">
-                    </div>
-                    <div class="my_r-name">
-                        <h3 class="fw-bold p-3 ">{{ restaurant.name }}</h3>
-                        <p class="p-3">{{ restaurant.city }}, {{ restaurant.address }}</p>
-                        <h5 class="fw-bold p-3">Tipi di cucina</h5>
-                        <ul>
-                            <li class="mb-0 ps-3" v-for="objTypes in restaurant.types">{{ objTypes.name }}</li>
-                        </ul>
-                    </div>
-
-                    <button @click="itemToSoftDelete(restaurant.id)" :disabled="showDeleteConfirmationModal"
-                        class="my_del-btn btn d-flex justify-content-center align-items-center">
-                        <i class="fa-solid fa-xmark fa-xs"></i>
-                    </button>
-
-                    <div class="position-relative d-flex flex-column ms-auto justify-content-evenly"
-                        v-if="!showDeleteConfirmationModal">
-                        <router-link v-for="link in links" :to="{ name: link.routeName }" :class="link.class"
-                            @click="store.selectedRes = restaurant.id">
-                            <i class="position-absolute fa-solid my-btn"
-                                :class="link.icon, restaurant.inHover ? 'active' : 'invisible'"></i>
-                        </router-link>
-                    </div>
-
                 </div>
             </div>
-        </div>
-        <!-- modale di conferma per eliminare -->
-        <div class="delete-modal position-fixed card p-3 bg-dark" v-if="showDeleteConfirmationModal">
-            <p>Spostare nel cestino?</p>
-            <div class="btn-group d-flex justify-content-evenly">
-                <button type="delete" @click="softDeleteItem" class="btn btn-modal">Sì</button>
-                <button @click="showDeleteConfirmationModal = false" class="btn btn-modal">Annulla</button>
+            <!-- modale di conferma per eliminare -->
+            <div class="delete-modal position-fixed card p-3 bg-dark" v-if="showDeleteConfirmationModal">
+                <p>Spostare nel cestino?</p>
+                <div class="btn-group d-flex justify-content-evenly">
+                    <button type="delete" @click="softDeleteItem" class="btn btn-modal">Sì</button>
+                    <button @click="showDeleteConfirmationModal = false" class="btn btn-modal">Annulla</button>
+                </div>
             </div>
+    
         </div>
-
-    </div>
+    </main>
 </template>
 
 <script>
@@ -114,6 +118,7 @@ export default {
     },
 
     created() {
+        this.store.isFooterVisible = true;
         this.userToken = localStorage.getItem('userToken')
         this.userId = localStorage.getItem('userId')
         this.userName = localStorage.getItem('userName')
@@ -188,6 +193,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.myPadding {
+    padding: 5rem 0;
+}
+
 header {
     .my_btn {
         border: 1px solid rgba(0, 0, 0, 0.223);
