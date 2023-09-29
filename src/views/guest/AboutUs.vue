@@ -4,10 +4,27 @@
         <svg style="height: 4rem; width: 100%; position: absolute; bottom: 0; left: 0; right: 0;" class="wave-1hkxOo" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" preserveAspectRatio="none"><path class="wavePath-haxJK1 animationPaused-2hZ4IO" d="M826.337463,25.5396311 C670.970254,58.655965 603.696181,68.7870267 447.802481,35.1443383 C293.342778,1.81111414 137.33377,1.81111414 0,1.81111414 L0,150 L1920,150 L1920,1.81111414 C1739.53523,-16.6853983 1679.86404,73.1607868 1389.7826,37.4859505 C1099.70117,1.81111414 981.704672,-7.57670281 826.337463,25.5396311 Z" fill="#ff9654"></path></svg>
         <div class="container py-5">
             <main>
+                <!-- ? il nostro team  -->
+                <section>
+                    <div class="d-flex justify-content-around align-items-center flex-wrap">
+                        <div v-for="member in members" class="mx-5 text-center">
+                            <div class="rounded-pill imgCont">
+                                <img :src="member.image" :alt="member.name" class="rounded-pill">
+                            </div>
+                            <div>
+                                <h5 class="m-0">
+                                    {{ member.name + " " + member.surname }}
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- ? il nostro team  -->
+
                 <!-- ? la nostra storia e i nostri valori  -->
                 <section>
                     <div class="row text-center">
-                        <div class="col-5">
+                        <div class="col-5 boxShadow py-3 px-5 rounded-pill">
                             <h4>
                                 {{ sections[0].name }}
                             </h4>
@@ -15,7 +32,7 @@
                                 {{ sections[0].text }}
                             </p>
                         </div>
-                        <div class="col-5 offset-2">
+                        <div class="col-5 offset-2 boxShadow py-3 px-5 rounded-pill">
                             <h4>
                                 {{ sections[1].name }}
                             </h4>
@@ -26,25 +43,7 @@
                     </div>
                 </section>
                 <!-- ? la nostra storia e i nostri valori  -->
-                <!-- ? il nostro team  -->
-                <section>
-                    <h3>
-                        i fondatori
-                    </h3>
-                    <div class="row my_members">
-                        <div v-for="member in members" class="col mx-3">
-                            <div class="card">
-                                <img :src="member.image" class="card-img-top" alt="img">
-                                <div class="card-body d-flex">
-                                    <h5 class="card-title m-auto">
-                                        {{ member.name + " " + member.surname }}
-                                    </h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!-- ? il nostro team  -->
+
                 <!-- ? recensioni  -->
                 <section class="pb-5">
                     <h3>
@@ -74,6 +73,7 @@
                     </div>
                 </section>
                 <!-- ? recensioni  -->
+
             </main>
         </div>
     </div>
@@ -184,8 +184,29 @@
     @use '../../styles/variables' as *;
     @use '../../styles/general.scss' as *;
 
-    *:not(i) {
-        font-family: 'Borel', cursive;
+    .boxShadow {
+        -webkit-box-shadow: 0px 0px 13px 0px #000000; 
+        box-shadow: 0px 0px 13px 0px #000000;
+        background-color: $primarysoft;
+    }
+
+    .imgCont {
+        height: 9rem;
+        width: 9rem;
+        -webkit-box-shadow: 0px 0px 13px 0px #000000; 
+        box-shadow: 0px 0px 13px 0px #000000;
+        position: relative;
+        margin-bottom: 2rem;
+
+        img {
+            height: 88%;
+            width: 88%;
+            object-fit: contain;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
     }
 
     .my_background {
@@ -201,10 +222,6 @@
     .my_rating {
         background-color: $secondary;
         border-radius: 1rem;
-    }
-
-    .my_members {
-        gap: 1.5rem;
     }
 
     .card {
