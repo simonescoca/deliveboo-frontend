@@ -1,6 +1,6 @@
 <template>
-    <div class="container">
-        <div class="py-2 px-3 bg-danger w-fit bord-rad">
+    <div class="container ">
+        <div class="py-2 px-3 bg-danger w-fit bord-rad  ">
             <h1 class="text-white">
                 404 NOT FOUND
             </h1>
@@ -42,6 +42,13 @@
 </script>
 
 <style lang="scss" scoped>
+    div.container{
+		height: 800px;
+		display: flex;
+		div{
+			margin: auto;
+		}
+	}
     .w-fit {
         width: fit-content;
     }
