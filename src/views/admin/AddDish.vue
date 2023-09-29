@@ -265,7 +265,7 @@ h3 {
 
 .container-fluid {
     background-color: $secondarysoft;
-
+    color: rgba(0, 0, 0, 0.732);
 
 }
 
@@ -278,17 +278,12 @@ form {
     }
 }
 
-input {
-    box-shadow: #ff94747b 0px 2px 4px, #ff947448 0px 7px 13px -3px, #ff94741d 0px -3px 0px inset;
-}
-
-select {
-    box-shadow: #ff94747b 0px 2px 4px, #ff947448 0px 7px 13px -3px, #ff94741d 0px -3px 0px inset;
-}
-
+input,
+select,
 textarea {
     box-shadow: #ff94747b 0px 2px 4px, #ff947448 0px 7px 13px -3px, #ff94741d 0px -3px 0px inset;
 }
+
 
 .pill-ingr {
     background-color: #ff9474;
@@ -303,5 +298,14 @@ textarea {
 
 .my-btn {
     background-color: $secondary;
+    color: white;
+}
+
+.form-control:focus {
+    color: none;
+    background-color: none;
+    border-color: $primary;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem #ff94747b;
 }
 </style>

@@ -7,10 +7,11 @@
                 d="M826.337463,25.5396311 C670.970254,58.655965 603.696181,68.7870267 447.802481,35.1443383 C293.342778,1.81111414 137.33377,1.81111414 0,1.81111414 L0,150 L1920,150 L1920,1.81111414 C1739.53523,-16.6853983 1679.86404,73.1607868 1389.7826,37.4859505 C1099.70117,1.81111414 981.704672,-7.57670281 826.337463,25.5396311 Z"
                 fill="#ff9654"></path>
         </svg>
-        <div class="container myPadding">
-            <h3>
+        <div class="container-fluid px-4 myPadding">
+            <h3 class="text-center">
                 Admin - Modifica ristorante
             </h3>
+            <hr>
             <div v-if="isUpdateSuccess" class="alert alert-success">
                 La modifica è andata a buon fine!
             </div>
@@ -55,7 +56,7 @@
                     </label>
                     <input class="form-control" name="image" type="file" @change="handleImageDish">
                 </div>
-                <button type="submit" class="d-flex btn btn-primary mx-auto mt-3">
+                <button type="submit" class="d-flex btn my-btn mx-auto mt-3">
                     Aggiorna
                 </button>
             </form>
@@ -214,6 +215,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use " ../../../../styles/variables" as *;
+
+.container-fluid {
+    background-color: $secondarysoft;
+    color: rgba(0, 0, 0, 0.732);
+}
+
 .myPadding {
     padding: 5rem 0;
 }
@@ -227,4 +235,36 @@ export default {
 .current-img {
     object-fit: cover;
     border-radius: 0.375rem;
-}</style>
+}
+
+input,
+select,
+textarea {
+    box-shadow: #ff94747b 0px 2px 4px, #ff947448 0px 7px 13px -3px, #ff94741d 0px -3px 0px inset;
+}
+
+
+.my-btn {
+    background-color: $secondary;
+    color: white;
+}
+
+.form-check-input:checked {
+    background-color: $primary;
+    border-color: $primary;
+}
+
+.form-check-input:focus {
+    border-color: $primary;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem #ff94747b;
+}
+
+.form-control:focus {
+    color: none;
+    background-color: none;
+    border-color: $primary;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem #ff94747b;
+}
+</style>

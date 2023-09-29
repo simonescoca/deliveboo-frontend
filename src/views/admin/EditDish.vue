@@ -11,6 +11,7 @@
             <h3>
                 Admin - Modifica piatto
             </h3>
+            <hr>
             <div v-if="isUpdateSuccess" class="alert alert-success">
                 La modifica del piatto è andata a buon fine!
             </div>
@@ -284,7 +285,6 @@ export default {
 @use " ../../../../styles/variables" as *;
 
 h3 {
-
     border-radius: 5px;
     text-align: center;
     padding: 0.6rem 0;
@@ -293,12 +293,10 @@ h3 {
 
 .container-fluid {
     background-color: $secondarysoft;
-
-
+    color: rgba(0, 0, 0, 0.732);
 }
 
 form {
-
     border-radius: 0.375rem;
 
     .add-ingr {
@@ -306,14 +304,8 @@ form {
     }
 }
 
-input {
-    box-shadow: #ff94747b 0px 2px 4px, #ff947448 0px 7px 13px -3px, #ff94741d 0px -3px 0px inset;
-}
-
-select {
-    box-shadow: #ff94747b 0px 2px 4px, #ff947448 0px 7px 13px -3px, #ff94741d 0px -3px 0px inset;
-}
-
+input,
+select,
 textarea {
     box-shadow: #ff94747b 0px 2px 4px, #ff947448 0px 7px 13px -3px, #ff94741d 0px -3px 0px inset;
 }
@@ -329,8 +321,17 @@ textarea {
     }
 }
 
+.form-control:focus {
+    color: none;
+    background-color: none;
+    border-color: $primary;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem #ff94747b;
+}
+
 .my-btn {
     background-color: $secondary;
+    color: white;
 }
 
 .myPadding {

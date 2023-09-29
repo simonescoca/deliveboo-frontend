@@ -8,10 +8,11 @@
                 fill="#ff9654"></path>
         </svg>
     </div>
-    <div class="container myPadding">
-        <h1 class="my-3">
+    <div class="container-fluid px-4 myPadding">
+        <h3 class="my-3 text-center">
             Admin - Aggiungi un ristorante
-        </h1>
+        </h3>
+        <hr>
         <div v-if="isUpdateSuccess" class="alert alert-success">
             La creazione del tuo ristorante è andata a buon fine!
         </div>
@@ -188,12 +189,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use " ../../../../styles/variables" as *;
+
 .myPadding {
     padding: 5rem 0;
 }
 
-.container {
+.container-fluid {
     color: rgba(0, 0, 0, 0.732);
+    background-color: $secondarysoft;
 }
 
 .card {
@@ -201,6 +205,40 @@ export default {
 }
 
 .btn {
-    background-color: #ff9474;
+    background-color: $secondary;
     color: white;
-}</style>
+}
+
+.form-control:focus {
+    color: none;
+    background-color: none;
+    border-color: $primary;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem #ff94747b;
+}
+
+input,
+select,
+.card {
+    box-shadow: #ff94747b 0px 2px 4px, #ff947448 0px 7px 13px -3px, #ff94741d 0px -3px 0px inset;
+}
+
+.form-control:focus {
+    color: none;
+    background-color: none;
+    border-color: $primary;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem #ff94747b;
+}
+
+.form-check-input:focus {
+    border-color: $primary;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem #ff94747b;
+}
+
+.form-check-input:checked {
+    background-color: $primary;
+    border-color: $primary;
+}
+</style>
