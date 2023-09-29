@@ -1,14 +1,13 @@
 <template>
     <nav class="position-relative d-flex justify-content-center">
-        <div
-            class="d-flex container-fluid container-sm container-fluid-md container-lg justify-content-between align-items-center">
+        <div class="d-flex container-fluid container-sm container-fluid-md container-lg justify-content-around justify-content-sm-between align-items-center">
 
             <!-- ? logo container -->
-            <div class="d-flex align-items-center my_logo-container">
+            <div class="d-none d-sm-flex align-items-center my_logo-container">
                 <div class="position-relative h-100 duckbox">
                     <div class="scroll-animation" :style="animationStyle"></div>
                 </div>
-                <img src="../../src/images/logo.png" alt="logo" class="logo d-none d-lg-block">
+                <img src="../../src/images/logo.png" alt="logo" class="logo d-none d-xl-block mx-4">
             </div>
 
             <!-- ? central links -->
@@ -329,11 +328,12 @@ nav {
     .my_logo-container {
         height: 3.5rem;
         width: 100%;
+        width: 220px;
 
         img {
             object-fit: contain;
             height: 100%;
-            width: 160px;
+            width: 100%;
         }
     }
 
