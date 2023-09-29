@@ -1,11 +1,18 @@
 <template>
-    <main class="position-relative">
-        <svg style="height: 4rem; width: 100%; position: absolute; top: 0; left: 0; right: 0; transform: rotate(180deg);" class="wave-1hkxOo" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" preserveAspectRatio="none"><path class="wavePath-haxJK1 animationPaused-2hZ4IO" d="M826.337463,25.5396311 C670.970254,58.655965 603.696181,68.7870267 447.802481,35.1443383 C293.342778,1.81111414 137.33377,1.81111414 0,1.81111414 L0,150 L1920,150 L1920,1.81111414 C1739.53523,-16.6853983 1679.86404,73.1607868 1389.7826,37.4859505 C1099.70117,1.81111414 981.704672,-7.57670281 826.337463,25.5396311 Z" fill="#ff9654"></path></svg>
-    </main>
-    <div class="container myPadding">
-        <h1 class="my-3">
+    <div class="position-relative">
+        <svg style="height: 4rem; width: 100%; position: absolute; top: 0; left: 0; right: 0; transform: rotate(180deg);"
+            class="wave-1hkxOo" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100"
+            preserveAspectRatio="none">
+            <path class="wavePath-haxJK1 animationPaused-2hZ4IO"
+                d="M826.337463,25.5396311 C670.970254,58.655965 603.696181,68.7870267 447.802481,35.1443383 C293.342778,1.81111414 137.33377,1.81111414 0,1.81111414 L0,150 L1920,150 L1920,1.81111414 C1739.53523,-16.6853983 1679.86404,73.1607868 1389.7826,37.4859505 C1099.70117,1.81111414 981.704672,-7.57670281 826.337463,25.5396311 Z"
+                fill="#ff9654"></path>
+        </svg>
+    </div>
+    <div class="container-fluid px-4 myPadding">
+        <h3 class="my-3 text-center">
             Admin - Aggiungi un ristorante
-        </h1>
+        </h3>
+        <hr>
         <div v-if="isUpdateSuccess" class="alert alert-success">
             La creazione del tuo ristorante è andata a buon fine!
         </div>
@@ -66,7 +73,7 @@
 <script>
 import { store } from "../../store.js";
 import axios from "axios";
-import {router} from '../../router.js'
+import { router } from '../../router.js'
 export default {
     data() {
         return {
@@ -159,7 +166,7 @@ export default {
                         console.log(this.newRestaurant);
                         this.isUpdateSuccess = true;
                         this.isUpdateFailure = false;
-                        router.push({name:'restaurants'});
+                        router.push({ name: 'restaurants' });
                     }
 
                     console.log(response)
@@ -182,13 +189,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use " ../../../../styles/variables" as *;
 
 .myPadding {
     padding: 5rem 0;
 }
 
-.container {
+.container-fluid {
     color: rgba(0, 0, 0, 0.732);
+    background-color: $secondarysoft;
 }
 
 .card {
@@ -196,7 +205,40 @@ export default {
 }
 
 .btn {
-    background-color: #ff9474;
+    background-color: $secondary;
     color: white;
+}
+
+.form-control:focus {
+    color: none;
+    background-color: none;
+    border-color: $primary;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem #ff94747b;
+}
+
+input,
+select,
+.card {
+    box-shadow: #ff94747b 0px 2px 4px, #ff947448 0px 7px 13px -3px, #ff94741d 0px -3px 0px inset;
+}
+
+.form-control:focus {
+    color: none;
+    background-color: none;
+    border-color: $primary;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem #ff94747b;
+}
+
+.form-check-input:focus {
+    border-color: $primary;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem #ff94747b;
+}
+
+.form-check-input:checked {
+    background-color: $primary;
+    border-color: $primary;
 }
 </style>

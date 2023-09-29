@@ -226,6 +226,7 @@ header {
         border: 1px solid rgba(0, 0, 0, 0.223);
         border-radius: 50%;
         position: fixed;
+        background-color: white;
         top: 16%;
         right: 20px;
         transition: all 500ms;
