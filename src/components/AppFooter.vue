@@ -1,68 +1,62 @@
 <template>
-	<footer v-if="store.isFooterVisible" class="pb-5"> 
-
-        <div class="container">
-            <div class="row justify-content-around">
-
-                <div v-for="member in members" class="col-3">
-                    <ul class="d-flex list-unstyled flex-column justify-content-center align-items-center">
+	<footer class="pb-5"> 
+    <div class="container">
+        <div class="row  justify-content-around">
+            <div v-for="member in members" class="col-12 col-md-6 col-lg-3 mb-4">
+                <div class="d-lg-flex ">
+                    <!-- Immagine all'interno del primo li solo su schermi "lg" e superiori -->
+                    <ul class="list-unstyled text-center d-flex justify-content-between align-items-center flex-row flex-md-column">
                         <li>
                             <div class="rounded-pill imgContainer mx-auto mb-2">
-                                <img :src="member.image" :alt="member.nameSurname" class="rounded-pill">
-                            </div>
-                            <div class="d-flex">
-                                <h4 class="m-auto">
-                                    {{ member.nameSurname }}
-                                </h4>
+                                <img :src="member.image" :alt="member.nameSurname" class="rounded-pill img-fluid">
                             </div>
                         </li>
                         <li>
-                            <a :href="member.linkedinURL">
-                                <button class="btn btn-outline-primary A">
-                                    <i class="fa-brands fa-linkedin"></i>
-                                    <span>
-                                        Linkedin
-                                    </span>
-                                </button>
-                            </a>
+                            <div>
+                              <h4>
+                                {{ member.nameSurname }}
+                              </h4>
+                            </div>
+                            <div>
+                              <a :href="member.linkedinURL" class="btn A btn-outline-primary mb-2 custom-link">
+                                <i class="fa-brands fa-linkedin"></i> Linkedin
+                              </a>
+                            </div>
+                            <div>
+                              <a :href="member.gitHubURL" class="btn B btn-outline-dark mb-2 custom-link">
+                                <i class="fa-brands fa-square-github"></i> GitHub
+                              </a>
+                            </div>
+                            <div>
+                              <a :href="'mailto:' + member.email" class="btn C btn-outline-primary custom-link">
+                                <i class="fa-solid fa-square-envelope"></i> {{ member.email }}
+                              </a>
+                            </div>
                         </li>
-                        <li>
-                            <a :href="member.gitHubURL">
-                                <button class="btn btn-outline-dark B">
-                                    <i class="fa-brands fa-square-github"></i>
-                                    <span>
-                                        GitHub
-                                    </span>
-                                </button>
-                            </a>
-                        </li>
-                        <li>
-                            <a :href="'mailto:' + member.email">
-                                <button class="btn btn-outline-primary C">
-                                    <i class="fa-solid fa-square-envelope"></i>
-                                    <span class="ms-1">
-                                        {{ member.email }}
-                                    </span>
-                                </button>
-                            </a>
-                        </li>
+                        
                     </ul>
+                    <!-- La ul sarà unica su schermi "lg" e superiori -->
                 </div>
-
             </div>
         </div>
+    </div>
+</footer>
 
-	</footer>
+
+
+
+
+
 </template>
 
 <script>
-	import {store} from "../store.js";
+	// import {store} from "../store.js";
 	// import axios from "axios";
 
 	export default {
 		data() {
 			return {
-				store,
+				// store
                 members: [
                     {
                         image: '../../src/images/gabri.png',
