@@ -57,28 +57,6 @@
 		data() {
 			return {
 				store,
-				members: [
-                    {
-                        name: 'Gabiele',
-                        surname: 'Majocchi',
-                        image: '../../../src/images/gabri.png',
-                    },
-                    {
-                        name: 'Simone',
-                        surname: 'Scoca',
-                        image: '../../../src/images/simo.png',
-                    },
-                    {
-                        name: 'Jacopo',
-                        surname: 'Grippiotti',
-                        image: '../../../src/images/pino.png',
-                    },
-                    {
-                        name: 'Manuel',
-                        surname: 'Camaioni',
-                        image: '../../../src/images/manu.png',
-                    },
-                ],
 			}
 		},
 
@@ -125,13 +103,6 @@
 			margin: auto;
 		}
 	}
-    .w-fit {
-        width: fit-content;
-    }
-
-    .bord-rad {
-        border-radius: 8px;
-    }
 
 
 @import url("https://fonts.googleapis.com/css?family=Barlow+Condensed:300,400,500,600,700,800,900|Barlow:300,400,500,600,700,800,900&display=swap");
