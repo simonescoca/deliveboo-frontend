@@ -1,8 +1,19 @@
 <template>
-    <main class="position-relative">
-        <svg style="height: 4rem; width: 100%; position: absolute; top: 0; left: 0; right: 0; transform: rotate(180deg);" class="wave-1hkxOo" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" preserveAspectRatio="none"><path class="wavePath-haxJK1 animationPaused-2hZ4IO" d="M826.337463,25.5396311 C670.970254,58.655965 603.696181,68.7870267 447.802481,35.1443383 C293.342778,1.81111414 137.33377,1.81111414 0,1.81111414 L0,150 L1920,150 L1920,1.81111414 C1739.53523,-16.6853983 1679.86404,73.1607868 1389.7826,37.4859505 C1099.70117,1.81111414 981.704672,-7.57670281 826.337463,25.5396311 Z" fill="#ff9654"></path></svg>
-        <svg style="height: 4rem; width: 100%; position: absolute; bottom: 0; left: 0; right: 0;" class="wave-1hkxOo" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" preserveAspectRatio="none"><path class="wavePath-haxJK1 animationPaused-2hZ4IO" d="M826.337463,25.5396311 C670.970254,58.655965 603.696181,68.7870267 447.802481,35.1443383 C293.342778,1.81111414 137.33377,1.81111414 0,1.81111414 L0,150 L1920,150 L1920,1.81111414 C1739.53523,-16.6853983 1679.86404,73.1607868 1389.7826,37.4859505 C1099.70117,1.81111414 981.704672,-7.57670281 826.337463,25.5396311 Z" fill="#ff9654"></path></svg>
-        <div class="container myPadding">
+    <div class="position-relative">
+        <svg style="height: 4rem; width: 100%; position: absolute; top: 0; left: 0; right: 0; transform: rotate(180deg);"
+            class="wave-1hkxOo" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100"
+            preserveAspectRatio="none">
+            <path class="wavePath-haxJK1 animationPaused-2hZ4IO"
+                d="M826.337463,25.5396311 C670.970254,58.655965 603.696181,68.7870267 447.802481,35.1443383 C293.342778,1.81111414 137.33377,1.81111414 0,1.81111414 L0,150 L1920,150 L1920,1.81111414 C1739.53523,-16.6853983 1679.86404,73.1607868 1389.7826,37.4859505 C1099.70117,1.81111414 981.704672,-7.57670281 826.337463,25.5396311 Z"
+                fill="#ff9654"></path>
+        </svg>
+        <svg style="height: 4rem; width: 100%; position: absolute; bottom: 0; left: 0; right: 0;" class="wave-1hkxOo"
+            version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" preserveAspectRatio="none">
+            <path class="wavePath-haxJK1 animationPaused-2hZ4IO"
+                d="M826.337463,25.5396311 C670.970254,58.655965 603.696181,68.7870267 447.802481,35.1443383 C293.342778,1.81111414 137.33377,1.81111414 0,1.81111414 L0,150 L1920,150 L1920,1.81111414 C1739.53523,-16.6853983 1679.86404,73.1607868 1389.7826,37.4859505 C1099.70117,1.81111414 981.704672,-7.57670281 826.337463,25.5396311 Z"
+                fill="#ff9654"></path>
+        </svg>
+        <div class="container myPadding px-3">
             <header class="d-flex justify-content-between">
                 <router-link :to="{ name: 'deleted-restaurants' }" class="btn my_btn deleted">
                     <i class="fa-regular fa-trash-can"></i>
@@ -11,6 +22,8 @@
                     <i class="fa-solid fa-plus"></i>
                 </router-link>
             </header>
+            <p class="fw-semibold ms-3">{{ user.name }} / <span class="fw-bold">Ristoranti ({{ restaurants.length }})</span>
+            </p>
             <h1 class="text-center my-3 fw-bold">
                 I tuoi ristoranti
             </h1>
@@ -21,7 +34,7 @@
                 <div class="row">
                     <div v-for="restaurant in restaurants" :key="restaurant.inHover = false"
                         @mouseenter="restaurant.inHover = true" @mouseleave="restaurant.inHover = false"
-                        class="d-flex position-relative my_restaurant col-12 my-3">
+                        class="d-flex flex-column align-items-center flex-md-row position-relative my_restaurant pb-5 pb-md-3 col-12 my-3">
                         <div class="my_r-img" v-if="restaurant.image.startsWith('http')">
                             <img :src="restaurant.image" :alt="restaurant.name">
                         </div>
@@ -36,21 +49,31 @@
                                 <li class="mb-0 ps-3" v-for="objTypes in restaurant.types">{{ objTypes.name }}</li>
                             </ul>
                         </div>
-    
+
                         <button @click="itemToSoftDelete(restaurant.id)" :disabled="showDeleteConfirmationModal"
-                            class="my_del-btn btn d-flex justify-content-center align-items-center">
+                            class="my_del-btn btn">
                             <i class="fa-solid fa-xmark fa-xs"></i>
                         </button>
-    
-                        <div class="position-relative d-flex flex-column ms-auto justify-content-evenly"
+
+                        <div class="position-relative d-flex d-md-none h-100 w-100 justify-content-evenly my-3"
                             v-if="!showDeleteConfirmationModal">
                             <router-link v-for="link in links" :to="{ name: link.routeName }" :class="link.class"
                                 @click="store.selectedRes = restaurant.id">
                                 <i class="position-absolute fa-solid my-btn"
+                                    :class="link.icon, restaurant.inHover ? 'active' : ''"></i>
+                            </router-link>
+                        </div>
+
+
+                        <div class="position-relative d-none d-md-flex flex-column h-100 ms-auto justify-content-evenly pe-4"
+                            v-if="!showDeleteConfirmationModal">
+                            <router-link v-for="link in links" :to="{ name: link.routeName }" :class="link.class"
+                                @click="store.selectedRes = restaurant.id">
+                                <i class="position-absolute fa-solid my-btn large"
                                     :class="link.icon, restaurant.inHover ? 'active' : 'invisible'"></i>
                             </router-link>
                         </div>
-    
+
                     </div>
                 </div>
             </div>
@@ -62,9 +85,9 @@
                     <button @click="showDeleteConfirmationModal = false" class="btn btn-modal">Annulla</button>
                 </div>
             </div>
-    
+
         </div>
-    </main>
+    </div>
 </template>
 
 <script>
@@ -82,6 +105,7 @@ export default {
             apiUrl: 'http://127.0.0.1:8000/api/',
             userToken: '',
             userId: '',
+            user: '',
             userName: '',
             links: [
                 {
@@ -174,9 +198,9 @@ export default {
                 }
             })
                 .then(response => {
-                    // console.log(response)
-                    this.restaurants = response.data
-
+                    console.log(response)
+                    this.restaurants = response.data.restaurants;
+                    this.user = response.data.user;
                     console.log(this.restaurants);
                 })
                 .catch(error => {
@@ -252,6 +276,7 @@ h1 {
                 height: 100%;
                 width: 100%;
                 border-radius: 50%;
+                object-fit: cover;
             }
         }
 
@@ -260,7 +285,7 @@ h1 {
             max-width: 25px;
             height: 25px;
             position: absolute;
-            top: 3%;
+            top: 1%;
             right: 0;
             transform: translateX(-50%);
             color: rgba(0, 0, 0, 0.645);
@@ -278,7 +303,6 @@ h1 {
         }
 
         .my-btn.active {
-            right: 40px;
             opacity: 1;
             transition: all 400ms ease-out;
 
@@ -291,10 +315,14 @@ h1 {
             }
         }
 
+        .my-btn.active.large {
+            right: 40px;
+        }
+
         .my-btn.invisible {
             opacity: 0;
+            right: 0;
             pointer-events: none;
-            right: 0px;
             transition: all 1s ease-out;
         }
     }
