@@ -1,8 +1,19 @@
 <template>
-    <main class="position-relative">
-        <svg style="height: 4rem; width: 100%; position: absolute; top: 0; left: 0; right: 0; transform: rotate(180deg);" class="wave-1hkxOo" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" preserveAspectRatio="none"><path class="wavePath-haxJK1 animationPaused-2hZ4IO" d="M826.337463,25.5396311 C670.970254,58.655965 603.696181,68.7870267 447.802481,35.1443383 C293.342778,1.81111414 137.33377,1.81111414 0,1.81111414 L0,150 L1920,150 L1920,1.81111414 C1739.53523,-16.6853983 1679.86404,73.1607868 1389.7826,37.4859505 C1099.70117,1.81111414 981.704672,-7.57670281 826.337463,25.5396311 Z" fill="#ff9654"></path></svg>
-        <svg style="height: 4rem; width: 100%; position: absolute; bottom: 0; left: 0; right: 0;" class="wave-1hkxOo" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" preserveAspectRatio="none"><path class="wavePath-haxJK1 animationPaused-2hZ4IO" d="M826.337463,25.5396311 C670.970254,58.655965 603.696181,68.7870267 447.802481,35.1443383 C293.342778,1.81111414 137.33377,1.81111414 0,1.81111414 L0,150 L1920,150 L1920,1.81111414 C1739.53523,-16.6853983 1679.86404,73.1607868 1389.7826,37.4859505 C1099.70117,1.81111414 981.704672,-7.57670281 826.337463,25.5396311 Z" fill="#ff9654"></path></svg>
-        <div class="container myPadding">
+    <div class="position-relative">
+        <svg style="height: 4rem; width: 100%; position: absolute; top: 0; left: 0; right: 0; transform: rotate(180deg);"
+            class="wave-1hkxOo" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100"
+            preserveAspectRatio="none">
+            <path class="wavePath-haxJK1 animationPaused-2hZ4IO"
+                d="M826.337463,25.5396311 C670.970254,58.655965 603.696181,68.7870267 447.802481,35.1443383 C293.342778,1.81111414 137.33377,1.81111414 0,1.81111414 L0,150 L1920,150 L1920,1.81111414 C1739.53523,-16.6853983 1679.86404,73.1607868 1389.7826,37.4859505 C1099.70117,1.81111414 981.704672,-7.57670281 826.337463,25.5396311 Z"
+                fill="#ff9654"></path>
+        </svg>
+        <svg style="height: 4rem; width: 100%; position: absolute; bottom: 0; left: 0; right: 0;" class="wave-1hkxOo"
+            version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" preserveAspectRatio="none">
+            <path class="wavePath-haxJK1 animationPaused-2hZ4IO"
+                d="M826.337463,25.5396311 C670.970254,58.655965 603.696181,68.7870267 447.802481,35.1443383 C293.342778,1.81111414 137.33377,1.81111414 0,1.81111414 L0,150 L1920,150 L1920,1.81111414 C1739.53523,-16.6853983 1679.86404,73.1607868 1389.7826,37.4859505 C1099.70117,1.81111414 981.704672,-7.57670281 826.337463,25.5396311 Z"
+                fill="#ff9654"></path>
+        </svg>
+        <div class="container myPadding px-3">
             <header class="d-flex justify-content-between mb-3">
                 <router-link :to="{ name: 'deleted-dishes' }" class="btn my_btn deleted">
                     <i class="fa-regular fa-trash-can"></i>
@@ -11,6 +22,8 @@
                     <i class="fa-solid fa-plus"></i>
                 </router-link>
             </header>
+            <p class="fw-semibold ms-3">{{ restaurant.name }} / <span class="fw-bold">Menù piatti</span>
+            </p>
             <h3 class="restaurant-menu">
                 {{ restaurant.name }} ~ Menù
             </h3>
@@ -18,19 +31,20 @@
                 La modifica è andata a buon fine!
             </div>
             <div class=" my_dishes">
-                <div v-for="dish in dishes" class="d-flex my_dish my-3">
-    
-                    <div class="my_r-img w-25" v-if="dish.photo.startsWith('http')">
+                <div v-for="dish in dishes" class="d-flex flex-column flex-md-row my_dish my-3">
+
+                    <div class="my_r-img w-100 w-md-25" v-if="dish.photo.startsWith('http')">
                         <img :src="dish.photo" :alt="dish.name">
                     </div>
-                    <div class="my_r-img w-25" v-else>
+                    <div class="my_r-img w-100 w-md-25" v-else>
                         <img :src="getImageUrl(dish.photo)" :alt="dish.name">
                     </div>
-                    <div class="dishinfo w-75 d-flex flex-column align-items-center justify-content-between mb-3">
+                    <div
+                        class="dishinfo w-100 d-flex flex-column align-items-center justify-content-evenly justify-content-md-between my-3 text-center">
                         <div class="my_r-name">
                             {{ dish.name }}
                         </div>
-                        <div class="w-50 text-left">
+                        <div class="w-50 text-left my-3">
                             {{ dish.description }}
                         </div>
                         <div class="btn-group">
@@ -48,7 +62,7 @@
                             </button>
                         </div>
                     </div>
-    
+
                 </div>
             </div>
             <div class="position-fixed dishShow" :class="infotoggle === false ? 'invisible' : ''">
@@ -78,9 +92,9 @@
                     <button @click="showDeleteConfirmationModal = false" class="btn">Annulla</button>
                 </div>
             </div>
-    
+
         </div>
-    </main>
+    </div>
 </template>
 
 <script>
@@ -204,7 +218,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 .myPadding {
     padding: 5rem 0;
 }
@@ -220,6 +233,7 @@ header {
         border: 1px solid rgba(0, 0, 0, 0.223);
         border-radius: 50%;
         position: fixed;
+        background-color: #fff;
         top: 16%;
         right: 20px;
         transition: all 500ms;
