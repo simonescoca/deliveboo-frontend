@@ -189,9 +189,9 @@ export default {
     },
 
     created() {
+        this.store.isFooterVisible = true;
         this.restCategOrName = store.search
-        this.getRestaurants();
-
+        this.getRestaurants()
     },
 
     methods: {

@@ -232,6 +232,7 @@
 		},
 
 		created () {
+            this.store.isFooterVisible = true;
 			this.selectedRestaurant = localStorage.getItem('selectedRestaurant')
 			console.log(this.selectedRestaurant)
 			this.getRestaurantInfo()

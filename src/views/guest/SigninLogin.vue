@@ -230,7 +230,7 @@
 		},
 
 		created () {
-
+            this.store.isFooterVisible = true;
 		},
 
 		methods: {
