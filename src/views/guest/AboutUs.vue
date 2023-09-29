@@ -197,6 +197,7 @@
         box-shadow: 0px 0px 13px 0px #000000;
         position: relative;
         margin-bottom: 2rem;
+        background-color: rgb(255, 245, 212);
 
         img {
             height: 88%;
