@@ -39,7 +39,7 @@
 							<article>
 								<p>Uh oh! Looks like you got lost. <br>Go back to the homepage!</p>
 								<router-link :to="{ name: 'homepage' }">
-                                    <button>Go back to home</button>
+                                    <button>Go back to </button>
                                 </router-link>
 							</article>
 						</div>
