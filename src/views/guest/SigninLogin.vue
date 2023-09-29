@@ -1,189 +1,193 @@
 <template>
-	<!-- ---Register section, active when store access is false--- -->
-	<div class="container register" v-if="store.access === false">
-		<div class="row my-5">
-			<!-- ---Register img--- -->
-			<div class="col-5 d-flex">
-				<img src="../../images/register.png" alt="" class="w-100 m-auto">
-			</div>
-			<!-- ---Form Register--- -->
-			<div class="col-7 text-center">
-				<h1>Sign up</h1>
-				<h5>Enter your information to get started</h5>
-				<form action="" class="mx-5" @submit.prevent="registerUser">
-					<!-- ---Name--- -->
-					<div class="form-control d-flex">
-						<input type="text" id="name" v-model="registerData.name" required>
-						<label class="fw-semibold">
-							<span style="transition-delay:0ms">F</span>
-							<span style="transition-delay:50ms">u</span>
-							<span style="transition-delay:100ms">l</span>
-							<span style="transition-delay:150ms">l</span>
-							<span style="transition-delay:200ms"> </span>
-							<span style="transition-delay:250ms">N</span>
-							<span style="transition-delay:300ms">a</span>
-							<span style="transition-delay:350ms">m</span>
-							<span style="transition-delay:400ms">e</span>
-						</label>
-						<i class="fa-solid fa-id-card align-self-center"></i>
-					</div>
-					<!-- ---Email--- -->
-					<div class="form-control">
-						<input type="email" id="email" v-model="registerData.email" required>
-						<label class="fw-semibold">
-							<span style="transition-delay:0ms">E</span>
-							<span style="transition-delay:50ms">m</span>
-							<span style="transition-delay:100ms">a</span>
-							<span style="transition-delay:150ms">i</span>
-							<span style="transition-delay:200ms">l</span>
-						</label>
-						<i class="fa-solid fa-envelope align-self-center"></i>
-					</div>
-					<!-- ---VAT number--- -->
-					<div class="form-control d-flex">
-						<input type="text" id="vat_num" v-model="registerData.vat_num" required>
-						<label class="fw-semibold">
-							<span style="transition-delay:0ms">V</span>
-							<span style="transition-delay:50ms">A</span>
-							<span style="transition-delay:100ms">T</span>
-							<span style="transition-delay:150ms"> </span>
-							<span style="transition-delay:200ms">N</span>
-							<span style="transition-delay:250ms">u</span>
-							<span style="transition-delay:300ms">m</span>
-							<span style="transition-delay:350ms">b</span>
-							<span style="transition-delay:400ms">e</span>
-							<span style="transition-delay:400ms">r</span>
-						</label>
-						<i class="fa-solid fa-lock align-self-center"></i>
-					</div>
-					<!-- ---Password--- -->
-					<div class="form-control d-flex">
-						<input type="password" id="password" v-model="registerData.password" required>
-						<label class="fw-semibold">
-							<span style="transition-delay:0ms">P</span>
-							<span style="transition-delay:50ms">a</span>
-							<span style="transition-delay:100ms">s</span>
-							<span style="transition-delay:150ms">s</span>
-							<span style="transition-delay:200ms">w</span>
-							<span style="transition-delay:250ms">o</span>
-							<span style="transition-delay:300ms">r</span>
-							<span style="transition-delay:350ms">d</span>
-						</label>
-						<i class="fa-solid fa-key align-self-center"></i>
-					</div>
-					<!-- ---Password confirm--- -->
-					<div class="form-control d-flex">
-						<input type="password" id="password_confirm" v-model="registerData.password_confirm" required>
-						<label class="fw-semibold">
-							<span style="transition-delay:0ms">P</span>
-							<span style="transition-delay:50ms">a</span>
-							<span style="transition-delay:100ms">s</span>
-							<span style="transition-delay:150ms">s</span>
-							<span style="transition-delay:200ms">w</span>
-							<span style="transition-delay:250ms">o</span>
-							<span style="transition-delay:300ms">r</span>
-							<span style="transition-delay:350ms">d</span>
-							<span style="transition-delay:400ms"> </span>
-							<span style="transition-delay:400ms">c</span>
-							<span style="transition-delay:450ms">o</span>
-							<span style="transition-delay:500ms">n</span>
-							<span style="transition-delay:550ms">f</span>
-							<span style="transition-delay:650ms">i</span>
-							<span style="transition-delay:700ms">r</span>
-							<span style="transition-delay:750ms">m</span>
-						</label>
-						<i class="fa-solid fa-lock align-self-center"></i>
-					</div>
-					<!-- ---Confirm button--- -->
-					<button class="continue-application" type="submit">
-						<div>
-							<div class="pencil"></div>
-							<div class="folder">
-								<div class="top">
-									<svg viewBox="0 0 24 27">
-										<path d="M1,0 L23,0 C23.5522847,-1.01453063e-16 24,0.44771525 24,1 L24,8.17157288 C24,8.70200585 23.7892863,9.21071368 23.4142136,9.58578644 L20.5857864,12.4142136 C20.2107137,12.7892863 20,13.2979941 20,13.8284271 L20,26 C20,26.5522847 19.5522847,27 19,27 L1,27 C0.44771525,27 6.76353751e-17,26.5522847 0,26 L0,1 C-6.76353751e-17,0.44771525 0.44771525,1.01453063e-16 1,0 Z"></path>
-									</svg>
-								</div>
-								<div class="paper"></div>
-							</div>
-						</div>
-						Confirm Registration
-					</button>
-					<!-- ---Already Log in link--- -->
-					<p class="alreadyLogin">Already have an account?<a href="#" class="fw-semibold" @click="store.access = true">Log in</a></p>
-				</form>
-			</div>
-		</div>
-	</div>
-	<!-- ---Login section, active when store access is true--- -->
-	<div class="container login" v-if="store.access === true">
-		<div class="row my-5">
-			<!-- ---Login img--- -->
-			<div class="col-5 d-flex">
-				<img src="../../images/login.png" alt="" class="w-100 m-auto">
-			</div>
-			<!-- ---Form Login--- -->
-			<div class="col-7 text-center">
-				<h1>Log in</h1>
-				<h5>Enter your information to access</h5>
-				<form action="" class="mx-5" @submit.prevent="loginUser">
-					<!-- ---Email--- -->
-					<div class="form-control">
-						<input id="email" type="email" v-model="loginData.email" required>
-						<label class="fw-semibold">
-							<span style="transition-delay:0ms">E</span>
-							<span style="transition-delay:50ms">m</span>
-							<span style="transition-delay:100ms">a</span>
-							<span style="transition-delay:150ms">i</span>
-							<span style="transition-delay:200ms">l</span>
-						</label>
-						<i class="fa-solid fa-envelope align-self-center"></i>
-					</div>
-					<!-- ---Password--- -->
-					<div class="form-control d-flex">
-						<input id="password" type="password" v-model="loginData.password" required>
-						<label class="fw-semibold">
-							<span style="transition-delay:0ms">P</span>
-							<span style="transition-delay:50ms">a</span>
-							<span style="transition-delay:100ms">s</span>
-							<span style="transition-delay:150ms">s</span>
-							<span style="transition-delay:200ms">w</span>
-							<span style="transition-delay:250ms">o</span>
-							<span style="transition-delay:300ms">r</span>
-							<span style="transition-delay:350ms">d</span>
-						</label>
-						<i class="fa-solid fa-key align-self-center"></i>
-					</div>
-					<!-- ---Login button--- -->
-					<button class="loginbtn fw-semibold" type="submit">Login</button>
-					<!-- ---Need to register--- -->
-					<p class="alreadyLogin">New to Deliveboo? <a href="#" class="fw-semibold" @click="store.access = false">Create an account</a></p>
-				</form>
-				<h5>OR</h5>
-				<div class="orline mx-auto">
-					<div></div>
-				</div>
-				<!-- ---Login with facebook button--- -->
-				<div class="d-flex flex-column align-items-center mt-3">
-					<button class="facebookbtn">
-						<svg viewBox="0 0 16 16" class="bi bi-facebook" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-							<path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"></path>
-						</svg>
-						<span>Connect with Facebook</span>
-					</button>
-					<button class="googlebtn px-4 mt-3" @click="test()">
-						<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" viewBox="0 0 256 262">
-							<path fill="#4285F4" d="M255.878 133.451c0-10.734-.871-18.567-2.756-26.69H130.55v48.448h71.947c-1.45 12.04-9.283 30.172-26.69 42.356l-.244 1.622 38.755 30.023 2.685.268c24.659-22.774 38.875-56.282 38.875-96.027"></path>
-							<path fill="#34A853" d="M130.55 261.1c35.248 0 64.839-11.605 86.453-31.622l-41.196-31.913c-11.024 7.688-25.82 13.055-45.257 13.055-34.523 0-63.824-22.773-74.269-54.25l-1.531.13-40.298 31.187-.527 1.465C35.393 231.798 79.49 261.1 130.55 261.1"></path>
-							<path fill="#FBBC05" d="M56.281 156.37c-2.756-8.123-4.351-16.827-4.351-25.82 0-8.994 1.595-17.697 4.206-25.82l-.073-1.73L15.26 71.312l-1.335.635C5.077 89.644 0 109.517 0 130.55s5.077 40.905 13.925 58.602l42.356-32.782"></path>
-							<path fill="#EB4335" d="M130.55 50.479c24.514 0 41.05 10.589 50.479 19.438l36.844-35.974C195.245 12.91 165.798 0 130.55 0 79.49 0 35.393 29.301 13.925 71.947l42.211 32.783c10.59-31.477 39.891-54.251 74.414-54.251"></path>
-						</svg>
-						<span>Connect with Google</span>
-					</button>
-				</div>
-			</div>
-		</div>
-	</div>
+    <main class="position-relative">
+        <svg style="height: 4rem; width: 100%; position: absolute; top: 0; left: 0; right: 0; transform: rotate(180deg);" class="wave-1hkxOo" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" preserveAspectRatio="none"><path class="wavePath-haxJK1 animationPaused-2hZ4IO" d="M826.337463,25.5396311 C670.970254,58.655965 603.696181,68.7870267 447.802481,35.1443383 C293.342778,1.81111414 137.33377,1.81111414 0,1.81111414 L0,150 L1920,150 L1920,1.81111414 C1739.53523,-16.6853983 1679.86404,73.1607868 1389.7826,37.4859505 C1099.70117,1.81111414 981.704672,-7.57670281 826.337463,25.5396311 Z" fill="#ff9654"></path></svg>
+        <svg style="height: 4rem; width: 100%; position: absolute; bottom: 0; left: 0; right: 0;" class="wave-1hkxOo" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" preserveAspectRatio="none"><path class="wavePath-haxJK1 animationPaused-2hZ4IO" d="M826.337463,25.5396311 C670.970254,58.655965 603.696181,68.7870267 447.802481,35.1443383 C293.342778,1.81111414 137.33377,1.81111414 0,1.81111414 L0,150 L1920,150 L1920,1.81111414 C1739.53523,-16.6853983 1679.86404,73.1607868 1389.7826,37.4859505 C1099.70117,1.81111414 981.704672,-7.57670281 826.337463,25.5396311 Z" fill="#ff9654"></path></svg>
+        <!-- ---Register section, active when store access is false--- -->
+        <div class="container register myPadding" v-if="store.access === false">
+            <div class="row">
+                <!-- ---Register img--- -->
+                <div class="col-5 d-flex">
+                    <img src="../../images/register.png" alt="" class="w-100 m-auto">
+                </div>
+                <!-- ---Form Register--- -->
+                <div class="col-7 text-center">
+                    <h1>Sign up</h1>
+                    <h5>Enter your information to get started</h5>
+                    <form action="" class="mx-5" @submit.prevent="registerUser">
+                        <!-- ---Name--- -->
+                        <div class="form-control d-flex">
+                            <input type="text" id="name" v-model="registerData.name" required>
+                            <label class="fw-semibold">
+                                <span style="transition-delay:0ms">F</span>
+                                <span style="transition-delay:50ms">u</span>
+                                <span style="transition-delay:100ms">l</span>
+                                <span style="transition-delay:150ms">l</span>
+                                <span style="transition-delay:200ms"> </span>
+                                <span style="transition-delay:250ms">N</span>
+                                <span style="transition-delay:300ms">a</span>
+                                <span style="transition-delay:350ms">m</span>
+                                <span style="transition-delay:400ms">e</span>
+                            </label>
+                            <i class="fa-solid fa-id-card align-self-center"></i>
+                        </div>
+                        <!-- ---Email--- -->
+                        <div class="form-control">
+                            <input type="email" id="email" v-model="registerData.email" required>
+                            <label class="fw-semibold">
+                                <span style="transition-delay:0ms">E</span>
+                                <span style="transition-delay:50ms">m</span>
+                                <span style="transition-delay:100ms">a</span>
+                                <span style="transition-delay:150ms">i</span>
+                                <span style="transition-delay:200ms">l</span>
+                            </label>
+                            <i class="fa-solid fa-envelope align-self-center"></i>
+                        </div>
+                        <!-- ---VAT number--- -->
+                        <div class="form-control d-flex">
+                            <input type="text" id="vat_num" v-model="registerData.vat_num" required>
+                            <label class="fw-semibold">
+                                <span style="transition-delay:0ms">V</span>
+                                <span style="transition-delay:50ms">A</span>
+                                <span style="transition-delay:100ms">T</span>
+                                <span style="transition-delay:150ms"> </span>
+                                <span style="transition-delay:200ms">N</span>
+                                <span style="transition-delay:250ms">u</span>
+                                <span style="transition-delay:300ms">m</span>
+                                <span style="transition-delay:350ms">b</span>
+                                <span style="transition-delay:400ms">e</span>
+                                <span style="transition-delay:400ms">r</span>
+                            </label>
+                            <i class="fa-solid fa-lock align-self-center"></i>
+                        </div>
+                        <!-- ---Password--- -->
+                        <div class="form-control d-flex">
+                            <input type="password" id="password" v-model="registerData.password" required>
+                            <label class="fw-semibold">
+                                <span style="transition-delay:0ms">P</span>
+                                <span style="transition-delay:50ms">a</span>
+                                <span style="transition-delay:100ms">s</span>
+                                <span style="transition-delay:150ms">s</span>
+                                <span style="transition-delay:200ms">w</span>
+                                <span style="transition-delay:250ms">o</span>
+                                <span style="transition-delay:300ms">r</span>
+                                <span style="transition-delay:350ms">d</span>
+                            </label>
+                            <i class="fa-solid fa-key align-self-center"></i>
+                        </div>
+                        <!-- ---Password confirm--- -->
+                        <div class="form-control d-flex">
+                            <input type="password" id="password_confirm" v-model="registerData.password_confirm" required>
+                            <label class="fw-semibold">
+                                <span style="transition-delay:0ms">P</span>
+                                <span style="transition-delay:50ms">a</span>
+                                <span style="transition-delay:100ms">s</span>
+                                <span style="transition-delay:150ms">s</span>
+                                <span style="transition-delay:200ms">w</span>
+                                <span style="transition-delay:250ms">o</span>
+                                <span style="transition-delay:300ms">r</span>
+                                <span style="transition-delay:350ms">d</span>
+                                <span style="transition-delay:400ms"> </span>
+                                <span style="transition-delay:400ms">c</span>
+                                <span style="transition-delay:450ms">o</span>
+                                <span style="transition-delay:500ms">n</span>
+                                <span style="transition-delay:550ms">f</span>
+                                <span style="transition-delay:650ms">i</span>
+                                <span style="transition-delay:700ms">r</span>
+                                <span style="transition-delay:750ms">m</span>
+                            </label>
+                            <i class="fa-solid fa-lock align-self-center"></i>
+                        </div>
+                        <!-- ---Confirm button--- -->
+                        <button class="continue-application" type="submit">
+                            <div>
+                                <div class="pencil"></div>
+                                <div class="folder">
+                                    <div class="top">
+                                        <svg viewBox="0 0 24 27">
+                                            <path d="M1,0 L23,0 C23.5522847,-1.01453063e-16 24,0.44771525 24,1 L24,8.17157288 C24,8.70200585 23.7892863,9.21071368 23.4142136,9.58578644 L20.5857864,12.4142136 C20.2107137,12.7892863 20,13.2979941 20,13.8284271 L20,26 C20,26.5522847 19.5522847,27 19,27 L1,27 C0.44771525,27 6.76353751e-17,26.5522847 0,26 L0,1 C-6.76353751e-17,0.44771525 0.44771525,1.01453063e-16 1,0 Z"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="paper"></div>
+                                </div>
+                            </div>
+                            Confirm Registration
+                        </button>
+                        <!-- ---Already Log in link--- -->
+                        <p class="alreadyLogin">Already have an account?<a href="#" class="fw-semibold" @click="store.access = true">Log in</a></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- ---Login section, active when store access is true--- -->
+        <div class="container login myPadding" v-if="store.access === true">
+            <div class="row my-5">
+                <!-- ---Login img--- -->
+                <div class="col-5 d-flex">
+                    <img src="../../images/login.png" alt="" class="w-100 m-auto">
+                </div>
+                <!-- ---Form Login--- -->
+                <div class="col-7 text-center">
+                    <h1>Log in</h1>
+                    <h5>Enter your information to access</h5>
+                    <form action="" class="mx-5" @submit.prevent="loginUser">
+                        <!-- ---Email--- -->
+                        <div class="form-control">
+                            <input id="email" type="email" v-model="loginData.email" required>
+                            <label class="fw-semibold">
+                                <span style="transition-delay:0ms">E</span>
+                                <span style="transition-delay:50ms">m</span>
+                                <span style="transition-delay:100ms">a</span>
+                                <span style="transition-delay:150ms">i</span>
+                                <span style="transition-delay:200ms">l</span>
+                            </label>
+                            <i class="fa-solid fa-envelope align-self-center"></i>
+                        </div>
+                        <!-- ---Password--- -->
+                        <div class="form-control d-flex">
+                            <input id="password" type="password" v-model="loginData.password" required>
+                            <label class="fw-semibold">
+                                <span style="transition-delay:0ms">P</span>
+                                <span style="transition-delay:50ms">a</span>
+                                <span style="transition-delay:100ms">s</span>
+                                <span style="transition-delay:150ms">s</span>
+                                <span style="transition-delay:200ms">w</span>
+                                <span style="transition-delay:250ms">o</span>
+                                <span style="transition-delay:300ms">r</span>
+                                <span style="transition-delay:350ms">d</span>
+                            </label>
+                            <i class="fa-solid fa-key align-self-center"></i>
+                        </div>
+                        <!-- ---Login button--- -->
+                        <button class="loginbtn fw-semibold" type="submit">Login</button>
+                        <!-- ---Need to register--- -->
+                        <p class="alreadyLogin">New to Deliveboo? <a href="#" class="fw-semibold" @click="store.access = false">Create an account</a></p>
+                    </form>
+                    <h5>OR</h5>
+                    <div class="orline mx-auto">
+                        <div></div>
+                    </div>
+                    <!-- ---Login with facebook button--- -->
+                    <div class="d-flex flex-column align-items-center mt-3">
+                        <button class="facebookbtn">
+                            <svg viewBox="0 0 16 16" class="bi bi-facebook" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"></path>
+                            </svg>
+                            <span>Connect with Facebook</span>
+                        </button>
+                        <button class="googlebtn px-4 mt-3" @click="test()">
+                            <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" viewBox="0 0 256 262">
+                                <path fill="#4285F4" d="M255.878 133.451c0-10.734-.871-18.567-2.756-26.69H130.55v48.448h71.947c-1.45 12.04-9.283 30.172-26.69 42.356l-.244 1.622 38.755 30.023 2.685.268c24.659-22.774 38.875-56.282 38.875-96.027"></path>
+                                <path fill="#34A853" d="M130.55 261.1c35.248 0 64.839-11.605 86.453-31.622l-41.196-31.913c-11.024 7.688-25.82 13.055-45.257 13.055-34.523 0-63.824-22.773-74.269-54.25l-1.531.13-40.298 31.187-.527 1.465C35.393 231.798 79.49 261.1 130.55 261.1"></path>
+                                <path fill="#FBBC05" d="M56.281 156.37c-2.756-8.123-4.351-16.827-4.351-25.82 0-8.994 1.595-17.697 4.206-25.82l-.073-1.73L15.26 71.312l-1.335.635C5.077 89.644 0 109.517 0 130.55s5.077 40.905 13.925 58.602l42.356-32.782"></path>
+                                <path fill="#EB4335" d="M130.55 50.479c24.514 0 41.05 10.589 50.479 19.438l36.844-35.974C195.245 12.91 165.798 0 130.55 0 79.49 0 35.393 29.301 13.925 71.947l42.211 32.783c10.59-31.477 39.891-54.251 74.414-54.251"></path>
+                            </svg>
+                            <span>Connect with Google</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 </template>
 
 <script>
@@ -272,7 +276,11 @@
 </script>
 
 <style lang="scss" scoped>
-@use '../../styles/variables' as *;
+    @use '../../styles/variables' as *;
+
+    .myPadding {
+        padding: 5rem 0;
+    }
 
 // ---Form inputs---
 	.orline{

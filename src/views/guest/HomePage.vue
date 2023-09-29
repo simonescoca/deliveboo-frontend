@@ -1,138 +1,142 @@
 <template>
 	<!-- ---Jumbotron section--- -->
-    <div class="container">
-		<div class="row text-center my-5">
-			<div class="col-3 col-sm-4 col-md-5 left-image">
-				<img src="../../images/search.png" alt="" class="w-100">
-			</div>
-			<div class="col-9 col-sm-8 col-md-7 my-auto">
-				<div class="row">
-					<div class="col-12 d-flex justify-content-center position-relative">
-						<h1>Find the perfect bite in <br> seconds</h1>
-					</div>
-					<div class="col-12 d-flex justify-content-center align-items-center">
-						<div class="search w-50">
-							<input type="text" placeholder="Restaurant name or type" v-model="search" @keyup.enter="advancedSearch" @change="saveSearch(search)">
-							<i class="fa-solid fa-magnifying-glass"></i>
-						</div>
-						<router-link :to="{name: 'advanced-search'}" class="btn btn-orange fw-semibold ms-3" @click="saveSearch(search)">
-							Search
-						</router-link>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- ---How it works section--- -->
-	<div class="container">
-        <div class="row border-top border-bottom py-3">
-			<div class="col">
-				<h3>How it works</h3>
-			</div>
-			<div class="col-1">
-				<!-- Bottone per aprire/chudere la section -->
-				<button class="btn btn-yellow" type="button" data-bs-toggle="collapse" data-bs-target="#howItWorks" aria-expanded="true" aria-controls="howItWorks">
-					<i class="fas fa-chevron-down"></i>
-				</button>
-			</div>
-		</div>
-        <!-- Section "How it works" con Collapse -->
-        <div class="collapse show" id="howItWorks">
-            <div class="row">
-                <div class="col-12 col-md-4">
-					<img src="../../images/position.png" alt="step one image" class="w-75 m-5">
-					<h3>Step 1</h3>
-					<p>Enter your location. Input your address or enable location services to pin your location.</p>
-				</div>
-				<div class="col-12 col-md-4 border-start border-end">
-					<img src="../../images/store.png" alt="step two image" class="w-75 m-5">
-					<h3>Step 2</h3>
-					<p>Select a restaurant and add items to your cart. You're one step closer to a satisfying meal.</p>
-				</div>
-				<div class="col-12 col-md-4">
-					<img src="../../images/payment.png" alt="step three image" class="w-75 m-5">
-					<h3>Step 3</h3>
-					<p>Complete your payment. Sit back and relax as we prepare your order!</p>
-				</div>
+    <main class="position-relative">
+        <svg style="height: 4rem; width: 100%; position: absolute; top: 0; left: 0; right: 0; transform: rotate(180deg);" class="wave-1hkxOo" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" preserveAspectRatio="none"><path class="wavePath-haxJK1 animationPaused-2hZ4IO" d="M826.337463,25.5396311 C670.970254,58.655965 603.696181,68.7870267 447.802481,35.1443383 C293.342778,1.81111414 137.33377,1.81111414 0,1.81111414 L0,150 L1920,150 L1920,1.81111414 C1739.53523,-16.6853983 1679.86404,73.1607868 1389.7826,37.4859505 C1099.70117,1.81111414 981.704672,-7.57670281 826.337463,25.5396311 Z" fill="#ff9654"></path></svg>
+        <svg style="height: 4rem; width: 100%; position: absolute; bottom: 0; left: 0; right: 0;" class="wave-1hkxOo" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" preserveAspectRatio="none"><path class="wavePath-haxJK1 animationPaused-2hZ4IO" d="M826.337463,25.5396311 C670.970254,58.655965 603.696181,68.7870267 447.802481,35.1443383 C293.342778,1.81111414 137.33377,1.81111414 0,1.81111414 L0,150 L1920,150 L1920,1.81111414 C1739.53523,-16.6853983 1679.86404,73.1607868 1389.7826,37.4859505 C1099.70117,1.81111414 981.704672,-7.57670281 826.337463,25.5396311 Z" fill="#ff9654"></path></svg>
+        <div class="container myPadding">
+            <div class="row text-center">
+                <div class="col-3 col-sm-4 col-md-5 left-image">
+                    <img src="../../images/search.png" alt="" class="w-100">
+                </div>
+                <div class="col-9 col-sm-8 col-md-7 my-auto">
+                    <div class="row">
+                        <div class="col-12 d-flex justify-content-center position-relative">
+                            <h1>Find the perfect bite in <br> seconds</h1>
+                        </div>
+                        <div class="col-12 d-flex justify-content-center align-items-center">
+                            <div class="search w-50">
+                                <input type="text" placeholder="Restaurant name or type" v-model="search" @keyup.enter="advancedSearch" @change="saveSearch(search)">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </div>
+                            <router-link :to="{name: 'advanced-search'}" class="btn btn-orange fw-semibold ms-3" @click="saveSearch(search)">
+                                Search
+                            </router-link>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-	<!-- ---Join Deliveroo section--- -->
-	<div class="container">
-        <div class="row border-top border-bottom py-3">
-			<div class="col">
-				<h3>Join Deliveboo</h3>
-			</div>
-			<div class="col-1">
-				<!-- Bottone per aprire/chudere la section -->
-				<button class="btn btn-yellow" type="button" data-bs-toggle="collapse" data-bs-target="#joinDeliveboo" aria-expanded="true" aria-controls="joinDeliveboo">
-					<i class="fas fa-chevron-down"></i>
-				</button>
-			</div>
-		</div>
-		
-        <!-- Section "Join Deliveboo" con Collapse -->
-        <div class="collapse show" id="joinDeliveboo">
-            <div class="row">
-                <div class="col-12 col-md text-center">
-					<img src="../../images/rider.png" alt="rider image" class="w-50">
-				</div>
-				<div class="col-12 col-md-4 my-auto">
-					<h3>As a rider</h3>
-					<p>Earn money by delivering food from local vendors. All you need is a bike and the passion for riding.</p>
-					<a href="" class="btn btn-orange fw-semibold">Ride with us</a>
-				</div>
+        <!-- ---How it works section--- -->
+        <div class="container">
+            <div class="row border-top border-bottom py-3">
+                <div class="col">
+                    <h3>How it works</h3>
+                </div>
+                <div class="col-1">
+                    <!-- Bottone per aprire/chudere la section -->
+                    <button class="btn btn-yellow" type="button" data-bs-toggle="collapse" data-bs-target="#howItWorks" aria-expanded="true" aria-controls="howItWorks">
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
             </div>
-			<div class="row border-top border-bottom">
-                <div class="col-12 col-md text-center">
-					<img src="../../images/chef.png" alt="chef image" class="w-50">
-				</div>
-				<div class="col-12 col-md-4 my-auto">
-					<h3>As a partner</h3>
-					<p>BiteEats helps local vendors grow with online ordering, loyalty programs, and more.</p>
-					<a href="" class="btn btn-orange fw-semibold">Partner with us</a>
-				</div>
-            </div>
-			<div class="row">
-                <div class="col-12 col-md text-center">
-					<img src="../../images/colleague.png" alt="colleagues image" class="w-50">
-				</div>
-				<div class="col-12 col-md-4 my-auto">
-					<h3>As a colleague</h3>
-					<p>Join our team and help build a top-notch food delivery service.</p>
-					<a href="" class="btn btn-orange fw-semibold">Work with us</a>
-				</div>
+            <!-- Section "How it works" con Collapse -->
+            <div class="collapse show" id="howItWorks">
+                <div class="row">
+                    <div class="col-12 col-md-4">
+                        <img src="../../images/position.png" alt="step one image" class="w-75 m-5">
+                        <h3>Step 1</h3>
+                        <p>Enter your location. Input your address or enable location services to pin your location.</p>
+                    </div>
+                    <div class="col-12 col-md-4 border-start border-end">
+                        <img src="../../images/store.png" alt="step two image" class="w-75 m-5">
+                        <h3>Step 2</h3>
+                        <p>Select a restaurant and add items to your cart. You're one step closer to a satisfying meal.</p>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <img src="../../images/payment.png" alt="step three image" class="w-75 m-5">
+                        <h3>Step 3</h3>
+                        <p>Complete your payment. Sit back and relax as we prepare your order!</p>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-	<!-- ---Download our app section--- -->
-	<div class="container">
-        <div class="row border-top border-bottom py-3">
-			<div class="col">
-				<h3>Download our app</h3>
-			</div>
-			<div class="col-1">
-				<!-- Bottone per aprire/chudere la section -->
-				<button class="btn btn-yellow" type="button" data-bs-toggle="collapse" data-bs-target="#downloadApp" aria-expanded="true" aria-controls="downloadApp">
-					<i class="fas fa-chevron-down"></i>
-				</button>
-			</div>
-		</div>
-		
-        <!-- Section "Download our app" con Collapse -->
-        <div class="collapse show" id="downloadApp">
-            <div class="row">
-				<div class="col-12 col-md-4 my-auto">
-					<h3>Order with ease!</h3>
-					<p>Get the most delicious bites delivered to your door with BiteEats. Our fast and reliable delivery service offers a variety of cuisines from local vendors.</p>
-					<a href="" class="btn btn-orange fw-semibold">Download</a>
-				</div>
-                <div class="col-12 col-md text-center">
-					<img src="../../images/enjoy.png" alt="table with food image" class="w-75">
-				</div>
+        <!-- ---Join Deliveroo section--- -->
+        <div class="container">
+            <div class="row border-top border-bottom py-3">
+                <div class="col">
+                    <h3>Join Deliveboo</h3>
+                </div>
+                <div class="col-1">
+                    <!-- Bottone per aprire/chudere la section -->
+                    <button class="btn btn-yellow" type="button" data-bs-toggle="collapse" data-bs-target="#joinDeliveboo" aria-expanded="true" aria-controls="joinDeliveboo">
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Section "Join Deliveboo" con Collapse -->
+            <div class="collapse show" id="joinDeliveboo">
+                <div class="row">
+                    <div class="col-12 col-md text-center">
+                        <img src="../../images/rider.png" alt="rider image" class="w-50">
+                    </div>
+                    <div class="col-12 col-md-4 my-auto">
+                        <h3>As a rider</h3>
+                        <p>Earn money by delivering food from local vendors. All you need is a bike and the passion for riding.</p>
+                        <a href="" class="btn btn-orange fw-semibold">Ride with us</a>
+                    </div>
+                </div>
+                <div class="row border-top border-bottom">
+                    <div class="col-12 col-md text-center">
+                        <img src="../../images/chef.png" alt="chef image" class="w-50">
+                    </div>
+                    <div class="col-12 col-md-4 my-auto">
+                        <h3>As a partner</h3>
+                        <p>BiteEats helps local vendors grow with online ordering, loyalty programs, and more.</p>
+                        <a href="" class="btn btn-orange fw-semibold">Partner with us</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md text-center">
+                        <img src="../../images/colleague.png" alt="colleagues image" class="w-50">
+                    </div>
+                    <div class="col-12 col-md-4 my-auto">
+                        <h3>As a colleague</h3>
+                        <p>Join our team and help build a top-notch food delivery service.</p>
+                        <a href="" class="btn btn-orange fw-semibold">Work with us</a>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+        <!-- ---Download our app section--- -->
+        <div class="container">
+            <div class="row border-top border-bottom py-3">
+                <div class="col">
+                    <h3>Download our app</h3>
+                </div>
+                <div class="col-1">
+                    <!-- Bottone per aprire/chudere la section -->
+                    <button class="btn btn-yellow" type="button" data-bs-toggle="collapse" data-bs-target="#downloadApp" aria-expanded="true" aria-controls="downloadApp">
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Section "Download our app" con Collapse -->
+            <div class="collapse show" id="downloadApp">
+                <div class="row">
+                    <div class="col-12 col-md-4 my-auto">
+                        <h3>Order with ease!</h3>
+                        <p>Get the most delicious bites delivered to your door with BiteEats. Our fast and reliable delivery service offers a variety of cuisines from local vendors.</p>
+                        <a href="" class="btn btn-orange fw-semibold">Download</a>
+                    </div>
+                    <div class="col-12 col-md text-center">
+                        <img src="../../images/enjoy.png" alt="table with food image" class="w-75">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 </template>
 
 <script>
@@ -208,4 +212,8 @@
 			background-color: $secondary;
 		}
 	}
+
+    .myPadding {
+        padding: 6rem 0;
+    }
 </style>
