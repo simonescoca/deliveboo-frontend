@@ -53,13 +53,13 @@
 </template>
 
 <script>
-	// import {store} from "../store.js";
+	import {store} from "../../store.js";
 	// import axios from "axios";
 
 	export default {
 		data() {
 			return {
-				// store
+				store,
                 icons: ['fa-brands fa-instagram', 'fa-brands fa-facebook', 'fa-brands fa-twitter', 'fa-brands fa-youtube',]
 			}
 		},
@@ -77,7 +77,7 @@
 		},
 
 		created () {
-
+            this.store.isFooterVisible = true;
 		},
 
 		methods: {

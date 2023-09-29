@@ -10,13 +10,13 @@
 </template>
 
 <script>
-	// import {store} from "../store.js";
+	import {store} from "../../store.js";
 	// import axios from "axios";
 
 	export default {
 		data() {
 			return {
-				// store
+				store,
 			}
 		},
 
@@ -33,7 +33,7 @@
 		},
 
 		created () {
-
+            this.store.isFooterVisible = false;
 		},
 
 		methods: {

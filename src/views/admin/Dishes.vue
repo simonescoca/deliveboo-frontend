@@ -1,82 +1,86 @@
 <template>
-    <div class="container py-3">
-        <header class="d-flex justify-content-between mb-3">
-            <router-link :to="{ name: 'deleted-dishes' }" class="btn my_btn deleted">
-                <i class="fa-regular fa-trash-can"></i>
-            </router-link>
-            <router-link :to="{ name: 'addDish' }" class="btn my_btn add">
-                <i class="fa-solid fa-plus"></i>
-            </router-link>
-        </header>
-        <h3 class="restaurant-menu">
-            {{ restaurant.name }} ~ Menù
-        </h3>
-        <div v-if="isDeleteSucess" class="position-fixed my-3 alert alert-success my_msg">
-            La modifica è andata a buon fine!
-        </div>
-        <div class=" my_dishes">
-            <div v-for="dish in dishes" class="d-flex my_dish my-3">
-
-                <div class="my_r-img w-25" v-if="dish.photo.startsWith('http')">
-                    <img :src="dish.photo" :alt="dish.name">
-                </div>
-                <div class="my_r-img w-25" v-else>
-                    <img :src="getImageUrl(dish.photo)" :alt="dish.name">
-                </div>
-                <div class="dishinfo w-75 d-flex flex-column align-items-center justify-content-between mb-3">
-                    <div class="my_r-name">
-                        {{ dish.name }}
+    <main class="position-relative">
+        <svg style="height: 4rem; width: 100%; position: absolute; top: 0; left: 0; right: 0; transform: rotate(180deg);" class="wave-1hkxOo" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" preserveAspectRatio="none"><path class="wavePath-haxJK1 animationPaused-2hZ4IO" d="M826.337463,25.5396311 C670.970254,58.655965 603.696181,68.7870267 447.802481,35.1443383 C293.342778,1.81111414 137.33377,1.81111414 0,1.81111414 L0,150 L1920,150 L1920,1.81111414 C1739.53523,-16.6853983 1679.86404,73.1607868 1389.7826,37.4859505 C1099.70117,1.81111414 981.704672,-7.57670281 826.337463,25.5396311 Z" fill="#ff9654"></path></svg>
+        <svg style="height: 4rem; width: 100%; position: absolute; bottom: 0; left: 0; right: 0;" class="wave-1hkxOo" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" preserveAspectRatio="none"><path class="wavePath-haxJK1 animationPaused-2hZ4IO" d="M826.337463,25.5396311 C670.970254,58.655965 603.696181,68.7870267 447.802481,35.1443383 C293.342778,1.81111414 137.33377,1.81111414 0,1.81111414 L0,150 L1920,150 L1920,1.81111414 C1739.53523,-16.6853983 1679.86404,73.1607868 1389.7826,37.4859505 C1099.70117,1.81111414 981.704672,-7.57670281 826.337463,25.5396311 Z" fill="#ff9654"></path></svg>
+        <div class="container myPadding">
+            <header class="d-flex justify-content-between mb-3">
+                <router-link :to="{ name: 'deleted-dishes' }" class="btn my_btn deleted">
+                    <i class="fa-regular fa-trash-can"></i>
+                </router-link>
+                <router-link :to="{ name: 'addDish' }" class="btn my_btn add">
+                    <i class="fa-solid fa-plus"></i>
+                </router-link>
+            </header>
+            <h3 class="restaurant-menu">
+                {{ restaurant.name }} ~ Menù
+            </h3>
+            <div v-if="isDeleteSucess" class="position-fixed my-3 alert alert-success my_msg">
+                La modifica è andata a buon fine!
+            </div>
+            <div class=" my_dishes">
+                <div v-for="dish in dishes" class="d-flex my_dish my-3">
+    
+                    <div class="my_r-img w-25" v-if="dish.photo.startsWith('http')">
+                        <img :src="dish.photo" :alt="dish.name">
                     </div>
-                    <div class="w-50 text-left">
-                        {{ dish.description }}
+                    <div class="my_r-img w-25" v-else>
+                        <img :src="getImageUrl(dish.photo)" :alt="dish.name">
                     </div>
-                    <div class="btn-group">
-                        <button class="btn" @click="dishInfo(dish.id)" :disabled="showDeleteConfirmationModal">
-                            <i class="fa-solid fa-circle-info"></i>
-                        </button>
-                        <router-link v-if="!showDeleteConfirmationModal" :to="{ name: 'editDish' }"
-                            @click="store.selectedDish = dish.id">
-                            <button class="btn mx-3">
-                                <i class="fa-solid fa-pen"></i>
+                    <div class="dishinfo w-75 d-flex flex-column align-items-center justify-content-between mb-3">
+                        <div class="my_r-name">
+                            {{ dish.name }}
+                        </div>
+                        <div class="w-50 text-left">
+                            {{ dish.description }}
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn" @click="dishInfo(dish.id)" :disabled="showDeleteConfirmationModal">
+                                <i class="fa-solid fa-circle-info"></i>
                             </button>
-                        </router-link>
-                        <button @click="itemToSoftDelete(dish.id)" class="btn" :disabled="showDeleteConfirmationModal">
-                            <i class="fa-solid fa-xmark"></i>
-                        </button>
+                            <router-link v-if="!showDeleteConfirmationModal" :to="{ name: 'editDish' }"
+                                @click="store.selectedDish = dish.id">
+                                <button class="btn mx-3">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+                            </router-link>
+                            <button @click="itemToSoftDelete(dish.id)" class="btn" :disabled="showDeleteConfirmationModal">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+            <div class="position-fixed dishShow" :class="infotoggle === false ? 'invisible' : ''">
+                <div class="card d-inline-block m-5 text-center position-relative">
+                    <i class="fa-solid fa-xmark fa-xl show position-absolute" @click="infotoggle = false"></i>
+                    <div class="card-body py-3">
+                        <h5 class="card-title fst-italic fw-bold">{{ infodish.name }}</h5>
+                        <h6 class="card-subtitle mb-2 py-2 mx-auto"><span class="fw-bold">Price</span> ~ {{
+                            infodish.price ? infodish.price.toFixed(2) +
+                        '&euro;' : ''
+                        }}
+                        </h6>
+                        <p class="card-text"><span class="fw-bold">Portata</span> ~ {{ infodish.course
+                        }}
+                        </p>
+                        <p class="card-text">{{ infodish.description }}</p>
+                        <p class="card-text"><span class="fw-bold">Ingredienti</span> ~ <span
+                                v-for="ingredient, index in infodish.ingredients">{{ ingredient.name
+                                }}{{ infodish.ingredients.length == index + 1 ? '' : ', ' }} </span></p>
                     </div>
                 </div>
-
             </div>
-        </div>
-        <div class="position-fixed dishShow" :class="infotoggle === false ? 'invisible' : ''">
-            <div class="card d-inline-block m-5 text-center position-relative">
-                <i class="fa-solid fa-xmark fa-xl show position-absolute" @click="infotoggle = false"></i>
-                <div class="card-body py-3">
-                    <h5 class="card-title fst-italic fw-bold">{{ infodish.name }}</h5>
-                    <h6 class="card-subtitle mb-2 py-2 mx-auto"><span class="fw-bold">Price</span> ~ {{
-                        infodish.price ? infodish.price.toFixed(2) +
-                    '&euro;' : ''
-                    }}
-                    </h6>
-                    <p class="card-text"><span class="fw-bold">Portata</span> ~ {{ infodish.course
-                    }}
-                    </p>
-                    <p class="card-text">{{ infodish.description }}</p>
-                    <p class="card-text"><span class="fw-bold">Ingredienti</span> ~ <span
-                            v-for="ingredient, index in infodish.ingredients">{{ ingredient.name
-                            }}{{ infodish.ingredients.length == index + 1 ? '' : ', ' }} </span></p>
+            <div class="delete-modal bg-dark position-fixed card p-3" v-if="showDeleteConfirmationModal">
+                <p class="text-white">Spostare nel cestino?</p>
+                <div class="btn-group d-flex justify-content-evenly">
+                    <button type="delete" @click="softDeleteItem" class="btn btn-modal">Sì</button>
+                    <button @click="showDeleteConfirmationModal = false" class="btn">Annulla</button>
                 </div>
             </div>
+    
         </div>
-        <div class="delete-modal bg-dark position-fixed card p-3" v-if="showDeleteConfirmationModal">
-            <p class="text-white">Spostare nel cestino?</p>
-            <div class="btn-group d-flex justify-content-evenly">
-                <button type="delete" @click="softDeleteItem" class="btn btn-modal">Sì</button>
-                <button @click="showDeleteConfirmationModal = false" class="btn">Annulla</button>
-            </div>
-        </div>
-
-    </div>
+    </main>
 </template>
 
 <script>
@@ -119,6 +123,7 @@ export default {
     },
 
     created() {
+        this.store.isFooterVisible = true;
         this.userToken = localStorage.getItem('userToken')
         this.userId = localStorage.getItem('userId')
         this.userName = localStorage.getItem('userName')
@@ -199,6 +204,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.myPadding {
+    padding: 5rem 0;
+}
+
 h3 {
     color: #de4a3a;
     font-weight: bold;
