@@ -359,7 +359,7 @@ body {
                 }
 
                 p {
-                    color: white;
+                    color: black;
                     font-size: 18px;
                     letter-spacing: 0.6px;
                     margin-bottom: 40px;
@@ -396,7 +396,7 @@ body {
             font-size: 200px;
             font-weight: 700;
             letter-spacing: 4px;
-            color: white;
+            color: black;
             display: flex !important;
             justify-content: center;
             align-items: center;
