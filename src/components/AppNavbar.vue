@@ -334,6 +334,7 @@ nav {
             object-fit: contain;
             height: 100%;
             width: 100%;
+            padding-left: 25px;
         }
     }
 
