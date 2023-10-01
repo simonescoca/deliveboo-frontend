@@ -24,21 +24,23 @@
                 <!-- ? la nostra storia e i nostri valori  -->
                 <section>
                     <div class="row text-center">
-                        <div class="col-5 boxShadow py-3 px-5 rounded-pill">
+                        <div class="col-5 boxShadow py-3 px-5 rounded-pill position-relative">
                             <h4>
                                 {{ sections[0].name }}
                             </h4>
                             <p class="m-0">
                                 {{ sections[0].text }}
                             </p>
+                            <img src="../../images/aboutBackground.png" alt="" class="position-absolute">
                         </div>
-                        <div class="col-5 offset-2 boxShadow py-3 px-5 rounded-pill">
+                        <div class="col-5 offset-2 boxShadow py-3 px-5 rounded-pill position-relative">
                             <h4>
                                 {{ sections[1].name }}
                             </h4>
                             <p class="m-0">
                                 {{ sections[1].text }}
                             </p>
+                            <img src="../../images/aboutBackground.png" alt="" class="position-absolute">
                         </div>
                     </div>
                 </section>
@@ -185,9 +187,14 @@
     @use '../../styles/general.scss' as *;
 
     .boxShadow {
-        -webkit-box-shadow: 0px 0px 13px 0px #000000; 
-        box-shadow: 0px 0px 13px 0px #000000;
-        background-color: $primarysoft;
+        .position-absolute{
+            top: -50px;
+            left: 0;
+            height: 150%;
+            width: 100%;
+            z-index: -1;
+            opacity: 0.6;
+        }
     }
 
     .imgCont {
@@ -212,6 +219,7 @@
 
     .my_background {
         background-color: $secondarysoft;
+        z-index: -2;
     }
 
     section {
