@@ -45,19 +45,28 @@
             <div class="collapse show" id="howItWorks">
                 <div class="row">
                     <div class="col-12 col-md-4">
-                        <img src="../../images/position.png" alt="step one image" class="w-75 m-5">
+                        <div class="duckBackground position-relative">
+                            <img src="../../images/position.png" alt="step one image" class="w-75 m-5">
+                            <img src="../../images/firstBackground.png" alt="" class="position-absolute w-100">
+                        </div>
                         <h3>Step 1</h3>
                         <p>Enter your location. Input your address or enable location services to pin your location.</p>
                     </div>
                     <hr class="d-block d-sm-none">
                     <div class="col-12 col-md-4 border-start border-end">
+                        <div class="duckBackground position-relative">
                         <img src="../../images/store.png" alt="step two image" class="w-75 m-5">
+                            <img src="../../images/firstBackground.png" alt="" class="position-absolute w-100">
+                        </div>
                         <h3>Step 2</h3>
                         <p>Select a restaurant and add items to your cart. You're one step closer to a satisfying meal.</p>
                     </div>
                     <hr class="d-block d-sm-none">
                     <div class="col-12 col-md-4">
-                        <img src="../../images/payment.png" alt="step three image" class="w-75 m-5">
+                        <div class="duckBackground position-relative">
+                            <img src="../../images/payment.png" alt="step three image" class="w-75 m-5">
+                            <img src="../../images/firstBackground.png" alt="" class="position-absolute w-100">
+                        </div>
                         <h3>Step 3</h3>
                         <p>Complete your payment. Sit back and relax as we prepare your order!</p>
                     </div>
@@ -82,7 +91,10 @@
             <div class="collapse show" id="joinDeliveboo">
                 <div class="row">
                     <div class="col-12 col-md text-center">
-                        <img src="../../images/rider.png" alt="rider image" class="w-50">
+                        <div class="duckBackground2 position-relative">
+                            <img src="../../images/rider.png" alt="rider image" class="w-50">
+                            <img src="../../images/secondBackground.png" alt="" class="position-absolute w-50">
+                        </div>
                     </div>
                     <div class="col-12 col-md-4 my-auto">
                         <h3>As a rider</h3>
@@ -92,7 +104,10 @@
                 </div>
                 <div class="row border-top border-bottom">
                     <div class="col-12 col-md text-center">
-                        <img src="../../images/chef.png" alt="chef image" class="w-50">
+                        <div class="duckBackground2 position-relative">
+                            <img src="../../images/chef.png" alt="chef image" class="w-50">
+                            <img src="../../images/secondBackground.png" alt="" class="position-absolute w-50">
+                        </div>
                     </div>
                     <div class="col-12 col-md-4 my-auto">
                         <h3>As a partner</h3>
@@ -102,7 +117,10 @@
                 </div>
                 <div class="row">
                     <div class="col-12 col-md text-center">
-                        <img src="../../images/colleague.png" alt="colleagues image" class="w-50">
+                        <div class="duckBackground2 position-relative">
+                            <img src="../../images/colleague.png" alt="colleagues image" class="w-50">
+                            <img src="../../images/secondBackground.png" alt="" class="position-absolute w-50">
+                        </div>
                     </div>
                     <div class="col-12 col-md-4 my-auto">
                         <h3>As a colleague</h3>
@@ -135,7 +153,11 @@
                         <a href="" class="btn btn-orange fw-semibold">Download</a>
                     </div>
                     <div class="col-12 col-md text-center">
-                        <img src="../../images/enjoy.png" alt="table with food image" class="w-75">
+                        <div class="duckBackground3 position-relative">
+                            <img src="../../images/enjoy.png" alt="table with food image" class="w-75">
+                            <img src="../../images/bigBackground.png" alt="" class="position-absolute w-75">
+                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -188,7 +210,30 @@
 
 <style lang="scss" scoped>
 @use '../../styles/variables' as *;
-	.search {
+    .duckBackground{
+        .position-absolute{
+            top: 0;
+            left: 0;
+            z-index: -1;
+            opacity: 0.8;
+        }
+    }
+    .duckBackground2{
+        .position-absolute{
+            top: 0;
+            left: 30%;
+            z-index: -1;
+            opacity: 0.8;
+        }
+    }
+    .duckBackground3{
+        .position-absolute{
+            top: 0;
+            left: 15%;
+            z-index: -1;
+        }
+    }
+    .search {
 		background-color: $grey;
 		padding: 10px 5px;
 		border-radius: 8px;
