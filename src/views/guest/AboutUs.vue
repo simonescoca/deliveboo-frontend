@@ -24,23 +24,23 @@
                 <!-- ? la nostra storia e i nostri valori  -->
                 <section>
                     <div class="row text-center">
-                        <div class="col-5 boxShadow py-3 px-5 rounded-pill position-relative">
+                        <div class="col-12 col-lg-5 mb-5 mb-lg-0 boxShadow py-3 px-5 rounded-pill position-relative">
                             <h4>
                                 {{ sections[0].name }}
                             </h4>
                             <p class="m-0">
                                 {{ sections[0].text }}
                             </p>
-                            <img src="../../images/aboutBackground.png" alt="" class="position-absolute">
+                            <img src="../../images/aboutBackground.png" alt="" class="position-absolute storybg">
                         </div>
-                        <div class="col-5 offset-2 boxShadow py-3 px-5 rounded-pill position-relative">
+                        <div class="col-12 offset-0 col-lg-5 mt-5 offset-lg-2 boxShadow py-3 px-5 rounded-pill position-relative">
                             <h4>
                                 {{ sections[1].name }}
                             </h4>
                             <p class="m-0">
                                 {{ sections[1].text }}
                             </p>
-                            <img src="../../images/aboutBackground.png" alt="" class="position-absolute">
+                            <img src="../../images/aboutBackground.png" alt="" class="position-absolute valuebg">
                         </div>
                     </div>
                 </section>
@@ -188,12 +188,41 @@
 
     .boxShadow {
         .position-absolute{
-            top: -50px;
+            z-index: -1;
+            opacity: 0.6;
+        }
+        .storybg{
+            top: -60px;
+            left: -20px;
+            height: 150%;
+            width: 110%;
+        }
+        .valuebg{
+            top: -55px;
             left: 0;
             height: 150%;
             width: 100%;
-            z-index: -1;
-            opacity: 0.6;
+        }
+    }
+    @media (min-width: 768px) {
+        .boxShadow {
+            .storybg{
+            top: -40px;
+            margin-bottom: 6rem;
+            }
+            .valuebg{
+                top: -40px;
+            }
+        }
+    }
+    @media (min-width: 992px) {
+        .boxShadow {
+            .storybg{
+            top: -70px;
+            }
+            .valuebg{
+                top: -50px;
+            }
         }
     }
 
