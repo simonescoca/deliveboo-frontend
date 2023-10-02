@@ -290,7 +290,7 @@ export default {
                         this.store.cart = []
                         this.cart = []
                         this.store.dishQuantity = 0
-                    
+                        this.store.orderId = response.data.success.id
                         const router = useRouter();
                         router.push({ name: 'success' });
                     }
