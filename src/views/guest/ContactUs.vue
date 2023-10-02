@@ -31,12 +31,15 @@
                     <label for="email" class="form-label">
                         La tua email
                     </label>
-                    <input type="email" class="form-control" id="email" placeholder="deliveboo@food.com" aria-describedby="emailHelp">
+                    <input type="email" class="form-control" id="email" placeholder="deliveboo@food.com"
+                        aria-describedby="emailHelp">
                 </div>
                 <div>
                     <label for="message" class="mb-2">
                         Messaggio
-                    </label><textarea class="form-control" placeholder="Sono troppo buoni i vostri piatti, come posso ordinarne altri?" id="message" style="height: 100px"></textarea>
+                    </label><textarea class="form-control"
+                        placeholder="Sono troppo buoni i vostri piatti, come posso ordinarne altri?" id="message"
+                        style="height: 100px"></textarea>
                 </div>
                 <div class="d-flex">
                     <button type="submit" class="btn my-3 mx-auto my-btn">
@@ -103,25 +106,44 @@ export default {
 <style lang="scss" scoped>
 @use "../../styles/variables" as *;
 
+
+
 .container-fluid {
-    background-color: $secondarysoft;
+    background: linear-gradient(40deg, #faca82, white, #faca82);
+}
+
+.form-control:focus {
+    color: $primary;
+    background-color: var(--bs-body-bg);
+    border-color: $primarysoft;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(253, 93, 13, 0.25);
+}
+
+input,
+textarea {
+    box-shadow: #ff94747b 0px 2px 4px, #ff947448 0px 7px 13px -3px, #ff94741d 0px -3px 0px inset;
 }
 
 .myPadding {
     padding: 6rem 0;
 }
 
-form, h3, h4{
+form,
+h3,
+h4 {
     padding: 0 4rem;
 }
 
 .img-cont {
     cursor: pointer;
     transition: all 0.5s;
-    &:hover{
+
+    &:hover {
         scale: 1.1;
         transition: all 0.5s;
     }
+
     img {
         width: 100%;
         object-fit: cover;
@@ -131,10 +153,11 @@ form, h3, h4{
 
 .my-btn {
     background-color: $secondarydark;
-    transition: all 0.5s ;
-    &:hover{
+    transition: all 0.5s;
+
+    &:hover {
         background-color: $secondary;
-        transition: all 0.5s ;
+        transition: all 0.5s;
     }
 }
 </style>
