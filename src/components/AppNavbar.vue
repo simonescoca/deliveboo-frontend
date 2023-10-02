@@ -149,7 +149,7 @@
 
 <script>
 import { store } from "../store.js";
-import { useRouter } from 'vue-router';
+import { router } from '../router';
 
 export default {
     data() {
@@ -231,8 +231,7 @@ export default {
             this.userName = localStorage.getItem('userName');
             store.logged = 0;
             store.userName = null;
-
-            const router = useRouter();
+            
             router.push({ name: 'homepage' });
         },
         // Aggiorna il contenuto del cart
