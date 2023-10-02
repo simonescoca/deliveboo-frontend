@@ -130,7 +130,7 @@
                 </div>
             </div>
             <section class="d-flex">
-                <button @click="$router.push({ name: 'order-statistics', params: { monthlySales: monthly_sales, orderCount: monthly_order_count } })" class="m-auto d-flex justify-content-center align-items-center btn btn-outline-success mt-4 myStats">
+                <button @click="$router.push({ name: 'order-statistics', params: { restaurantName:restaurantName, monthlySales: monthly_sales, orderCount: monthly_order_count } })" class="m-auto d-flex justify-content-center align-items-center btn btn-outline-success mt-4 myStats">
                     <span>
                         <i class="fa-solid fa-chart-column"></i>
                     </span>
@@ -160,7 +160,8 @@
                 infotoggle: false,
                 selectedRes: null,
                 monthly_sales: [],
-                monthly_order_count: []
+                monthly_order_count: [],
+                restaurantName:""
             }
         },
 
@@ -196,10 +197,12 @@
                     }
                 })
                     .then(response => {
+                        
                         this.orders = response.data.results
                         this.monthly_sales = response.data.monthly_sales
                         this.monthly_order_count = response.data.monthly_order_count
-
+                        this.restaurantName = response.data.restaurant_name
+                        
                     })
                     .catch(error => {
                         console.log(error)
