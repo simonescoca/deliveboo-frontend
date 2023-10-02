@@ -8,6 +8,7 @@ const store = reactive({
     dishQuantity: 0,
     search: "",
     isFooterVisible: true,
+    logged: 0,
 });
 
 export { store };

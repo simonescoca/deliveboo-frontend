@@ -245,6 +245,7 @@
 				localStorage.setItem('userToken', this.userToken);
 				localStorage.setItem('userId', this.userId);
 				localStorage.setItem('userName', this.userName);
+				store.logged = 1;
 			},
 
 			registerUser() {

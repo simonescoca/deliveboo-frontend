@@ -30,7 +30,7 @@
 
             <!-- ? login or profile -->
             <div class="d-flex align-items-center ms-2 ms-lg-5">
-                <div v-if="userName === null" @click="store.access = false"> <!--class="d-flex align-items-center"-->
+                <div v-if="userName === null && store.logged === 0" @click="store.access = false"> <!--class="d-flex align-items-center"-->
                     <transition name="slide-fade" mode="in-out">
                         <router-link :to="{ name: 'profile' }" key="Page3"
                             class="d-flex align-items-center bg-mySecondary rounded-pill btn">
@@ -43,7 +43,7 @@
                         </router-link>
                     </transition>
                 </div>
-                <div v-if="userName === null" @click="store.access = true"> <!--class="d-flex align-items-center"-->
+                <div v-if="userName === null && store.logged === 0" @click="store.access = true"> <!--class="d-flex align-items-center"-->
                     <transition name="slide-fade" mode="in-out">
                         <router-link :to="{ name: 'profile' }" key="Page4"
                             class="d-flex align-items-center bg-mySecondary rounded-pill btn ms-2">
@@ -56,7 +56,7 @@
                         </router-link>
                     </transition>
                 </div>
-                <div v-if="userName !== null"> <!--class="d-flex align-items-center"-->
+                <div v-if="userName !== null || store.logged === 1" > <!--class="d-flex align-items-center"-->
                     <button class="d-flex align-items-center bg-mySecondary rounded-pill btn" @click="logout()">
                         <span>
                             <i class="fa-solid fa-arrow-right-from-bracket"></i>
@@ -67,7 +67,7 @@
                     </button>
                 </div>
                 <transition name="slide-fade" mode="in-out">
-                    <router-link :to="{ name: 'restaurants' }" v-if="userName !== null" key="Page5"
+                    <router-link :to="{ name: 'restaurants' }" v-if="userName !== null || store.logged === 1" key="Page5"
                         class="text-decoration-none rounded-pill btn btn-outline-dark ms-3">
                         <div class="d-flex align-items-center">
                             <div class="my_user-img-cont bg-white rounded-pill">
@@ -210,6 +210,9 @@ export default {
         this.cart = cartString ? JSON.parse(cartString) : []
         store.cart = cartString ? JSON.parse(cartString) : []
         store.dishQuantity = this.getTotalQuantity(store.cart)
+        if(this.userName !== null){
+            store.logged = 1
+        }
     },
 
     methods: {
@@ -225,6 +228,7 @@ export default {
             localStorage.removeItem('userId');
             localStorage.removeItem('userName');
             this.userName = localStorage.getItem('userName');
+            store.logged = 0;
         },
         // Aggiorna il contenuto del cart
         getCart() {
