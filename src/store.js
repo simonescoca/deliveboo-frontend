@@ -10,6 +10,7 @@ const store = reactive({
     isFooterVisible: true,
     logged: 0,
     orderId: null,
+    userName: null,
 });
 
 export { store };
