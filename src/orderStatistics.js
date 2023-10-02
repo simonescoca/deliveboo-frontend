@@ -8,16 +8,16 @@ export function initChart(orderCount,monthlySales) {
       datasets: [{
         label: 'ammontare degli ordini',
         grouped:true,
-        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-        borderColor: 'rgba(75, 192, 192, 1)',
+        backgroundColor: 'rgba(255, 242, 176, 0.5)',
+        borderColor: 'rgba(255, 242, 176, 1)',
         borderWidth: 1,
         data: orderCount
       },
       {
         label: 'ammontare delle entrate',
         grouped:true,
-        backgroundColor: 'rgba(13, 255, 0, 1)',
-        borderColor: 'rgba(75, 192, 192, 0.2)',
+        backgroundColor: 'rgba(255, 150, 84, 0.5)',
+        borderColor: 'rgba(255, 160, 84, 1)',
         borderWidth: 1,
         data: monthlySales
       }
