@@ -131,7 +131,7 @@
             </div>
         </div>
         <!-- ---Download our app section--- -->
-        <div class="container">
+        <div class="container downloadSection">
             <div class="row border-top border-bottom py-3">
                 <div class="col-10 col-sm">
                     <h3 class="mt-2 mt-sm-1">Download our app</h3>
@@ -145,7 +145,7 @@
             </div>
             
             <!-- Section "Download our app" con Collapse -->
-            <div class="collapse show pb-5" id="downloadApp">
+            <div class="collapse show myPadding" id="downloadApp">
                 <div class="row">
                     <div class="col-12 col-md-4 my-auto">
                         <h3 class="mt-4 mt-sm-0">Order with ease!</h3>
@@ -200,6 +200,7 @@
             advancedSearch () {
                 router.push({ name: 'advanced-search' });
             },
+
 			saveSearch(search){
 				store.search = search
 				console.log(store.search)
@@ -209,7 +210,7 @@
 </script>
 
 <style lang="scss" scoped>
-@use '../../styles/variables' as *;
+    @use '../../styles/variables' as *;
     .duckBackground{
         .position-absolute{
             top: 0;
@@ -265,5 +266,14 @@
 
     .myPadding {
         padding: 6rem 0;
+    }
+
+
+    .downloadSection {
+        &::after {
+            content: '';
+            display: block;
+            height: 5rem;
+        }
     }
 </style>
