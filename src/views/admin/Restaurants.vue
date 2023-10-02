@@ -231,7 +231,7 @@ header {
         border-radius: 50%;
         position: fixed;
         background-color: white;
-        top: 16%;
+        top: 18%;
         right: 20px;
         transition: all 500ms;
         z-index: 2;
@@ -254,7 +254,7 @@ header {
     }
 
     .my_btn.add {
-        top: 23%;
+        top: 25%;
     }
 }
 
@@ -291,9 +291,9 @@ h1 {
             height: 25px;
             position: absolute;
             top: 1%;
-            right: 0;
+            right: -9px;
             transform: translateX(-50%);
-            color: rgba(0, 0, 0, 0.645);
+            color: rgba(250, 0, 0, 0.645);
         }
 
         .my-btn {
