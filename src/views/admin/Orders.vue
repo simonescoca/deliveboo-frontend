@@ -5,7 +5,8 @@
             preserveAspectRatio="none">
             <path class="wavePath-haxJK1 animationPaused-2hZ4IO"
                 d="M826.337463,25.5396311 C670.970254,58.655965 603.696181,68.7870267 447.802481,35.1443383 C293.342778,1.81111414 137.33377,1.81111414 0,1.81111414 L0,150 L1920,150 L1920,1.81111414 C1739.53523,-16.6853983 1679.86404,73.1607868 1389.7826,37.4859505 C1099.70117,1.81111414 981.704672,-7.57670281 826.337463,25.5396311 Z"
-                fill="#ff9654"></path>
+                fill="#ff9654">
+            </path>
         </svg>
         <div class="myPadding">
             <div class="container">
@@ -76,12 +77,9 @@
                         <!-- ? Order Infos -->
                         <div class="position-absolute dishinfo" :class="this.infotoggle === false ? 'invisible' : ''">
                             <div class="card d-inline-block m-5 text-center position-relative">
-                                <i class="fa-solid fa-xmark position-absolute" style="color: #ff0000;"
-                                    @click="this.infotoggle = false"></i>
-
-                                <table class="table table-dark table-striped table-hover ">
+                                <table class="table table-striped table-hover">
                                     <thead>
-                                        <tr class="fw-bold">
+                                        <tr class="fw-bold position-relative">
                                             <th scope="col">
                                                 Dish Name
                                             </th>
@@ -97,6 +95,9 @@
                                             <th scope="col">
                                                 Dish Image
                                             </th>
+                                            <button class="position-absolute top-0 end-0 fw-bold mt-2 me-2 fs-3 d-flex btn rounded-pill X-button" @click="this.infotoggle = false">
+                                                <i class="fa-solid fa-xmark m-auto"></i>
+                                            </button>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -128,102 +129,137 @@
                     </div>
                 </div>
             </div>
-            <button @click="$router.push({ name: 'order-statistics', params: { monthlySales: monthly_sales, orderCount: monthly_order_count } })">
-                ...
-            </button>
+            <section class="d-flex">
+                <button @click="$router.push({ name: 'order-statistics', params: { monthlySales: monthly_sales, orderCount: monthly_order_count } })" class="m-auto d-flex justify-content-center align-items-center btn btn-outline-success mt-4 myStats">
+                    <span>
+                        <i class="fa-solid fa-chart-column"></i>
+                    </span>
+                    <span class="ms-2">
+                        Statistics
+                    </span>
+                </button>
+            </section>
         </div>
     </div>
 </template>
 
 <script>
-import { store } from "../../store.js";
-import axios from "axios";
+    import { store } from "../../store.js";
+    import axios from "axios";
 
-export default {
-    data() {
-        return {
-            store,
-            apiUrl: 'http://127.0.0.1:8000/api/',
-            userToken: '',
-            userId: '',
-            userName: '',
-            orders: [],
-            orderDishes: [],
-            infotoggle: false,
-            selectedRes: null,
-            monthly_sales: [],
-            monthly_order_count: []
-        }
-    },
+    export default {
+        data() {
+            return {
+                store,
+                apiUrl: 'http://127.0.0.1:8000/api/',
+                userToken: '',
+                userId: '',
+                userName: '',
+                orders: [],
+                orderDishes: [],
+                infotoggle: false,
+                selectedRes: null,
+                monthly_sales: [],
+                monthly_order_count: []
+            }
+        },
 
-    components: {
+        components: {
 
-    },
+        },
 
-    props: {
+        props: {
 
-    },
+        },
 
-    mounted() {
-        this.selectedRes = localStorage.getItem('currentRestaurant');
-        this.getOrders()
-    },
+        mounted() {
+            this.selectedRes = localStorage.getItem('currentRestaurant');
+            this.getOrders()
+        },
 
-    created() {
-        this.store.isFooterVisible = false;
-        this.userToken = localStorage.getItem('userToken')
-        this.userId = localStorage.getItem('userId')
-        this.userName = localStorage.getItem('userName')
-        if (store.selectedRes) {
-            localStorage.setItem('currentRestaurant', store.selectedRes);
-        }
-    },
+        created() {
+            this.store.isFooterVisible = false;
+            this.userToken = localStorage.getItem('userToken')
+            this.userId = localStorage.getItem('userId')
+            this.userName = localStorage.getItem('userName')
+            if (store.selectedRes) {
+                localStorage.setItem('currentRestaurant', store.selectedRes);
+            }
+        },
 
-    methods: {
+        methods: {
 
-        getOrders() {
-            axios.get(`${this.apiUrl}${this.userId}/restaurants/${this.selectedRes}/orders`, {
-                headers: {
-                    'Authorization': `Bearer ${this.userToken}`
-                }
-            })
-                .then(response => {
-                    this.orders = response.data.results
-                    this.monthly_sales = response.data.monthly_sales
-                    this.monthly_order_count = response.data.monthly_order_count
-
+            getOrders() {
+                axios.get(`${this.apiUrl}${this.userId}/restaurants/${this.selectedRes}/orders`, {
+                    headers: {
+                        'Authorization': `Bearer ${this.userToken}`
+                    }
                 })
-                .catch(error => {
-                    console.log(error)
-                });
-        },
+                    .then(response => {
+                        this.orders = response.data.results
+                        this.monthly_sales = response.data.monthly_sales
+                        this.monthly_order_count = response.data.monthly_order_count
 
-        getOrderInfo(orderId) {
-            axios.get(`${this.apiUrl}${this.userId}/restaurants/${this.selectedRes}/orders/${orderId}`, {
-                headers: {
-                    'Authorization': `Bearer ${this.userToken}`
-                }
-            })
-                .then(response => {
-                    this.orderDishes = response.data.results
-                    this.infotoggle = !this.infotoggle
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    });
+            },
+
+            getOrderInfo(orderId) {
+                axios.get(`${this.apiUrl}${this.userId}/restaurants/${this.selectedRes}/orders/${orderId}`, {
+                    headers: {
+                        'Authorization': `Bearer ${this.userToken}`
+                    }
                 })
-                .catch(error => {
-                    console.log(error)
-                });
+                    .then(response => {
+                        this.orderDishes = response.data.results
+                        this.infotoggle = !this.infotoggle
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    });
+            },
+            getImageUrl(filename) {
+                return this.imageUrl = 'http://localhost:5173/public' + `/storage/${filename}`;
+            },
         },
-        getImageUrl(filename) {
-            return this.imageUrl = 'http://localhost:5173/public' + `/storage/${filename}`;
-        },
-    },
-}
+    }
 </script>
 
 <style lang="scss" scoped>
+
+    .myStats {
+        --bs-btn-color: #0ac600;
+        --bs-btn-border-color: #0ac600;
+        --bs-btn-hover-bg: #0ac600;
+        --bs-btn-hover-border-color: #0ac600;
+    }
+
+    .X-button {
+        padding: .3rem .5rem;
+        background-color: transparent;
+        
+        &:hover {
+            -webkit-box-shadow: 0px 0px 6px 3px rgb(0, 0, 0); 
+            box-shadow: 0px 0px 6px 3px rgb(0, 0, 0);
+
+            i {
+                transform: rotate(90deg);
+                transition: all .3s;
+            }
+        }
+    }
+
     .table {
         --bs-table-striped-bg: #ffd7be;
         --bs-table-accent-bg: #fff6cc;
         --bs-table-hover-bg: #ff9754;
+        margin-bottom: 0;
+
+        thead th {
+            padding: 2rem .5rem;
+        }
     }
 
     .myBg {
@@ -248,13 +284,6 @@ export default {
 
         .card {
             background-color: rgb(228, 228, 228);
-        }
-
-        .fa-xmark {
-            right: 10px;
-            top: 5px;
-            font-size: 30px;
-            cursor: pointer;
         }
 
         .card-body {
