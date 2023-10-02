@@ -51,7 +51,7 @@
                         </div>
 
                         <button @click="itemToSoftDelete(restaurant.id)" :disabled="showDeleteConfirmationModal"
-                            class="my_del-btn btn">
+                            class="my_del-btn btn d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-xmark fa-xs"></i>
                         </button>
 
