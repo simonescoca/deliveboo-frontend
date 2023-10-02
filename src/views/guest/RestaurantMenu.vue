@@ -234,6 +234,7 @@
 				secondCourse: [],
 				dessertCourse: [],
                 alert: false,
+                activeButton: true,
 			}
 		},
 
@@ -246,7 +247,7 @@
 		},
 
 		mounted () {
-
+        
 		},
 
 		created () {
@@ -254,6 +255,14 @@
 			this.selectedRestaurant = localStorage.getItem('selectedRestaurant')
 			console.log(this.selectedRestaurant)
 			this.getRestaurantInfo()
+
+            const cartString = localStorage.getItem('cart');
+            const cart = cartString ? JSON.parse(cartString) : [];
+            if(cart[0] !== undefined){
+                if (cart[0].restaurant_id !== this.selectedRestaurant) {
+                this.activeButton = false;
+                }
+            }
 		},
 
 		methods: {
@@ -379,11 +388,12 @@
 			},
             // --Svuota carrello--
             emptyCart(){
-                this.alert = false
-                localStorage.removeItem('cart')
-                this.store.cart = []
-                this.cart = []
-                this.store.dishQuantity = 0
+                localStorage.removeItem('cart');
+                this.store.cart = [];
+                this.cart = [];
+                this.store.dishQuantity = 0;
+                this.activeButton = true;
+                this.alert = false;
             }
 		}
 	}
