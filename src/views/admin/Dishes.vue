@@ -22,7 +22,7 @@
                     <i class="fa-solid fa-plus"></i>
                 </router-link>
             </header>
-            <p class="fw-semibold ms-3">{{ restaurant.name }} / <span class="fw-bold">Menù piatti</span>
+            <p class="fw-semibold ms-3">{{ restaurant.name }} / <span class="fw-bold">Menù</span>
             </p>
             <h3 class="restaurant-menu">
                 {{ restaurant.name }} ~ Menù
@@ -325,7 +325,7 @@ header {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 30%;
+    width: 400px;
 
     transition: all 500ms;
 
