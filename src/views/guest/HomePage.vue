@@ -14,6 +14,8 @@
                 d="M826.337463,25.5396311 C670.970254,58.655965 603.696181,68.7870267 447.802481,35.1443383 C293.342778,1.81111414 137.33377,1.81111414 0,1.81111414 L0,150 L1920,150 L1920,1.81111414 C1739.53523,-16.6853983 1679.86404,73.1607868 1389.7826,37.4859505 C1099.70117,1.81111414 981.704672,-7.57670281 826.337463,25.5396311 Z"
                 fill="#ff9654"></path>
         </svg>
+
+
         <div class="container myPadding">
             <div class="row text-center">
                 <div class="col-3 col-sm-4 col-md-5 left-image">
@@ -65,7 +67,8 @@
                             <img src="../../images/firstBackground.png" alt="" class="position-absolute w-100">
                         </div>
                         <h3>Step 1</h3>
-                        <p>Inserisci la tua posizione. Digita il tuo indirizzo o applica i serivizi di geolocalizzazione per
+                        <p>Inserisci la tua posizione. Digita il tuo indirizzo o applica i serivizi di geolocalizzazione
+                            per
                             essere localizzato.</p>
                     </div>
                     <hr class="d-block d-sm-none">
@@ -75,7 +78,8 @@
                             <img src="../../images/firstBackground.png" alt="" class="position-absolute w-100">
                         </div>
                         <h3>Step 2</h3>
-                        <p>Seleziona un ristorante e aggiungi i prodotti al tuo carrello. Sei a un passo dal goderti il tuo
+                        <p>Seleziona un ristorante e aggiungi i prodotti al tuo carrello. Sei a un passo dal goderti il
+                            tuo
                             cibo preferito.</p>
                     </div>
                     <hr class="d-block d-sm-none">
@@ -104,7 +108,6 @@
                     </button>
                 </div>
             </div>
-
             <!-- Section "Join Deliveboo" con Collapse -->
             <div class="collapse show" id="joinDeliveboo">
                 <div class="row">
@@ -116,7 +119,8 @@
                     </div>
                     <div class="col-12 col-md-4 my-auto">
                         <h3>Come rider</h3>
-                        <p>Guadagna consegando cibo dai locali nelle vicinanze. Tutto ciò che ti serve sono una bicicletta e
+                        <p>Guadagna consegando cibo dai locali nelle vicinanze. Tutto ciò che ti serve sono una
+                            bicicletta e
                             un po' di passione.</p>
                         <a href="" class="btn btn-orange fw-semibold mb-4 mb-sm-0">Ride with us</a>
                     </div>
@@ -130,7 +134,8 @@
                     </div>
                     <div class="col-12 col-md-4 my-auto">
                         <h3>Come partner</h3>
-                        <p>BiteEats aiuta i venditori locali a crescere con ordini online, programmi fedeltà e altro ancora.
+                        <p>BiteEats aiuta i venditori locali a crescere con ordini online, programmi fedeltà e altro
+                            ancora.
                         </p>
                         <a href="" class="btn btn-orange fw-semibold mb-4 mb-sm-0">Partner with us</a>
                     </div>
@@ -144,7 +149,8 @@
                     </div>
                     <div class="col-12 col-md-4 my-auto">
                         <h3>Come collega</h3>
-                        <p>Unisciti al nostro team e aiutaci a costruire un servizio di consegna di cibo di alta qualità.
+                        <p>Unisciti al nostro team e aiutaci a costruire un servizio di consegna di cibo di alta
+                            qualità.
                         </p>
                         <a href="" class="btn btn-orange fw-semibold mb-4 mb-sm-0">Work with us</a>
                     </div>
@@ -165,7 +171,6 @@
                     </button>
                 </div>
             </div>
-
             <!-- Section "Download our app" con Collapse -->
             <div class="collapse show myPadding" id="downloadApp">
                 <div class="row">
@@ -180,11 +185,11 @@
                             <img src="../../images/enjoy.png" alt="table with food image" class="w-75">
                             <img src="../../images/bigBackground.png" alt="" class="position-absolute w-75">
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
+
     </main>
 </template>
 
@@ -234,6 +239,11 @@ export default {
 
 <style lang="scss" scoped>
 @use '../../styles/variables' as *;
+
+main {
+    background: linear-gradient(40deg, $secondary, white, $secondary);
+    z-index: -1;
+}
 
 .duckBackground {
     .position-absolute {
