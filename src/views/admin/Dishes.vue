@@ -235,7 +235,7 @@ h3 {
 header {
     .my_btn {
         border: 1px solid rgba(0, 0, 0, 0.223);
-        border-radius: 50%;
+        border-radius: 5px;
         position: fixed;
         background-color: #fff;
         top: 18%;
@@ -243,6 +243,32 @@ header {
         transition: all 500ms;
         z-index: 2;
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+        &:before {
+            background-color: #fff;
+            content: "";
+            display: inline-block;
+            height: 1px;
+            opacity: 0;
+            transition: all 700ms cubic-bezier(.25, .8, .25, 1);
+            width: 0;
+        }
+
+        &:hover:before {
+            background-color: #fff;
+            color: #e8726498;
+            width: 5rem;
+            opacity: 1;
+            margin-right: 13px;
+        }
+
+        &.deleted:hover:before {
+            content: 'Cestino';
+        }
+
+        &.add:hover:before {
+            content: 'Aggiungi';
+        }
 
         &:hover {
             scale: 1.2;
