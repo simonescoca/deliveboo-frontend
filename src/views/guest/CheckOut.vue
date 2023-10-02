@@ -192,14 +192,10 @@
                             </form>
                             <input type="hidden" id="amountInput" :value=amount>
                             <div v-show="cart.length > 0" id="dropin-container"></div>
-                            <div class="w-100 align-items-center d-flex">
-                                <button id="submit-button" class="purchase--btn mx-auto">Conferma</button>
-                            </div>
                             <!-- ---Checkout button--- -->
-
-
-
-
+                            <div class="w-100 align-items-center d-flex">
+                                <button id="submit-button" class="purchase--btn mx-auto mb-3">Conferma</button>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -47,6 +47,19 @@
 
 	<!-- ---Sezione piatti, divisa in Primi, Secondi, Dolci--- -->
     <main class="position-relative">
+        <div class="position-fixed alert" :class="alert === false ? 'invisible' : ''">
+                <div class="card d-inline-block m-5 text-center position-relative">
+                    <i class="fa-solid fa-xmark fa-xl show position-absolute" @click="alert = false"></i>
+                    <div class="card-body py-3">
+                        <h5 class="card-title fst-italic fw-bold">Attenzione!</h5>
+                        <p class="card-text">Il piatto selezionato è di un ristorante differente da quello nel tuo carrello.</p>
+                        <p class="card-text">Per poterlo aggiungere rimuovi i piatti appartenenti ad altri ristoranti.</p>
+                        <router-link :to="{ name: 'checkout' }" class="btn btn-warning">
+                        Check Out
+                        </router-link>
+                    </div>
+                </div>
+            </div>
         <svg style="height: 4rem; width: 100%; position: absolute; bottom: 0; left: 0; right: 0;" class="wave-1hkxOo" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" preserveAspectRatio="none"><path class="wavePath-haxJK1 animationPaused-2hZ4IO" d="M826.337463,25.5396311 C670.970254,58.655965 603.696181,68.7870267 447.802481,35.1443383 C293.342778,1.81111414 137.33377,1.81111414 0,1.81111414 L0,150 L1920,150 L1920,1.81111414 C1739.53523,-16.6853983 1679.86404,73.1607868 1389.7826,37.4859505 C1099.70117,1.81111414 981.704672,-7.57670281 826.337463,25.5396311 Z" fill="#ff9654"></path></svg>
         <div class="container pb-5">
             <section>
@@ -222,6 +235,7 @@
 				firstCourse: [],
 				secondCourse: [],
 				dessertCourse: [],
+                alert: false,
 			}
 		},
 
@@ -329,7 +343,7 @@
                 // Verifica se l'elemento appartiene allo stesso negozio degli altri elementi nel carrello
                 if(cart[0] !== undefined){
                     if (cart[0].restaurant_id !== dish.restaurant_id) {
-                    alert('Non puoi aggiungere elementi da ristoranti diversi nello stesso carrello.');
+                    this.alert = true;
                     return;
                     }
                 }
@@ -372,6 +386,34 @@
 <style lang="scss" scoped>
 	@use '../../styles/variables.scss' as *;
     @use '../../styles/general.scss' as *;
+
+    .alert {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 470px;
+    transition: all 500ms;
+    z-index: 1;
+    .fa-xmark.show {  
+        right: 2%;
+        top: 6.5%;
+        cursor: pointer;
+        color: $primarydark;
+    }
+    .card-body {
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+        color: rgb(241, 100, 24);
+        border-radius: 5px;
+    }
+    .card-text{
+        color: black;
+    }
+}
+.invisible {
+    opacity: 0;
+    scale: 0.1;
+    transform: translate(-100%, -80%);
+}
     .btn-yellow{
 		background-color: $primarydark;
 		&:hover{
