@@ -54,9 +54,7 @@
                         <h5 class="card-title fst-italic fw-bold">Attenzione!</h5>
                         <p class="card-text">Il piatto selezionato è di un ristorante differente da quello nel tuo carrello.</p>
                         <p class="card-text">Per poterlo aggiungere rimuovi i piatti appartenenti ad altri ristoranti.</p>
-                        <router-link :to="{ name: 'checkout' }" class="btn btn-warning">
-                        Check Out
-                        </router-link>
+                        <p class="btn btn-danger" @click="emptyCart()">Svuota carrello</p>
                     </div>
                 </div>
             </div>
@@ -80,7 +78,7 @@
                                     {{ ingredient.name + (index !== (dish.ingredients.length - 1) ? ", " : "")}}
                                 </span>
                             </div>
-                            <p class="btn btn-yellow" @click="addToCart(dish)">Add to cart</p>
+                            <p class="btn btn-yellow" @click="addToCart(dish)">Aggiungi al Carrello</p>
                         </div>
                         <div class="content" :class="showDescription[dish.id] ? 'description-hidden': ''">
                             <div class="boxImg" v-if="dish.photo.startsWith('http')">
@@ -99,10 +97,10 @@
                                 </p>
                                 <button class="myCart-button" @click="dish.cartClicked = true, addToCart(dish)" :class="dish.cartClicked === true ? 'myClicked' : ''">
                                     <span class="myAdd-to-cart">
-                                        Add to cart
+                                        Aggiungi al Carrello
                                     </span>
                                     <span class="myAdded">
-                                        Added
+                                        Aggiunto
                                     </span>
                                     <i class="fas fa-shopping-cart"></i>
                                     <i class="fas fa-box"></i>
@@ -128,7 +126,7 @@
                                     {{ ingredient.name + (index !== (dish.ingredients.length - 1) ? ", " : "")}}
                                 </span>
                             </div>
-                            <p class="btn btn-yellow" @click="addToCart(dish)">Add to cart</p>
+                            <p class="btn btn-yellow" @click="addToCart(dish)">Aggiungi al Carrello</p>
                         </div>
                         <div class="content" :class="showDescription[dish.id] ? 'description-hidden': ''">
                             <div class="boxImg" v-if="dish.photo.startsWith('http')">
@@ -147,10 +145,10 @@
                                 </p>
                                 <button class="myCart-button" @click="dish.cartClicked = true, addToCart(dish)" :class="dish.cartClicked === true ? 'myClicked' : ''">
                                     <span class="myAdd-to-cart">
-                                        Add to cart
+                                        Aggiungi al Carrello
                                     </span>
                                     <span class="myAdded">
-                                        Added
+                                        Aggiunto
                                     </span>
                                     <i class="fas fa-shopping-cart"></i>
                                     <i class="fas fa-box"></i>
@@ -176,7 +174,7 @@
                                     {{ ingredient.name + (index !== (dish.ingredients.length - 1) ? ", " : "")}}
                                 </span>
                             </div>
-                            <p class="btn btn-yellow" @click="addToCart(dish)">Add to cart</p>
+                            <p class="btn btn-yellow" @click="addToCart(dish)">Aggiungi al Carrello</p>
                         </div>
                         <div class="content" :class="showDescription[dish.id] ? 'description-hidden': ''">
                             <div class="boxImg" v-if="dish.photo.startsWith('http')">
@@ -379,6 +377,14 @@
 			getImageUrl(filename) {
 				return this.imageUrl = 'http://localhost:5173/public' + `/storage/${filename}`;
 			},
+            // --Svuota carrello--
+            emptyCart(){
+                this.alert = false
+                localStorage.removeItem('cart')
+                this.store.cart = []
+                this.cart = []
+                this.store.dishQuantity = 0
+            }
 		}
 	}
 </script>
