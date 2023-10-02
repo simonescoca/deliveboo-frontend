@@ -67,9 +67,7 @@
                             <img src="../../images/firstBackground.png" alt="" class="position-absolute w-100">
                         </div>
                         <h3>Step 1</h3>
-                        <p>Inserisci la tua posizione. Digita il tuo indirizzo o applica i serivizi di geolocalizzazione
-                            per
-                            essere localizzato.</p>
+                        <p>Inserisci la tua posizione. Digita il tuo indirizzo o attiva i serivizi di geolocalizzazione per essere localizzato.</p>
                     </div>
                     <hr class="d-block d-sm-none">
                     <div class="col-12 col-md-4 border-start border-end">
@@ -78,9 +76,7 @@
                             <img src="../../images/firstBackground.png" alt="" class="position-absolute w-100">
                         </div>
                         <h3>Step 2</h3>
-                        <p>Seleziona un ristorante e aggiungi i prodotti al tuo carrello. Sei a un passo dal goderti il
-                            tuo
-                            cibo preferito.</p>
+                        <p>Seleziona un ristorante e aggiungi i piatti al tuo carrello. Sei a un passo dal goderti il tuo cibo preferito.</p>
                     </div>
                     <hr class="d-block d-sm-none">
                     <div class="col-12 col-md-4">
@@ -89,7 +85,7 @@
                             <img src="../../images/firstBackground.png" alt="" class="position-absolute w-100">
                         </div>
                         <h3>Step 3</h3>
-                        <p>Completa il pagamento. Ora, stenditi e rilassati mentre aspetti il tuo ordine!</p>
+                        <p>Completa il pagamento. Ora, stenditi e rilassati mentre noi pensiamo al resto!</p>
                     </div>
                 </div>
             </div>
@@ -119,10 +115,8 @@
                     </div>
                     <div class="col-12 col-md-4 my-auto">
                         <h3>Come rider</h3>
-                        <p>Guadagna consegando cibo dai locali nelle vicinanze. Tutto ciò che ti serve sono una
-                            bicicletta e
-                            un po' di passione.</p>
-                        <a href="" class="btn btn-orange fw-semibold mb-4 mb-sm-0">Ride with us</a>
+                        <p>Guadagna consegando cibo dai locali nelle vicinanze. Tutto ciò che ti serve sono una bicicletta e un po' di passione.</p>
+                        <a href="" class="btn btn-orange fw-semibold mb-4 mb-sm-0">Consegna con noi</a>
                     </div>
                 </div>
                 <div class="row border-top border-bottom">
@@ -134,8 +128,7 @@
                     </div>
                     <div class="col-12 col-md-4 my-auto">
                         <h3>Come partner</h3>
-                        <p>BiteEats aiuta i venditori locali a crescere con ordini online, programmi fedeltà e altro
-                            ancora.
+                        <p>Deliveboo aiuta i ristoratori a crescere con ordini online, programmi fedeltà e altro ancora.
                         </p>
                         <a href="" class="btn btn-orange fw-semibold mb-4 mb-sm-0">Partner with us</a>
                     </div>
@@ -149,8 +142,7 @@
                     </div>
                     <div class="col-12 col-md-4 my-auto">
                         <h3>Come collega</h3>
-                        <p>Unisciti al nostro team e aiutaci a costruire un servizio di consegna di cibo di alta
-                            qualità.
+                        <p>Unisciti al nostro team e aiutaci a costruire un servizio di consegna di cibo di alta qualità.
                         </p>
                         <a href="" class="btn btn-orange fw-semibold mb-4 mb-sm-0">Work with us</a>
                     </div>
@@ -176,8 +168,7 @@
                 <div class="row">
                     <div class="col-12 col-md-4 my-auto">
                         <h3 class="mt-4 mt-sm-0">Ordina in relax!</h3>
-                        <p>Ricevi i bocconi più deliziosi direttamente a casa tua con BiteEats. Il nostro servizio di
-                            consegna rapido e affidabile offre una varietà di cucine da venditori locali.</p>
+                        <p>Ricevi i piatti più deliziosi direttamente a casa tua con Deliveboo. Il nostro servizio di consegna rapido e affidabile offre una vasta scelta tra diverse tipologie di cucine e piatti sfiziosi.</p>
                         <a href="" class="btn btn-orange fw-semibold">Download</a>
                     </div>
                     <div class="col-12 col-md text-center">
