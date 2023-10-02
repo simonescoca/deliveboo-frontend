@@ -45,7 +45,7 @@
                 </div>
             </form>
             <div class="text-center my-3">
-                <h2 class="fw-bold">Follow us here!</h2>
+                <h2 class="fw-bold">Seguiteci qui!</h2>
             </div>
             <div class="container">
                 <div class="row d-flex align-items-center justify-content-center">
