@@ -113,7 +113,7 @@ export default {
 }
 
 .form-control:focus {
-    color: $primary;
+    color: rgba(0, 0, 0, 0.736);
     background-color: var(--bs-body-bg);
     border-color: $primarysoft;
     outline: 0;
