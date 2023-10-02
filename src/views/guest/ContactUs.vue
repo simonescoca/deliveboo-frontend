@@ -17,7 +17,6 @@
             <h3 class="fw-bold">
                 Contattaci!
             </h3>
-
             <h4>
                 Richiedi assistenza mandandoci un messaggio, ti risponderemo il prima possibile!
             </h4>
@@ -26,20 +25,18 @@
                     <label for="name" class="form-label">
                         Il tuo nome
                     </label>
-                    <input type="text" class="form-control" id="name">
+                    <input type="text" class="form-control" placeholder="Deliveboo Food" id="name">
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">
                         La tua email
                     </label>
-                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+                    <input type="email" class="form-control" id="email" placeholder="deliveboo@food.com" aria-describedby="emailHelp">
                 </div>
-                <div class="form-floating">
-                    <label for="message">
+                <div>
+                    <label for="message" class="mb-2">
                         Messaggio
-                    </label>
-                    <textarea class="form-control" placeholder="Your message..." id="message" style="height: 100px">
-                    </textarea>
+                    </label><textarea class="form-control" placeholder="Sono troppo buoni i vostri piatti, come posso ordinarne altri?" id="message" style="height: 100px"></textarea>
                 </div>
                 <div class="d-flex">
                     <button type="submit" class="btn my-3 mx-auto my-btn">
@@ -50,25 +47,20 @@
             <div class="text-center my-3">
                 <h2 class="fw-bold">Follow us here!</h2>
             </div>
-            <div class="d-flex align-items-center justify-content-center flex-wrap">
-
-                <div class="img-cont p-3">
-                    <img src="../../images/youtube.png" alt="">
-                    <a href="#" class="text-decoration-none text-body">
-                        <i class="fa-brands fa-youtube"></i>
-                    </a>
-                </div>
-                <div class="img-cont">
-                    <img src="../../images/facebook.png" alt="">
-                    <i class="fa-brands fa-facebook"></i>
-                </div>
-                <div class="img-cont">
-                    <img src="../../images/twitter.png" alt="">
-                    <i class="fa-brands fa-twitter"></i>
-                </div>
-                <div class="img-cont p-3">
-                    <img src="../../images/instagram.png" alt="">
-                    <i class="fa-brands fa-instagram"></i>
+            <div class="container">
+                <div class="row d-flex align-items-center justify-content-center">
+                    <div class="img-cont p-3 col-6 col-md-3">
+                        <img src="../../images/youtube.png" alt="">
+                    </div>
+                    <div class="img-cont col-6 col-md-3">
+                        <img src="../../images/facebook.png" alt="">
+                    </div>
+                    <div class="img-cont col-6 col-md-3">
+                        <img src="../../images/twitter.png" alt="">
+                    </div>
+                    <div class="img-cont p-3 col-6 col-md-3">
+                        <img src="../../images/instagram.png" alt="">
+                    </div>
                 </div>
             </div>
         </div>
@@ -83,7 +75,6 @@ export default {
     data() {
         return {
             store,
-            icons: ['fa-brands fa-instagram', 'fa-brands fa-facebook', 'fa-brands fa-twitter', 'fa-brands fa-youtube',]
         }
     },
 
@@ -120,44 +111,12 @@ export default {
     padding: 6rem 0;
 }
 
-form {
+form, h3, h4{
     padding: 0 4rem;
 }
 
 .img-cont {
-    width: calc(100% / 4 - 1rem);
-    position: relative;
-
-    .fa-brands {
-        color: white;
-        position: absolute;
-        font-size: 200%;
-    }
-
-    .fa-brands.fa-youtube {
-        top: 23%;
-        right: 26%;
-        transform: rotate(18deg);
-    }
-
-    .fa-brands.fa-instagram {
-        top: 24%;
-        right: 62%;
-        transform: rotate(-18deg);
-    }
-
-    .fa-brands.fa-twitter {
-        top: 22%;
-        right: 22%;
-        transform: rotate(20deg);
-    }
-
-    .fa-brands.fa-facebook {
-        top: 25%;
-        right: 68%;
-        transform: rotate(-27deg);
-    }
-
+    cursor: pointer;
     img {
         width: 100%;
         object-fit: cover;
@@ -167,5 +126,10 @@ form {
 
 .my-btn {
     background-color: $secondarydark;
+    transition: all 0.5s ;
+    &:hover{
+        background-color: $secondary;
+        transition: all 0.5s ;
+    }
 }
 </style>
