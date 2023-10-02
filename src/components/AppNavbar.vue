@@ -164,12 +164,12 @@ export default {
                 {
                     routeName: "about",
                     text: "about",
-                    icon: 'fa-solid fa-burger',
+                    icon: 'fa-solid fa-users',
                 },
                 {
                     routeName: "contact-us",
                     text: "contacts",
-                    icon: 'fa-solid fa-paper-plane',
+                    icon: 'fa-solid fa-envelope',
                 },
             ],
             isCartVisible: false,
