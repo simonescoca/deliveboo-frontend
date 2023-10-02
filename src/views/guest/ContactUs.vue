@@ -117,6 +117,11 @@ form, h3, h4{
 
 .img-cont {
     cursor: pointer;
+    transition: all 0.5s;
+    &:hover{
+        scale: 1.1;
+        transition: all 0.5s;
+    }
     img {
         width: 100%;
         object-fit: cover;
