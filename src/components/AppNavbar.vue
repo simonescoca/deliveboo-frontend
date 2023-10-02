@@ -3,7 +3,7 @@
         <div class="d-flex container-fluid container-sm container-fluid-md container-lg justify-content-around justify-content-sm-between align-items-center">
 
             <!-- ? logo container -->
-            <div class="d-none d-sm-flex align-items-center my_logo-container">
+            <div class="d-none d-xs-flex align-items-center my_logo-container">
                 <div class="position-relative h-100 duckbox">
                     <div class="scroll-animation" :style="animationStyle"></div>
                 </div>
@@ -337,7 +337,7 @@ nav {
     .my_logo-container {
         height: 3.5rem;
         width: 100%;
-        width: 220px;
+        width: 50px;
 
         img {
             object-fit: contain;
@@ -459,5 +459,17 @@ nav {
     {
     transform: translateX(10px);
     opacity: 0;
+}
+
+@media screen and (min-width: 480px) {
+    .d-xs-flex {
+        display: flex !important;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    div.d-xs-flex.my_logo-container {
+        width: 220px;
+    }
 }
 </style>
