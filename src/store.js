@@ -9,6 +9,7 @@ const store = reactive({
     search: "",
     isFooterVisible: true,
     logged: 0,
+    orderId: null,
 });
 
 export { store };
