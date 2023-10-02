@@ -12,7 +12,7 @@
                 <div class="row justify-content-center">
                     <div class="col-12">
 
-                        <table class="table table-dark table-striped table-hover">
+                        <table class="table table-striped table-hover">
                             <thead>
                                 <tr class="fw-bold">
                                     <th scope="col">
@@ -64,7 +64,7 @@
                                         </span>
                                     </td>
                                     <td>
-                                        <button type="submit" class="btn btn-sm btn-primary"
+                                        <button type="submit" class="btn btn-sm btn-outline-primary myBg"
                                             @click="getOrderInfo(order.id)">
                                             <i class="fa-solid fa-circle-info"></i>
                                         </button>
@@ -128,8 +128,7 @@
                     </div>
                 </div>
             </div>
-            <button
-                @click="$router.push({ name: 'order-statistics', params: { monthlySales: monthly_sales, orderCount: monthly_order_count } })">
+            <button @click="$router.push({ name: 'order-statistics', params: { monthlySales: monthly_sales, orderCount: monthly_order_count } })">
                 ...
             </button>
         </div>
@@ -221,55 +220,73 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.myPadding {
-    padding: 6rem 0;
-}
-
-.dishinfo {
-    top: 150px;
-    left: 25%;
-    width: 50%;
-
-    .card {
-        background-color: rgb(228, 228, 228);
+    .table {
+        --bs-table-striped-bg: #ffd7be;
+        --bs-table-accent-bg: #fff6cc;
+        --bs-table-hover-bg: #ff9754;
     }
 
-    .fa-xmark {
-        right: 10px;
-        top: 5px;
-        font-size: 30px;
-        cursor: pointer;
+    .myBg {
+        border-color: black;
+        color: black;
+
+        &:hover {
+            background-color: #ffda33;
+            border-color: black;
+            color: black;
+        }
     }
 
-    .card-body {
-        background-color: rgba(0, 0, 0, 0.185);
-        border: 1px solid black;
-        border-radius: 5px;
-        width: calc(100%/5);
+    .myPadding {
+        padding: 6rem 0;
     }
-}
 
-tr {
-    vertical-align: middle;
-}
+    .dishinfo {
+        top: 150px;
+        left: 25%;
+        width: 50%;
 
-.boxImg {
-    width: 300px;
-    height: 200px;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid black;
-    padding: 0;
+        .card {
+            background-color: rgb(228, 228, 228);
+        }
 
-    .image {
-        width: 100%;
-        height: auto;
-        display: block;
+        .fa-xmark {
+            right: 10px;
+            top: 5px;
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        .card-body {
+            background-color: rgba(0, 0, 0, 0.185);
+            border: 1px solid black;
+            border-radius: 5px;
+            width: calc(100%/5);
+        }
     }
-}
 
-.invisible {
-    display: none;
-}</style>
+    tr {
+        vertical-align: middle;
+    }
+
+    .boxImg {
+        width: 300px;
+        height: 200px;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid black;
+        padding: 0;
+
+        .image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+    }
+
+    .invisible {
+        display: none;
+    }
+</style>
