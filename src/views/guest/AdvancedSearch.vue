@@ -267,7 +267,7 @@ export default {
 .findYourFavorite {
     font-size: 3rem;
     font-weight: 700;
-    font-family: NunitoItalic;
+    font-style: italic;
 }
 
 .my_searchbar {
