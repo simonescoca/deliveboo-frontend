@@ -185,7 +185,11 @@ export default {
 
             this.showDeleteConfirmationModal = false;
 
-            axios.delete(`${this.apiUrl}${this.userId}/restaurants/${this.selectedRes}/dishes/${this.dishToDelete}`)
+            axios.delete(`${this.apiUrl}${this.userId}/restaurants/${this.selectedRes}/dishes/${this.dishToDelete}`, {
+                headers: {
+                    'Authorization': `Bearer ${this.userToken}`
+                }
+            })
                 .then(response => {
                     // Gestisci la risposta dal backend (ad esempio, aggiorna lo stato della vista)
                     if (response.status === 200 || response.status === 204) {

@@ -165,7 +165,11 @@ export default {
         softDeleteItem() {
 
             this.showDeleteConfirmationModal = false;
-            axios.delete(`${this.apiUrl}${this.userId}/restaurants/${this.restaurantToDelete}`)
+            axios.delete(`${this.apiUrl}${this.userId}/restaurants/${this.restaurantToDelete}`, {
+                headers: {
+                    'Authorization': `Bearer ${this.userToken}`
+                }
+            })
                 .then(response => {
                     // Gestisci la risposta dal backend (ad esempio, aggiorna lo stato della vista)
                     if (response.status === 200 || response.status === 204) {
