@@ -38,7 +38,7 @@
                                 <i class="fa-solid fa-user-pen"></i>
                             </span>
                             <span class="d-none d-md-inline ms-2">
-                                Register
+                                Registrati
                             </span>
                         </router-link>
                     </transition>
@@ -51,7 +51,7 @@
                                 <i class="fa-solid fa-arrow-right-to-bracket"></i>
                             </span>
                             <span class="d-none d-md-inline ms-2">
-                                Login
+                                Accedi
                             </span>
                         </router-link>
                     </transition>
@@ -62,7 +62,7 @@
                             <i class="fa-solid fa-arrow-right-from-bracket"></i>
                         </span>
                         <span class="d-none d-md-inline ms-2">
-                            Logout
+                            Esci
                         </span>
                     </button>
                 </div>
@@ -158,17 +158,17 @@ export default {
             links: [
                 {
                     routeName: "homepage",
-                    text: "home",
+                    text: "Home",
                     icon: 'fa-solid fa-house',
                 },
                 {
                     routeName: "about",
-                    text: "about",
+                    text: "About",
                     icon: 'fa-solid fa-users',
                 },
                 {
                     routeName: "contact-us",
-                    text: "contacts",
+                    text: "Contatti",
                     icon: 'fa-solid fa-envelope',
                 },
             ],
