@@ -78,7 +78,7 @@
                                     {{ ingredient.name + (index !== (dish.ingredients.length - 1) ? ", " : "")}}
                                 </span>
                             </div>
-                            <p class="btn btn-yellow" @click="addToCart(dish)">Aggiungi al Carrello</p>
+                            <p class="btn btn-yellow" :disabled="activeButton == false" @click="addToCart(dish)">Aggiungi al Carrello</p>
                         </div>
                         <div class="content" :class="showDescription[dish.id] ? 'description-hidden': ''">
                             <div class="boxImg" v-if="dish.photo.startsWith('http')">
@@ -95,7 +95,7 @@
                                 <p class="price">
                                     {{ dish.price.toFixed(2) }}
                                 </p>
-                                <button class="myCart-button" @click="dish.cartClicked = true, addToCart(dish)" :class="dish.cartClicked === true ? 'myClicked' : ''">
+                                <button class="myCart-button" @click="dish.cartClicked = true, addToCart(dish)" :class="dish.cartClicked === true && activeButton === true ? 'myClicked' : ''">
                                     <span class="myAdd-to-cart">
                                         Aggiungi al Carrello
                                     </span>
@@ -126,7 +126,7 @@
                                     {{ ingredient.name + (index !== (dish.ingredients.length - 1) ? ", " : "")}}
                                 </span>
                             </div>
-                            <p class="btn btn-yellow" @click="addToCart(dish)">Aggiungi al Carrello</p>
+                            <p class="btn btn-yellow" :disabled="activeButton == false" @click="addToCart(dish)">Aggiungi al Carrello</p>
                         </div>
                         <div class="content" :class="showDescription[dish.id] ? 'description-hidden': ''">
                             <div class="boxImg" v-if="dish.photo.startsWith('http')">
@@ -143,7 +143,7 @@
                                 <p class="price">
                                     {{ dish.price.toFixed(2) }}
                                 </p>
-                                <button class="myCart-button" @click="dish.cartClicked = true, addToCart(dish)" :class="dish.cartClicked === true ? 'myClicked' : ''">
+                                <button class="myCart-button" @click="dish.cartClicked = true, addToCart(dish)" :class="dish.cartClicked === true && activeButton === true ? 'myClicked' : ''">
                                     <span class="myAdd-to-cart">
                                         Aggiungi al Carrello
                                     </span>
@@ -174,7 +174,7 @@
                                     {{ ingredient.name + (index !== (dish.ingredients.length - 1) ? ", " : "")}}
                                 </span>
                             </div>
-                            <p class="btn btn-yellow" @click="addToCart(dish)">Aggiungi al Carrello</p>
+                            <p class="btn btn-yellow" :disabled="activeButton == false" @click="addToCart(dish)">Aggiungi al Carrello</p>
                         </div>
                         <div class="content" :class="showDescription[dish.id] ? 'description-hidden': ''">
                             <div class="boxImg" v-if="dish.photo.startsWith('http')">
@@ -191,12 +191,12 @@
                                 <p class="price">
                                     {{ dish.price.toFixed(2) }}
                                 </p>
-                                <button class="myCart-button" @click="dish.cartClicked = true, addToCart(dish)" :class="dish.cartClicked === true ? 'myClicked' : ''">
+                                <button class="myCart-button" @click="dish.cartClicked = true, addToCart(dish)" :class="dish.cartClicked === true && activeButton === true ? 'myClicked' : ''">
                                     <span class="myAdd-to-cart">
-                                        Add to cart
+                                        Aggiungi al Carrello
                                     </span>
                                     <span class="myAdded">
-                                        Added
+                                        Aggiunto
                                     </span>
                                     <i class="fas fa-shopping-cart"></i>
                                     <i class="fas fa-box"></i>
@@ -214,6 +214,7 @@
 <script>
 	import {store} from "../../store.js";
 	import axios from "axios";
+    import { router } from '../../router';
 
 	export default {
 		data() {
@@ -394,6 +395,7 @@
                 this.store.dishQuantity = 0;
                 this.activeButton = true;
                 this.alert = false;
+                window.location.reload();
             }
 		}
 	}
@@ -661,6 +663,9 @@
         transform: scale(.9);
     }
 
+    .disabled{
+        z-index: -2;
+    }
     .fa-shopping-cart {
         position: absolute;
         z-index: 2;
