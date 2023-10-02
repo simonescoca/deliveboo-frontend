@@ -24,7 +24,7 @@
                         </div>
                         <div class="order-details">
                         <div class="order-number-label">Ordine Numero</div>
-                        <div class="order-number">123456789</div>
+                        <div class="order-number">{{ store.orderId }}</div>
                         </div>
                         <div class="order-footer">Grazie!</div>
                     </div>
