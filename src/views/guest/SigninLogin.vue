@@ -11,8 +11,8 @@
                 </div>
                 <!-- ---Form Register--- -->
                 <div class="col-12 col-sm-7 text-center">
-                    <h1>Sign up</h1>
-                    <h5>Enter your information to get started</h5>
+                    <h1>Registrati</h1>
+                    <h5>Inserisci i tuoi dati per iniziare</h5>
                     <form action="" class="mx-5" @submit.prevent="registerUser">
                         <!-- ---Name--- -->
                         <div class="form-control d-flex">
@@ -110,10 +110,10 @@
                                     <div class="paper"></div>
                                 </div>
                             </div>
-                            Confirm Registration
+                            Conferma Registrazione
                         </button>
                         <!-- ---Already Log in link--- -->
-                        <p class="alreadyLogin">Already have an account?<a href="#" class="fw-semibold" @click="store.access = true">Log in</a></p>
+                        <p class="alreadyLogin">Hai già un account?<a href="#" class="fw-semibold" @click="store.access = true">Accedi</a></p>
                     </form>
                 </div>
             </div>
@@ -127,8 +127,8 @@
                 </div>
                 <!-- ---Form Login--- -->
                 <div class="col-12 col-sm-7 text-center">
-                    <h1>Log in</h1>
-                    <h5>Enter your information to access</h5>
+                    <h1>Accedi</h1>
+                    <h5>Inserisci le tue credenziali per accedere</h5>
                     <form action="" class="mx-5" @submit.prevent="loginUser">
                         <!-- ---Email--- -->
                         <div class="form-control">
@@ -158,11 +158,11 @@
                             <i class="fa-solid fa-key align-self-center"></i>
                         </div>
                         <!-- ---Login button--- -->
-                        <button class="loginbtn fw-semibold" type="submit">Login</button>
+                        <button class="loginbtn fw-semibold" type="submit">Accedi</button>
                         <!-- ---Need to register--- -->
-                        <p class="alreadyLogin">New to Deliveboo? <a href="#" class="fw-semibold" @click="store.access = false">Create an account</a></p>
+                        <p class="alreadyLogin">Sei nuovo su Deliveboo? <a href="#" class="fw-semibold" @click="store.access = false">Crea un account</a></p>
                     </form>
-                    <h5>OR</h5>
+                    <h5>Oppure</h5>
                     <div class="orline mx-auto">
                         <div></div>
                     </div>
@@ -172,7 +172,7 @@
                             <svg viewBox="0 0 16 16" class="bi bi-facebook" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"></path>
                             </svg>
-                            <span>Connect with Facebook</span>
+                            <span>Connettiti con Facebook</span>
                         </button>
                         <button class="googlebtn px-4 mt-3" @click="test()">
                             <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" viewBox="0 0 256 262">
@@ -181,7 +181,7 @@
                                 <path fill="#FBBC05" d="M56.281 156.37c-2.756-8.123-4.351-16.827-4.351-25.82 0-8.994 1.595-17.697 4.206-25.82l-.073-1.73L15.26 71.312l-1.335.635C5.077 89.644 0 109.517 0 130.55s5.077 40.905 13.925 58.602l42.356-32.782"></path>
                                 <path fill="#EB4335" d="M130.55 50.479c24.514 0 41.05 10.589 50.479 19.438l36.844-35.974C195.245 12.91 165.798 0 130.55 0 79.49 0 35.393 29.301 13.925 71.947l42.211 32.783c10.59-31.477 39.891-54.251 74.414-54.251"></path>
                             </svg>
-                            <span>Connect with Google</span>
+                            <span>Connettiti con Google</span>
                         </button>
                     </div>
                 </div>
@@ -294,7 +294,7 @@
 		div{
 			background-color: white;
 			height: 10px;
-			width: 30px;
+			width: 80px;
 			margin-top: -17px;
 			margin:auto;
 		}
