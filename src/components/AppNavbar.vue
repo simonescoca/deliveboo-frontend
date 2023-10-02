@@ -348,9 +348,11 @@ nav {
 
     .bg-mySecondary {
         background-color: $secondary;
-
+        transition: all 0.5s;
         &:hover {
             background-color: $secondarysoft;
+            transition: all 0.5s;
+            scale: 1.05;
         }
     }
 
