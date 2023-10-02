@@ -559,9 +559,11 @@ export default {
     }
 
     .input_field:focus {
-        border: 1px solid transparent;
-        box-shadow: 0px 0px 0px 2px #242424;
-        background-color: transparent;
+        color: rgba(0, 0, 0, 0.736);
+        background-color: var(--bs-body-bg);
+        border-color: $primarysoft;
+        outline: 0;
+        box-shadow: 0 0 0 0.25rem rgba(253, 93, 13, 0.25);
     }
 
     .purchase--btn {
