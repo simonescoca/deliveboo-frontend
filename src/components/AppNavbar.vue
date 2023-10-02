@@ -149,7 +149,7 @@
 
 <script>
 import { store } from "../store.js";
-// import axios from "axios";
+import { useRouter } from 'vue-router';
 
 export default {
     data() {
@@ -232,6 +232,8 @@ export default {
             store.logged = 0;
             store.userName = null;
 
+            const router = useRouter();
+            router.push({ name: 'homepage' });
         },
         // Aggiorna il contenuto del cart
         getCart() {
