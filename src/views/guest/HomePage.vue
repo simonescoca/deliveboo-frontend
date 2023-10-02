@@ -242,7 +242,7 @@ export default {
 
 main {
     background: linear-gradient(40deg, $secondary, white, $secondary);
-    z-index: -1;
+
 }
 
 .duckBackground {
