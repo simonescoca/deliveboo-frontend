@@ -24,7 +24,7 @@
                 <div class="col-9 col-sm-8 col-md-7 my-auto">
                     <div class="row">
                         <div class="col-12 d-flex justify-content-center position-relative">
-                            <h1>I piatti che ami, a domicilio</h1>
+                            <h1>Cerca, Scegli, Gusta! Il tuo cibo preferito a un clic di distanza.</h1>
                         </div>
                         <div class="col-12">
                             <div class="row d-flex justify-content-center align-items-center">
