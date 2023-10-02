@@ -663,9 +663,6 @@
         transform: scale(.9);
     }
 
-    .disabled{
-        z-index: -2;
-    }
     .fa-shopping-cart {
         position: absolute;
         z-index: 2;
