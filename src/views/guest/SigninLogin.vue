@@ -235,10 +235,10 @@
 
 		methods: {
 			handleApiResponse(response) {
-				// console.log(response);
-				// console.log(response.data.token);
-				// console.log(response.data.user.id);
-				// console.log(response.data.user.name);
+				console.log(response);
+				console.log(response.data.token);
+				console.log(response.data.user.id);
+				console.log(response.data.user.name);
 				this.userToken = response.data.token;
 				this.userId = response.data.user.id;
 				this.userName = response.data.user.name;
@@ -251,12 +251,13 @@
 
 			registerUser() {
 				axios.post(`${this.apiUrl}register`, this.registerData)
-					.then(response => {
-						this.handleApiResponse(response)
-					})
-					.catch(error => {
-						console.log(error)
-					});
+				.then(response => {
+					this.handleApiResponse(response)
+				})
+				.catch(error => {
+					console.log(error)
+				});
+				setTimeout(this.dashboardRedirect, 500)
 			},
 
             dashboardRedirect () {
