@@ -63,7 +63,7 @@
                 <div class="row">
                     <div class="col-12 col-md-4">
                         <div class="duckBackground position-relative">
-                            <img src="../../images/position.png" alt="step one image" class="w-75 m-5">
+                            <img src="../../images/position.png" alt="step one image" class="position-relative w-75 m-5">
                             <img src="../../images/firstBackground.png" alt="" class="position-absolute w-100">
                         </div>
                         <h3>Step 1</h3>
@@ -74,7 +74,7 @@
                     <hr class="d-block d-sm-none">
                     <div class="col-12 col-md-4 border-start border-end">
                         <div class="duckBackground position-relative">
-                            <img src="../../images/store.png" alt="step two image" class="w-75 m-5">
+                            <img src="../../images/store.png" alt="step two image" class="position-relative w-75 m-5">
                             <img src="../../images/firstBackground.png" alt="" class="position-absolute w-100">
                         </div>
                         <h3>Step 2</h3>
@@ -85,7 +85,7 @@
                     <hr class="d-block d-sm-none">
                     <div class="col-12 col-md-4">
                         <div class="duckBackground position-relative">
-                            <img src="../../images/payment.png" alt="step three image" class="w-75 m-5">
+                            <img src="../../images/payment.png" alt="step three image" class="position-relative w-75 m-5">
                             <img src="../../images/firstBackground.png" alt="" class="position-absolute w-100">
                         </div>
                         <h3>Step 3</h3>
@@ -113,7 +113,7 @@
                 <div class="row">
                     <div class="col-12 col-md text-center">
                         <div class="duckBackground2 position-relative">
-                            <img src="../../images/rider.png" alt="rider image" class="w-50">
+                            <img src="../../images/rider.png" alt="rider image" class="position-relative w-50">
                             <img src="../../images/secondBackground.png" alt="" class="position-absolute w-50">
                         </div>
                     </div>
@@ -128,7 +128,7 @@
                 <div class="row border-top border-bottom">
                     <div class="col-12 col-md text-center">
                         <div class="duckBackground2 position-relative">
-                            <img src="../../images/chef.png" alt="chef image" class="w-50">
+                            <img src="../../images/chef.png" alt="chef image" class="position-relative w-50">
                             <img src="../../images/secondBackground.png" alt="" class="position-absolute w-50">
                         </div>
                     </div>
@@ -143,7 +143,7 @@
                 <div class="row">
                     <div class="col-12 col-md text-center">
                         <div class="duckBackground2 position-relative">
-                            <img src="../../images/colleague.png" alt="colleagues image" class="w-50">
+                            <img src="../../images/colleague.png" alt="colleagues image" class="position-relative w-50">
                             <img src="../../images/secondBackground.png" alt="" class="position-absolute w-50">
                         </div>
                     </div>
@@ -182,7 +182,7 @@
                     </div>
                     <div class="col-12 col-md text-center">
                         <div class="duckBackground3 position-relative">
-                            <img src="../../images/enjoy.png" alt="table with food image" class="w-75">
+                            <img src="../../images/enjoy.png" alt="table with food image" class="position-relative w-75">
                             <img src="../../images/bigBackground.png" alt="" class="position-absolute w-75">
                         </div>
                     </div>
@@ -241,7 +241,7 @@ export default {
 @use '../../styles/variables' as *;
 
 main {
-    background: linear-gradient(40deg, $secondary, white, $secondary);
+    background: linear-gradient(40deg, #faca82, white, #faca82);
 
 }
 
@@ -249,8 +249,12 @@ main {
     .position-absolute {
         top: 0;
         left: 0;
-        z-index: -1;
+        z-index: 0;
         opacity: 0.8;
+    }
+
+    .position-relative {
+        z-index: 1;
     }
 }
 
@@ -258,8 +262,12 @@ main {
     .position-absolute {
         top: 0;
         left: 30%;
-        z-index: -1;
+        z-index: 0;
         opacity: 0.8;
+    }
+
+    .position-relative {
+        z-index: 1;
     }
 }
 
@@ -267,7 +275,11 @@ main {
     .position-absolute {
         top: 0;
         left: 15%;
-        z-index: -1;
+        z-index: 0;
+    }
+
+    .position-relative {
+        z-index: 1;
     }
 }
 
