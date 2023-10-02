@@ -271,7 +271,7 @@
                 .catch(error => {
                     console.log(error)
                 });
-                setTimeout(this.dashboardRedirect, 1500)
+                setTimeout(this.dashboardRedirect, 500)
 			},
 		}
 	}
