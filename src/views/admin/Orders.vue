@@ -192,7 +192,7 @@ export default {
                     this.orders = response.data.results
                     this.monthly_sales = response.data.monthly_sales
                     this.monthly_order_count = response.data.monthly_order_count
-
+                    console.log(this.monthly_order_count);
                 })
                 .catch(error => {
                     console.log(error)

@@ -9,7 +9,7 @@
 		</svg>
 		<div class="container myPadding">
 			<h3>
-				Admin - Orders' Statistics
+				Statistiche
 			</h3>
 
 			<canvas id="myChart" width="400" height="200"></canvas>
@@ -38,8 +38,9 @@ export default {
 	},
 
 	mounted() {
-		this.chartInstance = initChart(this.$route.params.monthlySales, this.$route.params.orderCount);
-		console.log(this.$route.params.orderCount)
+	    initChart( this.$route.params.orderCount, this.$route.params.monthlySales );
+		console.log(this.$route.params.orderCount);
+		console.log(this.$route.params.monthlySales);
 	},
 
 	created() {
