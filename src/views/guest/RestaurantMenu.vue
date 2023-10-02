@@ -325,12 +325,15 @@
 
                 // Verifica se l'elemento è già nel carrello
                 const existingDish = cart.find(cartDish => cartDish.id === dish.id);
-
+                
                 // Verifica se l'elemento appartiene allo stesso negozio degli altri elementi nel carrello
-                if (existingDish && existingDish.restaurant_id !== dish.restaurant_id) {
+                if(cart[0] !== undefined){
+                    if (cart[0].restaurant_id !== dish.restaurant_id) {
                     alert('Non puoi aggiungere elementi da ristoranti diversi nello stesso carrello.');
                     return;
+                    }
                 }
+                
 
                 if (existingDish) {
                     // Se l'elemento esiste già nel carrello, aumenta la quantità

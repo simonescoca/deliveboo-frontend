@@ -221,6 +221,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use '../../styles/variables' as *;
 .myPadding {
     padding: 5rem 0;
 }
@@ -319,7 +320,7 @@ h1 {
             top: 1%;
             right: -9px;
             transform: translateX(-50%);
-            color: rgba(250, 0, 0, 0.645);
+            color: $primary;
         }
 
         .my-btn {
