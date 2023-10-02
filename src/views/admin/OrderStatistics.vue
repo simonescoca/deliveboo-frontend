@@ -9,7 +9,7 @@
 		</svg>
 		<div class="container myPadding">
 			<h3>
-				Statistiche
+				Statistiche del ristorante {{ restaurantName }}
 			</h3>
 
 			<canvas id="myChart" width="400" height="200"></canvas>
@@ -25,6 +25,7 @@ export default {
 	data() {
 		return {
 			store,
+			restaurantName:this.$route.params.restaurantName
 		}
 	},
 
