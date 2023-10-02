@@ -51,7 +51,7 @@
                         </div>
 
                         <button @click="itemToSoftDelete(restaurant.id)" :disabled="showDeleteConfirmationModal"
-                            class="my_del-btn btn">
+                            class="my_del-btn btn d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-xmark fa-xs"></i>
                         </button>
 
@@ -165,7 +165,11 @@ export default {
         softDeleteItem() {
 
             this.showDeleteConfirmationModal = false;
-            axios.delete(`${this.apiUrl}${this.userId}/restaurants/${this.restaurantToDelete}`)
+            axios.delete(`${this.apiUrl}${this.userId}/restaurants/${this.restaurantToDelete}`, {
+                headers: {
+                    'Authorization': `Bearer ${this.userToken}`
+                }
+            })
                 .then(response => {
                     // Gestisci la risposta dal backend (ad esempio, aggiorna lo stato della vista)
                     if (response.status === 200 || response.status === 204) {
@@ -217,6 +221,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use '../../styles/variables' as *;
 .myPadding {
     padding: 5rem 0;
 }
@@ -224,14 +229,40 @@ export default {
 header {
     .my_btn {
         border: 1px solid rgba(0, 0, 0, 0.223);
-        border-radius: 50%;
+        border-radius: 5px;
         position: fixed;
         background-color: white;
-        top: 16%;
+        top: 18%;
         right: 20px;
         transition: all 500ms;
         z-index: 2;
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+        &:before {
+            background-color: #fff;
+            content: "";
+            display: inline-block;
+            height: 1px;
+            opacity: 0;
+            transition: all 700ms cubic-bezier(.25, .8, .25, 1);
+            width: 0;
+        }
+
+        &:hover:before {
+            background-color: #fff;
+            color: #e8726498;
+            width: 5rem;
+            opacity: 1;
+            margin-right: 13px;
+        }
+
+        &.deleted:hover:before {
+            content: 'Cestino';
+        }
+
+        &.add:hover:before {
+            content: 'Aggiungi';
+        }
 
         &:hover {
             scale: 1.2;
@@ -250,7 +281,7 @@ header {
     }
 
     .my_btn.add {
-        top: 23%;
+        top: 25%;
     }
 }
 
@@ -287,9 +318,9 @@ h1 {
             height: 25px;
             position: absolute;
             top: 1%;
-            right: 0;
+            right: -9px;
             transform: translateX(-50%);
-            color: rgba(0, 0, 0, 0.645);
+            color: $primary;
         }
 
         .my-btn {
@@ -300,6 +331,16 @@ h1 {
             height: 15px;
             color: rgb(163, 163, 163);
             transition: all 1s ease-out;
+
+            &:after {
+                position: absolute;
+                content: '';
+                opacity: 0;
+                transition: all 1s cubic-bezier(.25, .8, .25, 1);
+                right: 0;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+            }
+
 
         }
 
@@ -314,6 +355,38 @@ h1 {
                 outline-offset: 11px;
                 scale: 1.15;
             }
+
+            &:hover:after {
+                opacity: 1;
+                right: 40px;
+            }
+
+            &.fa-pen:hover:after {
+                content: 'Modifica';
+            }
+
+            &.fa-bars:hover:after {
+                content: 'Menu';
+            }
+
+            &.fa-copy:hover:after {
+                content: 'Ordini';
+            }
+
+            @media (max-width: 767px) {
+                &.fa-pen:hover:after {
+                    content: '';
+                }
+
+                &.fa-bars:hover:after {
+                    content: '';
+                }
+
+                &.fa-copy:hover:after {
+                    content: '';
+                }
+            }
+
         }
 
         .my-btn.active.large {

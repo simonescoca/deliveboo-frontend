@@ -213,6 +213,7 @@
 import { store } from "../../store.js";
 import axios from "axios";
 import { initializeDropin } from '../../dropin.js';
+import { useRouter } from 'vue-router';
 export default {
     name: 'CheckOut',
 
@@ -289,6 +290,9 @@ export default {
                         this.store.cart = []
                         this.cart = []
                         this.store.dishQuantity = 0
+                        this.store.orderId = response.data.success.id
+                        const router = useRouter();
+                        router.push({ name: 'success' });
                     }
                     console.log(response)
                 })

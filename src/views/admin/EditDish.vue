@@ -38,9 +38,9 @@
                     </div>
                 </div>
                 <div class="form-check form-switch mb-3">
-                    <input class="form-check-input" type="checkbox" id="available" name="available"
-                        v-model="editData.available">
-                    <label class="form-check-label" for="is-it-available">
+                    <input class="form-check-input" type="checkbox" :checked="editData.available === 1"
+                        :value="editData.available" id="available" name="available" v-model="editData.available">
+                    <label class="form-check-label" for="available">
                         E' disponibile?
                     </label>
                 </div>
@@ -226,7 +226,7 @@ export default {
                 price: this.editData.price,
                 course: this.editData.course,
                 photo: this.editData.photo,
-                available: this.editData.available,
+                available: this.editData.available ? '1' : '0',
                 ingredients: this.editData.ingredients,
             }, {
                 headers: {

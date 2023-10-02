@@ -245,6 +245,8 @@
 				localStorage.setItem('userToken', this.userToken);
 				localStorage.setItem('userId', this.userId);
 				localStorage.setItem('userName', this.userName);
+				store.logged = 1;
+				store.userName = this.userName;
 			},
 
 			registerUser() {
@@ -269,7 +271,7 @@
                 .catch(error => {
                     console.log(error)
                 });
-                setTimeout(this.dashboardRedirect, 1500)
+                setTimeout(this.dashboardRedirect, 500)
 			},
 		}
 	}

@@ -5,7 +5,10 @@
 		<main class="container">
 			<div class="row">
 				<div class="d-none d-lg-flex col-4">
-					<img src="../../images/search.png" alt="" class="w-100 my-auto">
+                    <div class="duckContainer position-relative my-auto">
+					<img src="../../images/errorDuck.png" alt="error duck" class="w-100">
+                    <img src="../../images/headDuck.png" alt="error duck head" class="position-absolute">
+                    </div>
 				</div>
 				<section class="wrapper overflow-hidden col-12 col-lg-8">
 					<div class="container">
@@ -88,6 +91,40 @@
 	.my_background{
 		background-color: $secondarysoft;
 	}
+
+    .duckContainer{
+        img.position-absolute{
+            width: 65%;
+            left: 135px;
+            top: 24px;
+            animation: spin 2.5s linear infinite;
+        }
+    }
+
+    @keyframes spin {
+                    0% {
+                        rotate: 0deg;
+                    }
+                    100% {
+                        rotate: 360deg;
+                    }
+                }
+
+                @media (max-width: 1399px) {
+    .duckContainer{
+        img.position-absolute{
+            left: 125px;
+        }
+    }
+    }
+
+    @media (max-width: 1199px) {
+    .duckContainer{
+        img.position-absolute{
+            left: 105px;
+        }
+    }
+    }
 
 	main{
 		height: 91vh;
@@ -359,7 +396,7 @@ body {
                 }
 
                 p {
-                    color: white;
+                    color: black;
                     font-size: 18px;
                     letter-spacing: 0.6px;
                     margin-bottom: 40px;
@@ -396,7 +433,7 @@ body {
             font-size: 200px;
             font-weight: 700;
             letter-spacing: 4px;
-            color: white;
+            color: black;
             display: flex !important;
             justify-content: center;
             align-items: center;

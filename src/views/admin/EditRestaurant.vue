@@ -167,7 +167,7 @@ export default {
         },
 
         updateRestaurant() {
-            axios.post(`${this.apiUrl}${this.userId}/restaurants/${store.selectedRes}`, {
+            axios.post(`${this.apiUrl}${this.userId}/restaurants/${this.selectedRes}`, {
                 name: this.editData.name,
                 address: this.editData.address,
                 city: this.editData.city,
@@ -194,7 +194,7 @@ export default {
                 })
                 .catch(error => {
 
-                    console.error(error);
+                    console.error(error.response.data);
                     this.isUpdateSuccess = false;
                     this.isUpdateFailure = true;
                 });

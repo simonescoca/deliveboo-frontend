@@ -22,7 +22,7 @@
                     <i class="fa-solid fa-plus"></i>
                 </router-link>
             </header>
-            <p class="fw-semibold ms-3">{{ restaurant.name }} / <span class="fw-bold">Menù piatti</span>
+            <p class="fw-semibold ms-3">{{ restaurant.name }} / <span class="fw-bold">Menù</span>
             </p>
             <h3 class="restaurant-menu">
                 {{ restaurant.name }} ~ Menù
@@ -185,7 +185,11 @@ export default {
 
             this.showDeleteConfirmationModal = false;
 
-            axios.delete(`${this.apiUrl}${this.userId}/restaurants/${this.selectedRes}/dishes/${this.dishToDelete}`)
+            axios.delete(`${this.apiUrl}${this.userId}/restaurants/${this.selectedRes}/dishes/${this.dishToDelete}`, {
+                headers: {
+                    'Authorization': `Bearer ${this.userToken}`
+                }
+            })
                 .then(response => {
                     // Gestisci la risposta dal backend (ad esempio, aggiorna lo stato della vista)
                     if (response.status === 200 || response.status === 204) {
@@ -231,14 +235,40 @@ h3 {
 header {
     .my_btn {
         border: 1px solid rgba(0, 0, 0, 0.223);
-        border-radius: 50%;
+        border-radius: 5px;
         position: fixed;
         background-color: #fff;
-        top: 16%;
+        top: 18%;
         right: 20px;
         transition: all 500ms;
         z-index: 2;
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+        &:before {
+            background-color: #fff;
+            content: "";
+            display: inline-block;
+            height: 1px;
+            opacity: 0;
+            transition: all 700ms cubic-bezier(.25, .8, .25, 1);
+            width: 0;
+        }
+
+        &:hover:before {
+            background-color: #fff;
+            color: #e8726498;
+            width: 5rem;
+            opacity: 1;
+            margin-right: 13px;
+        }
+
+        &.deleted:hover:before {
+            content: 'Cestino';
+        }
+
+        &.add:hover:before {
+            content: 'Aggiungi';
+        }
 
         &:hover {
             scale: 1.2;
@@ -257,7 +287,7 @@ header {
     }
 
     .my_btn.add {
-        top: 23%;
+        top: 25%;
     }
 }
 
@@ -295,7 +325,7 @@ header {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 30%;
+    width: 400px;
 
     transition: all 500ms;
 

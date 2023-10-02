@@ -30,7 +30,7 @@
 
             <!-- ? login or profile -->
             <div class="d-flex align-items-center ms-2 ms-lg-5">
-                <div v-if="userName === null" @click="store.access = false"> <!--class="d-flex align-items-center"-->
+                <div v-if="store.userName === null && store.logged === 0" @click="store.access = false"> <!--class="d-flex align-items-center"-->
                     <transition name="slide-fade" mode="in-out">
                         <router-link :to="{ name: 'profile' }" key="Page3"
                             class="d-flex align-items-center bg-mySecondary rounded-pill btn">
@@ -43,7 +43,7 @@
                         </router-link>
                     </transition>
                 </div>
-                <div v-if="userName === null" @click="store.access = true"> <!--class="d-flex align-items-center"-->
+                <div v-if="store.userName === null && store.logged === 0" @click="store.access = true"> <!--class="d-flex align-items-center"-->
                     <transition name="slide-fade" mode="in-out">
                         <router-link :to="{ name: 'profile' }" key="Page4"
                             class="d-flex align-items-center bg-mySecondary rounded-pill btn ms-2">
@@ -56,7 +56,7 @@
                         </router-link>
                     </transition>
                 </div>
-                <div v-if="userName !== null"> <!--class="d-flex align-items-center"-->
+                <div v-if="store.userName !== null || store.logged === 1" > <!--class="d-flex align-items-center"-->
                     <button class="d-flex align-items-center bg-mySecondary rounded-pill btn" @click="logout()">
                         <span>
                             <i class="fa-solid fa-arrow-right-from-bracket"></i>
@@ -66,19 +66,20 @@
                         </span>
                     </button>
                 </div>
+                <div class="user" v-if="store.userName !== null  || store.logged === 1">
                 <transition name="slide-fade" mode="in-out">
-                    <router-link :to="{ name: 'restaurants' }" v-if="userName !== null" key="Page5"
-                        class="text-decoration-none rounded-pill btn btn-outline-dark ms-3">
+                    <router-link :to="{ name: 'restaurants' }" key="Page5" class="text-decoration-none rounded-pill btn btn-outline-dark ms-3">
                         <div class="d-flex align-items-center">
                             <div class="my_user-img-cont bg-white rounded-pill">
                                 <img src="../../src/images/user.png" alt="user profile img" class="rounded-pill">
                             </div>
-                            <div class="d-none d-md-inline ms-2">
-                                {{ "@" + this.userName.toLowerCase() }}
+                            <div class="d-none d-md-inline ms-2" v-if="store.userName !== null">
+                                {{ "@" + store.userName.toLowerCase() }}
                             </div>
                         </div>
                     </router-link>
                 </transition>
+                </div>
 
                 <!-- ? cart-button -->
                 <button
@@ -148,7 +149,7 @@
 
 <script>
 import { store } from "../store.js";
-// import axios from "axios";
+import { useRouter } from 'vue-router';
 
 export default {
     data() {
@@ -171,7 +172,6 @@ export default {
                     icon: 'fa-solid fa-paper-plane',
                 },
             ],
-            userName: localStorage.getItem('userName'),
             isCartVisible: false,
             totale: 0,
             cart: [],
@@ -210,6 +210,10 @@ export default {
         this.cart = cartString ? JSON.parse(cartString) : []
         store.cart = cartString ? JSON.parse(cartString) : []
         store.dishQuantity = this.getTotalQuantity(store.cart)
+        store.userName = localStorage.getItem('userName')
+        if(store.userName !== null){
+            store.logged = 1
+        }
     },
 
     methods: {
@@ -225,6 +229,11 @@ export default {
             localStorage.removeItem('userId');
             localStorage.removeItem('userName');
             this.userName = localStorage.getItem('userName');
+            store.logged = 0;
+            store.userName = null;
+
+            const router = useRouter();
+            router.push({ name: 'homepage' });
         },
         // Aggiorna il contenuto del cart
         getCart() {
