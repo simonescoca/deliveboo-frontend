@@ -71,7 +71,7 @@
                     <router-link :to="{ name: 'restaurants' }" key="Page5" class="text-decoration-none rounded-pill btn btn-outline-dark ms-3">
                         <div class="d-flex align-items-center">
                             <div class="my_user-img-cont bg-white rounded-pill">
-                                <img src="../../src/images/user.png" alt="user profile img" class="rounded-pill">
+                                <img src="../../src/images/gabri.png" alt="user profile img" class="rounded-pill">
                             </div>
                             <div class="d-none d-md-inline ms-2" v-if="store.userName !== null">
                                 {{ "@" + store.userName.toLowerCase() }}
