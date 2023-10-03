@@ -143,10 +143,8 @@ export default {
             ],
 
             courses: [
-                'Antipasti',
                 'Primi',
                 'Secondi',
-                'Contorni',
                 'Dolci',
             ],
             newDish: {
