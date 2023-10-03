@@ -40,9 +40,9 @@
 						</div>
 						<div class="text">
 							<article>
-								<p>Uh oh! Looks like you got lost. <br>Go back to the homepage!</p>
+								<p>Ops! Sembra tu ti sia perso. <br>Torna alla homepage!</p>
 								<router-link :to="{ name: 'homepage' }">
-                                    <button>Go back to home</button>
+                                    <button>Homepage</button>
                                 </router-link>
 							</article>
 						</div>
