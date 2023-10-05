@@ -51,6 +51,7 @@
                 <div class="card d-inline-block m-5 text-center position-relative">
                     <i class="fa-solid fa-xmark fa-xl show position-absolute" @click="alert = false"></i>
                     <div class="card-body py-3">
+                        <img src="../../images/search.png" alt="" class="card-img">
                         <h5 class="card-title fst-italic fw-bold">Attenzione!</h5>
                         <p class="card-text">Il piatto selezionato è di un ristorante differente da quello nel tuo carrello.</p>
                         <p class="card-text">Per poterlo aggiungere rimuovi i piatti appartenenti ad altri ristoranti.</p>
@@ -404,7 +405,6 @@
 <style lang="scss" scoped>
 	@use '../../styles/variables.scss' as *;
     @use '../../styles/general.scss' as *;
-
     .alert {
     top: 50%;
     left: 50%;
