@@ -25,21 +25,22 @@
                     <label for="name" class="form-label">
                         Il tuo nome
                     </label>
-                    <input type="text" name="full_name" class="form-control" placeholder="Deliveboo Food" id="name">
+                    <input type="text" name="full_name" v-model="dataContact.full_name" class="form-control"
+                        placeholder="Deliveboo Food" id="name">
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">
                         La tua email
                     </label>
-                    <input type="email" name="email" class="form-control" id="email" placeholder="deliveboo@food.com"
-                        aria-describedby="emailHelp">
+                    <input type="email" name="email" v-model="dataContact.email" class="form-control" id="email"
+                        placeholder="deliveboo@food.com" aria-describedby="emailHelp">
                 </div>
                 <div>
                     <label for="message" class="mb-2">
                         Messaggio
                     </label><textarea class="form-control"
                         placeholder="Sono troppo buoni i vostri piatti, come posso ordinarne altri?" id="message"
-                        style="height: 100px" name="message"></textarea>
+                        style="height: 100px" name="message" v-model="dataContact.message"></textarea>
                 </div>
                 <div class="d-flex">
                     <button type="submit" class="btn my-3 mx-auto my-btn">
@@ -72,13 +73,18 @@
 
 <script>
 import { store } from "../../store.js";
-// import axios from "axios";
+import axios from "axios";
 
 export default {
     data() {
         return {
             store,
             apiUrl: 'http://127.0.0.1:8000/api/',
+            dataContact: {
+                full_name: '',
+                email: '',
+                message: ''
+            }
         }
     },
 
@@ -100,7 +106,7 @@ export default {
 
     methods: {
         sendMail() {
-            axios.post(`${this.apiUrl}contact-form`)
+            axios.post(`${this.apiUrl}contact-form`, this.dataContact)
                 .then(response => {
                     console.log(response)
                 })
