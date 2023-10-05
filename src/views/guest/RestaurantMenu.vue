@@ -62,8 +62,8 @@
         <svg style="height: 4rem; width: 100%; position: absolute; bottom: 0; left: 0; right: 0;" class="wave-1hkxOo" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" preserveAspectRatio="none"><path class="wavePath-haxJK1 animationPaused-2hZ4IO" d="M826.337463,25.5396311 C670.970254,58.655965 603.696181,68.7870267 447.802481,35.1443383 C293.342778,1.81111414 137.33377,1.81111414 0,1.81111414 L0,150 L1920,150 L1920,1.81111414 C1739.53523,-16.6853983 1679.86404,73.1607868 1389.7826,37.4859505 C1099.70117,1.81111414 981.704672,-7.57670281 826.337463,25.5396311 Z" fill="#ff9654"></path></svg>
         <div class="container pb-5">
             <section>
-                <h4 class="text-center">Primi piatti</h4>
-                <div class="d-flex flex-wrap justify-content-around align-items-center">
+                <h4 class="text-center" v-if="!this.nessunaCategoriaPresentePrimi">Primi piatti</h4>
+                <div class="d-flex flex-wrap justify-content-around align-items-center" v-if="!this.nessunaCategoriaPresentePrimi">
                     <div class="myCard col-3-custom mx-auto mb-5" v-for="dish in firstCourse" :class="!showSelectedDish(dish.categories) ? 'notSelected' : ''">
                         <div class="content-info">
                             <p class="title fw-bold">
@@ -110,8 +110,8 @@
                         </div>
                     </div>
                 </div>
-                <h4 class="text-center">Secondi piatti</h4>
-                <div class="d-flex flex-wrap justify-content-around align-items-center">
+                <h4 class="text-center" v-if="!this.nessunaCategoriaPresenteSecondi">Secondi piatti</h4>
+                <div class="d-flex flex-wrap justify-content-around align-items-center" v-if="!this.nessunaCategoriaPresenteSecondi">
                     <div class="myCard col-3-custom mx-auto mb-5" v-for="dish in secondCourse" :class="!showSelectedDish(dish.categories) ? 'notSelected' : ''">
                         <div class="content-info">
                             <p class="title fw-bold">
@@ -158,8 +158,8 @@
                         </div>
                     </div>
                 </div>
-                <h4 class="text-center">Dessert</h4>
-                <div class="d-flex flex-wrap justify-content-around align-items-center">
+                <h4 class="text-center" v-if="!this.nessunaCategoriaPresenteDessert">Dessert</h4>
+                <div class="d-flex flex-wrap justify-content-around align-items-center" v-if="!this.nessunaCategoriaPresenteDessert">
                     <div class="myCard col-3-custom mx-auto mb-5" v-for="dish in dessertCourse" :class="!showSelectedDish(dish.categories) ? 'notSelected' : ''">
                         <div class="content-info">
                             <p class="title fw-bold">
@@ -237,6 +237,9 @@
 				dessertCourse: [],
                 alert: false,
                 activeButton: true,
+                nessunaCategoriaPresentePrimi: false,
+                nessunaCategoriaPresenteSecondi: false,
+                nessunaCategoriaPresenteDessert: false,
 			}
 		},
 
@@ -276,6 +279,7 @@
 					this.resData = response.data.results.restaurant
 					this.resTypes = response.data.results.restaurant.types
 					this.resDishes = response.data.results.restaurant.dishes
+                    console.log(this.resDishes)
                     this.resDishes.forEach((dish)=>{
                         dish['cartClicked'] = false;
 						this.showDescription[dish.id] = false;
@@ -312,6 +316,8 @@
 						this.dessertCourse.push(dish)
 					}
 				});
+                console.log('Console log first course')
+                console.log(this.firstCourse)
 			},
 			// --Funzione per attivare e disattivare le categorie---
 			toggleCategory(selectedCategory){
@@ -323,8 +329,28 @@
 					// Il tipo non è presente nell'array, quindi aggiungilo
 					this.activeCategory.push(selectedCategory);
 				}
-				console.log(this.activeCategory)
+                this.confrontaCategorie(this.firstCourse, this.secondCourse, this.dessertCourse, this.activeCategory)
 			},
+            // --Funzione per confrontare le categorie delle portate con quelle selezionate--
+            confrontaCategorie(firstCourse, secondCourse, dessertCourse, category) {
+                console.log('confronto partito')
+                // Estrai l'array delle categorie dalla struttura 'course'
+                const categoriePrimi = Object.values(firstCourse).map(corso => corso.categories.map(categoria => categoria.name)).flat();
+                const categorieSecondi = Object.values(secondCourse).map(corso => corso.categories.map(categoria => categoria.name)).flat();
+                const categorieDessert = Object.values(dessertCourse).map(corso => corso.categories.map(categoria => categoria.name)).flat();
+
+                // Controlla se l'array 'category' è vuoto
+                if (category.length === 0) {
+                this.nessunaCategoriaPresentePrimi = false;
+                this.nessunaCategoriaPresenteSecondi = false;
+                this.nessunaCategoriaPresenteDessert = false;
+                } else {
+                // Controlla se nessuna delle categorie è presente nell'array 'category'
+                this.nessunaCategoriaPresentePrimi = categoriePrimi.every(categoria => !category.includes(categoria));
+                this.nessunaCategoriaPresenteSecondi = categorieSecondi.every(categoria => !category.includes(categoria));
+                this.nessunaCategoriaPresenteDessert = categorieDessert.every(categoria => !category.includes(categoria));
+                }
+            },
 			// --Funzione per mostrare un piatto solo se non ci sono selezioni oppure la selezione della categoria è presente in quel piatto--
 			showSelectedDish(categories){
 				let active = false;
