@@ -34,7 +34,7 @@
                                     <i class="fa-solid fa-magnifying-glass"></i>
                                 </div>
                                 <router-link :to="{ name: 'advanced-search' }"
-                                    class="btn btn-orange fw-semibold ms-3 col-5 col-sm-3 mt-2 mt-sm-0  "
+                                    class="btn btn-orange fw-semibold ms-3 col-5 col-sm-3 mt-2 mt-sm-0 customCursor"
                                     @click="saveSearch(search)">
                                     Cerca
                                 </router-link>
@@ -52,7 +52,7 @@
                 </div>
                 <div class="col-1">
                     <!-- Bottone per aprire/chudere la section -->
-                    <button class="btn btn-yellow  " type="button" data-bs-toggle="collapse" data-bs-target="#howItWorks"
+                    <button class="btn btn-yellow customCursor" type="button" data-bs-toggle="collapse" data-bs-target="#howItWorks"
                         aria-expanded="true" aria-controls="howItWorks">
                         <i class="fas fa-chevron-down"></i>
                     </button>
@@ -98,7 +98,7 @@
                 </div>
                 <div class="col-1">
                     <!-- Bottone per aprire/chudere la section -->
-                    <button class="btn btn-yellow  " type="button" data-bs-toggle="collapse" data-bs-target="#joinDeliveboo"
+                    <button class="btn btn-yellow customCursor" type="button" data-bs-toggle="collapse" data-bs-target="#joinDeliveboo"
                         aria-expanded="true" aria-controls="joinDeliveboo">
                         <i class="fas fa-chevron-down"></i>
                     </button>
@@ -116,7 +116,7 @@
                     <div class="col-12 col-md-4 my-auto">
                         <h3>Come rider</h3>
                         <p>Guadagna consegando cibo dai locali nelle vicinanze. Tutto ciò che ti serve sono una bicicletta e un po' di passione.</p>
-                        <a href="" class="btn btn-orange fw-semibold mb-4 mb-sm-0  ">Consegna con noi</a>
+                        <a href="" class="btn btn-orange fw-semibold mb-4 mb-sm-0 customCursor">Consegna con noi</a>
                     </div>
                 </div>
                 <div class="row border-top border-bottom">
@@ -130,7 +130,7 @@
                         <h3>Come partner</h3>
                         <p>Deliveboo aiuta i ristoratori a crescere con ordini online, programmi fedeltà e altro ancora.
                         </p>
-                        <a href="" class="btn btn-orange fw-semibold mb-4 mb-sm-0  ">Partner with us</a>
+                        <a href="" class="btn btn-orange fw-semibold mb-4 mb-sm-0 customCursor">Partner with us</a>
                     </div>
                 </div>
                 <div class="row">
@@ -144,7 +144,7 @@
                         <h3>Come collega</h3>
                         <p>Unisciti al nostro team e aiutaci a costruire un servizio di consegna di cibo di alta qualità.
                         </p>
-                        <a href="" class="btn btn-orange fw-semibold mb-4 mb-sm-0  ">Work with us</a>
+                        <a href="" class="btn btn-orange fw-semibold mb-4 mb-sm-0 customCursor">Work with us</a>
                     </div>
                 </div>
             </div>
@@ -157,7 +157,7 @@
                 </div>
                 <div class="col-1">
                     <!-- Bottone per aprire/chudere la section -->
-                    <button class="btn btn-yellow  " type="button" data-bs-toggle="collapse" data-bs-target="#downloadApp"
+                    <button class="btn btn-yellow customCursor" type="button" data-bs-toggle="collapse" data-bs-target="#downloadApp"
                         aria-expanded="true" aria-controls="downloadApp">
                         <i class="fas fa-chevron-down"></i>
                     </button>
@@ -169,7 +169,7 @@
                     <div class="col-12 col-md-4 my-auto">
                         <h3 class="mt-4 mt-sm-0">Ordina in relax!</h3>
                         <p>Ricevi i piatti più deliziosi direttamente a casa tua con Deliveboo. Il nostro servizio di consegna rapido e affidabile offre una vasta scelta tra diverse tipologie di cucine e piatti sfiziosi.</p>
-                        <a href="" class="btn btn-orange fw-semibold  ">Download</a>
+                        <a href="" class="btn btn-orange fw-semibold customCursor">Download</a>
                     </div>
                     <div class="col-12 col-md text-center">
                         <div class="duckBackground3 position-relative">
@@ -234,6 +234,11 @@ export default {
 main {
     background: linear-gradient(40deg, #faca82, white, #faca82);
     cursor: url('../../images/cursor.png'), auto;
+    .customCursor{
+        &:hover{
+            cursor: url('../../images/cursorPointer.png'), auto;
+        }
+    }
 }
 
 
