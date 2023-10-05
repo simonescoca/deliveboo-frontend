@@ -30,7 +30,7 @@
                             <div class="row d-flex justify-content-center align-items-center">
                                 <div class="search col-10 col-sm-8">
                                     <input type="text" placeholder="Cerca un ristorante" v-model="search"
-                                        @keyup.enter="advancedSearch" @change="saveSearch(search)">
+                                        @keyup.enter="advancedSearch" @change="saveSearch(search)" class="customCursor2">
                                     <i class="fa-solid fa-magnifying-glass"></i>
                                 </div>
                                 <router-link :to="{ name: 'advanced-search' }"
@@ -237,6 +237,12 @@ main {
     .customCursor{
         &:hover{
             cursor: url('../../images/cursorPointer.png'), auto;
+        }
+    }
+    .customCursor2{
+        &:hover{
+            cursor: url('../../images/cursorText.png'), auto;
+            background-size: 32px 32px;
         }
     }
 }
