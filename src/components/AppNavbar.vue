@@ -111,7 +111,7 @@
             <!-- ? cart - dishes -->
             <main class="overflow">
                 <div v-for="dish in store.cart" class="d-flex mt-3 cartSection">
-                    <div class="m-auto d-flex rounded py-2 px-3 position-relative myAdded">
+                    <div class="m-auto d-flex align-items-start rounded py-2 px-3 position-relative myAdded">
                         <div class="imgCont me-4">
                             <img :src="dish.photo" :alt="dish.name" class="rounded">
                         </div>
@@ -424,10 +424,12 @@ nav {
     }
 
     .imgCont {
-        object-fit: contain;
         width: 7rem;
-
+        height: 100%;
+        
         img {
+            object-fit: cover;
+            object-position: center;
             height: 100%;
             width: 100%;
         }
