@@ -242,7 +242,6 @@ main {
     .customCursor2{
         &:hover{
             cursor: url('../../images/cursorText.png'), auto;
-            background-size: 32px 32px;
         }
     }
 }
