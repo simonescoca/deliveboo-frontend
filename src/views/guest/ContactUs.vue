@@ -20,7 +20,7 @@
             <h4>
                 Richiedi assistenza mandandoci un messaggio, ti risponderemo il prima possibile!
             </h4>
-            <form>
+            <form @submit.prevent="sendMail">
                 <div class="mb-3">
                     <label for="name" class="form-label">
                         Il tuo nome
@@ -78,6 +78,7 @@ export default {
     data() {
         return {
             store,
+            apiUrl: 'http://127.0.0.1:8000/api/',
         }
     },
 
@@ -98,7 +99,15 @@ export default {
     },
 
     methods: {
-
+        sendMail() {
+            axios.post(`${this.apiUrl}contact-form`)
+                .then(response => {
+                    console.log(response)
+                })
+                .catch(error => {
+                    console.log(error)
+                });
+        },
     }
 }
 </script>
