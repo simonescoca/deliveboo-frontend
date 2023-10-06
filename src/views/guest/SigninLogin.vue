@@ -281,7 +281,8 @@
 <style lang="scss" scoped>
     @use '../../styles/variables' as *;
 
-	main {
+main {
+    background: linear-gradient(40deg, #faca82, white, #faca82);
     cursor: url('../../images/cursor.png'), auto;
     .customCursor{
         &:hover{
