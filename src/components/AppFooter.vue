@@ -18,17 +18,17 @@
                               </h4>
                             </div>
                             <div>
-                              <a :href="member.linkedinURL" class="btn A btn-outline-primary mb-2 custom-link">
+                              <a :href="member.linkedinURL" class="btn A btn-outline-primary mb-2 custom-link customCursor">
                                 <i class="fa-brands fa-linkedin"></i> Linkedin
                               </a>
                             </div>
                             <div>
-                              <a :href="member.gitHubURL" class="btn B btn-outline-dark mb-2 custom-link">
+                              <a :href="member.gitHubURL" class="btn B btn-outline-dark mb-2 custom-link customCursor">
                                 <i class="fa-brands fa-square-github"></i> GitHub
                               </a>
                             </div>
                             <div>
-                              <a :href="'mailto:' + member.email" class="btn C btn-outline-primary custom-link">
+                              <a :href="'mailto:' + member.email" class="btn C btn-outline-primary custom-link customCursor">
                                 <i class="fa-solid fa-square-envelope"></i> {{ member.email }}
                               </a>
                             </div>
@@ -117,7 +117,12 @@
 
     footer {
         background-color: $primarysoft;
-
+    cursor: url('../images/cursor.png'), auto;
+        .customCursor{
+            &:hover{
+                cursor: url('../images/cursorPointer.png'), auto;
+            }
+        }
         ul {
             gap: .6rem;
         }
