@@ -368,6 +368,11 @@ main {
 // ---Submit---
 .col-12{
 	form{
+		.continue-application{
+			cursor: url('../../images/cursorPointer.png'), auto;
+		}
+	}
+}
 		.continue-application {
 		--color: black;
 		--background: #ffda32;
@@ -385,7 +390,6 @@ main {
 		--shadow: rgba(13, 15, 25, .2);
 		border: none;
 		outline: none;
-		cursor: url('../../images/cursorPointer.png'), auto;
 		position: relative;
 		border-radius: 5px;
 		font-size: 14px;
@@ -398,8 +402,8 @@ main {
 		color: var(--color);
 		background: var(--bg, var(--background));
 		}
-	}
-}
+
+
 	.continue-application > div {
 		top: 0;
 		left: 0;
@@ -586,6 +590,7 @@ main {
 
 // ---Facebook button---
 .facebookbtn {
+		z-index: 1;
 		background: transparent;
 		position: relative;
 		padding: 5px 15px;
@@ -641,6 +646,7 @@ main {
 
 // ---Google button---
 	.googlebtn {
+		z-index: 1;
 		background: transparent;
 		position: relative;
 		padding: 5px 15px;
