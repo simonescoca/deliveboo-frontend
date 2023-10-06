@@ -196,10 +196,20 @@ export default {
 
 <style lang="scss" scoped>
 @use '../../styles/variables' as *;
-@use '../../styles/general.scss' as *;
 
-
-
+* {
+    cursor: url('../../images/cursor.png'), auto;
+    .customCursor{
+        &:hover{
+            cursor: url('../../images/cursorPointer.png'), auto;
+        }
+    }
+    .customCursor2{
+        &:hover{
+            cursor: url('../../images/cursorText.png'), auto;
+        }
+    }
+}
 .boxShadow {
     .position-absolute {
         z-index: -1;
@@ -268,7 +278,7 @@ export default {
 
 .my_background {
     background: linear-gradient(40deg, #faca82, white, #faca82);
-    z-index: -2;
+    z-index: 0;
 }
 
 section {
