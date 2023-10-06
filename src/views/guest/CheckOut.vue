@@ -15,10 +15,10 @@
         </svg>
         <div class="container myPadding px-3 px-sm-0">
             <div class="row px-3 px-sm-0">
-                <p class="fw-semibold ms-3">Shopping Cart / <span class="fw-bold">Checkout Step</span></p>
+                <p class="fw-semibold ms-3">Carrello / <span class="fw-bold">Checkout</span></p>
                 <!-- ---Shopping Cart Section--- -->
                 <div class="col-12 mb-3 mb-lg-0 col-lg-7 mx-auto cart position-relative">
-                    <h2 class="m-3">Shopping Cart</h2>
+                    <h2 class="m-3">Carrello</h2>
                     <!-- ---Dishes header--- -->
                     <div class="row d-flex">
                         <div class="col-3 col-md-4 col-lg-6">
@@ -166,7 +166,7 @@
                                 </div>
                                 <div class="separator">
                                     <hr class="line">
-                                    <p class="fs-6">or pay using credit card</p>
+                                    <p class="fs-6">o paga con la tua carta</p>
                                     <hr class="line">
                                 </div>
                                 <!-- ---User credit card info--- -->
@@ -174,18 +174,18 @@
                                     <div class="input_container">
                                         <label for="customer_name" class="input_label fs-6">Nome</label>
                                         <input id="customer_name" class="input_field" type="text" name="address"
-                                            title="customer_name" placeholder="Enter your name and surname"
+                                            title="customer_name" placeholder="Deliveboo Food"
                                             v-model="customer_name">
                                     </div>
                                     <div class="input_container">
                                         <label for="address" class="input_label fs-6">Indirizzo di domicilio</label>
                                         <input id="address" class="input_field" type="text" name="address" title="address"
-                                            placeholder="Enter your home address" v-model="customer_address">
+                                            placeholder="Via fastfood 21" v-model="customer_address">
                                     </div>
                                     <div class="input_container">
                                         <label for="phone" class="input_label fs-6">Numero di cellulare</label>
                                         <input id="phone" class="input_field" type="text" name="phone" title="phone"
-                                            placeholder="Enter your phone number" v-model="phone_number">
+                                            placeholder="345 6789012" v-model="phone_number">
                                     </div>
                                 </div>
 
@@ -497,7 +497,6 @@ export default {
         display: grid;
         grid-template-columns: 1fr 2fr 1fr;
         gap: 10px;
-        color: #8B8E98;
         margin: 0 10px;
     }
 
@@ -545,7 +544,6 @@ export default {
 
     .input_label {
         font-size: 10px;
-        color: #8B8E98;
         font-weight: 600;
     }
 
@@ -561,9 +559,11 @@ export default {
     }
 
     .input_field:focus {
-        border: 1px solid transparent;
-        box-shadow: 0px 0px 0px 2px #242424;
-        background-color: transparent;
+        color: rgba(0, 0, 0, 0.736);
+        background-color: var(--bs-body-bg);
+        border-color: $primarysoft;
+        outline: 0;
+        box-shadow: 0 0 0 0.25rem rgba(253, 93, 13, 0.25);
     }
 
     .purchase--btn {

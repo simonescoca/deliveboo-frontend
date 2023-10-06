@@ -135,14 +135,12 @@
                             <p class="card-text">
                                 {{ restaurant.city + ", " + restaurant.address }}
                             </p>
-                            <div class="d-flex align-items-center my_categories">
-                                <p v-for="category in restaurant.types" class="m-0 ms-2 mb-2 card-text">
-                                    {{ category.name }}
-                                </p>
-                            </div>
+                            <p v-for="category in restaurant.types" class="card-text">
+                                {{ category.name }}
+                            </p>
                             <router-link :to="{ name: 'restaurant-menu' }" class="btn btn-orange"
                                 @click="saveSelectedRestaurant(restaurant.id)">
-                                Restaurant Menu
+                                Menu del Ristorante
                             </router-link>
                         </div>
                     </div>
@@ -258,16 +256,18 @@ export default {
 .btn-orange {
     background-color: $primarydark;
     color: white;
-
+    transition: all 0.5s;
     &:hover {
         background-color: $primarysoft;
+        transition: all 0.5s;
+        scale: 1.05;
     }
 }
 
 .findYourFavorite {
     font-size: 3rem;
     font-weight: 700;
-    font-family: NunitoItalic;
+    font-style: italic;
 }
 
 .my_searchbar {

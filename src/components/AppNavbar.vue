@@ -3,7 +3,7 @@
         <div class="d-flex container-fluid container-sm container-fluid-md container-lg justify-content-around justify-content-sm-between align-items-center">
 
             <!-- ? logo container -->
-            <div class="d-none d-sm-flex align-items-center my_logo-container">
+            <div class="d-none d-xs-flex align-items-center my_logo-container">
                 <div class="position-relative h-100 duckbox">
                     <div class="scroll-animation" :style="animationStyle"></div>
                 </div>
@@ -38,7 +38,7 @@
                                 <i class="fa-solid fa-user-pen"></i>
                             </span>
                             <span class="d-none d-md-inline ms-2">
-                                Register
+                                Registrati
                             </span>
                         </router-link>
                     </transition>
@@ -51,7 +51,7 @@
                                 <i class="fa-solid fa-arrow-right-to-bracket"></i>
                             </span>
                             <span class="d-none d-md-inline ms-2">
-                                Login
+                                Accedi
                             </span>
                         </router-link>
                     </transition>
@@ -62,7 +62,7 @@
                             <i class="fa-solid fa-arrow-right-from-bracket"></i>
                         </span>
                         <span class="d-none d-md-inline ms-2">
-                            Logout
+                            Esci
                         </span>
                     </button>
                 </div>
@@ -71,7 +71,7 @@
                     <router-link :to="{ name: 'restaurants' }" key="Page5" class="text-decoration-none rounded-pill btn btn-outline-dark ms-3">
                         <div class="d-flex align-items-center">
                             <div class="my_user-img-cont bg-white rounded-pill">
-                                <img src="../../src/images/user.png" alt="user profile img" class="rounded-pill">
+                                <img src="../../src/images/gabri.png" alt="user profile img" class="rounded-pill">
                             </div>
                             <div class="d-none d-md-inline ms-2" v-if="store.userName !== null">
                                 {{ "@" + store.userName.toLowerCase() }}
@@ -111,7 +111,7 @@
             <!-- ? cart - dishes -->
             <main class="overflow">
                 <div v-for="dish in store.cart" class="d-flex mt-3 cartSection">
-                    <div class="m-auto d-flex rounded py-2 px-3 position-relative myAdded">
+                    <div class="m-auto d-flex align-items-start rounded py-2 px-3 position-relative myAdded">
                         <div class="imgCont me-4">
                             <img :src="dish.photo" :alt="dish.name" class="rounded">
                         </div>
@@ -149,7 +149,7 @@
 
 <script>
 import { store } from "../store.js";
-import { useRouter } from 'vue-router';
+import { router } from '../router';
 
 export default {
     data() {
@@ -158,17 +158,17 @@ export default {
             links: [
                 {
                     routeName: "homepage",
-                    text: "home",
+                    text: "Home",
                     icon: 'fa-solid fa-house',
                 },
                 {
                     routeName: "about",
-                    text: "about",
+                    text: "About",
                     icon: 'fa-solid fa-users',
                 },
                 {
                     routeName: "contact-us",
-                    text: "contacts",
+                    text: "Contatti",
                     icon: 'fa-solid fa-envelope',
                 },
             ],
@@ -231,8 +231,7 @@ export default {
             this.userName = localStorage.getItem('userName');
             store.logged = 0;
             store.userName = null;
-
-            const router = useRouter();
+            
             router.push({ name: 'homepage' });
         },
         // Aggiorna il contenuto del cart
@@ -337,7 +336,7 @@ nav {
     .my_logo-container {
         height: 3.5rem;
         width: 100%;
-        width: 220px;
+        width: 50px;
 
         img {
             object-fit: contain;
@@ -348,9 +347,11 @@ nav {
 
     .bg-mySecondary {
         background-color: $secondary;
-
+        transition: all 0.5s;
         &:hover {
             background-color: $secondarysoft;
+            transition: all 0.5s;
+            scale: 1.05;
         }
     }
 
@@ -423,10 +424,12 @@ nav {
     }
 
     .imgCont {
-        object-fit: contain;
         width: 7rem;
-
+        height: 100%;
+        
         img {
+            object-fit: cover;
+            object-position: center;
             height: 100%;
             width: 100%;
         }
@@ -459,5 +462,17 @@ nav {
     {
     transform: translateX(10px);
     opacity: 0;
+}
+
+@media screen and (min-width: 480px) {
+    .d-xs-flex {
+        display: flex !important;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    div.d-xs-flex.my_logo-container {
+        width: 220px;
+    }
 }
 </style>
