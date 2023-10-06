@@ -31,22 +31,23 @@
                 <label for="name">
                     Nome
                 </label>
-                <input type="text" name="name" id="name" class="form-control mb-3" v-model="newRestaurant.name">
-
+                <input type="text" name="name" id="name" class="form-control mb-3" :class="{'is-invalid':errors.name}" v-model="newRestaurant.name">
+                <div v-if="errors.name" class="invalid-feedback">{{ errors.name }}</div>
                 <label for="address">
                     Indirizzo
                 </label>
-                <input type="text" name="address" id="address" class="form-control mb-3" v-model="newRestaurant.address">
-
+                <input type="text" name="address" id="address" class="form-control mb-3" :class="{'is-invalid':errors.address}" v-model="newRestaurant.address">
+                <div v-if="errors.address" class="invalid-feedback">{{ errors.address }}</div> 
                 <label for="city">
                     Locazione (Città)
                 </label>
-                <input type="text" name="city" id="city" class="form-control mb-3" v-model="newRestaurant.city">
-
+                <input type="text" name="city" id="city" class="form-control mb-3" :class="{'is-invalid':errors.city}" v-model="newRestaurant.city">
+                <div v-if="errors.city" class="invalid-feedback">{{ errors.city }}</div>
                 <label for="image">
                     Carica un'immagine
                 </label>
-                <input type="file" name="image" id="image" class="form-control mb-3" @change="handleImage">
+                <input type="file" name="image" id="image" class="form-control mb-3" :class="{'is-invalid':errors.image}" @change="handleImage">
+                <div v-if="errors.image" class="invalid-feedback">{{ errors.image }}</div>
             </div>
 
 
@@ -54,15 +55,16 @@
                 <div class="card-header">Tipologie di cucina</div>
                 <div class="card-body d-flex flex-wrap justify-content-evenly">
                     <div v-for="formCheck in formChecks" class="ps-0 form-check d-flex">
-                        <input type="checkbox" class="form-check-input me-0" :id="formCheck" :value="formCheck"
+                        <input type="checkbox" class="form-check-input me-0" :id="formCheck" :class="{'is-invalid':errors.types}" :value="formCheck"
                             v-model="newRestaurant.types" @click="console.log(newRestaurant)">
                         <label class="ps-2 form-check-label" :for="formCheck">
                             {{ formCheck }}
                         </label>
                     </div>
+                    
                 </div>
             </div>
-
+            <div v-if="errors.types" class="alert alert-danger p-1 mt-2">{{ errors.types }}</div>
             <button type="submit" class="my-3 btn d-flex mx-auto px-3">
                 Crea
             </button>
@@ -77,6 +79,13 @@ import { router } from '../../router.js'
 export default {
     data() {
         return {
+            errors:{
+                name: '',
+                address: '',
+                city: '',
+                image: '',
+                types: '',
+            },
             store,
             apiUrl: 'http://127.0.0.1:8000/api',
             userToken: '',
@@ -146,9 +155,50 @@ export default {
     },
 
     methods: {
-        createNewRestaurant() {
+        validateForm() {
+        let isValid = true;
 
-            axios.post(`${this.apiUrl}/${this.userId}/restaurants`, {
+        if (!this.newRestaurant.name) {
+        this.errors.name = 'Il nome è obbligatorio';
+        isValid = false;
+        } else {
+        this.errors.name = '';
+        }
+         
+        
+         if (!this.newRestaurant.address) {
+        this.errors.address = 'Inserire un indirizzo è obbligatorio';
+        isValid = false;
+        } else {
+        this.errors.address = '';
+        }
+        
+        if (!this.newRestaurant.city) {
+        this.errors.city = 'Inserire la città è obbligatorio';
+        isValid = false;
+        } else {
+        this.errors.city = '';
+        }
+       
+        if (!this.newRestaurant.image) {
+        this.errors.image = 'inserire un\'immagine è obbligatorio';
+        isValid = false;
+        } else {
+        this.errors.image = '';
+        }
+        if (this.newRestaurant.types == 0) {
+        this.errors.types = 'Inserire la tipologia del ristorante è obbligatorio';
+        isValid = false;
+        } else {
+        this.errors.types = '';
+        }
+         return isValid;
+
+        
+  },
+        createNewRestaurant() {
+            if (this.validateForm()){
+                axios.post(`${this.apiUrl}/${this.userId}/restaurants`, {
                 name: this.newRestaurant.name,
                 address: this.newRestaurant.address,
                 city: this.newRestaurant.city,
@@ -178,7 +228,8 @@ export default {
                     this.isUpdateSuccess = false;
                     this.isUpdateFailure = true;
                 });
-        },
+        }}
+            ,
         handleImage(event) {
             // Ottieni il file selezionato dall'utente
             const file = event.target.files[0];

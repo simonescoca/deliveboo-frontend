@@ -19,20 +19,22 @@
             <div v-if="isUpdateFailure" class="alert alert-danger">
                 La creazione del tuo piatto non è andata a buon fine. Si è verificato un errore.
             </div>
+            
             <form @submit.prevent="createDish" class="p-3" enctype="multipart/form-data">
                 <div v-for="formSection in formSections" class="mb-3">
                     <div v-if="formSection.labelFor != 'description'">
                         <label :for="formSection.labelFor" class="form-label">
                             {{ formSection.labelContent }}
                         </label>
-                        <input :type="formSection.inputType" :class="formSection.inputClass" :id="formSection.inputID"
+                        <input :type="formSection.inputType" :class="[formSection.inputClass,{'is-invalid': errors[formSection.inputID]}]" :id="formSection.inputID"
                             :aria-describedby="formSection.labelFor" v-model="newDish[formSection.inputID]">
+                        <div v-if="errors[formSection.inputID]" class="invalid-feedback">{{ errors[formSection.inputID] }}</div>
                     </div>
                     <div v-else class="form-floating">
-                        <textarea class="form-control" :placeholder="formSection.textareaPlaceholder"
+                        <textarea class="form-control"  :class="{'is-invalid':errors.description}" :placeholder="formSection.textareaPlaceholder"
                             :id="formSection.textareaID" v-model="newDish.description">
-
                         </textarea>
+                        <div v-if="errors.description" class="invalid-feedback">{{ errors.description }}</div>
                         <label :for="formSection.labelFor" class="form-label">
                             {{ formSection.labelContent }}
                         </label>
@@ -48,9 +50,10 @@
                     <label for="formFile" class="form-label">
                         Aggiungi immagine
                     </label>
-                    <input class="form-control" type="file" id="formFile" @change="handleImageDish">
+                    <input class="form-control" :class="{'is-invalid' : errors.photo}" type="file" id="formFile" @change="handleImageDish">
+                    <div v-if="errors.photo" class="invalid-feedback">{{ errors.photo }}</div>
                 </div>
-                <select class="form-select" aria-label="select-course" id="course" v-model="newDish.course">
+                <select class="form-select" aria-label="select-course" id="course" :class="{'is-invalid':errors.course}"  v-model="newDish.course">
                     <option selected>
                         Seleziona portata
                     </option>
@@ -58,11 +61,12 @@
                         {{ course }}
                     </option>
                 </select>
-
+                <div v-if="errors.course" class="invalid-feedback">{{ errors.course }}</div>
                 <label for="ingredients" class="form-label mt-4">
                     Scrivi un ingrediente
                 </label>
                 <input type="text" class="form-control mb-3" id="ingredient" v-model="ingredient">
+                
                 <div v-if="newDish.ingredients.length > 0" class="py-3">
                     <p>Ingredienti aggiunti:</p>
                     <span class="me-2 pill-ingr" v-for="ingredientNewDish, index in newDish.ingredients"><i
@@ -70,14 +74,16 @@
                             }}</span>
                     <hr>
                 </div>
-
+                
                 <div class="btn add-ingr me-3" @click="addIngredient">
                     Aggiungi ingrediente
                 </div>
                 <div class="btn btn-outline-secondary" @click="emptyIngredients">
                     Svuota
                 </div>
-                <select class="form-select my-3" aria-label="select-course" id="type" v-model="newDish.type">
+                <div v-if="errors.ingredients" class="alert alert-danger p-1 mt-2">{{ errors.ingredients }}</div>
+               
+                <select class="form-select my-3" aria-label="select-course"  id="type" v-model="newDish.type">
                     <option selected>
                         {{ newDish.type }}
                     </option>
@@ -85,6 +91,7 @@
                         {{ formCheck }}
                     </option>
                 </select>
+                <div v-if="errors.type" class="alert alert-danger p-1 mt-2">{{ errors.type }}</div>
                 <button type="submit" class="btn my-btn d-flex mx-auto px-3">
                     Crea
                 </button>
@@ -101,6 +108,16 @@ import axios from "axios";
 export default {
     data() {
         return {
+            router,
+            errors: {
+            name: '',
+            description: '',
+            price:'',
+            course:'',
+            photo:'',
+            ingredients:'',
+            type:''
+            },
             store,
             apiUrl: 'http://127.0.0.1:8000/api/',
             userToken: '',
@@ -188,8 +205,67 @@ export default {
     },
 
     methods: {
+        validateForm() {
+        let isValid = true;
+
+        if (!this.newDish.name) {
+        this.errors.name = 'Il nome è obbligatorio';
+        isValid = false;
+        } else {
+        this.errors.name = '';
+        }
+        
+        
+        
+        if (!this.newDish.description) {
+        this.errors.description = 'La descrizione è obbligatoria';
+        isValid = false;
+        } else {
+         this.errors.description = '';
+        }
+        
+        if (!this.newDish.price) {
+        this.errors.price = 'Il prezzo è obbligatorio';
+        isValid = false;
+        } else {
+         this.errors.price = '';
+        }
+        
+        if (!this.newDish.course) {
+        this.errors.course = 'Inserire la portata è obbligatorio';
+        isValid = false;
+        } else {
+         this.errors.course = '';
+        }
+        
+        if (!this.newDish.photo) {
+        this.errors.photo = 'Inserire il file della foto è obbligatorio';
+        isValid = false;
+        } else {
+         this.errors.photo = '';
+        }
+        
+        if (this.newDish.ingredients == 0) {
+        this.errors.ingredients = 'Devi aggiungere almeno un ingrediente.';
+        } else {
+         this.errors.ingredients = '';
+         };
+        
+        if (this.newDish.type === 'Seleziona la tipologia del piatto') {
+        this.errors.type = 'Inserire la nazionalità del piatto è obbligatorio';
+        isValid = false;
+        } else {
+         this.errors.type = '';
+        }
+
+   
+
+        return isValid;
+  },
         createDish() {
-            axios.post(`${this.apiUrl}${this.userId}/restaurants/${this.selectedRes}/dishes`, {
+            
+            if (this.validateForm()){
+                axios.post(`${this.apiUrl}${this.userId}/restaurants/${this.selectedRes}/dishes`, {
                 name: this.newDish.name,
                 description: this.newDish.description,
                 price: this.newDish.price,
@@ -206,16 +282,16 @@ export default {
             })
                 .then(response => {
                     if (response.status === 200 || response.status === 204) {
-
+                      
                         this.isUpdateSuccess = true;
-                        router.push({ name: 'dishes' });
+                      router.push({ name: 'dishes' });
 
                         setTimeout(() => {
                             this.isUpdateSuccess = false;
                         }, 3000);
                         this.isUpdateFailure = false;
                     }
-
+                    
                     console.log(response)
 
 
@@ -225,10 +301,12 @@ export default {
                     console.error('Response', error.response);
                     console.error('Error data', error.response.data);
                     console.log(this.newDish);
+                    console.log(this.errors.ingredients);
                     this.isUpdateSuccess = false;
                     this.isUpdateFailure = true;
                 });
-        },
+            }
+            },
         addIngredient() {
             if (this.ingredient != '') {
                 this.newDish.ingredients.push(this.ingredient)
