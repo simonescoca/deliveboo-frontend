@@ -1,5 +1,5 @@
 <template>
-    <div class="position-relative">
+    <div class="position-relative customCursorPage">
         <svg style="height: 4rem; width: 100%; position: absolute; top: 0; left: 0; right: 0; transform: rotate(180deg);"
             class="wave-1hkxOo" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100"
             preserveAspectRatio="none">
@@ -92,7 +92,7 @@
                             <form class="form">
                                 <!-- ---Other Payments buttons--- -->
                                 <div class="payment--options">
-                                    <button name="paypal" type="button" class="paypal">
+                                    <button name="paypal" type="button" class="paypal customCursor">
                                         <svg xml:space="preserve" viewBox="0 0 124 33" height="33px" width="124px" y="0px"
                                             x="0px" id="Layer_1" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -128,7 +128,7 @@
                                                 fill="#253B80"></path>
                                         </svg>
                                     </button>
-                                    <button name="apple-pay" type="button">
+                                    <button name="apple-pay" type="button" class="customCursor">
                                         <svg xml:space="preserve" viewBox="0 0 512 210.2" y="0px" x="0px" id="Layer_1"
                                             version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -137,7 +137,7 @@
                                                 id="XMLID_34_"></path>
                                         </svg>
                                     </button>
-                                    <button name="google-pay" type="button">
+                                    <button name="google-pay" type="button" class="customCursor">
                                         <svg fill="none" viewBox="0 0 80 39" height="39" width="80"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path fill="#5F6368"
@@ -172,19 +172,19 @@
                                 <!-- ---User credit card info--- -->
                                 <div class="credit-card-info--form">
                                     <div class="input_container">
-                                        <label for="customer_name" class="input_label fs-6">Nome</label>
-                                        <input id="customer_name" class="input_field" type="text" name="address"
+                                        <label for="customer_name" class="input_label fs-6 customCursor3">Nome</label>
+                                        <input id="customer_name" class="input_field customCursor2" type="text" name="address"
                                             title="customer_name" placeholder="Deliveboo Food"
                                             v-model="customer_name">
                                     </div>
                                     <div class="input_container">
-                                        <label for="address" class="input_label fs-6">Indirizzo di domicilio</label>
-                                        <input id="address" class="input_field" type="text" name="address" title="address"
+                                        <label for="address" class="input_label fs-6 customCursor3">Indirizzo di domicilio</label>
+                                        <input id="address" class="input_field customCursor2" type="text" name="address" title="address"
                                             placeholder="Via fastfood 21" v-model="customer_address">
                                     </div>
                                     <div class="input_container">
-                                        <label for="phone" class="input_label fs-6">Numero di cellulare</label>
-                                        <input id="phone" class="input_field" type="text" name="phone" title="phone"
+                                        <label for="phone" class="input_label fs-6 customCursor3">Numero di cellulare</label>
+                                        <input id="phone" class="input_field customCursor2" type="text" name="phone" title="phone"
                                             placeholder="345 6789012" v-model="phone_number">
                                     </div>
                                 </div>
@@ -194,7 +194,7 @@
                             <div v-show="cart.length > 0" id="dropin-container"></div>
                             <!-- ---Checkout button--- -->
                             <div class="w-100 align-items-center d-flex">
-                                <button id="submit-button" class="purchase--btn mx-auto mb-3">Conferma</button>
+                                <button id="submit-button" class="purchase--btn mx-auto mb-3 customCursor">Conferma</button>
                             </div>
                         </div>
                     </div>
@@ -396,7 +396,25 @@ export default {
 
 <style lang="scss" scoped>
 @use '../../styles/variables' as *;
-
+.customCursorPage {
+    background: linear-gradient(40deg, #faca82, white, #faca82);
+    cursor: url('../../images/cursor.png'), auto;
+    .customCursor{
+        &:hover{
+            cursor: url('../../images/cursorPointer.png'), auto;
+        }
+    }
+    .customCursor2{
+        &:hover{
+            cursor: url('../../images/cursorText.png'), auto;
+        }
+    }
+    .customCursor3{
+        &:hover{
+            cursor: url('../../images/cursor.png'), auto;
+        }
+    }
+}
 // ---Shopping cart css---
 .cart {
     background-color: $greydark;
@@ -422,11 +440,11 @@ export default {
             border: none;
             border-radius: 5px;
             padding-left: 1rem;
-            cursor: pointer;
+            cursor: url('../../images/cursorPointer.png'), auto;
         }
 
         i {
-            cursor: pointer;
+            cursor: url('../../images/cursorPointer.png'), auto;
         }
 
         .liner {

@@ -17,9 +17,9 @@
             </div>
             <form @submit.prevent="getRestaurants()">
                 <div class="input-group mb-3 w-50 mx-auto">
-                    <input type="text" v-model="restCategOrName" class="form-control" placeholder="Cerca"
+                    <input type="text" v-model="restCategOrName" class="form-control customCursor2" placeholder="Cerca"
                         @keyup.enter="getRestaurants()">
-                    <button class="btn search-btn" @click="searchResults = true" type="submit">
+                    <button class="btn search-btn customCursor" @click="searchResults = true" type="submit">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </button>
                 </div>
@@ -138,7 +138,7 @@
                             <p v-for="category in restaurant.types" class="card-text">
                                 {{ category.name }}
                             </p>
-                            <router-link :to="{ name: 'restaurant-menu' }" class="btn btn-orange"
+                            <router-link :to="{ name: 'restaurant-menu' }" class="btn btn-orange customCursor"
                                 @click="saveSelectedRestaurant(restaurant.id)">
                                 Menu del Ristorante
                             </router-link>
@@ -248,7 +248,19 @@ export default {
 <style lang="scss" scoped>
 @use '../../styles/variables' as *;
 @use '../../styles/general.scss' as *;
-
+main, header{
+    cursor: url('../../images/cursor.png'), auto;
+    .customCursor{
+        &:hover{
+            cursor: url('../../images/cursorPointer.png'), auto;
+        }
+    }
+    .customCursor2{
+        &:hover{
+            cursor: url('../../images/cursorText.png'), auto;
+        }
+    }
+}
 .bg-yellow {
     background-color: $secondarysoft;
 }
@@ -296,7 +308,7 @@ export default {
     width: fit-content;
     position: relative;
     overflow: hidden;
-    cursor: pointer;
+    cursor: url('../../images/cursorPointer.png'), auto;
     user-select: none;
     padding: 2px 8px;
     background-color: rgba(0, 0, 0, 0.16);
@@ -391,5 +403,10 @@ export default {
     border: 1px solid #ff9654;
     background-color: #ff9654;
     color: white;
+    &:hover{
+        border: 1px solid #ff9654;
+        background-color: $primarydark;
+        color: white;
+    }
 }
 </style>

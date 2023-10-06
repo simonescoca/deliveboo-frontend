@@ -55,7 +55,7 @@
                         <h5 class="card-title fst-italic fw-bold">Attenzione!</h5>
                         <p class="card-text">Il piatto selezionato è di un ristorante differente da quello nel tuo carrello.</p>
                         <p class="card-text">Per poterlo aggiungere rimuovi i piatti appartenenti ad altri ristoranti.</p>
-                        <p class="btn btn-danger" @click="emptyCart()">Svuota carrello</p>
+                        <p class="btn btn-danger customCursor" @click="emptyCart()">Svuota carrello</p>
                     </div>
                 </div>
             </div>
@@ -79,7 +79,7 @@
                                     {{ ingredient.name + (index !== (dish.ingredients.length - 1) ? ", " : "")}}
                                 </span>
                             </div>
-                            <p class="btn btn-yellow" :disabled="activeButton == false" @click="addToCart(dish)">Aggiungi al Carrello</p>
+                            <p class="btn btn-yellow customCursor" :disabled="activeButton == false" @click="addToCart(dish)">Aggiungi al Carrello</p>
                         </div>
                         <div class="content" :class="showDescription[dish.id] ? 'description-hidden': ''">
                             <div class="boxImg" v-if="dish.photo.startsWith('http')">
@@ -91,12 +91,13 @@
                             <div class="description">
                                 <p class="title fw-bold">
                                         {{ dish.name }}
-                                    <i class="fa-solid fa-circle-info ms-2" @click="seeDescription(dish)"></i>
+                                    <i v-if="dish.available === 1" class="fa-solid fa-circle-info ms-2" @click="seeDescription(dish)"></i>
+                                    <i v-else class="fa-solid fa-ban ms-2"></i>
                                 </p>
                                 <p class="price">
                                     {{ dish.price.toFixed(2) }}
                                 </p>
-                                <button class="myCart-button" @click="dish.cartClicked = true, addToCart(dish)" :class="dish.cartClicked === true && activeButton === true ? 'myClicked' : ''">
+                                <button v-if="dish.available === 1" class="myCart-button" @click="dish.cartClicked = true, addToCart(dish)" :class="dish.cartClicked === true && activeButton === true ? 'myClicked' : ''">
                                     <span class="myAdd-to-cart">
                                         Aggiungi al Carrello
                                     </span>
@@ -105,6 +106,12 @@
                                     </span>
                                     <i class="fas fa-shopping-cart"></i>
                                     <i class="fas fa-box"></i>
+                                </button>
+                                <button v-else class="myCart-button-disabled">
+                                    <i class="fa-solid fa-ban"></i>
+                                    <span class="myAdd-to-cart">
+                                        Esaurito
+                                    </span>
                                 </button>
                             </div>
                         </div>
@@ -127,7 +134,7 @@
                                     {{ ingredient.name + (index !== (dish.ingredients.length - 1) ? ", " : "")}}
                                 </span>
                             </div>
-                            <p class="btn btn-yellow" :disabled="activeButton == false" @click="addToCart(dish)">Aggiungi al Carrello</p>
+                            <p class="btn btn-yellow customCursor" :disabled="activeButton == false" @click="addToCart(dish)">Aggiungi al Carrello</p>
                         </div>
                         <div class="content" :class="showDescription[dish.id] ? 'description-hidden': ''">
                             <div class="boxImg" v-if="dish.photo.startsWith('http')">
@@ -139,12 +146,13 @@
                             <div class="description">
                                 <p class="title fw-bold">
                                         {{ dish.name }}
-                                    <i class="fa-solid fa-circle-info ms-2" @click="seeDescription(dish)"></i>
+                                    <i v-if="dish.available === 1" class="fa-solid fa-circle-info ms-2" @click="seeDescription(dish)"></i>
+                                    <i v-else class="fa-solid fa-ban ms-2"></i>
                                 </p>
                                 <p class="price">
                                     {{ dish.price.toFixed(2) }}
                                 </p>
-                                <button class="myCart-button" @click="dish.cartClicked = true, addToCart(dish)" :class="dish.cartClicked === true && activeButton === true ? 'myClicked' : ''">
+                                <button v-if="dish.available === 1" class="myCart-button" @click="dish.cartClicked = true, addToCart(dish)" :class="dish.cartClicked === true && activeButton === true ? 'myClicked' : ''">
                                     <span class="myAdd-to-cart">
                                         Aggiungi al Carrello
                                     </span>
@@ -153,6 +161,12 @@
                                     </span>
                                     <i class="fas fa-shopping-cart"></i>
                                     <i class="fas fa-box"></i>
+                                </button>
+                                <button v-else class="myCart-button-disabled">
+                                    <i class="fa-solid fa-ban"></i>
+                                    <span class="myAdd-to-cart">
+                                        Esaurito
+                                    </span>
                                 </button>
                             </div>
                         </div>
@@ -175,7 +189,7 @@
                                     {{ ingredient.name + (index !== (dish.ingredients.length - 1) ? ", " : "")}}
                                 </span>
                             </div>
-                            <p class="btn btn-yellow" :disabled="activeButton == false" @click="addToCart(dish)">Aggiungi al Carrello</p>
+                            <p class="btn btn-yellow customCursor" :disabled="activeButton == false" @click="addToCart(dish)">Aggiungi al Carrello</p>
                         </div>
                         <div class="content" :class="showDescription[dish.id] ? 'description-hidden': ''">
                             <div class="boxImg" v-if="dish.photo.startsWith('http')">
@@ -187,12 +201,13 @@
                             <div class="description">
                                 <p class="title fw-bold">
                                         {{ dish.name }}
-                                    <i class="fa-solid fa-circle-info ms-2" @click="seeDescription(dish)"></i>
+                                    <i v-if="dish.available === 1" class="fa-solid fa-circle-info ms-2" @click="seeDescription(dish)"></i>
+                                    <i v-else class="fa-solid fa-ban ms-2"></i>
                                 </p>
                                 <p class="price">
                                     {{ dish.price.toFixed(2) }}
                                 </p>
-                                <button class="myCart-button" @click="dish.cartClicked = true, addToCart(dish)" :class="dish.cartClicked === true && activeButton === true ? 'myClicked' : ''">
+                                <button v-if="dish.available === 1" class="myCart-button" @click="dish.cartClicked = true, addToCart(dish)" :class="dish.cartClicked === true && activeButton === true ? 'myClicked' : ''">
                                     <span class="myAdd-to-cart">
                                         Aggiungi al Carrello
                                     </span>
@@ -201,6 +216,12 @@
                                     </span>
                                     <i class="fas fa-shopping-cart"></i>
                                     <i class="fas fa-box"></i>
+                                </button>
+                                <button v-else class="myCart-button-disabled">
+                                    <i class="fa-solid fa-ban"></i>
+                                    <span class="myAdd-to-cart">
+                                        Esaurito
+                                    </span>
                                 </button>
                             </div>
                         </div>
@@ -430,7 +451,23 @@
 
 <style lang="scss" scoped>
 	@use '../../styles/variables.scss' as *;
-    @use '../../styles/general.scss' as *;
+    main, header{
+    cursor: url('../../images/cursor.png'), auto;
+    .customCursor{
+        &:hover{
+            cursor: url('../../images/cursorPointer.png'), auto;
+        }
+    }
+    .customCursor2{
+        &:hover{
+            cursor: url('../../images/cursorText.png'), auto;
+        }
+    }
+}
+    i.fa-solid.fa-ban {
+        cursor: not-allowed;
+    }
+
     .alert {
     top: 50%;
     left: 50%;
@@ -441,7 +478,7 @@
     .fa-xmark.show {  
         right: 2%;
         top: 6.5%;
-        cursor: pointer;
+        cursor: url('../../images/cursorPointer.png'), auto;
         color: $primarydark;
     }
     .card-body {
@@ -507,7 +544,7 @@
 		width: fit-content;
 		position: relative;
 		overflow: hidden;
-		cursor: pointer;
+		cursor: url('../../images/cursorPointer.png'), auto;
 		user-select: none;
 		padding: 2px 8px;
 		background-color: rgba(0, 0, 0, 0.16);
@@ -590,7 +627,7 @@
         transition: transform 300ms, box-shadow 200ms;
 	}
 	i{
-	cursor: pointer;
+	cursor: url('../../images/cursorPointer.png'), auto;
 	}
 	.content-info{
 		position: absolute;
@@ -676,7 +713,7 @@
 	border-radius: 10px;
 	background-color: $primarydark;
 	outline: none;
-	cursor: pointer;
+	cursor: url('../../images/cursorPointer.png'), auto;
 	color: #fff;
 	transition: .3s ease-in-out;
 	overflow: hidden;
@@ -720,6 +757,21 @@
     span.myAdded {
         opacity: 0;
     }
+}
+
+.myCart-button-disabled {
+	padding: 10px;
+	width: 200px;
+	height: 60px;
+	border: 0;
+	border-radius: 10px;
+	// background-color: $primarydark;
+    background-color: grey;
+	outline: none;
+	cursor: not-allowed;
+	color: #fff;
+	transition: .3s ease-in-out;
+	overflow: hidden;
 }
 
 .myCart-button.myClicked {

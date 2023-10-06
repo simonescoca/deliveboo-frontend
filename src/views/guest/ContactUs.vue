@@ -25,25 +25,25 @@
                     <label for="name" class="form-label">
                         Il tuo nome
                     </label>
-                    <input type="text" name="full_name" v-model="dataContact.full_name" class="form-control"
+                    <input type="text" name="full_name" v-model="dataContact.full_name" class="form-control customCursor2"
                         placeholder="Deliveboo Food" id="name">
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">
                         La tua email
                     </label>
-                    <input type="email" name="email" v-model="dataContact.email" class="form-control" id="email"
+                    <input type="email" name="email" v-model="dataContact.email" class="form-control customCursor2" id="email"
                         placeholder="deliveboo@food.com" aria-describedby="emailHelp">
                 </div>
                 <div>
                     <label for="message" class="mb-2">
                         Messaggio
-                    </label><textarea class="form-control"
+                    </label><textarea class="form-control customCursor2"
                         placeholder="Sono troppo buoni i vostri piatti, come posso ordinarne altri?" id="message"
                         style="height: 100px" name="message" v-model="dataContact.message"></textarea>
                 </div>
                 <div class="d-flex">
-                    <button type="submit" class="btn my-3 mx-auto my-btn">
+                    <button type="submit" class="btn my-3 mx-auto my-btn customCursor">
                         Invia
                     </button>
                 </div>
@@ -121,7 +121,20 @@ export default {
 <style lang="scss" scoped>
 @use "../../styles/variables" as *;
 
-
+main {
+    background: linear-gradient(40deg, #faca82, white, #faca82);
+    cursor: url('../../images/cursor.png'), auto;
+    .customCursor{
+        &:hover{
+            cursor: url('../../images/cursorPointer.png'), auto;
+        }
+    }
+    .customCursor2{
+        &:hover{
+            cursor: url('../../images/cursorText.png'), auto;
+        }
+    }
+}
 
 .container-fluid {
     background: linear-gradient(40deg, #faca82, white, #faca82);
@@ -151,7 +164,7 @@ h4 {
 }
 
 .img-cont {
-    cursor: pointer;
+    cursor: url('../../images/cursorPointer.png'), auto;
     transition: all 0.5s;
 
     &:hover {

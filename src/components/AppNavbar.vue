@@ -15,7 +15,7 @@
                 <li v-for="(link, index) in links" :key="index" :class="index !== 0 ? 'ms-2 ms-lg-5' : ''">
                     <transition name="slide-fade" :key="`Page` + index" mode="in-out">
                         <router-link :to="{ name: link.routeName }"
-                            class="d-flex align-items-center bg-mySecondary rounded-pill btn linkOnHover">
+                            class="d-flex align-items-center bg-mySecondary rounded-pill btn linkOnHover customCursor">
                             <span>
                                 <i :class="link.icon">
                                 </i>
@@ -33,7 +33,7 @@
                 <div v-if="store.userName === null && store.logged === 0" @click="store.access = false"> <!--class="d-flex align-items-center"-->
                     <transition name="slide-fade" mode="in-out">
                         <router-link :to="{ name: 'profile' }" key="Page3"
-                            class="d-flex align-items-center bg-mySecondary rounded-pill btn">
+                            class="d-flex align-items-center bg-mySecondary rounded-pill btn customCursor">
                             <span>
                                 <i class="fa-solid fa-user-pen"></i>
                             </span>
@@ -46,7 +46,7 @@
                 <div v-if="store.userName === null && store.logged === 0" @click="store.access = true"> <!--class="d-flex align-items-center"-->
                     <transition name="slide-fade" mode="in-out">
                         <router-link :to="{ name: 'profile' }" key="Page4"
-                            class="d-flex align-items-center bg-mySecondary rounded-pill btn ms-2">
+                            class="d-flex align-items-center bg-mySecondary rounded-pill btn ms-2 customCursor">
                             <span>
                                 <i class="fa-solid fa-arrow-right-to-bracket"></i>
                             </span>
@@ -57,7 +57,7 @@
                     </transition>
                 </div>
                 <div v-if="store.userName !== null || store.logged === 1" > <!--class="d-flex align-items-center"-->
-                    <button class="d-flex align-items-center bg-mySecondary rounded-pill btn" @click="logout()">
+                    <button class="d-flex align-items-center bg-mySecondary rounded-pill btn customCursor" @click="logout()">
                         <span>
                             <i class="fa-solid fa-arrow-right-from-bracket"></i>
                         </span>
@@ -68,7 +68,7 @@
                 </div>
                 <div class="user" v-if="store.userName !== null  || store.logged === 1">
                 <transition name="slide-fade" mode="in-out">
-                    <router-link :to="{ name: 'restaurants' }" key="Page5" class="text-decoration-none rounded-pill btn btn-outline-dark ms-3">
+                    <router-link :to="{ name: 'restaurants' }" key="Page5" class="text-decoration-none rounded-pill btn btn-outline-dark ms-3 customCursor">
                         <div class="d-flex align-items-center">
                             <div class="my_user-img-cont bg-white rounded-pill">
                                 <img src="../../src/images/gabri.png" alt="user profile img" class="rounded-pill">
@@ -83,7 +83,7 @@
 
                 <!-- ? cart-button -->
                 <button
-                    class="d-flex justify-content-center align-items-center rounded-pill btn bg-mySecondary ms-3 ms-lg-5"
+                    class="d-flex justify-content-center align-items-center rounded-pill btn bg-mySecondary ms-3 ms-lg-5 customCursor"
                     @click="getCart(), calculateGrandTotal(), isCartVisible = true">
                     <span>
                         <i class="fa-solid fa-cart-shopping position-relative">
@@ -97,7 +97,7 @@
 
         <!-- ? cart -->
         <div class="position-fixed top-0 end-0 bg-opacity-25 myCart" :class="isCartVisible === false ? 'w-0' : 'col-12 col-sm9 col-md-6 col-xxl-3 cartBoxShadow'">
-            <button class="position-absolute top-0 start-0 fw-bold fs-3 d-flex mt-4 ms-4 btn rounded-pill X-button" @click="isCartVisible = false">
+            <button class="position-absolute top-0 start-0 fw-bold fs-3 d-flex mt-4 ms-4 btn rounded-pill X-button customCursor" @click="isCartVisible = false">
                 <i class="fa-solid fa-xmark m-auto"></i>
             </button>
 
@@ -137,7 +137,7 @@
                     {{ "Totale: $" + totale.toFixed(2) }}
                 </h4>
                 <transition name="slide-fade" mode="in-out">
-                    <router-link :to="{ name: 'checkout' }" key="Page6" class="btn btn-warning"
+                    <router-link :to="{ name: 'checkout' }" key="Page6" class="btn btn-warning customCursor"
                         @click="isCartVisible = false">
                         Check Out
                     </router-link>
@@ -298,7 +298,14 @@ export default {
 
 <style lang="scss" scoped>
 @use "../styles/variables" as *;
-
+nav {
+    cursor: url('../images/cursor.png'), auto;
+    .customCursor{
+        &:hover{
+            cursor: url('../images/cursorPointer.png'), auto;
+        }
+    }
+}
 .X-button {
 
     &:hover {

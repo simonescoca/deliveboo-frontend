@@ -90,6 +90,7 @@
 
 	.my_background{
 		background-color: $secondarysoft;
+        cursor: url('../../images/cursor.png'), auto;
 	}
 
     .duckContainer{
@@ -407,7 +408,7 @@ body {
                     height: 40px;
                     padding: 0 30px;
                     border-radius: 50px;
-                    cursor: pointer;
+                    cursor: url('../../images/cursorPointer.png'), auto;;
                     box-shadow: 0px 15px 20px rgba($bg-02, 0.5);
                     z-index: 3;
                     color: $bg-01;
