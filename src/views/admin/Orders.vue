@@ -139,6 +139,17 @@
                     </span>
                 </button>
             </section>
+            <div class="pagination">
+               
+                <button @click="prevPage" :disabled="currentPage === 1">
+                  Previous
+                </button>
+                
+                <span>
+                    {{ currentPage }}
+                </span>
+                <button @click="nextPage" :disabled="currentPage === lastPage">Next</button>
+            </div>
         </div>
     </div>
 </template>
@@ -150,6 +161,7 @@
     export default {
         data() {
             return {
+                
                 store,
                 apiUrl: 'http://127.0.0.1:8000/api/',
                 userToken: '',
@@ -189,9 +201,20 @@
         },
 
         methods: {
+            prevPage() {
+             if (this.currentPage > 1) {
+            this.getOrders(this.currentPage - 1);
+            }
+    },
 
-            getOrders() {
-                axios.get(`${this.apiUrl}${this.userId}/restaurants/${this.selectedRes}/orders`, {
+    // Vai alla pagina successiva
+    nextPage() {
+        if (this.currentPage < this.lastPage) {
+            this.getOrders(this.currentPage + 1);
+        }
+    },
+            getOrders(page) {
+                axios.get(`${this.apiUrl}${this.userId}/restaurants/${this.selectedRes}/orders?page=${page}`, {
                     headers: {
                         'Authorization': `Bearer ${this.userToken}`
                     }
@@ -202,7 +225,9 @@
                         this.monthly_sales = response.data.monthly_sales
                         this.monthly_order_count = response.data.monthly_order_count
                         this.restaurantName = response.data.restaurant_name
-                        
+                        this.currentPage = response.data.pagination.current_page;
+
+                        this.lastPage = response.data.pagination.last_page; 
                     })
                     .catch(error => {
                         console.log(error)
