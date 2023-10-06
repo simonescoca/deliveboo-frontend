@@ -16,7 +16,7 @@
                     <form action="" class="mx-5" @submit.prevent="registerUser">
                         <!-- ---Name--- -->
                         <div class="form-control d-flex">
-                            <input type="text" id="name" v-model="registerData.name" required>
+                            <input type="text" id="name" v-model="registerData.name" required class="customCursor2">
                             <label class="fw-semibold">
                                 <span style="transition-delay:0ms">F</span>
                                 <span style="transition-delay:50ms">u</span>
@@ -32,7 +32,7 @@
                         </div>
                         <!-- ---Email--- -->
                         <div class="form-control">
-                            <input type="email" id="email" v-model="registerData.email" required>
+                            <input type="email" id="email" v-model="registerData.email" required class="customCursor2">
                             <label class="fw-semibold">
                                 <span style="transition-delay:0ms">E</span>
                                 <span style="transition-delay:50ms">m</span>
@@ -44,7 +44,7 @@
                         </div>
                         <!-- ---VAT number--- -->
                         <div class="form-control d-flex">
-                            <input type="text" id="vat_num" v-model="registerData.vat_num" required>
+                            <input type="text" id="vat_num" v-model="registerData.vat_num" required class="customCursor2">
                             <label class="fw-semibold">
                                 <span style="transition-delay:0ms">V</span>
                                 <span style="transition-delay:50ms">A</span>
@@ -61,7 +61,7 @@
                         </div>
                         <!-- ---Password--- -->
                         <div class="form-control d-flex">
-                            <input type="password" id="password" v-model="registerData.password" required>
+                            <input type="password" id="password" v-model="registerData.password" required class="customCursor2">
                             <label class="fw-semibold">
                                 <span style="transition-delay:0ms">P</span>
                                 <span style="transition-delay:50ms">a</span>
@@ -76,7 +76,7 @@
                         </div>
                         <!-- ---Password confirm--- -->
                         <div class="form-control d-flex">
-                            <input type="password" id="password_confirm" v-model="registerData.password_confirm" required>
+                            <input type="password" id="password_confirm" v-model="registerData.password_confirm" required class="customCursor2">
                             <label class="fw-semibold">
                                 <span style="transition-delay:0ms">P</span>
                                 <span style="transition-delay:50ms">a</span>
@@ -113,7 +113,7 @@
                             Conferma Registrazione
                         </button>
                         <!-- ---Already Log in link--- -->
-                        <p class="alreadyLogin">Hai già un account?<a href="#" class="fw-semibold" @click="store.access = true">Accedi</a></p>
+                        <p class="alreadyLogin">Hai già un account?<a href="#" class="fw-semibold customCursor" @click="store.access = true">Accedi</a></p>
                     </form>
                 </div>
             </div>
@@ -132,7 +132,7 @@
                     <form action="" class="mx-5" @submit.prevent="loginUser">
                         <!-- ---Email--- -->
                         <div class="form-control">
-                            <input id="email" type="email" v-model="loginData.email" required>
+                            <input id="email" type="email" v-model="loginData.email" required class="customCursor2">
                             <label class="fw-semibold">
                                 <span style="transition-delay:0ms">E</span>
                                 <span style="transition-delay:50ms">m</span>
@@ -144,7 +144,7 @@
                         </div>
                         <!-- ---Password--- -->
                         <div class="form-control d-flex">
-                            <input id="password" type="password" v-model="loginData.password" required>
+                            <input id="password" type="password" v-model="loginData.password" required class="customCursor2">
                             <label class="fw-semibold">
                                 <span style="transition-delay:0ms">P</span>
                                 <span style="transition-delay:50ms">a</span>
@@ -158,9 +158,9 @@
                             <i class="fa-solid fa-key align-self-center"></i>
                         </div>
                         <!-- ---Login button--- -->
-                        <button class="loginbtn fw-semibold" type="submit">Accedi</button>
+                        <button class="loginbtn fw-semibold customCursor" type="submit">Accedi</button>
                         <!-- ---Need to register--- -->
-                        <p class="alreadyLogin">Sei nuovo su Deliveboo? <a href="#" class="fw-semibold" @click="store.access = false">Crea un account</a></p>
+                        <p class="alreadyLogin">Sei nuovo su Deliveboo? <a href="#" class="fw-semibold customCursor" @click="store.access = false">Crea un account</a></p>
                     </form>
                     <h5>Oppure</h5>
                     <div class="orline mx-auto">
@@ -281,6 +281,19 @@
 <style lang="scss" scoped>
     @use '../../styles/variables' as *;
 
+	main {
+    cursor: url('../../images/cursor.png'), auto;
+    .customCursor{
+        &:hover{
+            cursor: url('../../images/cursorPointer.png'), auto;
+        }
+    }
+    .customCursor2{
+        &:hover{
+            cursor: url('../../images/cursorText.png'), auto;
+        }
+    }
+}
     .myPadding {
         padding: 5rem 0;
     }
@@ -352,7 +365,9 @@
 
 
 // ---Submit---
-.continue-application {
+.col-12{
+	form{
+		.continue-application {
 		--color: black;
 		--background: #ffda32;
 		--background-hover: #ff9654;
@@ -369,7 +384,7 @@
 		--shadow: rgba(13, 15, 25, .2);
 		border: none;
 		outline: none;
-		cursor: pointer;
+		cursor: url('../../images/cursorPointer.png'), auto;
 		position: relative;
 		border-radius: 5px;
 		font-size: 14px;
@@ -381,7 +396,9 @@
 		transition: background 0.3s;
 		color: var(--color);
 		background: var(--bg, var(--background));
+		}
 	}
+}
 	.continue-application > div {
 		top: 0;
 		left: 0;
@@ -567,7 +584,7 @@
 	
 
 // ---Facebook button---
-	.facebookbtn {
+.facebookbtn {
 		background: transparent;
 		position: relative;
 		padding: 5px 15px;
@@ -576,7 +593,7 @@
 		font-size: 17px;
 		font-weight: 600;
 		text-decoration: none;
-		cursor: pointer;
+		cursor: url('../../images/cursorPointer.png'), auto;
 		border: 1px solid #0163E0;
 		border-radius: 25px;
 		outline: none;
@@ -631,7 +648,7 @@
 		font-size: 17px;
 		font-weight: 600;
 		text-decoration: none;
-		cursor: pointer;
+		cursor: url('../../images/cursorPointer.png'), auto;
 		border: 1px solid $primarysoft;
 		border-radius: 25px;
 		outline: none;
