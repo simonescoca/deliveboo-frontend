@@ -55,7 +55,7 @@
                         <h5 class="card-title fst-italic fw-bold">Attenzione!</h5>
                         <p class="card-text">Il piatto selezionato è di un ristorante differente da quello nel tuo carrello.</p>
                         <p class="card-text">Per poterlo aggiungere rimuovi i piatti appartenenti ad altri ristoranti.</p>
-                        <p class="btn btn-danger" @click="emptyCart()">Svuota carrello</p>
+                        <p class="btn btn-danger customCursor" @click="emptyCart()">Svuota carrello</p>
                     </div>
                 </div>
             </div>
@@ -79,7 +79,7 @@
                                     {{ ingredient.name + (index !== (dish.ingredients.length - 1) ? ", " : "")}}
                                 </span>
                             </div>
-                            <p class="btn btn-yellow" :disabled="activeButton == false" @click="addToCart(dish)">Aggiungi al Carrello</p>
+                            <p class="btn btn-yellow customCursor" :disabled="activeButton == false" @click="addToCart(dish)">Aggiungi al Carrello</p>
                         </div>
                         <div class="content" :class="showDescription[dish.id] ? 'description-hidden': ''">
                             <div class="boxImg" v-if="dish.photo.startsWith('http')">
@@ -134,7 +134,7 @@
                                     {{ ingredient.name + (index !== (dish.ingredients.length - 1) ? ", " : "")}}
                                 </span>
                             </div>
-                            <p class="btn btn-yellow" :disabled="activeButton == false" @click="addToCart(dish)">Aggiungi al Carrello</p>
+                            <p class="btn btn-yellow customCursor" :disabled="activeButton == false" @click="addToCart(dish)">Aggiungi al Carrello</p>
                         </div>
                         <div class="content" :class="showDescription[dish.id] ? 'description-hidden': ''">
                             <div class="boxImg" v-if="dish.photo.startsWith('http')">
@@ -189,7 +189,7 @@
                                     {{ ingredient.name + (index !== (dish.ingredients.length - 1) ? ", " : "")}}
                                 </span>
                             </div>
-                            <p class="btn btn-yellow" :disabled="activeButton == false" @click="addToCart(dish)">Aggiungi al Carrello</p>
+                            <p class="btn btn-yellow customCursor" :disabled="activeButton == false" @click="addToCart(dish)">Aggiungi al Carrello</p>
                         </div>
                         <div class="content" :class="showDescription[dish.id] ? 'description-hidden': ''">
                             <div class="boxImg" v-if="dish.photo.startsWith('http')">
@@ -451,8 +451,19 @@
 
 <style lang="scss" scoped>
 	@use '../../styles/variables.scss' as *;
-    @use '../../styles/general.scss' as *;
-
+    main, header{
+    cursor: url('../../images/cursor.png'), auto;
+    .customCursor{
+        &:hover{
+            cursor: url('../../images/cursorPointer.png'), auto;
+        }
+    }
+    .customCursor2{
+        &:hover{
+            cursor: url('../../images/cursorText.png'), auto;
+        }
+    }
+}
     i.fa-solid.fa-ban {
         cursor: not-allowed;
     }
@@ -467,7 +478,7 @@
     .fa-xmark.show {  
         right: 2%;
         top: 6.5%;
-        cursor: pointer;
+        cursor: url('../../images/cursorPointer.png'), auto;
         color: $primarydark;
     }
     .card-body {
@@ -533,7 +544,7 @@
 		width: fit-content;
 		position: relative;
 		overflow: hidden;
-		cursor: pointer;
+		cursor: url('../../images/cursorPointer.png'), auto;
 		user-select: none;
 		padding: 2px 8px;
 		background-color: rgba(0, 0, 0, 0.16);
@@ -616,7 +627,7 @@
         transition: transform 300ms, box-shadow 200ms;
 	}
 	i{
-	cursor: pointer;
+	cursor: url('../../images/cursorPointer.png'), auto;
 	}
 	.content-info{
 		position: absolute;
@@ -702,7 +713,7 @@
 	border-radius: 10px;
 	background-color: $primarydark;
 	outline: none;
-	cursor: pointer;
+	cursor: url('../../images/cursorPointer.png'), auto;
 	color: #fff;
 	transition: .3s ease-in-out;
 	overflow: hidden;
