@@ -129,8 +129,19 @@
                     </div>
                 </div>
             </div>
+            <div class="d-flex mt-2">
+                <div class="pagination mx-auto">
+                    <button @click="prevPage" :disabled="currentPage === 1" class="btn btn-custom">
+                        Previous
+                    </button>
+                    <span class="text-center mx-2 my-auto">
+                        {{ currentPage }}
+                    </span>
+                    <button @click="nextPage" :disabled="currentPage === lastPage" class="btn btn-custom">Next</button>
+                </div>
+            </div>
             <section class="d-flex">
-                <button @click="$router.push({ name: 'order-statistics', params: { restaurantName:restaurantName, monthlySales: monthly_sales, orderCount: monthly_order_count } })" class="m-auto d-flex justify-content-center align-items-center btn btn-outline-success mt-4 myStats">
+                <button @click="$router.push({ name: 'order-statistics', params: { restaurantName:restaurantName, monthlySales: monthly_sales, orderCount: monthly_order_count } })" class="m-auto d-flex justify-content-center align-items-center btn btn-outline-success mt-2 myStats">
                     <span>
                         <i class="fa-solid fa-chart-column"></i>
                     </span>
@@ -139,17 +150,6 @@
                     </span>
                 </button>
             </section>
-            <div class="pagination">
-               
-                <button @click="prevPage" :disabled="currentPage === 1">
-                  Previous
-                </button>
-                
-                <span>
-                    {{ currentPage }}
-                </span>
-                <button @click="nextPage" :disabled="currentPage === lastPage">Next</button>
-            </div>
         </div>
     </div>
 </template>
@@ -256,7 +256,13 @@
 </script>
 
 <style lang="scss" scoped>
-
+@use '../../styles/variables' as *;
+    .btn-custom{
+        background-color: $primarysoft;
+        &:hover{
+            background-color: $secondary;
+        }
+    }
     .myStats {
         --bs-btn-color: #0ac600;
         --bs-btn-border-color: #0ac600;
