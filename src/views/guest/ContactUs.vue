@@ -32,8 +32,8 @@
                     <label for="email" class="form-label">
                         La tua email
                     </label>
-                    <input type="email" name="email" v-model="dataContact.email" class="form-control customCursor2" id="email"
-                        placeholder="deliveboo@food.com" aria-describedby="emailHelp">
+                    <input type="email" name="email" v-model="dataContact.email" class="form-control customCursor2"
+                        id="email" placeholder="deliveboo@food.com" aria-describedby="emailHelp">
                 </div>
                 <div>
                     <label for="message" class="mb-2">
@@ -108,7 +108,10 @@ export default {
         sendMail() {
             axios.post(`${this.apiUrl}contact-form`, this.dataContact)
                 .then(response => {
-                    console.log(response)
+                    console.log(response);
+                    this.dataContact.full_name = '',
+                        this.dataContact.email = '';
+                    this.dataContact.message = '';
                 })
                 .catch(error => {
                     console.log(error)
@@ -124,13 +127,15 @@ export default {
 main {
     background: linear-gradient(40deg, #faca82, white, #faca82);
     cursor: url('../../images/cursor.png'), auto;
-    .customCursor{
-        &:hover{
+
+    .customCursor {
+        &:hover {
             cursor: url('../../images/cursorPointer.png'), auto;
         }
     }
-    .customCursor2{
-        &:hover{
+
+    .customCursor2 {
+        &:hover {
             cursor: url('../../images/cursorText.png'), auto;
         }
     }
